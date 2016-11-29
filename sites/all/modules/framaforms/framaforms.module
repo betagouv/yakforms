@@ -1,0 +1,85 @@
+<?php
+
+
+/**
+  Load a given CSS if page is embeded in iframe
+*/
+/*
+function framaforms_init() {
+
+  //here put any condition to you want, for example a domain
+  $url = url("<front>", array('absolute' => TRUE));
+drupal_set_message('base URL '.$url);
+
+  if( $url == "http://beta.framaforms.org/") {
+    drupal_set_message('Notre formulaire est importé...');
+    drupal_add_css(drupal_get_path('theme', 'framaforms_embed') . '/embed.css'); 
+  }
+}
+*/
+
+
+
+/**
+ * Hide Webforms IP
+*/
+function framaforms_webform_submission_load(&$submissions) {
+  global $user;
+  $submission = current($submissions);
+
+  if (in_array('administrator', $user->roles)) {
+    // do we need to anonymze ?
+
+  } else {
+      foreach ($submissions as $sid => $submission) {
+      // If called for, anonymize uid and ip of submission before display.
+      $submission->uid = 0;
+      $submission->name = 'Anonymous';
+      $submission->remote_addr = '0.0.0.0';
+    }
+  }
+  
+}
+
+
+/**
+* Add specific views access if the visitor is the author of the node
+*/
+function framaforms_views_access_callbacks() {
+  return array(
+    'framaforms_user_has_access' => t('Current user is author of the node'),
+  );
+}
+
+function framaforms_user_has_access($account = NULL) {
+  global $user;
+  //if ($account == $user->uid && user_access('view own events registration' )){
+    $node = node_load(arg(1));
+    if ( (isset($node->uid, $GLOBALS['user']->uid) && $GLOBALS['user']->uid == $node->uid && $GLOBALS['user']->uid > 0) || (user_has_role(3) ) ) {
+
+
+    return TRUE;
+  }
+  return FALSE;
+}
+
+
+function framaforms_form_alter(&$element, &$form_state, $context) {
+ // if (isset($element['form-builder-element-markup']['form-builder-element-markup'])) {
+ //    $element['form-builder-element-markup']['form-builder-element-markup']['#wysiwyg'] = false;
+ //    $element['form-builder-element-markup']['form-builder-element-markup']['#type'] = 'text_format';
+ // }
+
+// if ($form_id['#id'] == 'form1') {
+    $form_id['edit-markup-value']['#wysiwyg'] = FALSE;
+    $form_id['edit-markup-value']['und'][0]['#wysiwyg'] = false;
+    $form_id['markup']['#wysiwyg'] = FALSE;
+    $form_id['markup']['und'][0]['#wysiwyg'] = false;
+
+
+    $form_id['form-builder-element-markup']['#type'] = 'text_format';
+    
+//  } 
+
+
+}

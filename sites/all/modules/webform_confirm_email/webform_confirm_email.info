@@ -1,0 +1,16 @@
+name = Webform Confirm Email
+description = Webform addon to confirm submitters' email.
+core = 7.x
+package = Webform
+project = webform_confirm_email
+
+dependencies[] = webform (>7.x-4.9)
+
+stylesheets[all][] = webform_confirm_email.css
+
+; Information added by Drupal.org packaging script on 2016-06-08
+version = "7.x-2.5"
+core = "7.x"
+project = "webform_confirm_email"
+datestamp = "1465392628"
+
