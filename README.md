@@ -69,7 +69,8 @@ Pour des raisons de performances, Framaforms utilise postgresql comme BDD, ce qu
   );
 ```
 
-* profitez en pour ajouter la possibilité d'inclure vos formulaires dans des iframes
+* profitez en pour ajouter la possibilité d'inclure vos formulaires dans des iframes en toute fin de fichier
+
 ```php
   /**
    * Turn off the X-Frame-Options header entirely, to restore the previous
