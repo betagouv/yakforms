@@ -85,12 +85,7 @@
  * @see html.tpl.php
  */
 ?>
-<script type="text/javascript">
-var script = document.createElement('script');
-    script.type = "text/javascript";
-    script.src="/nav/nav.js";
-    document.getElementsByTagName('head')[0].appendChild(script);
-</script>
+
 <div id="page-wrapper"><div id="page">
 
   <div id="header" class="<?php print $secondary_menu ? 'with-secondary-menu': 'without-secondary-menu'; ?>"><div class="section clearfix">

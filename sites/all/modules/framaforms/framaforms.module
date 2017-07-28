@@ -2,7 +2,7 @@
 
 
 /**
-  Load a given CSS if page is embeded in iframe
+  Loose attempt Load a given CSS if page is embeded in iframe - Kept for later
 */
 /*
 function framaforms_init() {
@@ -18,6 +18,20 @@ drupal_set_message('base URL '.$url);
 }
 */
 
+/**
+  Add Framanav bar - You may want to remove this for yout theme
+function hook_preprocess_page(&$vars) {
+  drupal_add_js('https://framasoft.org/nav/nav.js', 'external');
+}
+*/
+
+
+function framaforms_preprocess_page(&$vars, $hook) {
+  if (true) {
+    drupal_add_js('https://framasoft.org/nav/nav.js', 'external');
+    //$vars['scripts'] = drupal_get_js(); // necessary in D7?
+  }
+}
 
 
 /**
@@ -53,33 +67,30 @@ function framaforms_views_access_callbacks() {
 
 function framaforms_user_has_access($account = NULL) {
   global $user;
-  //if ($account == $user->uid && user_access('view own events registration' )){
     $node = node_load(arg(1));
     if ( (isset($node->uid, $GLOBALS['user']->uid) && $GLOBALS['user']->uid == $node->uid && $GLOBALS['user']->uid > 0) || (user_has_role(3) ) ) {
-
-
     return TRUE;
   }
   return FALSE;
 }
 
-
-function framaforms_form_alter(&$element, &$form_state, $context) {
- // if (isset($element['form-builder-element-markup']['form-builder-element-markup'])) {
- //    $element['form-builder-element-markup']['form-builder-element-markup']['#wysiwyg'] = false;
- //    $element['form-builder-element-markup']['form-builder-element-markup']['#type'] = 'text_format';
- // }
-
+/**
+* Disable wysiwyg on markup widget and add protection before leaving
+*/
+function framaforms_form_alter(&$form, &$form_state, $context) {
 // if ($form_id['#id'] == 'form1') {
     $form_id['edit-markup-value']['#wysiwyg'] = FALSE;
     $form_id['edit-markup-value']['und'][0]['#wysiwyg'] = false;
     $form_id['markup']['#wysiwyg'] = FALSE;
     $form_id['markup']['und'][0]['#wysiwyg'] = false;
-
-
-    $form_id['form-builder-element-markup']['#type'] = 'text_format';
-    
+    $form_id['form-builder-element-markup']['#type'] = 'text_format';    
 //  } 
+
+  // loose attempt to add protection if user leave within editing a webform :-/
+  // dpm($form);
+  //if(isset($form_id['form_builder_preview'])) {
+  //     drupal_add_js(drupal_get_path('module', 'node_edit_protection') . '/node-edit-protection.js');
+  //}
 
 
 }

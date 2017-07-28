@@ -663,31 +663,23 @@ function theme_webform_confirm_email_email_add_form($form) {
 }
 
 function webform_confirm_email_settings($form, &$form_state, $node) {
+  $form['#node'] = $node;
+  $form['#tree'] = TRUE;
   $lifetime = array(
     'days'    => NULL,
     'hours'   => NULL,
     'minutes' => NULL,
   );
-  $delete_submissions = FALSE;
-  if (!empty($node)) {
-    $form['#node'] = $node;
 
-    $result = db_query(
-      'SELECT request_lifetime, delete_submissions ' .
-      '  FROM {webform_confirm_email} ' .
-      '    WHERE nid = :nid ' .
-      '  LIMIT 1 ' ,
-      array(':nid' => $node->nid)
-    )->fetchObject();
-    if (isset($result->request_lifetime) && isset($result->delete_submissions)) {
-      $delete_submissions  = $result->delete_submissions;
-      $lifetime['days']    = (int) ($result->request_lifetime / 86400);
-      $lifetime['hours']   = (int)(($result->request_lifetime % 86400) / 3600);
-      $lifetime['minutes'] = (int)(($result->request_lifetime % 86400) % 3600) / 60;
-      foreach (array('days', 'hours', 'minutes') as $key) {
-        if ($lifetime[$key] == 0) {
-          $lifetime[$key] = NULL;
-        }
+  $request_lifetime = $node->webform['confirm_email_request_lifetime'];
+  $delete_submissions = $node->webform['confirm_email_delete_submissions'];
+  if ($request_lifetime) {
+    $lifetime['days']    = (int) ($request_lifetime / 86400);
+    $lifetime['hours']   = (int)(($request_lifetime % 86400) / 3600);
+    $lifetime['minutes'] = (int)(($request_lifetime % 3600) / 60);
+    foreach (array('days', 'hours', 'minutes') as $key) {
+      if ($lifetime[$key] == 0) {
+        $lifetime[$key] = NULL;
       }
     }
   }
@@ -701,7 +693,7 @@ function webform_confirm_email_settings($form, &$form_state, $node) {
     '#weight'      => 0,
   );
 
-  $form['request_lifetime']['lifetime-container'] = array(
+  $form['request_lifetime']['lifetime'] = array(
     '#type'      => 'container',
     '#attributes' => array(
       'class' => array(
@@ -710,7 +702,7 @@ function webform_confirm_email_settings($form, &$form_state, $node) {
     ),
   );
 
-  $form['request_lifetime']['lifetime-container']['days'] = array(
+  $form['request_lifetime']['lifetime']['days'] = array(
     '#type'          => 'textfield',
     '#title'         => t('Days'),
     '#maxlength'     => 3,
@@ -722,7 +714,7 @@ function webform_confirm_email_settings($form, &$form_state, $node) {
       ),
     ),
   );
-  $form['request_lifetime']['lifetime-container']['hours'] = array(
+  $form['request_lifetime']['lifetime']['hours'] = array(
     '#type'          => 'textfield',
     '#title'         => t('Hours'),
     '#maxlength'     => 2,
@@ -734,7 +726,7 @@ function webform_confirm_email_settings($form, &$form_state, $node) {
       ),
     ),
   );
-  $form['request_lifetime']['lifetime-container']['minutes'] = array(
+  $form['request_lifetime']['lifetime']['minutes'] = array(
     '#type'          => 'textfield',
     '#title'         => t('Minutes'),
     '#maxlength'     => 2,
@@ -746,7 +738,7 @@ function webform_confirm_email_settings($form, &$form_state, $node) {
       ),
     ),
   );
-  $form['request_lifetime']['lifetime-container']['delete_submissions'] = array(
+  $form['request_lifetime']['delete_submissions'] = array(
     '#type'          => 'checkbox',
     '#title'         => t('Delete submissions'),
     '#description'   => t('If checked then not only webform_confirm_email\'s internal data but also the submissions themselfs will be deleted. If unchecked, only webform_confirm_email\'s internal data will be deleted.'),
@@ -767,48 +759,32 @@ function webform_confirm_email_settings($form, &$form_state, $node) {
 }
 
 function webform_confirm_email_settings_validate($form, &$form_state) {
+  $values = &drupal_array_get_nested_value($form_state['values'], $form['#parents']);
+  $v = $values['request_lifetime']['lifetime'];
 
   foreach(array('days', 'hours', 'minutes') as $field_name) {
-    if (   !empty($form_state['values'][$field_name])
-        && preg_match('/^\d*$/', $form_state['values'][$field_name]) != 1) {
-      form_error($form['request_lifetime'][$field_name], t('The entered value %value is not a number.', array('%value' => $form_state['values'][$field_name])));
+    if (!empty($v[$field_name]) && preg_match('/^\d*$/', $v[$field_name]) != 1) {
+      form_error($form['request_lifetime']['lifetime'][$field_name], t('The entered value %value is not a number.', array('%value' => $form_state['values'][$field_name])));
     }
   }
-  if (   !empty($form_state['values']['hours'])
-      && (int) $form_state['values']['hours'] > 23) {
-    form_error($form['request_lifetime']['hours'], t('Hours must be smaller than 24.'));
+  if (!empty($v['hours']) && (int) $v['hours'] > 23) {
+    form_error($form['request_lifetime']['lifetime']['hours'], t('Hours must be smaller than 24.'));
   }
-  if (   !empty($form_state['values']['minutes'])
-      && (int) $form_state['values']['minutes'] > 59) {
-    form_error($form['request_lifetime']['minutes'], t('Minutes must be smaller than 60.'));
+  if (!empty($v['minutes']) && (int) $v['minutes'] > 59) {
+    form_error($form['request_lifetime']['lifetime']['minutes'], t('Minutes must be smaller than 60.'));
   }
+
+  $values['request_lifetime']['lifetime'] = (int) $v['days'] * 86400
+    + (int) $v['hours'] * 3600 + (int) $v['minutes'] * 60;
+
 }
 
 function webform_confirm_email_settings_submit($form, &$form_state) {
-  if (!empty($form['#node'])) {
-    $lifetime = 0;
-    if (!empty($form_state['values']['days'])) {
-      $lifetime += (int) $form_state['values']['days'] * 86400;
-    }
-    if (!empty($form_state['values']['hours'])) {
-      $lifetime += (int) $form_state['values']['hours'] * 3600;
-    }
-    if (!empty($form_state['values']['minutes'])) {
-      $lifetime += (int) $form_state['values']['minutes'] * 60;
-    }
+  $values = &drupal_array_get_nested_value($form_state['values'], $form['#parents']);
+  $w = &$form['#node']->webform;
+  $w['confirm_email_request_lifetime'] = $values['request_lifetime']['lifetime'];
+  $w['confirm_email_delete_submissions'] = $values['request_lifetime']['delete_submissions'];
+  node_save($form['#node']);
 
-    db_query(
-      'UPDATE {webform_confirm_email} ' .
-      '  SET request_lifetime   = :lifetime , ' .
-      '      delete_submissions = :delete_submissions ' .
-      '  WHERE nid = :nid ' ,
-      array(
-        ':lifetime'           => $lifetime,
-        ':nid'                => $form['#node']->nid,
-        ':delete_submissions' => $form_state['values']['delete_submissions'],
-      )
-    );
-
-    drupal_set_message(t('The confirmation mail settings have been updated.'));
-  }
+  drupal_set_message(t('The confirmation mail settings have been updated.'));
 }

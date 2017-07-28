@@ -90,8 +90,8 @@ function webform_confirm_email_generate_key($nid, $sid, $eid, $email = NULL) {
  * in the webform_confirm_email table that identifies the email as being a
  * confirmation request or confirmation email.
  * If it's a confirmational mail a hash code is generated, an URL is generated
- * out of the hash and the "%confirm_url" is replaced in the email by this generated
- * confirmation URL.
+ * out of the hash and the [submission:confirm_url] is replaced in the email by
+ * this generated confirmation URL.
  * If it's a confirmation email, the email is stopped from being send; This is because
  * after a webform submission the webform module would send all emails that are
  * registered for this form; but we want the confirmation email to be send only when
@@ -483,6 +483,9 @@ function webform_confirm_email_tokens($type, $tokens, array $data = array(), arr
         drupal_write_record('webform_confirm_email_code', $obj);
       }
 
+      if (!empty($data['webform-email']['html'])) {
+        $confirm_url = "<a href=\"$confirm_url\">$confirm_url</a>";
+      }
       $replacements['[submission:confirm_url]'] = $confirm_url;
     }
   }
@@ -557,16 +560,17 @@ The forms for changing the 3 different webform email settings (from address,
 from name, to address, to name, ...) is the same as the webform email settings
 form.  The only difference is in the 2nd email type, the "confirmation request
 email", where you have an added entry in the "Token values" list, here you\'ll
-find the %confirm_url token that should be used in confirmation request emails.
+find the [submission:confirm_url] token that should be used in confirmation
+request emails.
 This token will be expanded to the confirmation link. So as an example the
 content of your "E-mail template" could look like this:
 <br>
 <br>
-"Hallo %value[first_name] %value[last_name],
+"Hallo [submission:values:first_name] [submission:values:last_name],
 <br>
 <br>
 <p style="text-indent:2em;">please visit the link below to confirm your submission.</p>
-%confirm_url
+[submission:confirm_url]
 <br>
 <br>
 Thank you!
@@ -582,12 +586,9 @@ Your petition team"';
 function webform_confirm_email_cron() {
   // get all node id's that we have to check for expired requests
   $nids_lifetime = db_query(
-    'SELECT confirm.nid, confirm.request_lifetime, confirm.delete_submissions ' .
-    '  FROM {webform_confirm_email_code} code ' .
-    '  INNER JOIN {webform_confirm_email} confirm ' .
-    '    ON code.nid = confirm.nid ' .
-    '  WHERE confirm.request_lifetime IS NOT NULL ' .
-    '  GROUP BY confirm.nid, confirm.request_lifetime, confirm.delete_submissions'
+    'SELECT nid, confirm_email_request_lifetime, confirm_email_delete_submissions ' .
+    '  FROM {webform} ' .
+    '  WHERE confirm_email_request_lifetime IS NOT NULL '
     )->fetchAllAssoc('nid');
 
   if (!empty($nids_lifetime)) {
@@ -595,7 +596,7 @@ function webform_confirm_email_cron() {
       $expired_sids = array();
       // calculate the oldets timestamp that is still not expired
       // for this nid;
-      $timestamp = REQUEST_TIME - $settings->request_lifetime;
+      $timestamp = REQUEST_TIME - $settings->confirm_email_request_lifetime;
       $expired_sids[$nid] = db_query(
         'SELECT sid ' .
         '  FROM {webform_confirm_email_code} ' .
@@ -626,7 +627,7 @@ function webform_confirm_email_cron() {
         );
       }
       module_invoke_all('webform_confirm_email_request_expired', $expired_sids);
-      if ($settings->delete_submissions) {
+      if ($settings->confirm_email_delete_submissions) {
         require_once drupal_get_path('module', 'webform') . '/includes/webform.submissions.inc';
         $node = node_load($nid);
         foreach ($expired_sids[$nid] as $sid) {
@@ -699,158 +700,56 @@ function webform_confirm_email_form_webform_results_download_form_alter(&$form, 
     '#options'       => $options,
     '#access'        => TRUE,
   );
-
-  $form['#submit'] = array('webform_confirm_email_results_download_form_submit');
+  array_unshift($form['range']['#element_validate'], 'webform_confirm_email_range_validate');
 
   return $form;
 }
 
 /**
- * Copied and adapted from webform/includes/webform.report.inc:
- * function webform_results_download_form_submit
+ * Form-API element validate function for the range element.
  */
-function webform_confirm_email_results_download_form_submit(&$form, &$form_state) {
-  $node = $form_state['values']['node'];
-  $format = $form_state['values']['format'];
-
-  $options = array(
-    'delimiter' => $form_state['values']['delimiter'],
-    'components' => array_keys(array_filter($form_state['values']['components'])),
-    'header_keys' => $form_state['values']['header_keys'],
-    'select_keys' => $form_state['values']['select_keys'],
-    'select_format' => $form_state['values']['select_format'],
-    'range' => $form_state['values']['range'],
-    'download' => $form_state['values']['download'],
-  );
-
-  $filters = array();
-  switch ($form_state['values']['range']['confirmed']) {
-    case WEBFORM_CONFIRM_EMAIL_FILTER_CONFIRMED:
-      $filters['confirmed'] = 1;
-      break;
-    case  WEBFORM_CONFIRM_EMAIL_FILTER_UNCONFIRMED:
-      $filters['confirmed'] = 0;
-      break;
-  }
-  $defaults = webform_results_download_default_options($node, $format);
-  $options += $defaults;
-  $options['range'] += $defaults['range'];
-
-  // Use a pre-built list of SIDs provided by validate handlers (if any).
-  if (isset($form_state['values']['sids'])) {
-    $options['sids'] = $form_state['values']['sids'];
-  }
-  // Retrieve the list of required SIDs.
-  elseif ($options['range']['range_type'] != 'all' || !empty($filters)) {
-    $options['sids'] = webform_confirm_email_download_sids($form_state['values']['node']->nid, $form_state['values']['range'], NULL, $filters);
-  }
-
-  // Determine an appropriate batch size based on the form and server specs.
-  if (!isset($options['range']['batch_size'])) {
-    // Start the batch size at 50,000 per batch, but divide by number of
-    // components in the form. e.g. If a form had 10 components, it would
-    // export 5,000 submissions at a time.
-    $batch_size = ceil(50000 / max(1, count($form_state['values']['node']->webform['components'])));
-
-    // Every 32MB of additional memory after 64MB adds a multiplier in size.
-    $memory_limit = parse_size(ini_get('memory_limit'));
-    $mb = 1048576;
-    $memory_modifier = max(1, ($memory_limit - (64 * $mb)) / (32 * $mb));
-    $batch_size = ceil($batch_size * $memory_modifier);
-
-    // For time reasons, limit the batch size to 10,000.
-    $batch_size = min($batch_size, 10000);
-
-    // Allow a non-UI configuration to override the batch size.
-    $batch_size = variable_get('webform_export_batch_size', $batch_size);
-
-    $options['range']['batch_size'] = $batch_size;
-  }
-
-  $options['file_name'] = _webform_export_tempname();
-
-  // Set up a batch to export the results.
-  $batch = webform_results_export_batch($node, $format, $options);
-  batch_set($batch);
+function webform_confirm_email_range_validate($element, &$form_state) {
+  _webform_confirm_email_range_confirmed($element['confirmed']['#value']);
 }
 
 /**
- * Copied and adapted from webform/includes/webform.report.inc:
- * function webform_download_sids
+ * Helper function to store and retrieve the range configuration.
+ *
+ * This is a hack to smuggle in this value into our query alter function.
+ *
+ * @see webform_confirm_email_query_webform_download_sids_alter()
  */
-function webform_confirm_email_download_sids($nid, $range_options, $uid = NULL, $filters = NULL) {
-  $query = db_select('webform_submissions', 'ws')
-    ->fields('ws', array('sid'))
-    ->condition('nid', $nid)
-    ->addTag('webform_download_sids');
-
-  if (isset($filters) == TRUE) {
-    foreach($filters as $column => $value) {
-      $query->condition($column, $value);
-    }
+function _webform_confirm_email_range_confirmed($value = NULL) {
+  $v = &drupal_static(__FUNCTION__);
+  if (!is_null($value)) {
+    $v = $value;
   }
+  return $v;
+}
 
-  switch ($range_options['range_type']) {
-    case 'all':
-      // All Submissions.
-      $query->orderBy('sid', 'ASC');
-      break;
-    case 'new':
-      // All Since Last Download.
-      $download_info = webform_download_last_download_info($nid, $uid);
-      $last_sid = $download_info ? $download_info['sid'] : 0;
-      $query
-        ->condition('sid', $last_sid, '>')
-        ->orderBy('sid', 'ASC');
-      break;
-    case 'latest':
-      // Last x Submissions.
-      $start_sid = webform_download_latest_start_sid($nid, $range_options['latest'], $range_options['completion_type']);
-      $query->condition('sid', $start_sid, '>=');
-      break;
-    case 'range':
-      // Submissions Start-End.
-      $query->condition('sid', $range_options['start'], '>=');
-      if ($range_options['end']){
-        $query->condition('sid', $range_options['end'], '<=');
-      }
-      $query->orderBy('sid', 'ASC');
-      break;
-    case 'range_serial':
-      // Submissions Start-End, using serial numbers.
-      $query->condition('serial', $range_options['start'], '>=');
-      if ($range_options['end']){
-        $query->condition('serial', $range_options['end'], '<=');
-      }
-      $query->orderBy('serial', 'ASC');
-      break;
+/**
+ * Implements hook_query_TAG_alter().
+ */
+function webform_confirm_email_query_webform_download_sids_alter($query) {
+  $confirmed = _webform_confirm_email_range_confirmed();
+  if (!empty($confirmed)) {
+    $op = $confirmed == WEBFORM_CONFIRM_EMAIL_FILTER_CONFIRMED ? '>' : '=';
+    $query->condition('ws.confirmed', 0, $op);
   }
+}
 
-  // Filter down to draft or finished submissions.
-  if (!empty($range_options['completion_type']) && $range_options['completion_type'] !== 'all') {
-    $query->condition('is_draft', (int) ($range_options['completion_type'] === 'draft'));
-  }
-    // Set batch properties. Unfortunately the pager query class reads directly
-  // from $_GET['page'] to determine the current page number, so we have to set
-  // this super-global and then restore it after executing the query.
-  if (isset($range_options['batch_number']) && isset($range_options['batch_size'])) {
-    if (isset($_GET['page'])) {
-      $current_page = $_GET['page'];
-    }
-    $_GET['page'] = $range_options['batch_number'];
-    $query = $query->extend('PagerDefault');
-    $query->limit($range_options['batch_size']);
-    $query->element(0);
-  }
+/**
+ * Implements hook_query_TAG_alter().
+ */
+function webform_confirm_email_query_webform_get_submissions_sids_alter($query) {
+  webform_confirm_email_query_webform_download_sids_alter($query);
+}
 
-  $sids = $query->execute()->fetchCol();
-
-  // Restore the current page number (if any).
-  if (isset($current_page)) {
-    $_GET['page'] = $current_page;
-  }
-
-  return $sids;
+/**
+ * Implements hook_query_TAG_alter().
+ */
+function webform_confirm_email_query_webform_get_submission_count_alter($query) {
+  webform_confirm_email_query_webform_download_sids_alter($query);
 }
 
 /**

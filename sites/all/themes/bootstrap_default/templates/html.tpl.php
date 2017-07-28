@@ -72,13 +72,6 @@
 @import url("/sites/all/themes/bootstrap_common/bootstrap_common.css");
 </style>
 <script type="text/javascript" src="/sites/all/themes/bootstrap_common/bootstrap.js"></script>
-<script type="text/javascript">
-var script = document.createElement('script');
-    script.type = "text/javascript";
-    script.src="/nav/nav.js";
-    document.getElementsByTagName('head')[0].appendChild(script);
-</script>
-
 
 </head>
 <body<?php print $body_attributes; ?>>

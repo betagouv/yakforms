@@ -65,15 +65,15 @@ The forms for changing the 3 different webform email settings (from address,
 from name, to address, to name, ...) is the same as the webform email settings
 form.  The only difference is in the 2nd email type, the "confirmation request
 email", where you have an added entry in the "Token values" list, here you'll
-find the %confirm_url token that should be used in confirmation request emails.
-This token will be expanded to the confirmation link. So as an example the
-content of your "E-mail template" could look like this:
+find the [submission:confirm_url] token that should be used in confirmation
+request emails.  This token will be expanded to the confirmation link. So as
+an example the content of your "E-mail template" could look like this:
 
-"Hallo %value[first_name] %value[last_name],
+"Hello [submission:values:first_name] [submission:values:last_name],
 
-  please visit the link below to confirm your submission.
+Please visit the link below to confirm your submission:
 
-%confirm_url
+ [submission:confirm_url]
 
 Thank you!
 

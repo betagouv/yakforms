@@ -8,9 +8,9 @@ dependencies[] = webform (>7.x-4.9)
 
 stylesheets[all][] = webform_confirm_email.css
 
-; Information added by Drupal.org packaging script on 2016-06-08
-version = "7.x-2.5"
+; Information added by Drupal.org packaging script on 2017-05-27
+version = "7.x-2.8"
 core = "7.x"
 project = "webform_confirm_email"
-datestamp = "1465392628"
+datestamp = "1495891686"
 

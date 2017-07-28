@@ -5,6 +5,9 @@
 
 include_once 'webform_confirm_email.inc';
 
+module_load_include('inc', 'webform', 'includes/webform.report');
+module_load_include('inc', 'webform', 'includes/webform.submissions');
+
 /**
  * Helper function to propvide a form for filtering for (un)confirmed submissions
  */
@@ -14,11 +17,14 @@ function webform_confirm_email_confirmed_filter_form($form, &$form_state) {
     WEBFORM_CONFIRM_EMAIL_FILTER_CONFIRMED   => t('Only confirmed submissions'),
     WEBFORM_CONFIRM_EMAIL_FILTER_UNCONFIRMED => t('Only unconfirmed submissions'),
   );
-  $query_parameters = drupal_get_query_parameters();
+  $query = drupal_get_query_parameters();
+  $confirmed = isset($query['confirmed']) ? $query['confirmed'] : WEBFORM_CONFIRM_EMAIL_FILTER_NONE;
+  // Set the confirmed filter for queries in the same request.
+  _webform_confirm_email_range_confirmed($confirmed);
   $form['confirmed']= array(
     '#type'          => 'radios',
     '#title'         => t('Filter for (un)confirmed submissions'),
-    '#default_value' => isset($query_parameters['confirmed']) ? $query_parameters['confirmed'] : WEBFORM_CONFIRM_EMAIL_FILTER_NONE,
+    '#default_value' => $confirmed,
     '#options'       => $options,
     '#access'        => TRUE,
   );
@@ -50,44 +56,17 @@ function webform_confirm_email_confirmed_filter_form_submit($form, &$form_state)
   drupal_goto($path, array('absolute' => TRUE, 'query' => $query_parameters));
 }
 
-/**
- * Helper function to determine if a "confirmed submissions" filter is set
- */
-function _webform_confirm_email_get_submission_filters($node) {
-  $filters = array('nid' => $node->nid);
-
-  if (   isset($_GET['confirmed']) == TRUE
-      && is_numeric($_GET['confirmed']) == TRUE) {
-    switch ($_GET['confirmed']) {
-      case WEBFORM_CONFIRM_EMAIL_FILTER_CONFIRMED:
-         $filters['confirmed'] = 1;
-         break;
-      case WEBFORM_CONFIRM_EMAIL_FILTER_UNCONFIRMED:
-         $filters['confirmed'] = 0;
-         break;
-    }
-  }
-  return $filters;
-}
-
 function webform_confirm_email_results_submissions($node, $user_filter, $pager_count) {
   global $user;
 
-  module_load_include('inc', 'webform', 'includes/webform.submissions');
+  // Load this early on so that the filter is set before executing the queries.
+  $element['confirmed_form'] = drupal_get_form('webform_confirm_email_confirmed_filter_form');
 
   if (isset($_GET['results']) && is_numeric($_GET['results'])) {
     $pager_count = $_GET['results'];
   }
 
-  $filters = _webform_confirm_email_get_submission_filters($node);
-
   $header = theme('webform_results_submissions_header', array('node' => $node));
-  $query = db_select('webform_submissions', 'ws')
-    ->condition('ws.nid', $node->nid)
-    ->condition('ws.is_draft', 0);
-  if (isset($filters['confirmed']) == TRUE) {
-    $query->condition('ws.confirmed', $filters['confirmed']);
-  }
   if ($user_filter) {
     if ($user->uid) {
       drupal_set_title(t('Submissions for %user', array('%user' => $user->name)), PASS_THROUGH);
@@ -96,20 +75,13 @@ function webform_confirm_email_results_submissions($node, $user_filter, $pager_c
       drupal_set_title(t('Your submissions'));
       webform_disable_page_cache();
     }
-    webform_set_breadcrumb($node);
-    $filters['uid'] = $user->uid;
-    $query->condition('ws.uid', $user->uid);
-  }
-  $submissions = isset($_SESSION['webform_submission']) ? $_SESSION['webform_submission'] : NULL;
-  if ($submissions) {
-    $query->condition('ws.sid', $submissions, 'IN');
-    $count = $query->countQuery()->execute()->fetchField();
+    $submissions = webform_get_submissions(array('nid' => $node->nid, 'uid' => $user->uid), $header, $pager_count);
+    $count = webform_get_submission_count($node->nid, $user->uid, NULL);
   }
   else {
-    $count = 0;
+    $submissions = webform_get_submissions($node->nid, $header, $pager_count);
+    $count = webform_get_submission_count($node->nid, NULL, NULL);
   }
-
-  $submissions = webform_get_submissions($filters, $header, $pager_count);
 
   $operation_column = end($header);
   $operation_total = $operation_column['colspan'];
@@ -117,7 +89,7 @@ function webform_confirm_email_results_submissions($node, $user_filter, $pager_c
   $rows = array();
   foreach ($submissions as $sid => $submission) {
     $row = array(
-      $submission->is_draft ? t('@sid (draft)', array('@sid' => $sid)) : $sid,
+      $submission->is_draft ? t('@serial (draft)', array('@serial' => $submission->serial)) : $submission->serial,
       format_date($submission->submitted, 'short'),
     );
     if (webform_results_access($node, $user)) {
@@ -149,8 +121,6 @@ function webform_confirm_email_results_submissions($node, $user_filter, $pager_c
   $element['#pager_count'] = $pager_count;
   $element['#attached']['library'][] = array('webform', 'admin');
 
-  $element['confirmed_form'] = drupal_get_form('webform_confirm_email_confirmed_filter_form');
-
   $element['table']['#theme'] = 'table';
   $element['table']['#header'] = $header;
   $element['table']['#rows'] = $rows;
@@ -181,12 +151,14 @@ function webform_confirm_email_results_table($node, $pager_count = 0) {
   if (isset($_GET['results']) && is_numeric($_GET['results'])) {
     $pager_count = $_GET['results'];
   }
-  $filters = _webform_confirm_email_get_submission_filters($node);
+
+  // Load this early on so that the filter is set before executing the queries.
+  $confirmed_form = drupal_get_form('webform_confirm_email_confirmed_filter_form');
+
   // Get all the submissions for the node.
   $header = theme('webform_results_table_header', array('node' => $node));
-  $submissions = webform_get_submissions($filters, $header, $pager_count);
+  $submissions = webform_get_submissions($node->nid, $header, $pager_count);
   $total_count = webform_get_submission_count($node->nid);
-  $confirmed_form = drupal_get_form('webform_confirm_email_confirmed_filter_form');
 
   $output = theme(
     'webform_confirm_email_results_table',

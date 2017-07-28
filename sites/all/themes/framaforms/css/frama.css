@@ -5,8 +5,8 @@
 */
 
 
-#block-block-22 {
-  margin-bottom: -55px;
+#block-block-22 + .block {
+  margin-top: -55px;
 }
 
 .big-title {
@@ -57,7 +57,8 @@ h1, h2, h3, h4, h5, h6,
   width: auto;
 }
 #page-wrapper {
- min-width: 300px;
+  min-width: 300px;
+  background: #eee;
 }
 
 .field-name-field-form1-image .file-icon img {
@@ -66,11 +67,11 @@ h1, h2, h3, h4, h5, h6,
 }
 
 #header div.section, #featured div.section, #messages div.section, #main, #triptych, #footer-columns {
-  width: calc;
+  width: auto;
 }
 
 #footer {
-  width: calc;
+/*   width: auto; */
   min-width: auto;
   padding: 0em 1em 0em 1em;
 }
@@ -91,7 +92,13 @@ h1, h2, h3, h4, h5, h6,
 
 /* Block d'aide / post-it */
 #sidebar-first, #sidebar-second {
-    margin-left: -285px;
+    /* margin-left: -285px; */
+    position: fixed;
+    -webkit-padding-start: 950px;
+}
+
+.region-sidebar-first > .block {
+ background-color: #ffffaf !important;
 }
 
 .region-sidebar-first {
@@ -108,8 +115,9 @@ h1, h2, h3, h4, h5, h6,
 /* block "Mis en évidence" */
 #highlighted {
     font-size: 80%;
-    background-color: #f6f6f2;
-    padding: 1em;
+    background-color: #fff;
+    padding: 1em 0;
+    border-bottom: 11px solid #eee;
 }
 
 #highlighted h2 {
@@ -136,6 +144,7 @@ h1, h2, h3, h4, h5, h6,
   position: inherit;
 }
 
+#framafooter nav,
 #framafooter > div > div {
   box-sizing: border-box !important;
   -moz-boxsizing: border-box;
@@ -203,6 +212,8 @@ border-radius: inherit;
 }
 
 #footer {
+  width: auto;
+  max-width: 900px;
   margin-top: 0;
   border-color: #808080;
 }
@@ -317,3 +328,20 @@ fieldset#edit-role-control.collapsible.form-wrapper.collapse-processed, div.form
 }
 
 
+.webform-progressbar-outer {
+  margin-top: 4em;
+  margin-bottom: 5em;
+}
+
+.webform-progressbar-page-label {
+  font-size: 80%;
+}
+
+.warning-personnal-data {
+  font-size: 75% !important;
+  padding: 0.7em;
+  background-color: #f2f2f2;
+  border: 1px solid darkgray;
+  border-radius: 13px;
+  margin: 1em;
+}
