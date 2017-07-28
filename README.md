@@ -23,7 +23,7 @@ Le niveau technique pour l'installer n'est pas très élevé, mais l'installatio
 
 Pour des raisons de performances, Framaforms utilise postgresql comme BDD, ce qui posait probleme pour en faire une "distribution" <https://www.drupal.org/docs/7/distributions>.
 
-== Prérequis ==
+## Prérequis
 
 * PHP 7+ (peut fonctionner avec des versions antérieures, mais PHP7 recommandé pour des raisons de performances)
 * Nginx (peut fonctionner avec Apache)
