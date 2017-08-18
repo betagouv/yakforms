@@ -345,3 +345,14 @@ fieldset#edit-role-control.collapsible.form-wrapper.collapse-processed, div.form
   border-radius: 13px;
   margin: 1em;
 }
+
+.tutoriel_element {
+  border: 1px solid lightgray;
+  box-shadow: 3px 3px 4px #aaa;
+  width: 100%;
+}
+
+video {
+  border: 1px solid lightgray;
+  box-shadow: 3px 3px 4px #aaa;
+}
