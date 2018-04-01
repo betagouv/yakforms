@@ -112,6 +112,7 @@ function webform_confirm_email_mail_alter(&$message) {
         'email_message' => $message,
       );
       $message['send'] = FALSE; // prevents drupal_mail from actually sending the message
+      unset($obj["email_message"]["params"]["node"]);  // https://framagit.org/framasoft/framaforms/issues/24
       drupal_write_record('webform_confirm_email_confirmation_emails', $obj);
     }
   }
