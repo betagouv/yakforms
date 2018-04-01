@@ -73,7 +73,8 @@ function webform_results_submissions($node, $user_filter, $pager_count) {
     $row[] = l(t('View'), "node/$node->nid/submission/$sid");
     $operation_count = 1;
     // No need to call this multiple times, just reference this in a variable.
-    $destination = drupal_get_destination();
+    //$destination = drupal_get_destination(); //commented for security : https://framagit.org/framasoft/framaforms/issues/29
+    $destination = array("destination" => drupal_get_path_alias('node/'.$node->nid)."/webform-results");
     if (webform_submission_access($node, $submission, 'edit', $user)) {
       $row[] = l(t('Edit'), "node/$node->nid/submission/$sid/edit", array('query' => $destination));
       $operation_count++;
