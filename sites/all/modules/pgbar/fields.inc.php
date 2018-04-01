@@ -4,6 +4,8 @@
  * Define the pgbar field type.
  */
 
+use \Drupal\polling\UrlGenerator;
+
 /**
  * Implements hook_field_info().
  */
@@ -49,14 +51,49 @@ function pgbar_field_formatter_info() {
  * Load the source plugin for a given field instance.
  *
  * @return object
- *   ctools plugin class instance.
+ *   A plugin implementing \Drupal\pgbar\Source\PluginInterface.
  */
 function _pgbar_source_plugin_load($entity, $field, $instance) {
-  ctools_include('plugins');
-  $plugin_name = isset($instance['settings']['source']) ? $instance['settings']['source'] : 'webform_submissions.inc';
-  $plugin = ctools_get_plugins('pgbar', 'source', $plugin_name);
-  $class = ctools_plugin_get_class($plugin, 'handler');
-  return new $class($entity, $field, $instance);
+  $name = isset($instance['settings']['source']) ? $instance['settings']['source'] : NULL;
+  $plugin_info = module_invoke_all('pgbar_source_plugin_info');
+  if (!isset($plugin_info[$name])) {
+    watchdog('pgbar', 'Failed to load unknown plugin %name.', ['%name' => $name], WATCHDOG_ERROR);
+    return;
+  }
+  $class = $plugin_info[$name];
+  return $class::forField($entity, $field, $instance);
+}
+
+/**
+ * Helper function to add default settings to a field item.
+ *
+ * @param array $item
+ *   A field item.
+ *
+ * @return array
+ *   The field item with all default values added.
+ */
+function _pgbar_add_item_defaults(array $item) {
+  return drupal_array_merge_deep([
+    'state' => 1,
+    'options' => [
+      'target' => [
+        'target'    => '200',
+        'threshold' => '90',
+        'offset'    => '0',
+      ],
+      'texts' => [
+        'intro_message'       => 'We need !target signatures.',
+        'full_intro_message'  => 'Thanks for your support!',
+        'status_message'      => 'Already !current of !target signed the petition.',
+        'full_status_message' => "We've reached our goal of !target supports.",
+      ],
+      'display' => [
+        'template' => '',
+      ],
+      'source' => [],
+    ],
+  ], $item);
 }
 
 /**
@@ -70,25 +107,7 @@ function pgbar_field_widget_form(&$form, &$form_state, $field, $instance, $langc
       $item['options']['target']['target'] = implode(',', $item['options']['target']['target']);
     }
   }
-  $item = drupal_array_merge_deep(array(
-    'state' => 1,
-    'options' => array(
-      'target' => array(
-        'target'    => '200',
-        'threshold' => '90',
-        'offset'    => '0',
-      ),
-      'texts' => array(
-        'intro_message'       => 'We need !target signatures.',
-        'full_intro_message'  => 'Thanks for your support!',
-        'status_message'      => 'Already !current of !target signed the petition.',
-        'full_status_message' => "We've reached our goal of !target supports.",
-      ),
-      'display' => array(
-        'template' => '',
-      ),
-    ),
-  ), $item);
+  $item = _pgbar_add_item_defaults($item);
 
   $element['state'] = array(
     '#title' => t('Display a progress bar'),
@@ -107,6 +126,7 @@ function pgbar_field_widget_form(&$form, &$form_state, $field, $instance, $langc
     'texts' => array(
       '#type' => 'fieldset',
       '#title' => t('Texts'),
+      '#description' => t('Available tokens: !current, !current-animated, !target, !needed.')
     ),
     'source' => array(
       '#type' => 'fieldset',
@@ -139,7 +159,7 @@ function pgbar_field_widget_form(&$form, &$form_state, $field, $instance, $langc
     '#title' => t('Collected offline'),
     '#description' => t('Add a constant offset to the number shown by the progress bar.'),
     '#type' => 'textfield',
-    '#nimber_type' => 'integer',
+    '#number_type' => 'integer',
     '#default_value' => $item['options']['target']['offset'],
   );
   $element['options']['texts']['intro_message'] = array(
@@ -177,7 +197,7 @@ function pgbar_field_widget_form(&$form, &$form_state, $field, $instance, $langc
     '#type' => 'textfield',
   );
   $source = _pgbar_source_plugin_load(NULL, $field, $instance);
-  if ($source_form = $source->widgetForm(isset($items[$delta]) ? $items[$delta] : NULL)) {
+  if ($source && ($source_form = $source->widgetForm($item))) {
     $element['options']['source'] += $source_form;
   }
   else {
@@ -227,12 +247,18 @@ function pgbar_field_widget_error($element, $error, $form, &$form_state) {
  * Implements hook_field_formatter_view().
  */
 function pgbar_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
-  module_load_include('inc', 'webform', 'includes/webform.submissions');
-
+  $entity_id = entity_id($entity_type, $entity);
   $source = _pgbar_source_plugin_load($entity, $field, $instance);
 
-  $element = array();
-  foreach ($items as $item) {
+  if (!$source) {
+    return;
+  }
+
+  $settings = [];
+  $element = [];
+  foreach ($items as $delta => $item) {
+    $item = _pgbar_add_item_defaults($item);
+    $html_id = drupal_html_id("pgbar-item");
     $current = $source->getValue($item);
     // Skip disabled items.
     if (!isset($item['state']) || !$item['state']) {
@@ -245,22 +271,32 @@ function pgbar_field_formatter_view($entity_type, $entity, $field, $instance, $l
     }
     $theme[] = 'pgbar';
     $current += isset($item['options']['target']['offset']) ? $item['options']['target']['offset'] : 0;
+    $target = _pgbar_select_target($item['options']['target']['target'], $current, $item['options']['target']['threshold']);
     $d = array(
       '#theme' => $theme,
       '#current' => $current,
-      '#target' => _pgbar_select_target($item['options']['target']['target'], $current, $item['options']['target']['threshold']),
+      '#target' => $target,
       '#texts' => $item['options']['texts'],
+      '#html_id' => $html_id,
     );
     // Skip pgbars that have a target of 0
     if ($d['#target'] <= 0) {
       continue;
     }
+    $settings['pgbar'][$html_id] = [
+      'current' => $current,
+      'target' => $target,
+      'pollingURL' => UrlGenerator::instance()->entityUrl($entity_type, $entity_id),
+      'field_name' => $field['field_name'],
+      'delta' => $delta,
+    ];
     $element[] = $d;
   }
   if (!empty($element)) {
-    $element['#attached'] = array(
-      'js' => array(drupal_get_path('module', 'pgbar') . '/pgbar.js'),
-    );
+    $element['#attached']['js'] = [
+      drupal_get_path('module', 'pgbar') . '/pgbar.js',
+      ['type' => 'setting', 'data' => $settings],
+    ];
     return $element;
   }
 }
@@ -301,7 +337,7 @@ function pgbar_field_validate($entity_type, $entity, $field, $instance, $langcod
     if ($item['state'] && empty($item['options']['target']['target'])) {
       $errors[$field['field_name']][$langcode][$delta][] = array(
         'error' => 'no_valid_target',
-        'message' => t('%name: Plese enter at least one valid progress bar target (a number > 0).', array('%name' => $instance['label'])),
+        'message' => t('%name: Please enter at least one valid progress bar target (a number > 0).', array('%name' => $instance['label'])),
       );
     }
   }
@@ -351,11 +387,10 @@ function pgbar_field_instance_settings_form($field, $instance) {
   $settings = &$instance['settings'];
 
   $form = array();
-  ctools_include('plugins');
-  $sources = ctools_get_plugins('pgbar', 'source');
-  $options = array();
-  foreach ($sources as $id => $source) {
-    $options[$id] = $source['label'];
+  $plugin_info = module_invoke_all('pgbar_source_plugin_info');
+  $options = [];
+  foreach ($plugin_info as $name => $class) {
+    $options[$name] = $class::label();
   }
 
   $form['source'] = array(

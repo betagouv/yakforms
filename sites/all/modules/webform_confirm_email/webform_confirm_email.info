@@ -4,13 +4,13 @@ core = 7.x
 package = Webform
 project = webform_confirm_email
 
-dependencies[] = webform (>7.x-4.9)
+dependencies[] = webform (>=7.x-4.16)
 
 stylesheets[all][] = webform_confirm_email.css
 
-; Information added by Drupal.org packaging script on 2017-05-27
-version = "7.x-2.8"
+; Information added by Drupal.org packaging script on 2017-10-31
+version = "7.x-2.11"
 core = "7.x"
 project = "webform_confirm_email"
-datestamp = "1495891686"
+datestamp = "1509463987"
 

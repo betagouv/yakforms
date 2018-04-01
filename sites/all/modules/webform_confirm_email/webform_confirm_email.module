@@ -639,28 +639,42 @@ function webform_confirm_email_cron() {
 }
 
 /**
- * Implements hook_theme().
+ * Implements hook_theme_registry_alter().
  */
-function webform_confirm_email_theme() {
-  return array(
-    'webform_confirm_email_results_submissions' => array(
-      'render element' => 'element',
-      'template'       => 'templates/webform-confirm-email-results-submissions',
-      'file'           => 'webform_confirm_email.report.inc',
-    ),
-    'webform_confirm_email_results_table' => array(
-      'variables' => array(
-        'confirmed_form' => NULL,
-        'node'           => NULL,
-        'components'     => NULL,
-        'submissions'    => NULL,
-        'total_count'    => NULL,
-        'pager_count'    => NULL,
-      ),
-      'file' => 'webform_confirm_email.report.inc',
-    ),
-  );
+function webform_confirm_email_theme_registry_alter(&$registry) {
+  $path = drupal_get_path('module', 'webform_confirm_email');
+
+  $t = &$registry['webform_results_submissions'];
+  if ($t['type'] == 'module') {
+    $t['template'] = $path . '/templates/webform-results-submissions';
+    $t['file'] = 'webform_confirm_email.report.inc';
+    $t['includes'][] = $path . '/webform_confirm_email.report.inc';
+    $t['theme path'] = $path;
+    $functions = [];
+    foreach ($t['preprocess functions'] as $f) {
+      if ($f == 'template_preprocess_webform_results_submissions') {
+        $functions[] = 'template_preprocess_webform_confirm_email_results_submissions';
+      }
+      $functions[] = $f;
+    }
+    $t['preprocess functions'] = $functions;
+  }
+  unset($t);
+
+  $t = &$registry['webform_results_table'];
+  if ($t['type'] == 'module') {
+    $t['file'] = 'webform_confirm_email.report.inc';
+    $t['includes'][] = $path . '/webform_confirm_email.report.inc';
+    $t['theme path'] = $path;
+    $t['variables']['confirmed_form'] = NULL;
+    $t['function'] = 'theme_webform_confirm_email_results_table';
+  }
+  unset($t);
+
+  $registry['webform_emails_form']['function']    = 'theme_webform_confirm_email_emails_form';
+  $registry['webform_email_add_form']['function'] = 'theme_webform_confirm_email_email_add_form';
 }
+
 
 /**
  * Implements hook_webform_template_insert().
@@ -799,4 +813,33 @@ function webform_confirm_email_node_export_after_import_alter(array &$nodes, $fo
       }
     }
   }
+}
+
+/**
+ * Implements hook_batch_alter().
+ *
+ * Override the rows callback for webform batch downloads.
+ *
+ * @see webform_results_export_batch()
+ */
+function webform_confirm_email_batch_alter(array &$batch) {
+  // Look for a batch API array as defined in webform_results_export_batch().
+  foreach ($batch['sets'] as &$batch_set) {
+    if (!empty($batch_set['operations'][2]) && $batch_set['operations'][2][0] == 'webform_results_batch_rows') {
+      // Call our wrapped version of webform_results_batch_row() instead.
+      $batch_set['operations'][2][0] = 'webform_confirm_email_results_batch_rows';
+    }
+  }
+}
+
+/**
+ * Callback to add the confirmed filter to the query for batch jobs.
+ *
+ * @see webform_confirm_email_batch_alter()
+ */
+function webform_confirm_email_results_batch_rows($node, $format = 'delimited', $options = array(), &$context) {
+  if (isset($options['range']['confirmed'])) {
+    _webform_confirm_email_range_confirmed($options['range']['confirmed']);
+  }
+  webform_results_batch_rows($node, $format, $options, $context);
 }

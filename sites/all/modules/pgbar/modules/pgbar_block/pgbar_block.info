@@ -7,9 +7,9 @@ dependencies[] = bean
 
 files[] = bean/pgbar_bean.inc.php
 
-; Information added by Drupal.org packaging script on 2014-09-25
-version = "7.x-1.5"
+; Information added by Drupal.org packaging script on 2017-12-04
+version = "7.x-2.0"
 core = "7.x"
 project = "pgbar"
-datestamp = "1411656576"
+datestamp = "1512425587"
 

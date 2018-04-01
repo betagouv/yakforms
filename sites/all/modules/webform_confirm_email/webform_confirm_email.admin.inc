@@ -515,17 +515,6 @@ function webform_confirm_email_confirmation_email_add($form, &$form_state) {
 }
 
 /**
- * implements hook_theme_registry_alter().
- *
- * insert 2 theme hooks for the 'webform_emails_form' and the 'webform_email_add_form'
- */
-function webform_confirm_email_theme_registry_alter(&$theme_registry) {
-
-  $theme_registry['webform_emails_form']['function']    = 'theme_webform_confirm_email_emails_form';
-  $theme_registry['webform_email_add_form']['function'] = 'theme_webform_confirm_email_email_add_form';
-}
-
-/**
  * theme hook defined in hook_theme_registry_alter().
  *
  * includes the original theme hook for the 'webform_emails_form' and adds handling of
