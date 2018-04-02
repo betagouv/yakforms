@@ -44,7 +44,7 @@ Pour des raisons de performances, Framaforms utilise postgresql comme BDD, ce qu
 
 * Créer un utilisateur, une base de données, et attribuer les droits nécéssaires à cet utilisateur sur cette base. Ex: http://www.sakana.fr/blog/2007/06/06/postgresql-create-a-user-a-database-and-grant-accesses/
   * pour la suite, nous prendrons comme exemple le user "framaforms_user" et comme BDD "framaforms"
-* Télécharger la BDD d'initialisation de Framaforms : http://framaforms.org/framaforms.sql (environ 20Mo)
+* Télécharger la BDD d'initialisation de Framaforms : https://framagit.org/framasoft/framaforms/raw/master/framaforms.sql (pour la branche "master", ou http://framaforms.org/framaforms.sql). NB : le fichier fait environ environ 20Mo.
 * Importer cette base de données (à faire avec l'utilisateur système "postgres"
   * `psql -U framaforms_user -W -h 127.0.0.1 framaforms < /path/to/framaforms.sql`
   * NB : si vous devez réimporter la base d'initialisation, il est conseillé de détruire puis recréer la BDD avant importation :  `dropdb framaforms;createdb --encoding=UTF8 --owner=framaforms_user framaforms`
