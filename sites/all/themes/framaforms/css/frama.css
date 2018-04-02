@@ -357,6 +357,8 @@ video {
   box-shadow: 3px 3px 4px #aaa;
 }
 
+/* Uncomment to hide ability to list form in templates
 #edit-field-form1-template {
   display: none;
 }
+*/
