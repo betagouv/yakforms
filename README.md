@@ -8,6 +8,10 @@ Description
 Framaforms est un logiciel de création de formulaires en ligne.
 Lire https://framablog.org/2016/10/05/framaforms-noffrez-plus-les-reponses-que-vous-collectez-a-google/ et https://framablog.org/2016/10/05/en-savoir-un-peu-plus-sur-le-projet-framaforms/ pour plus d'informations.
 
+Current version
+================
+1.0 - 20180402
+
 Changelog
 ============
 Un changelog sommaire est disponible sur https://framagit.org/framasoft/framaforms/wikis/logbook
