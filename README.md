@@ -1,6 +1,6 @@
-Framaforms 
+Framaforms
 ==============
-(documentation is mainly in french. Some informations in english at the bottom of this file, you are very welcome to help translating)
+([English version available here](README-en.md))
 
 
 Description
@@ -58,7 +58,7 @@ Pour des raisons de performances, Framaforms utilise postgresql comme BDD, ce qu
   * allez dans le dossier /path/to/framaforms/sites/default/
   * copiez le fichier default.settings.php en settings.php
   * editez ce fichier et modifiez les information de connexion à la BDD
-  
+
 ```php
   $databases = array (
     'default' =>.
@@ -105,12 +105,3 @@ Logiquement, vous devriez pouvoir commencer à utiliser votre instance de Framaf
 English version
 ==================
 (not ready :-/ Why not help us to translate this file?)
-
-
-
-
-
-
-
-
-
