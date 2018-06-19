@@ -100,8 +100,3 @@ A ce stade, vous devriez (si tout va bien) accéder à votre site (par exemple s
 * Activez éventuellement les informations de cache lorsque vous passerez en production : https://monsite.com/admin/config/development/performance
 
 Logiquement, vous devriez pouvoir commencer à utiliser votre instance de Framaforms.
-
-
-English version
-==================
-(not ready :-/ Why not help us to translate this file?)
