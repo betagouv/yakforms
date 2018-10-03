@@ -80,14 +80,14 @@ For performance reasons, Framaforms use postgresql databse which caused issues f
 
 ## Site access
 
-At the moment, you should (if everything is fine) access your site (e.g.: mysite.com).
+At the moment, you should (if everything is fine) access your site (e.g.: example.org).
 
-* go to mysite.com
+* go to example.org
 * connect with id ``admin`` and password ``changemeASAP!``
 * **IMPORTANT**: edit your admin password :)
-* edit informations of your site https://monsite.com/admin/config/system/site-information
-* check paths https://monsite.com/admin/config/media/file-system
-* check your installation and if your modules are up to date https://monsite.com/admin/reports/status
-* optionally, activate cache informations for production use https://monsite.com/admin/config/development/performance
+* edit informations of your site https://example.org/admin/config/system/site-information
+* check paths https://example.org/admin/config/media/file-system
+* check your installation and if your modules are up to date https://example.org/admin/reports/status
+* optionally, activate cache informations for production use https://example.org/admin/config/development/performance
 
 Logically, you could now use your framaforms site.
