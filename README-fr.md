@@ -89,14 +89,14 @@ Pour des raisons de performances, Framaforms utilise postgresql comme BDD, ce qu
 
 ## Accéder au site
 
-A ce stade, vous devriez (si tout va bien) accéder à votre site (par exemple sur monsite.com) .
+A ce stade, vous devriez (si tout va bien) accéder à votre site (par exemple sur example.org) .
 
-* Rendez-vous sur https://monsite.com/
+* Rendez-vous sur https://example.org/
 * Connectez vous avec l'identifiant "admin" et le mot de passe "changemeASAP!"
 * IMPORTANT : Modifiez votre mot de passe administrateur :)
-* Editez les infos de https://monsite.com/admin/config/system/site-information
-* Vérifiez les chemins d'accès sur https://monsite.com/admin/config/media/file-system
-* Vérifiez que votre installation et vos modules sont à jour sur https://monsite.com/admin/reports/status
-* Activez éventuellement les informations de cache lorsque vous passerez en production : https://monsite.com/admin/config/development/performance
+* Editez les infos de https://example.org/admin/config/system/site-information
+* Vérifiez les chemins d'accès sur https://example.org/admin/config/media/file-system
+* Vérifiez que votre installation et vos modules sont à jour sur https://example.org/admin/reports/status
+* Activez éventuellement les informations de cache lorsque vous passerez en production : https://example.org/admin/config/development/performance
 
 Logiquement, vous devriez pouvoir commencer à utiliser votre instance de Framaforms.
