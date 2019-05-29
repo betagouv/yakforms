@@ -18,13 +18,6 @@ drupal_set_message('base URL '.$url);
 }
 */
 
-/**
-  Add Framanav bar - You may want to remove this for yout theme
-function hook_preprocess_page(&$vars) {
-  drupal_add_js('https://framasoft.org/nav/nav.js', 'external');
-}
-*/
-
 
 function framaforms_preprocess_page(&$vars, $hook) {
   if (true) {
