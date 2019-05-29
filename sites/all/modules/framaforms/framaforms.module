@@ -18,14 +18,16 @@ drupal_set_message('base URL '.$url);
 }
 */
 
-
 function framaforms_preprocess_page(&$vars, $hook) {
-  if (true) {
-    drupal_add_js('https://framasoft.org/nav/nav.js', 'external');
-    //$vars['scripts'] = drupal_get_js(); // necessary in D7?
-  }
-}
 
+   $url = url("<front>", array('absolute' => TRUE)); //get base URL of the current website
+   //drupal_set_message('base URL '.$url);
+
+   // if the current base url contain  "framaforms.org", add the framanav
+   if( strpos( $url, "framaforms.org" ) !== false) {
+     drupal_add_js('https://framasoft.org/nav/nav.js', 'external');
+   }
+}
 
 /**
  * Hide Webforms IP
