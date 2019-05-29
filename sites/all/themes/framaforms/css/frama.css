@@ -371,3 +371,9 @@ video {
 #admin-menu {
   z-index: 1003;
 }
+
+/* remove glowing around text percentage on pie charts */
+.highcharts-data-labels > g > text > tspan {
+  text-shadow: none;
+}
+
