@@ -4,3 +4,9 @@ sites/*/settings*.php
 # Ignore paths that contain user-generated content.
 sites/*/files
 sites/*/private
+
+
+# Include general-purpose static files
+# !sites/default/files/Framasoft_Logo.svg__0.png
+#
+# !sites/default/files/imgforms/*

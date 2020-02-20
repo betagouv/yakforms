@@ -73,7 +73,8 @@ function webform_results_submissions($node, $user_filter, $pager_count) {
     $row[] = l(t('View'), "node/$node->nid/submission/$sid");
     $operation_count = 1;
     // No need to call this multiple times, just reference this in a variable.
-    $destination = drupal_get_destination();
+    //$destination = drupal_get_destination();
+    $destination = array("destination" => drupal_get_path_alias('node/'.$node->nid)."/webform-results");
     if (webform_submission_access($node, $submission, 'edit', $user)) {
       $row[] = l(t('Edit'), "node/$node->nid/submission/$sid/edit", array('query' => $destination));
       $operation_count++;
@@ -909,13 +910,9 @@ function _webform_export_tempname() {
 /**
  * Generate a Excel-readable CSV file containing all submissions for a Webform.
  *
- * Note that this function is generally no longer utilized. Instead Batch API
- * should be used to generate a file over multiple requests.
- *
- * @see webform_results_export_batch()
- *
- * @deprecated This function is schedule to be removed in webform 7.x-5.x. Use
- * the batch opertions instead.
+ * @deprecated in webform:7.x-4.8 and is removed from webform:7.x-5.0. Use
+ * webform_results_export_batch().
+ * @see https://www.drupal.org/project/webform/issues/2465291
  *
  * @return array|null
  *   The array of export info or null if the file could not be opened.
@@ -1075,6 +1072,10 @@ function webform_results_download_headers($node, array $options) {
 /**
  * Returns rows of downloadable webform data.
  *
+ * @deprecated in webform:7.x-4.8 and is removed from webform:7.x-5.0. See
+ * webform_results_download_rows_process().
+ * @see https://www.drupal.org/project/webform/issues/2465291
+ *
  * @param $node
  *   The webform node on which to generate the analysis.
  * @param array $options
@@ -1089,8 +1090,6 @@ function webform_results_download_headers($node, array $options) {
  *   An array of rows built according to the provided $serial_start and
  *   $pager_count variables. Note that the current page number is determined
  *   by the super-global $_GET['page'] variable.
- *
- * @deprecated This function is scheduled to be removed in webform 7.x-5.x.
  */
 function webform_results_download_rows($node, array $options, $serial_start = 0, &$last_sid = NULL) {
   // Get all the required submissions for the download.
@@ -1882,8 +1881,9 @@ function theme_webform_results_analysis($variables) {
 /**
  * Given a set of range options, retrieve a set of SIDs for a webform node.
  *
- * @deprecated This function is scheduled to be removed int webform 7.x-5.x.
- * Use webform_download_sids_query() instead.
+ * @deprecated in webform:7.x-4.8 and is removed from webform:7.x-5.0. Use
+ * webform_download_sids_query().
+ * @see https://www.drupal.org/project/webform/issues/2465291
  */
 function webform_download_sids($nid, $range_options, $uid = NULL) {
   return webform_download_sids_query($nid, $range_options, $uid)
