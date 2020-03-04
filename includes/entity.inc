@@ -313,6 +313,11 @@ class DrupalDefaultEntityController implements DrupalEntityControllerInterface {
       }
       $query->fields('revision', $entity_revision_fields);
     }
+    
+    // Personal add : from patch https://www.drupal.org/files/issues/fix_null_entity_fields.patch
+    if(!isset($entity_fields)){
+      $entity_fields=array(); 
+    }
 
     $query->fields('base', $entity_fields);
 

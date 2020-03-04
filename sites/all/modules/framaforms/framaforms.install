@@ -1,0 +1,58 @@
+<?php 
+
+/**
+* @file 
+* Framaforms module install.
+*/
+
+/** 
+* Implements hook_schema(); 
+*/ 
+function framaforms_schema(){
+  
+    watchdog("framaforms", "Starting framaforms_expired table creation.");
+    $schema['framaforms_expired'] = array(
+        'description' => 'Table containing expiration information for Framaforms webforms',
+        'fields' => array(
+                'nid' => array(
+                'description' => 'NID of the webform (foreign key)',
+                'type' => 'int',
+                'not null' => FALSE,
+            ),
+            'date_notified' => array(
+                'description' => 'Date the user was notified (using the associated email).',
+                'type' => 'int',  
+            ),
+            'notified' => array(
+                'description' => 'Set to 1 if the user was notified (default 0).',
+                'type' => 'int',
+                'not null' => TRUE,
+                'default' => 0,
+            ),
+        ),
+        'unique keys' => array(
+            'nid' => array(
+                'nid'
+            )
+        ), 
+        'foreign key'=>array(
+            'fk_name_node' => array(
+                'table'=>'node', 
+                'column'=>array('nid'=>'nid')
+            ),
+        ),
+    );
+
+    watchdog("framaforms", "Created database.");
+    
+    return $schema; 
+}
+
+function framaform_install(){
+    /**/
+}
+
+
+function framaform_uninstall(){
+    /**/
+}

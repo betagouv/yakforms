@@ -5,6 +5,11 @@ sites/*/settings*.php
 sites/*/files
 sites/*/private
 
+# Composer and Drush -related files
+composer.*
+vendor/*
+
+
 
 # Include general-purpose static files
 # !sites/default/files/Framasoft_Logo.svg__0.png
