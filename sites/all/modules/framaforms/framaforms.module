@@ -9,6 +9,16 @@ function framaforms_preprocess_page(&$vars, $hook) {
    if( strpos( $url, "framaforms.org" ) !== false) {
      drupal_add_js('https://framasoft.org/nav/nav.js', 'external');
    }
+
+   $meta_element = array(
+    '#tag' => 'meta', // The #tag is the html tag - 
+    '#attributes' => array( // Set up an array of attributes inside the tag
+      'name' => 'viewport', 
+      'content' => 'width=device-width, initial-scale=1.0"',
+    ),
+);
+
+   drupal_add_html_head($meta_element, 'meta-responsive'); 
 }
 
 /**
@@ -29,7 +39,6 @@ function framaforms_webform_submission_load(&$submissions) {
       $submission->remote_addr = '0.0.0.0';
     }
   }
-  
 }
 
 
@@ -99,11 +108,11 @@ function framaforms_cron(){
      */
     $expiration_period = '2 weeks';   //amount of time between the notification of the user and the actual expiration of the webform.  
     $deletion_period = '9 weeks';     //amount of time between the notification of the user and the deletion of data from the DB. 
-    $cron_frequency = "-1 day"; 
+    $cron_frequency = "-1 day";       //amount of time between two cron runs. Should be in plain letters (ie "-1 week", "-2 months...") 
 
 
     $cron_last = date('Y/m/d/ h:m:s', variable_get('cron_last')); // the last time the cron task was run.
-    $cron_limit = date('Y/m/d/ h:m:s', strtotime($cron_frequency)); // the 
+    $cron_limit = date('Y/m/d/ h:m:s', strtotime($cron_frequency)); // the time when the cron should be run again.
     $now = date('Y/m/d/ h:m:s', time());
 
     // if the cron was executed less than 24h ago, do nothing. 

@@ -39,6 +39,7 @@ h1, h2, h3, h4, h5, h6,
   box-sizing: content-box;
   -moz-boxsizing: content-box;
   -webkit-box-sizing: content-box;
+  max-width:100%; 
 }
 
 .front .col-md-4 {
@@ -189,6 +190,33 @@ border-radius: inherit;
  font-size: 1.4em; 
 }
 
+/* for responsive inputs */ 
+input{
+ max-width: 100%; 
+}
+img{
+ width: 100%; 
+ max-width:100%; 
+}
+
+/* Titres adaptables sur la barre de progression */
+.webform-progressbar-page .webform-progressbar-page-label {
+    display:grid; 
+    position: relative;
+    top: 10px;
+    margin: 0 -10em;
+    margin: bottom;
+    bottom:1000em;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.webform-progressbar-page-label{
+    word-break: break-word; 
+    max-width: none; 
+}
+.webform-progressbar{
+    height:150px
+}
 
 /* Fin de modifs en cas de bootstrap.css /framanav */
 
