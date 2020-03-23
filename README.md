@@ -47,8 +47,6 @@ cd ..
 mkdir private_files
 chown -R www-data:www-data private_files
 chmod -R 200 private_files
-chown -R www-data:www-data private_files
-chmod -R 200 private_files
 ```
 
 * database connection configuration:
