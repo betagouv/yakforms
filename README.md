@@ -36,6 +36,7 @@ sudo -u postgres psql -U framaforms_user -W -h 127.0.0.1 framaforms < framaforms
 
 ### Files
 
+Drupal needs a private directory for its user files. We name it `framaforms_private`, it can be changed to another directory with the approriate permissions afterwards from the administration interface (at <mysite.org>/admin/config/media/file-system).
 * go to your web directory (we then assume you are in this directory)
 * clone code and ensure proper directory permissions:
 
@@ -44,9 +45,9 @@ git clone https://framagit.org/framasoft/framaforms.git`
 chown -R www-data:www-data sites/default/files
 chmod -R 600 sites/default/files
 cd ..
-mkdir private_files
-chown -R www-data:www-data private_files
-chmod -R 200 private_files
+mkdir framaforms_private
+chown -R www-data:www-data framaforms_private
+chmod -R 200 framaforms_private
 ```
 
 * database connection configuration:
