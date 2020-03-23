@@ -1,54 +1,60 @@
-Framaforms
-==============
+# Framaforms
 
-Description
-===============
 Framaforms helps you create online webforms and surveys.
-See https://framablog.org/2016/10/05/framaforms-noffrez-plus-les-reponses-que-vous-collectez-a-google/ (in French ) and https://framablog.org/2016/10/05/en-savoir-un-peu-plus-sur-le-projet-framaforms/ (in French) for further informations.
 
+See why we created it ([#1](https://framablog.org/2016/10/05/framaforms-noffrez-plus-les-reponses-que-vous-collectez-a-google/) and [#2](https://framablog.org/2016/10/05/en-savoir-un-peu-plus-sur-le-projet-framaforms/) in French) for further general information.
 
-Usage
-=============
-There isn't yet help for Framaforms. Nevertheless, you can read https://framaforms.org/fonctionnalites (in french) and https://framablog.org/2016/10/05/framaforms-noffrez-plus-les-reponses-que-vous-collectez-a-google/ for further information.
+## Usage
 
+There isn't yet dedicated help for Framaforms. Nevertheless, you can read ([#3](https://framaforms.org/fonctionnalites) and [#1](https://framablog.org/2016/10/05/framaforms-noffrez-plus-les-reponses-que-vous-collectez-a-google/) in french) for further contextual information.
 
-Installation
-=================
+## Installation
 
-Framaforms is based at 99% on Drupal 7, with some modules (like webform).
+Framaforms is based at 99% on Drupal 7, with some modules (like webform). You don't need superpowers, but the installation is more involved than that of Drupal.
 
-You don't need technical skills, but installation is a little bit more complicated than standard Drupal installation.
+Framaforms being dependent on postgresql, it cannot be "[distributed as a module](https://www.drupal.org/docs/7/distributions)" per the Drupal community standard.
 
-For performance reasons, Framaforms use postgresql databse which caused issues for making it a "[distribution](https://www.drupal.org/docs/7/distributions)"
+### Prerequisites
 
+* PHP 7 or later (may work with previous versions, but php7 is recommended for performance-wise)
+* postgresql 9.4.12 or later
+* php extension `mb_string` for php7 (`sudo apt-get install php7.0-mbstring` on debian-based systems)
 
-## Prerequisite
+*note:* we only support Nginx as reverse-proxy
 
-* PHP 7+ (may works with previous version, but php7 is recommended for performance reason)
-* Nginx (may works with Apache)
-* postgresql 9.4.12 (or +)
-* php extension mb_string for php7 ( ``sudo apt-get install php7.0-mbstring`` )
-* a reachable web directory
+### Database
 
+* create an postgresql user (we use `framaforms_user`), a database (we use `framaforms`) and grant this user correct rights ([doc](http://www.sakana.fr/blog/2007/06/06/postgresql-create-a-user-a-database-and-grant-accesses/)).
+* now let's download the initializer (~20MB) and set it up:
 
-## database
+```sh
+curl -L http://framaforms.org/framaforms.sql --output framaforms.sql
+sudo -u postgres psql -U framaforms_user -W -h 127.0.0.1 framaforms < framaforms.sql
+```
 
-* create an user, a database and grant this user correct rights. See  http://www.sakana.fr/blog/2007/06/06/postgresql-create-a-user-a-database-and-grant-accesses/
-  * next we will use ``framaforms_user`` as user and ``framaforms`` as database
-* download initialization Framafoms database : http://framaforms.org/framaforms.sql (~ 20Mo)
-* import this database (using ``postgres`` user)
-  * `psql -U framaforms_user -W -h 127.0.0.1 framaforms < /path/to/framaforms.sql`
-  * if you need to reimport the database, it is recommended to destroy and recreate the database before import:  `dropdb framaforms;createdb --encoding=UTF8 --owner=framaforms_user framaforms`
+*note:* if you need to reimport the database, it is recommended to destroy and recreate the database beforehand: `dropdb framaforms;createdb --encoding=UTF8 --owner=framaforms_user framaforms`
 
-## Files
+### Files
 
-* type `git clone https://framagit.org/framasoft/framaforms.git` in your web directory
-* make sure you apply corret user rights (``chown``) and give extended write/read permissions to /path/to/framaforms/sites/default/files
-* create a directory and give it write permission (but not read permission). E.g: /path/to/framaforms_private_files/
+* go to your web directory (we then assume you are in this directory)
+* clone code and ensure proper directory permissions:
+
+```sh
+git clone https://framagit.org/framasoft/framaforms.git`
+chown -R www-data:www-data sites/default/files
+chmod -R 600 sites/default/files
+cd ..
+mkdir private_files
+chown -R www-data:www-data private_files
+chmod -R 200 private_files
+chown -R www-data:www-data private_files
+chmod -R 200 private_files
+```
+
 * database connection configuration:
-  * go to /path/to/framaforms/sites/default/
-  * copy default.settings.php to settings.php
-  * edit with database connection informations
+  * `cd sites/default/`
+  * `cp default.settings.php settings.php`
+  * edit with database connection informations:
 
 ```php
   $databases = array (
@@ -78,16 +84,16 @@ For performance reasons, Framaforms use postgresql databse which caused issues f
    $conf['x_frame_options'] = '';
 ```
 
-## Site access
+### Site access
 
-At the moment, you should (if everything is fine) access your site (e.g.: example.org).
+Your site should now be accessible, but not yet production-ready:
 
-* go to example.org
-* connect with id ``admin`` and password ``changemeASAP!``
+* go to your domain
+* connect with id `admin` and password `changemeASAP!`
 * **IMPORTANT**: edit your admin password :)
-* edit informations of your site https://example.org/admin/config/system/site-information
-* check paths https://example.org/admin/config/media/file-system
-* check your installation and if your modules are up to date https://example.org/admin/reports/status
-* optionally, activate cache informations for production use https://example.org/admin/config/development/performance
+* edit informations of your site https://<your domain>/admin/config/system/site-information
+* check paths https://<your domain>/admin/config/media/file-system
+* check your installation and if your modules are up to date https://<your domain>/admin/reports/status
+* optionally, activate cache informations for production use https://<your domain>/admin/config/development/performance
 
-Logically, you could now use your framaforms site.
+You site should now be usable.
