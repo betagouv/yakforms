@@ -73,8 +73,7 @@ function webform_results_submissions($node, $user_filter, $pager_count) {
     $row[] = l(t('View'), "node/$node->nid/submission/$sid");
     $operation_count = 1;
     // No need to call this multiple times, just reference this in a variable.
-    //$destination = drupal_get_destination();
-    $destination = array("destination" => drupal_get_path_alias('node/'.$node->nid)."/webform-results");
+    $destination = drupal_get_destination();
     if (webform_submission_access($node, $submission, 'edit', $user)) {
       $row[] = l(t('Edit'), "node/$node->nid/submission/$sid/edit", array('query' => $destination));
       $operation_count++;
@@ -1922,7 +1921,7 @@ function webform_download_sids_count($nid, $range_options, $uid = NULL) {
  */
 function webform_download_sids_query($nid, array $range_options, $uid = NULL) {
   $query = db_select('webform_submissions', 'ws')
-    ->condition('nid', $nid)
+    ->condition('ws.nid', $nid)
     ->addTag('webform_download_sids');
 
   switch ($range_options['range_type']) {
@@ -1988,6 +1987,9 @@ function webform_download_sids_query($nid, array $range_options, $uid = NULL) {
   if (isset($range_options['batch_number']) && !empty($range_options['batch_size'])) {
     $query->range($range_options['batch_number'] * $range_options['batch_size'], $range_options['batch_size']);
   }
+
+  drupal_alter('webform_download_sids_query', $query);
+
   return $query;
 }
 
