@@ -1,4 +1,3 @@
-
 (function($) {
   Drupal.node_edit_protection = {};
   var click = false; // Allow Submit/Edit button
@@ -32,6 +31,7 @@
               }
             });
           });
+   
 
       // Handle backbutton, exit etc.
       window.onbeforeunload = function() {
