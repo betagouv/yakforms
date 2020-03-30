@@ -13,7 +13,6 @@ stylesheets[all][] = css/colors.css
 stylesheets[print][] = css/print.css
 
 scripts[] = js/framaforms.js 
-scripts[] = js/responsive_progress_bar.js
 
 regions[header] = Header
 regions[help] = Help

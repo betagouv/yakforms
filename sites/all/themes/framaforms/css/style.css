@@ -1654,6 +1654,10 @@ only screen and (max-width: 1024px),
     display: block;
   }
 
+  .th.checkbox.webform-grid-option{
+    display: block;
+  }
+
   /* Hide table headers (but not display: none;, for accessibility) */
     thead tr { 
         position: absolute;
@@ -1678,5 +1682,5 @@ only screen and (max-width: 1024px),
 
     .region-sidebar-first{
       display: none; 
-    }
+    }   
 }

@@ -1,4 +1,4 @@
-(function($) {
+jQuery(function($){
   Drupal.node_edit_protection = {};
   var click = false; // Allow Submit/Edit button
   var edit = false; // Dirty form flag
@@ -51,4 +51,18 @@
       }
     }
   };
-})(jQuery);
+
+  /* Get progress bar title and replace progress bar with the title of the current page 
+  * for mobiles. 
+  */
+  if(window.screen.width < 768 || window.screen.height < 1024){
+    // get current and last page numbers
+    var currentPage = $(".webform-progressbar-page.current > .webform-progressbar-page-number").text(); 
+    var lastPage = $(".webform-progressbar-page-number:last").text(); 
+    var currentTitle = $(".webform-progressbar-page.current > .webform-progressbar-page-label").text(); 
+
+    // Replace progress bar with textual element
+    $(".webform-progressbar")
+      .replaceWith("<h4>"+ currentTitle + ": " + currentPage + " / " + lastPage + "</h5>");
+ }
+}); 
