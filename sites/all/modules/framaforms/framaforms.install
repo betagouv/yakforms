@@ -10,7 +10,6 @@
 */ 
 function framaforms_schema(){
   
-    watchdog("framaforms", "Starting framaforms_expired table creation.");
     $schema['framaforms_expired'] = array(
         'description' => 'Table containing expiration information for Framaforms webforms',
         'fields' => array(
@@ -42,9 +41,6 @@ function framaforms_schema(){
             ),
         ),
     );
-
-    watchdog("framaforms", "Created database.");
-    
     return $schema; 
 }
 
