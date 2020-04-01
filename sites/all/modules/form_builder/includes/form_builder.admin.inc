@@ -656,6 +656,10 @@ function form_builder_field_configure_submit(&$form, &$form_state) {
   $form_obj = Loader::instance()->fromCache($form_type, $form_id);
   $element_obj = $form_obj->getElement($element_id);
 
+  // FIX : place the 'unique' value at the right place in order to allow it to 
+  // be saved properly. 
+  $form_state['values']['unique'] = $form_state['values']['extra']['unique']; 
+
   $element_obj->configurationSubmit($form, $form_state);
 
   // Update the form builder cache.
