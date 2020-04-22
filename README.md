@@ -18,6 +18,11 @@ You don't need superpowers to install Framaforms, as it is based mainly on Drupa
 Follow detailed instructions [here](https://framagit.org/framasoft/framaforms/-/wikis/Installing-Framaforms). 
 
 
+## Homemade tweaking of Drupal
+As mentioned above, Framaforms is mainly Drupal, and we try as much as possible not to mess with the upstream code. 
+
+However, due to our environment and needs, a few custom modifications have been made to the original code. **If you ever need to update the Drupal core or a module** and that update is not commited to the code on the repo, you'll find all the instructions [on this wiki page](https://framagit.org/framasoft/framaforms/-/wikis/modifications). 
+
 ## Resources & support 
 Technical details can be found [on the wiki](https://framagit.org/framasoft/framaforms/-/wikis/home). 
 
