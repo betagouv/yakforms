@@ -9,7 +9,10 @@ sites/*/private
 composer.*
 vendor/*
 
-
+# database credentials used for Framastats script.
+database_credentials.json
+# json file for Framastats
+framaforms.json
 
 # Include general-purpose static files
 # !sites/default/files/Framasoft_Logo.svg__0.png
