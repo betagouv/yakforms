@@ -12,7 +12,7 @@ stylesheets[all][] = css/style.css
 stylesheets[all][] = css/colors.css
 stylesheets[print][] = css/print.css
 
-scripts[] = js/framaforms.js 
+scripts[] = js/framaforms.js
 
 regions[header] = Header
 regions[help] = Help

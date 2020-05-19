@@ -1128,7 +1128,7 @@ fieldset {
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   border-radius: 4px;
-  min-width:100%; 
+  min-width:100%;
 
 }
 .fieldset-wrapper {
@@ -1643,23 +1643,19 @@ div.admin-panel .description {
   background-color: #ddd;
 }
 
-/* --------- Modification : responsive table element */ 
-/* ---- Taken from https://css-tricks.com/responsive-data-tables/ */ 
-@media 
-only screen and (max-width: 1024px), 
+/* --------- Modification : responsive table element */
+/* ---- Taken from https://css-tricks.com/responsive-data-tables/ */
+@media
+only screen and (max-width: 1024px),
 (min-device-width: 768px) and (max-device-width:1024px) {
-  
+
   /* Force table not to be tables anymore */
   table, thread, tbody, th, td, tr {
     display: block;
   }
 
-  .th.checkbox.webform-grid-option{
-    display: block;
-  }
-
   /* Hide table headers (but not display: none;, for accessibility) */
-    thead tr { 
+    thead tr {
         position: absolute;
         top: -9999px;
         left: -9999px;
@@ -1667,20 +1663,20 @@ only screen and (max-width: 1024px),
 
     tr { border: 1px solid #ccc; }
 
-    td { 
+    td {
         /* Behave  like a "row" */
         border: none;
-        border-bottom: 1px solid #eee; 
+        border-bottom: 1px solid #eee;
         position: relative;
-        padding-left: 50%; 
+        padding-left: 50%;
     }
 
     /* Make some options disappear in the admin menu of webforms*/
     .vertical-tabs{
-      display: none; 
+      display: none;
     }
 
     .region-sidebar-first{
-      display: none; 
-    }   
+      display: none;
+    }
 }

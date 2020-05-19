@@ -9,9 +9,8 @@ sites/*/private
 composer.*
 vendor/*
 
-# json file for Framastats
-framaforms.json
-
+# framaforms stats json file
+framaforms.json 
 # Include general-purpose static files
 # !sites/default/files/Framasoft_Logo.svg__0.png
 #
