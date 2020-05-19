@@ -11,14 +11,14 @@ function framaforms_preprocess_page(&$vars, $hook) {
    }
 
    $meta_element = array(
-    '#tag' => 'meta', // The #tag is the html tag - 
+    '#tag' => 'meta', // The #tag is the html tag -
     '#attributes' => array( // Set up an array of attributes inside the tag
-      'name' => 'viewport', 
+      'name' => 'viewport',
       'content' => 'width=device-width, initial-scale=1.0"',
     ),
 );
 
-   drupal_add_html_head($meta_element, 'meta-responsive'); 
+   drupal_add_html_head($meta_element, 'meta-responsive');
 }
 
 /**
@@ -68,108 +68,148 @@ function framaforms_form_alter(&$form, &$form_state, $context) {
     $form_id['edit-markup-value']['und'][0]['#wysiwyg'] = false;
     $form_id['markup']['#wysiwyg'] = FALSE;
     $form_id['markup']['und'][0]['#wysiwyg'] = false;
-    $form_id['form-builder-element-markup']['#type'] = 'text_format';    
+    $form_id['form-builder-element-markup']['#type'] = 'text_format';
+
+    switch($context){
+      case 'user_profile_form':
+        $form['contact']['contact']['#description'] = "
+        <p>Si cette case reste cochée, un lien pour vous contacter via un formulaire sera affiché en bas des formulaires que vous créez. Cela permettra aux utilisateurs de vous contacter en cas de problème d'utilisation de votre formulaire.</p>
+  <p>L'association Framasoft reçoit régulièrement des demandes de la part d'utilisateurs souhaitant contacter l'auteur d'un formulaire, ce qui représente une charge supplémentaire pour notre support. Merci donc de laisser aux utilisateurs l'accès à ce formulaire de contact.</p>
+  <p><strong>Votre mail ne sera pas affiché directement à qui que ce soit.</strong></p>
+        ";
+      break;
+      case 'contact_personal_form':
+        $form['mail']['#description'] = t('L\'utilisateur⋅ice vous répondra directement à l\'adresse que vous indiquez.');
+      break;
+    }
 }
 
 /**
  * Implementation of hook_mail().
- * From damien_vancouver's example on https://api.drupal.org/comment/26814#comment-26814. 
- * Will be called through drupal_send_mail. 
+ * From damien_vancouver's example on https://api.drupal.org/comment/26814#comment-26814.
+ * Will be called through drupal_send_mail.
  */
 function framaforms_mail($key, &$message, $params) {
-  switch($key){  
-    case 'expired_webform': 
+  switch($key){
+    case 'expired_webform':
       if (isset($params['subject'])) {
         $message['subject'] = $params['subject'];
-      } 
-      if (isset($params['body'])) {
-        $message['body'][] = $params['body']; 
       }
-      if (isset($params['headers']) && is_array($params['headers'])) {   
+      if (isset($params['body'])) {
+        $message['body'][] = $params['body'];
+      }
+      if (isset($params['headers']) && is_array($params['headers'])) {
         $message['headers'] += $params['headers'];
       }
-    break; 
+    break;
   }
 }
 
 /**
- * Implementation of hook_cron. 
- * To be run once a day. 
- * Will check for webforms about to expire (6 months - 2 weeks) and send an email to its owner. 
+* Implementation of hook_mail_alter. Edit mails sent by other modules.
+*/
+function framaforms_mail_alter (&$message) {
+  global $base_url;
+  switch ($message['id']) {
+    // update email fields when someone sends a message to user through his.her personal contact form.
+    case 'contact_user_mail':
+      $user_email = $message['from']; // mail from the user who filled the contact form.
+      $user_name = $message['params']['name'];     // name given by the user in the contact form
+      $$user_subject = $message['params']['subject']; // message subject defined by the user
+      $user_from = $user_name. ' (via Framaforms) <no-reply@framasoft.org>';
+      $user_message .= $message['body'][4];
+      $site_url = url($_GET['q'], array('absolute' => TRUE));
+      $message['body'] = array();
+      array_push($message['body'], t(sprintf("<p> Vous avez reçu un message de %s depuis votre formulaire de contact personnel (%s)  </p>",$user_name, $site_url)));
+      array_push($message['body'], t('<p>Vous pouvez répondre à l\'utilisateur en répondant directement à ce mail. </p>'));
+      array_push($message['body'], t('<p>Contenu du message :</p>'));
+      array_push($message['body'], $user_message);
+      array_push($message['body'], t(sprintf('<p>Si vous recevez trop de messages de ce type, vous pouvez mettre en place un filtre sur votre boite mail, ou bien désactiver le formulaire de contact sur vos paramètres de compte (%s/user)', $base_url)));
+      $message['from'] = $user_from;
+      $message['headers']['From'] = $user_from;
+      $message['headers']['Reply-To'] = $user_email;
+    break;
+  }
+}
+
+/**
+ * Implementation of hook_cron.
+ * To be run once a day.
+ * Will check for webforms about to expire (6 months - 2 weeks) and send an email to its owner.
  */
 
 function framaforms_cron(){
-    global $user; 
+    global $user;
     $watchdog_topic = "framaforms";
 
     /**
-     * Parameters for adjusting the expiration and deletion period, 
-     * as well as the cron frequency.  
+     * Parameters for adjusting the expiration and deletion period,
+     * as well as the cron frequency.
      */
-    $expiration_period = '2 weeks';   //amount of time between the notification of the user and the actual expiration of the webform.  
-    $deletion_period = '9 weeks';     //amount of time between the notification of the user and the deletion of data from the DB. 
-    $cron_frequency = "-1 day";       //amount of time between two cron runs. Should be in plain letters (ie "-1 week", "-2 months...") 
+    $expiration_period = '2 weeks';   //amount of time between the notification of the user and the actual expiration of the webform.
+    $deletion_period = '9 weeks';     //amount of time between the notification of the user and the deletion of data from the DB.
+    $cron_frequency = "-1 day";       //amount of time between two cron runs. Should be in plain letters (ie "-1 week", "-2 months...")
 
 
     $cron_last = date('Y/m/d/ h:m:s', variable_get('cron_last')); // the last time the cron task was run.
     $cron_limit = date('Y/m/d/ h:m:s', strtotime($cron_frequency)); // the time when the cron should be run again.
     $now = date('Y/m/d/ h:m:s', time());
 
-    // if the cron was executed less than 24h ago, do nothing. 
+    // if the cron was executed less than 24h ago, do nothing.
     if(strtotime($cron_last) > strtotime($cron_limit)){
-        return; 
+        return;
     }
 
-    // else, proceed to cron. 
-    watchdog($watchdog_topic, "Running framaforms cron."); 
+    // else, proceed to cron.
+    watchdog($watchdog_topic, "Running framaforms cron.");
     variable_set('cron_last', strtotime($now));
 
     /* Get all webforms that will expired between now and 2 weeks in the future,
-    * and insert them into framaforms_expired table 
-    */ 
+    * and insert them into framaforms_expired table
+    */
 
-    $transaction = db_transaction(); 
+    $transaction = db_transaction();
 
     try{
       db_query(sprintf("
-        insert into framaforms_expired (nid) 	
+        insert into framaforms_expired (nid)
         select node.nid
-        from node 
-        inner join field_data_field_form1_expiration 
-        on field_data_field_form1_expiration.entity_id = node.nid 
-        where node.type='form1' 
+        from node
+        inner join field_data_field_form1_expiration
+        on field_data_field_form1_expiration.entity_id = node.nid
+        where node.type='form1'
         and field_data_field_form1_expiration.field_form1_expiration_value <= date_trunc('day', NOW() + interval'%s')
         and field_data_field_form1_expiration.field_form1_expiration_value > date_trunc('day', NOW())
-        on conflict do nothing; 	
-        ", $expiration_period), array());    
+        on conflict do nothing;
+        ", $expiration_period), array());
 
     }
     catch(Exception $e){
-      $transaction->rollback(); 
-      watchdog($watchdog_topic, $e); 
+      $transaction->rollback();
+      watchdog($watchdog_topic, $e);
     }
-  
-    /* Get all the webforms that are about to expire and whose owner wasn't yet notified */ 
+
+    /* Get all the webforms that are about to expire and whose owner wasn't yet notified */
 
     try{
       $results = db_query("
-        select framaforms_expired.nid, users.mail, node.title 
-        from framaforms_expired 
+        select framaforms_expired.nid, users.mail, node.title
+        from framaforms_expired
         inner join node
-        on framaforms_expired.nid = node.nid 
-        inner join users 
+        on framaforms_expired.nid = node.nid
+        inner join users
         on users.uid = node.uid
-        where framaforms_expired.notified = 0"  
+        where framaforms_expired.notified = 0"
       , array() ) ;
 
-    
-      // Notify the user calling hook_mail; 
+
+      // Notify the user calling hook_mail;
       foreach ($results as $record){
-        watchdog($watchdog_topic, "Sending email to " . (string)$record->mail . 
+        watchdog($watchdog_topic, "Sending email to " . (string)$record->mail .
             " because of expired webform node (nid = " . (string)$record->nid . ")"
-        ); 
-        
-        $user_notified = notify_user_of_expiration($record, $expiration_period, $deletion_period); 
+        );
+
+        $user_notified = notify_user_of_expiration($record, $expiration_period, $deletion_period);
 
         /**
          * Update the database with the notification date and the notified=1
@@ -177,17 +217,17 @@ function framaforms_cron(){
         if($user_notified){
           db_update('framaforms_expired')
             ->fields(array(
-              'notified' => 1, 
-              'date_notified' => time() 
+              'notified' => 1,
+              'date_notified' => time()
             ))
             ->condition('nid', $record->nid, '=')
-            ->execute() ; 
+            ->execute() ;
         }
       }
     }
     catch(Exception $e){
-      $transaction->rollback(); 
-      watchdog($watchdog_topic, $e); 
+      $transaction->rollback();
+      watchdog($watchdog_topic, $e);
     }
 
     /**
@@ -195,18 +235,18 @@ function framaforms_cron(){
      * If it was, delete the entry from the framaforms_expired table.
      */
 
-    update_modified_nodes(); 
-    delete_expired_nodes($expiration_period); 
+    update_modified_nodes();
+    delete_expired_nodes($expiration_period);
 }
 
 /**
- * Sends an email by calling drupal_mail to a user, 
- * notifying him.her of the upcoming webform expiration. 
+ * Sends an email by calling drupal_mail to a user,
+ * notifying him.her of the upcoming webform expiration.
  */
 function notify_user_of_expiration($record, $expiration_period='2 weeks', $deletion_period='9 weeks'){
-  $watchdog_topic = "framaforms"; 
+  $watchdog_topic = "framaforms";
 
-  $mail_subject = t("Framaforms : Votre formulaire " .(string)$record->title . " expirera dans deux semaines."); 
+  $mail_subject = t("Framaforms : Votre formulaire " .(string)$record->title . " expirera dans deux semaines.");
 
   $body_format =t("
     <p>Bonjour,</p>
@@ -217,35 +257,35 @@ function notify_user_of_expiration($record, $expiration_period='2 weeks', $delet
     <p>Cordialement,</p>
     <p>Framasoft</p>
     <p><em>\" La route est longue, mais la voie est libre. \"</em></p>
-  "); 
+  ");
 
-  
-  $expiration_date = date("d/m/Y", strtotime('+'.$expiration_period)); 
-  $delete_date = date("d/m/Y", strtotime('+'.$deletion_period)); 
 
-  $node_url = url('node/' . $record->nid, array('absolute' => true, 'alias' => false)); 
+  $expiration_date = date("d/m/Y", strtotime('+'.$expiration_period));
+  $delete_date = date("d/m/Y", strtotime('+'.$deletion_period));
+
+  $node_url = url('node/' . $record->nid, array('absolute' => true, 'alias' => false));
 
   $mail_params = array(
     'body' => sprintf($body_format, (string)$record->title, $expiration_date, $delete_date, $node_url),
     'subject' => $mail_subject,
     'headers' => array()
-  ); 
+  );
 
-  watchdog($watchdog_topic, "Sending following email to " . (string)$record->mail . " : " . $body); 
+  watchdog($watchdog_topic, "Sending following email to " . (string)$record->mail . " : " . $body);
 
   $message = drupal_mail('framaforms', 'expired_webform', (string)$record->mail, user_preferred_language($user), $mail_params);
 
-  return $message['send']; 
-} 
+  return $message['send'];
+}
 
 /**
- * Looksup webform nodes in the database that were marked as 
- * "expired" but whose expiration date * got changed by the user. 
+ * Looksup webform nodes in the database that were marked as
+ * "expired" but whose expiration date * got changed by the user.
  */
 function update_modified_nodes(){
 
-  $watchdog_topic='framaforms'; 
-  $transaction = db_transaction(); 
+  $watchdog_topic='framaforms';
+  $transaction = db_transaction();
   try{
     $modified_nodes = db_query('
         select node.nid
@@ -253,68 +293,68 @@ function update_modified_nodes(){
         inner join field_data_field_form1_expiration
         on field_data_field_form1_expiration.entity_id = node.nid
         inner join framaforms_expired
-        on node.nid=framaforms_expired.nid 
-        where field_data_field_form1_expiration.field_form1_expiration_value 
+        on node.nid=framaforms_expired.nid
+        where field_data_field_form1_expiration.field_form1_expiration_value
         > to_timestamp(framaforms_expired.date_notified) + interval\'2 weeks\'
-    ', array() ); 
+    ', array() );
 
-    $nid_changed= 0 ; 
-    
+    $nid_changed= 0 ;
+
     foreach($modified_nodes as $node){
-      $nid_changed = $node->nid; 
-      watchdog($watchdog_topic, "Updating framaforms_expired, deleting the modified webform " . 
-              (string)$node->nid . " from the framaforms_expired table."); 
+      $nid_changed = $node->nid;
+      watchdog($watchdog_topic, "Updating framaforms_expired, deleting the modified webform " .
+              (string)$node->nid . " from the framaforms_expired table.");
       db_delete('framaforms_expired')
         ->condition('nid', (int)$nid_changed)
-        ->execute() ; 
+        ->execute() ;
     }
   }
   catch(Exception $e){
-    $transaction->rollback(); 
-    watchdog($watchdog_topic, $e); 
+    $transaction->rollback();
+    watchdog($watchdog_topic, $e);
   }
 }
 
 /**
- * Deletes all expired webform nodes after a period of inactivity (defined in $deletion_period). 
+ * Deletes all expired webform nodes after a period of inactivity (defined in $deletion_period).
  * If the webform's expiration date is modified by the user, the update_modified_node()
- * function will delete them from the framaforms_expired table and the rows won't be affected 
- * by this function.  
+ * function will delete them from the framaforms_expired table and the rows won't be affected
+ * by this function.
  */
 function delete_expired_nodes($deletion_period='9 weeks'){
-  $deleted_nodes = []; 
-  $transaction = db_transaction(); 
+  $deleted_nodes = [];
+  $transaction = db_transaction();
 
   try{
     $query = db_query(sprintf("
-      select framaforms_expired.nid 
-      from framaforms_expired 
-      where notified=1 
+      select framaforms_expired.nid
+      from framaforms_expired
+      where notified=1
       and to_timestamp(framaforms_expired.date_notified) < date_trunc('day', NOW() - interval'%s') ;
       ", $deletion_period)
-    ); 
+    );
 
-    $expired_nodes= $query->fetchAll(); 
+    $expired_nodes= $query->fetchAll();
 
     foreach($expired_nodes as $record){
-      node_delete($record->nid); 
+      node_delete($record->nid);
 
-      // also delete it from the framaforms_expired table 
+      // also delete it from the framaforms_expired table
       db_delete('framaforms_expired')
-      ->condition('nid', $record->nid) 
-      ->execute(); 
+      ->condition('nid', $record->nid)
+      ->execute();
 
-      $deleted_nodes[] = $record->nid; 
+      $deleted_nodes[] = $record->nid;
     }
 
     if(!empty($deleted_nodes)){
-      watchdog("framaforms", "Deleted following expired webforms : " . explode($deleted_nodes)); 
-      return; 
+      watchdog("framaforms", "Deleted following expired webforms : " . explode($deleted_nodes));
+      return;
     }
     watchdog("framaforms", "No expired webform to delete.");
   }
   catch(Exception $e){
-    $transaction->rollback(); 
-    watchdog($watchdog_topic, $e); 
+    $transaction->rollback();
+    watchdog($watchdog_topic, $e);
   }
 }

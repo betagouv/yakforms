@@ -1,15 +1,14 @@
-<?php 
+<?php
 
 /**
-* @file 
+* @file
 * Framaforms module install.
 */
 
-/** 
-* Implements hook_schema(); 
-*/ 
+/**
+* Implements hook_schema();
+*/
 function framaforms_schema(){
-  
     $schema['framaforms_expired'] = array(
         'description' => 'Table containing expiration information for Framaforms webforms',
         'fields' => array(
@@ -20,7 +19,7 @@ function framaforms_schema(){
             ),
             'date_notified' => array(
                 'description' => 'Date the user was notified (using the associated email).',
-                'type' => 'int',  
+                'type' => 'int',
             ),
             'notified' => array(
                 'description' => 'Set to 1 if the user was notified (default 0).',
@@ -33,15 +32,15 @@ function framaforms_schema(){
             'nid' => array(
                 'nid'
             )
-        ), 
+        ),
         'foreign key'=>array(
             'fk_name_node' => array(
-                'table'=>'node', 
+                'table'=>'node',
                 'column'=>array('nid'=>'nid')
             ),
         ),
     );
-    return $schema; 
+    return $schema;
 }
 
 function framaform_install(){
