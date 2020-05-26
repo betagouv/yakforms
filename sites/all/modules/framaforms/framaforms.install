@@ -44,10 +44,10 @@ function framaforms_schema(){
 }
 
 function framaform_install(){
-    /**/
+    variable_set('site_contact_url', 'https://contact.framasoft.org/#framaforms');
 }
 
 
 function framaform_uninstall(){
-    /**/
+    variable_del('site_contact_url');
 }
