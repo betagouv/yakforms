@@ -57,6 +57,12 @@ jQuery(function($){
     var lastPage = $(".webform-progressbar-page-number:last").text();
     var currentTitle = $(".webform-progressbar-page.current > .webform-progressbar-page-label").text();
 
+    // Don't replace the progress bar if the current title is set to null
+    // (avoiding leftover characters)
+    if(currentTitle===""){
+      return;
+    }
+
     // Replace progress bar with textual element
     $(".webform-progressbar")
       .replaceWith("<h4>"+ currentTitle + ": " + currentPage + " / " + lastPage + "</h5>");
