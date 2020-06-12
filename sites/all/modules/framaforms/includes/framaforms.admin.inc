@@ -153,6 +153,13 @@ function framaforms_config_form ($form, &$form_state) {
         '#default_value' => variable_get('framaforms_mail_user_notification_body'),
         '#required' => TRUE,
     );
+    $form['framaforms_expiration_page_content'] = array(
+      '#type' => 'textarea',
+      '#title' => t('Page d\'expiration des formulaires'),
+      '#description' => t("Vous pouvez ici configurer le contenu de la page d'expiration des formulaires : il s'agit de la page sur laquelle seront redirigé⋅e⋅s les utilisateurices se rendant sur un formulaire dont la date d'expiration est passée. Vous pouvez utiliser les jetons suivants : <strong>[my_forms_url]</strong> (lien vers la page « Mes formulaires »)"),
+      '#default_value' => variable_get('framaforms_expiration_page_content'),
+      '#required' => TRUE,
+  );
     return system_settings_form($form);
   }
 
