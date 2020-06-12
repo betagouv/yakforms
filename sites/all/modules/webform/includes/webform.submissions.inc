@@ -13,20 +13,22 @@
 /**
  * Given an array of submitted values, flatten it into data for a submission.
  *
- * @param $node
+ * @param object $node
  *   The node object containing the current webform.
- * @param $submitted
+ * @param array $submitted
  *   The submitted user values from the webform.
  *
  * @return array
  *   An array suitable for use in the 'data' property of a $submission object.
  */
 function webform_submission_data($node, $submitted) {
+  require_once __DIR__ . '/webform.components.inc';
+
   $data = array();
 
   foreach ($submitted as $cid => $values) {
-    // Don't save pseudo-fields or pagebreaks as submitted data.
-    if (!isset($node->webform['components'][$cid]) || $node->webform['components'][$cid]['type'] == 'pagebreak') {
+    // Don't save pseudo-fields or components that do not collect data.
+    if (!isset($node->webform['components'][$cid]) || !webform_component_feature($node->webform['components'][$cid]['type'], 'stores_data')) {
       continue;
     }
 
@@ -829,8 +831,8 @@ function webform_get_submissions_query($filters = array(), $header = NULL, $page
     $sort = drupal_get_query_parameters();
     // Sort by submitted data column if order is set but not in
     // $metadata_columns.
+    $pager_query->fields('wsd', array('data'));
     if (isset($sort['order']) && !in_array($sort['order'], $metadata_columns, TRUE)) {
-      $pager_query->fields('wsd', array('data'));
       // Default if sort is unset or invalid.
       if (!isset($sort['sort']) || !in_array($sort['sort'], array('asc', 'desc'), TRUE)) {
         $sort['sort'] = '';
