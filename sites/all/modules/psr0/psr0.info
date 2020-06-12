@@ -3,8 +3,8 @@ description = a PSR-0 and PSR-4 autoloader following the KISS principle with bui
 core = 7.x
 php = 5.3
 
-; Information added by Drupal.org packaging script on 2020-05-05
-version = "7.x-1.5"
+; Information added by Drupal.org packaging script on 2020-06-06
+version = "7.x-1.6"
 core = "7.x"
 project = "psr0"
-datestamp = "1588693279"
+datestamp = "1591460082"
