@@ -27,7 +27,6 @@ function get_contact_form_content ($nid) {
       if($nid && isset($name) && isset($uid) && $contact == 1 ){
         $url_contact = '/' .drupal_get_path_alias('user/'.$uid) .'/contact';
         $content .= t("<h3>Contacter l'auteur du formulaire</h3>");
-        $content .= t("<p><strong> Formulaire créé par  ". $name."</strong></p>");
         $content .= sprintf("<p> Pour contacter l'auteur du formulaire, <a href='%s'> cliquez ici</a><p>", $url_contact);
         $content .= "<br>";
       }

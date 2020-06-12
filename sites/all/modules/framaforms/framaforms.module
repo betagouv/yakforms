@@ -26,6 +26,22 @@ function framaforms_menu () {
     'weight' => -60,
     'file' => 'includes/framaforms.admin.inc',
   );
+  $items['expiration'] = array(
+    'title' => t('Expiration'),
+    'description' => t("Page d'instructions pour partager un formulaire."),
+    'page callback' => 'get_expiration_content',
+    'type' => MENU_NORMAL_ITEM,
+    'access arguments' => array('access content'),
+    'file' => 'includes/framaforms.pages.inc',
+  );
+  $items['content/share'] = array(
+    'title' => t('Partager'),
+    'description' => t('Page de redirection lors de l\'expiration d\'un formulaire.'),
+    'page callback' => 'get_share_content',
+    'type' => MENU_NORMAL_ITEM,
+    'access arguments' => array('access content'),
+    'file' => 'includes/framaforms.pages.inc',
+  );
   return $items;
 }
 
@@ -212,8 +228,9 @@ function framaforms_block_view ($delta) {
   $current_url = $_GET['q'];
   $matches = array();
   preg_match("/node\/([0-9]+)/", $current_url, $matches);
-  $nid = $matches[1];
-
+  if(isset($matches[1])){
+    $nid = $matches[1];
+  }
   // generate content by block ID
   switch($delta) {
     case 'framaforms_contact_form_block':
@@ -245,7 +262,7 @@ function framaforms_block_view ($delta) {
     break;
     case 'framaforms_header':
       // if the current page is of node type form1, don't display
-      if(node_is_form1($nid) && !strpos($current_url, '/edit')){
+      if(isset($nid) && node_is_form1($nid) && !strpos($current_url, '/edit')){
         return;
       }
       $block['content']['#markup'] = '<h1 class="big-title"><a href="/"><b class="frama">Frama</b><b class="vert">forms</b></a></h1>';
@@ -542,4 +559,16 @@ function framaforms_cron(){
     make_forms_expire(); // Look in node table for nodes about to expire, and notify the users.
     update_modified_nodes(); // Look in the node table for nodes whose expiration date got changed by the user
     delete_expired_nodes(); // Delete expired nodes after a period of inactivity
+}
+
+/**
+ * Implements hook_node_delete
+ */
+function framaforms_node_delete ($node) {
+  // If the node being deleted is a page, then delete its aliases too
+  if($node->type == 'page'){
+      db_delete('url_alias')
+          ->condition('source', 'node/'.$node->nid)
+          ->execute();
+  }
 }

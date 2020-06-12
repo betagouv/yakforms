@@ -47,13 +47,40 @@ function framaforms_schema(){
  * Implements hook_install
  */
 function framaforms_install () {
+    module_load_include('inc', 'framaforms', 'includes/framaforms.pages');
     framaforms_set_variables_mail();
+    framaforms_set_variables_pages();
     $now = date('Y/m/d/ h:m:s', time());
     variable_set('framaforms_cron_last', strtotime($now)); // the last framforms cron run
     variable_set('framaforms_expiration_period_default_value', 26); // default creation-expiration time interval
     variable_set('framaforms_deletion_period_value', 9); // default expiration-deletion time interval
     variable_set('framaforms_notification_period_value', 2); // default notification-expiration time interval
     variable_set('site_contact_url', 'https://contact.framasoft.org/#framaforms');
+
+    // Create custom Framaforms pages
+    $frontpage_nid = create_custom_page('Bienvenue sur Framaforms', 'frontpage.html');
+    // if a new frontpage was created from the default Framaforms template, set it as the site frontpage.
+    if($frontpage_nid != -1){
+        variable_set('site_frontpage', 'node/'.$frontpage_nid);
+    }
+    $forbidden_nid = create_custom_page('Accès refusé','403.html');
+    if($forbidden_nid != -1){
+        variable_set('site_403', 'node/'.$forbidden_nid);
+    }
+    $notfound_nid = create_custom_page('Page not found / Page introuvable','404.html');
+    if($notfound_nid != -1){
+        variable_set('site_404', 'node/'.$notfound_nid);
+    }
+    create_custom_page('Partager','share_feature.html');
+    create_custom_page('Fonctionnalités','base_features.html');
+    create_custom_page('Création rapide de formulaires','quick_creation_feature.html');
+    create_custom_page('Créer un modèle','model_feature.html');
+    create_custom_page('Règles de validation','validation_rule_feature.html');
+    create_custom_page('Champs conditionnels','conditionnal_fields_feature.html');
+    create_custom_page('Courriels','mail_feature.html');
+    create_custom_page('Confirmation','confirmation_feature.html');
+    create_custom_page('Téléchargement','download_feature.html');
+    create_custom_page('Limitations','limits.html');
 }
 
 /**
@@ -67,6 +94,8 @@ function framaforms_uninstall () {
     variable_del('framaforms_deletion_period_value');
     variable_del('framaforms_notification_period_value');
     variable_del('site_contact_url');
+
+    // TODO : delete aliases when deleting custom pages
 }
 
 /**
@@ -88,4 +117,9 @@ function framaforms_set_variables_mail () {
     $framaforms_mail_user_notification_subject = t("Framaforms : Votre formulaire \"%s\" expirera dans deux semaines.");
     variable_set('framaforms_mail_user_notification_subject', $framaforms_mail_user_notification_subject);
     variable_set('framaforms_mail_user_notification_body', $framaforms_mail_user_notification_body);
+}
+
+function framaforms_set_variables_pages () {
+    $expiration_page_content = "<p>Le formulaire que vous essayez de voir a expiré.</p><p>Si vous êtes l'auteur de ce formulaire, vous pouvez peut-être le réactiver en vous identifiant, puis <strong>en éditant sa date d'expiration</strong> (en cliquant sur <b>Modifier</b> > <b>Autres options</b>) après avoir cliqué sur le lien <a href='[my_forms_url]'>Mes formulaires.</a></p><p>Si vous n'êtes pas l'auteur, contactez-le, en utilisant le moyen que l'auteur a utilisé pour vous enjoindre à remplir son formulaire (mail, réseau social, autres) et signalez-lui que son formulaire est expiré.</p>";
+    variable_set('framaforms_expiration_page_content', $expiration_page_content);
 }

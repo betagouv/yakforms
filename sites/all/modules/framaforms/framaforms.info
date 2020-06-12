@@ -13,6 +13,7 @@ dependencies[] = webform_confirm_email
 files[] = includes/framaforms.expiration.inc
 files[] = includes/framaforms.admin.inc
 files[] = includes/framaforms.block.inc
+files[] = includes/framaforms.pages.inc
 
 ; Configuration menu
 configure = admin/config/system/framaforms

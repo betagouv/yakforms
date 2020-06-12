@@ -39,7 +39,7 @@ h1, h2, h3, h4, h5, h6,
   box-sizing: content-box;
   -moz-boxsizing: content-box;
   -webkit-box-sizing: content-box;
-  max-width:100%; 
+  max-width:100%;
 }
 
 .front .col-md-4 {
@@ -81,7 +81,7 @@ h1, h2, h3, h4, h5, h6,
   max-width: 100%;
   height: auto;
   margin-left: auto;
-  margin-right: auto; 
+  margin-right: auto;
   display: block;
 }
 
@@ -187,22 +187,22 @@ border-radius: inherit;
 }
 
 #content h3 {
- font-size: 1.4em; 
+ font-size: 1.4em;
 }
 
-/* for responsive inputs */ 
+/* for responsive inputs */
 input{
- max-width: 100%; 
+ max-width: 100%;
 }
 img{
- width: 100%; 
- max-width:100%; 
+ width: 100%;
+ max-width:100%;
 }
 
 /* Titres adaptables sur la barre de progression */
 /*
 .webform-progressbar-page .webform-progressbar-page-label {
-    display:grid; 
+    display:grid;
     position: relative;
     top: 10px;
     margin: 0 -10em;
@@ -212,13 +212,13 @@ img{
     overflow: hidden;
 }
 .webform-progressbar-page-label{
-    word-break: break-word; 
-    max-width: none; 
+    word-break: break-word;
+    max-width: none;
 }
 .webform-progressbar{
     height:150px
 }
-*/ 
+*/
 
 /* Fin de modifs en cas de bootstrap.css /framanav */
 
@@ -249,7 +249,7 @@ img{
 }
 
 #page, #main-wrapper {
-  background: #eee !important; 
+  background: #eee !important;
 }
 
 #main {
@@ -269,8 +269,8 @@ img{
 .field-name-field-form1-image {
     padding-top: 10px;
     margin-bottom: 16px;
-   
-   
+
+
 }
 
 .description {
@@ -309,9 +309,9 @@ img{
 .webform-component-number > span:nth-child(4)
 
 /* hidding some confusing classes */
-div.form-item.form-type-checkbox.form-item-webform-private, 
-div.form-item.form-type-checkbox.form-item-disabled, 
-div.form-item.form-type-textfield.form-item-wrapper-classes, 
+div.form-item.form-type-checkbox.form-item-webform-private,
+div.form-item.form-type-checkbox.form-item-disabled,
+div.form-item.form-type-textfield.form-item-wrapper-classes,
 div.form-item.form-type-textfield.form-item-css-classes {
   display: none;
 }
@@ -347,6 +347,7 @@ fieldset#edit-role-control.collapsible.form-wrapper.collapse-processed, div.form
 
 /* images for feature page */
 #features-page img {
+  width: auto;
   max-width: 80%;
   border: 1px solid lightgray;
   box-shadow: 3px 3px 5px rgb(136, 136, 136);
@@ -481,7 +482,7 @@ display: none;
   display: block;
   padding: 5px 5px 15px;
   text-overflow: ellipsis;
-  white-space: nowrap; 
+  white-space: nowrap;
   overflow: hidden;
 }
 
@@ -524,11 +525,30 @@ display: none;
 }
 
 .webform-progressbar-inner{
-  display: none; 
+  display: none;
 }
 
-/* Fix long titles of section legends */ 
+/* Fix long titles of section legends */
 legend{
   overflow: auto;
   height: 20%;
+}
+
+/* Fix carousel appearance for front page */
+.carousel-caption p {
+  color: #666666;
+  background: white;
+  opacity: 80%;
+}
+
+.carousel-caption h1 {
+  color: #666666;  
+  background: white;
+  padding: 10px; 
+    opacity: 80%;
+}
+
+.carousel-caption p a.btn {
+  opacity: 100%!important;
+  color:  #f2f2f2;
 }
