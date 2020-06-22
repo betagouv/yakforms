@@ -831,8 +831,8 @@ function webform_get_submissions_query($filters = array(), $header = NULL, $page
     $sort = drupal_get_query_parameters();
     // Sort by submitted data column if order is set but not in
     // $metadata_columns.
-    $pager_query->fields('wsd', array('data'));
     if (isset($sort['order']) && !in_array($sort['order'], $metadata_columns, TRUE)) {
+      $pager_query->fields('wsd', array('data'));
       // Default if sort is unset or invalid.
       if (!isset($sort['sort']) || !in_array($sort['sort'], array('asc', 'desc'), TRUE)) {
         $sort['sort'] = '';
