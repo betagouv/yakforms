@@ -1,0 +1,13 @@
+; $Id: framaforms.info,v 1.1 2016/10/08 00:03:04 pyg Exp $
+
+name = Framaforms Public Results
+description = "Give form author ability to give public access to his results."
+
+core = 7.x
+
+; Information added by drupal.org packaging script on 2016-10-25
+version = "7.x-1.0"
+core = "7.x"
+project = "framaforms_public_results"
+datestamp = "1382691029"
+
