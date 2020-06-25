@@ -57,30 +57,38 @@ function framaforms_install () {
     variable_set('framaforms_notification_period_value', 2); // default notification-expiration time interval
     variable_set('site_contact_url', 'https://contact.framasoft.org/#framaforms');
 
-    // Create custom Framaforms pages
-    $frontpage_nid = create_custom_page('Bienvenue sur Framaforms', 'frontpage.html');
-    // if a new frontpage was created from the default Framaforms template, set it as the site frontpage.
-    if($frontpage_nid != -1){
-        variable_set('site_frontpage', 'node/'.$frontpage_nid);
+    /* various other custom manipulation */
+    /* Hide Drupal default banner */
+    $theme_settings = variable_get('theme_settings');
+    $theme_settings['toggle_logo'] = 0;
+    $theme_settings['toggle_slogan'] = 0;
+    $theme_settings['toggle_name'] = 0;
+    variable_set('theme_settings', $theme_settings);
+
+    /* Set default favicon for Frama theme */
+    $theme_frama_settings = variable_get('theme_frama_settings');
+    $theme_frama_settings['favicon_path'] = drupal_get_path('theme', 'frama'). '/images/Framasoft_Logo.png';
+    variable_set('theme_frama_settings', $theme_frama_settings);
+
+    /* Enable webform option for the form1 type */
+    variable_set('webform_node_form1', 1);
+
+    /* Pathauto configuration */
+    $form1_settings = variable_get('pathauto_node_form1_pattern');
+    $page_settings = variable_get('pathauto_node_page_pattern');
+
+    if(!isset($form1_settings)){
+        variable_set('pathauto_node_form1_pattern', '[node:title]-[node:created:raw]');
     }
-    $forbidden_nid = create_custom_page('Accès refusé','403.html');
-    if($forbidden_nid != -1){
-        variable_set('site_403', 'node/'.$forbidden_nid);
+    if(!isset($page_settings)){
+        variable_set('pathauto_node_page_pattern', '[node:title]');
     }
-    $notfound_nid = create_custom_page('Page not found / Page introuvable','404.html');
-    if($notfound_nid != -1){
-        variable_set('site_404', 'node/'.$notfound_nid);
+
+    //TODO : set index on install
+    if( db_table_exists('locales_source') && !db_index_exists('locales_source', 'locales_source_source_context_textgroup_idx')) {
+        db_add_index('locales_source', 'locales_source_source_context_textgroup_idx',
+            array('source', 'context', 'textgroup'));
     }
-    create_custom_page('Partager','share_feature.html');
-    create_custom_page('Fonctionnalités','base_features.html');
-    create_custom_page('Création rapide de formulaires','quick_creation_feature.html');
-    create_custom_page('Créer un modèle','model_feature.html');
-    create_custom_page('Règles de validation','validation_rule_feature.html');
-    create_custom_page('Champs conditionnels','conditionnal_fields_feature.html');
-    create_custom_page('Courriels','mail_feature.html');
-    create_custom_page('Confirmation','confirmation_feature.html');
-    create_custom_page('Téléchargement','download_feature.html');
-    create_custom_page('Limitations','limits.html');
 }
 
 /**
@@ -94,8 +102,6 @@ function framaforms_uninstall () {
     variable_del('framaforms_deletion_period_value');
     variable_del('framaforms_notification_period_value');
     variable_del('site_contact_url');
-
-    // TODO : delete aliases when deleting custom pages
 }
 
 /**
