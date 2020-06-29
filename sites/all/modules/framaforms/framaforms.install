@@ -118,7 +118,7 @@ function framaforms_set_variables_mail () {
         <p>&nbsp;</p>
         <p>Cordialement,</p>
         <p>Framasoft</p>
-        <p><em>\" La route est longue, mais la voie est libre. \"</em></p>
+        <p><em>« La route est longue, mais la voie est libre. »</em></p>
     ");
     $framaforms_mail_user_notification_subject = t("Framaforms : Votre formulaire \"%s\" expirera dans deux semaines.");
     variable_set('framaforms_mail_user_notification_subject', $framaforms_mail_user_notification_subject);
