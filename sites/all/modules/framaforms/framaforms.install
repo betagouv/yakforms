@@ -51,7 +51,8 @@ function framaforms_install () {
     framaforms_set_variables_mail();
     framaforms_set_variables_pages();
     $now = date('Y/m/d/ h:m:s', time());
-    variable_set('framaforms_cron_last', strtotime($now)); // the last framforms cron run
+    variable_set('framaforms_cron_last', new DateTime()); // the last framforms cron run
+    variable_set('framaforms_cron_frequency', '1 hour');
     variable_set('framaforms_expiration_period_default_value', 26); // default creation-expiration time interval
     variable_set('framaforms_deletion_period_value', 9); // default expiration-deletion time interval
     variable_set('framaforms_notification_period_value', 2); // default notification-expiration time interval
@@ -82,12 +83,6 @@ function framaforms_install () {
     }
     if(!isset($page_settings)){
         variable_set('pathauto_node_page_pattern', '[node:title]');
-    }
-
-    //TODO : set index on install
-    if( db_table_exists('locales_source') && !db_index_exists('locales_source', 'locales_source_source_context_textgroup_idx')) {
-        db_add_index('locales_source', 'locales_source_source_context_textgroup_idx',
-            array('source', 'context', 'textgroup'));
     }
 }
 
