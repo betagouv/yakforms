@@ -13,7 +13,7 @@
  function make_forms_expire(){
     $expiration_period = variable_get('framaforms_expiration_period_default_value');
     // If the user set the expiration period to 0, don't make the nodes expire.
-    if($expiration_period == 0 || (!is_numeric($expiration_period)) ){
+    if($expiration_period == 0){
       return;
     }
     $expiration_period .= ' weeks';
@@ -87,8 +87,14 @@ function notify_user_of_expiration ($record) {
     global $base_url;  //use the global variable of Drupal for the site's URL
     $expiration_period = variable_get('framaforms_notification_period_value') .' weeks';
     $deletion_period = variable_get('framaforms_deletion_period_value') .' weeks';
-    $expiration_date = date("d/m/Y", strtotime('+'.$expiration_period));
-    $delete_date = date("d/m/Y", strtotime('+'.$deletion_period));
+
+    $expiration_date = new DateTime();
+    $expiration_date->modify("+".$expiration_period);
+    $delete_date = clone $expiration_date;
+    $delete_date->modify($deletion_period);
+    $delete_date = $delete_date->getTimestamp();
+    $expiration_date = $expiration_date->getTimestamp();
+  
     $node_url = $base_url . url('node/'.$record->nid);
     $mail_body = variable_get('framaforms_mail_user_notification_body');
     $mail_subject = variable_get('framaforms_mail_user_notification_subject');
@@ -117,7 +123,7 @@ function notify_user_of_expiration ($record) {
  */
 function update_modified_nodes () {
     $expiration_period = variable_get('framaforms_notification_period_value');
-    if($expiration_period == 0 || (!is_numeric($expiration_period)) ){
+    if($expiration_period == 0){
       return;
     }
     $expiration_period .= ' weeks';
@@ -133,6 +139,7 @@ function update_modified_nodes () {
             on node.nid=framaforms_expired.nid
             where field_data_field_form1_expiration.field_form1_expiration_value
             > to_timestamp(framaforms_expired.date_notified) + interval'%s'
+            and node.nid not in (select nid from framaforms_expired)
         ", $expiration_period));
         $nid_changed= 0 ;
 
@@ -163,7 +170,7 @@ function update_modified_nodes () {
 function delete_expired_nodes () {
     // if the user set the deletion period to 0, don't delete the forms
     $deletion_period = variable_get('framaforms_deletion_period_value');
-    if($deletion_period == 0 || (!is_numeric($deletion_period)) ){
+    if($deletion_period == 0){
         return;
     }
     $deletion_period .= ' weeks';
