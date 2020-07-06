@@ -11,7 +11,7 @@
 * @return void
 */
  function make_forms_expire(){
-    $expiration_period = variable_get('framaforms_expiration_period_default_value');
+    $expiration_period = variable_get('framaforms_notification_period_value');
     // If the user set the expiration period to 0, don't make the nodes expire.
     if($expiration_period == 0){
       return;
@@ -20,17 +20,19 @@
 
     $transaction = db_transaction();
     try{
-      // Look for nodes expiring in a interval of time set in the global varialbe 'framaforms_expiration_period_default_value'
+      // Select nodes expiring within the two next weeks.
+      // Limit query to batch of 1000 rows in order to avoid errors
       db_query(sprintf("
-        insert into framaforms_expired (nid)
-        select node.nid
-        from node
-        inner join field_data_field_form1_expiration
-        on field_data_field_form1_expiration.entity_id = node.nid
-        where node.type='form1'
-        and field_data_field_form1_expiration.field_form1_expiration_value <= date_trunc('day', NOW() + interval'%s')
-        and field_data_field_form1_expiration.field_form1_expiration_value > date_trunc('day', NOW())
-        on conflict do nothing;
+        INSERT INTO framaforms_expired (nid)
+        (SELECT n.nid
+        FROM node n
+        INNER JOIN field_data_field_form1_expiration fex
+        ON fex.entity_id = n.nid
+        AND fex.field_form1_expiration_value <= date_trunc('day', NOW() + interval'{$expiration_period}')
+        AND fex.entity_id NOT IN
+          (SELECT nid FROM framaforms_expired)
+        LIMIT 1000)
+        ON CONFLICT DO NOTHING;
         ",$expiration_period));
     }
     catch(Exception $e){
@@ -41,20 +43,19 @@
     /* Get all the webforms that are about to expire and whose owner wasn't yet notified */
     try{
       $results = db_query("
-        select framaforms_expired.nid, users.mail, node.title
-        from framaforms_expired
-        inner join node
-        on framaforms_expired.nid = node.nid
-        inner join users
-        on users.uid = node.uid
-        where framaforms_expired.notified = 0"
-        ) ;
+        SELECT fex.nid, u.mail, n.title
+        FROM framaforms_expired fex
+        INNER JOIN node n
+        ON fex.nid = n.nid
+        INNER JOIN users u
+        ON u.uid = n.uid
+        WHERE fex.notified = 0
+        LIMIT 1000;
+        ") ;
 
       // Notify the users of their forms expiration
+      watchdog('framaforms', "Notifying users of their expired forms.");
       foreach ($results as $record){
-        watchdog('framaforms', "Sending email to " . (string)$record->mail .
-            " because of expired webform node (nid = " . (string)$record->nid . ")"
-        );
         $user_notified = notify_user_of_expiration($record);
         // Update the database with the notification date and set notified to 1
         if($user_notified){
@@ -67,9 +68,11 @@
             ->execute();
         }
       }
+      watchdog('framaforms', "Notified all users of their expired forms.");
     }
     catch(Exception $e){
       $transaction->rollback();
+      watchdog('framaforms', "There was an error notifying users.");
       watchdog('framaforms', $e);
     }
  }
@@ -94,7 +97,7 @@ function notify_user_of_expiration ($record) {
     $delete_date->modify($deletion_period);
     $delete_date = $delete_date->getTimestamp();
     $expiration_date = $expiration_date->getTimestamp();
-  
+
     $node_url = $base_url . url('node/'.$record->nid);
     $mail_body = variable_get('framaforms_mail_user_notification_body');
     $mail_subject = variable_get('framaforms_mail_user_notification_subject');
@@ -109,14 +112,12 @@ function notify_user_of_expiration ($record) {
         'subject' => $mail_subject,
         'headers' => array(),
     );
-
-    watchdog('framaforms', "Sending following email to " . (string)$record->mail . " : " . $body);
     $message = drupal_mail('framaforms', 'expired_webform', (string)$record->mail, user_preferred_language($user), $mail_params);
     return $message['send'];
 }
 
 /**
- * Looksup webform nodes in the database that were marked as
+ * Looks up webform nodes in the database that were marked as
  * "expired" but whose expiration date * got changed by the user.
  *
  * @return void
@@ -128,25 +129,24 @@ function update_modified_nodes () {
     }
     $expiration_period .= ' weeks';
     $transaction = db_transaction();
+    watchdog('framaforms', "Deleting forms from the framaforms_expired table if users pushed back the expiration date.");
     try{
         //Delete nodes from the framaforms_notified table if their expiration date was pushed back by the user
         $modified_nodes = db_query(sprintf("
-            select node.nid
-            from node
-            inner join field_data_field_form1_expiration
-            on field_data_field_form1_expiration.entity_id = node.nid
-            inner join framaforms_expired
-            on node.nid=framaforms_expired.nid
-            where field_data_field_form1_expiration.field_form1_expiration_value
-            > to_timestamp(framaforms_expired.date_notified) + interval'%s'
-            and node.nid not in (select nid from framaforms_expired)
+            SELECT n.nid
+            FROM node n
+            INNER JOIN field_data_field_form1_expiration f_exdate
+            ON f_exdate.entity_id = n.nid
+            INNER JOIN framaforms_expired fex
+            ON n.nid = fex.nid
+            WHERE f_exdate.field_form1_expiration_value
+              > to_timestamp(fex.date_notified) + interval'{$expiration_period}'
+            AND n.nid NOT IN (SELECT nid from framaforms_expired)
         ", $expiration_period));
         $nid_changed= 0 ;
 
         foreach($modified_nodes as $node){
         $nid_changed = $node->nid;
-        watchdog('framaforms', "Updating framaforms_expired, deleting the modified webform " .
-                (string)$node->nid . " from the framaforms_expired table.");
         db_delete('framaforms_expired')
             ->condition('nid', (int)$nid_changed)
             ->execute() ;
@@ -174,15 +174,16 @@ function delete_expired_nodes () {
         return;
     }
     $deletion_period .= ' weeks';
-    $deleted_nodes = [];
+    $deleted_nodes = array();
+    watchdog('framaforms', "Deleting expired forms {$deletion_period} after notification.");
     $transaction = db_transaction();
     try{
-        $query = db_query(sprintf("
-            select framaforms_expired.nid
-            from framaforms_expired
-            where notified=1
-            and to_timestamp(framaforms_expired.date_notified) < date_trunc('day', NOW() - interval'%s') ;
-            ", $deletion_period));
+        $query = db_query("
+            SELECT fex.nid
+            FROM framaforms_expired fex
+            WHERE fex.notified = 1
+            AND to_timestamp(fex.date_notified) < date_trunc('day', NOW() - interval'{$deletion_period}')
+            ");
         $expired_nodes= $query->fetchAll();
         foreach($expired_nodes as $record){
             node_delete($record->nid);
@@ -191,7 +192,7 @@ function delete_expired_nodes () {
             ->condition('nid', $record->nid)
             ->execute();
 
-            $deleted_nodes[] = $record->nid;
+            array_push($deleted_nodes, $record->nid);
         }
 
         if(!empty($deleted_nodes)){
