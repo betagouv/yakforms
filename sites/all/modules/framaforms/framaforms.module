@@ -548,20 +548,21 @@ function framaforms_cron(){
     module_load_include('inc', 'framaforms', 'includes/framaforms.expiration');
     global $user;
     /**
-     * Parameters for adjusting the expiration and deletion period,
-     * as well as the cron frequency.
+     * Parameter for adjusting cron frequency.
      */
-    $cron_last = date('Y/m/d/ h:m:s', variable_get('framaforms_cron_last')); // the last time the cron task was run.
-    $cron_limit = date('Y/m/d/ h:m:s', strtotime('-'. variable_get('framaforms_cron_limit')));
-    $now = date('Y/m/d/ h:m:s', time());
+    $framaforms_cron_last = variable_get('framaforms_cron_last'); // the last time the cron task was run.
+    $cron_limit = new DateTime();
+    $cron_limit->setTimestamp($framaforms_cron_last);
+    $cron_limit->modify('+'.variable_get('framaforms_cron_frequency'));
+    $now = new DateTime();
 
     // if the cron was executed less than 24h ago, do nothing.
-    if(strtotime($cron_last) > strtotime($cron_limit)){
-        return;
+    if($now < $cron_limit){
+      return;
     }
     // else, proceed to cron.
     watchdog('framaforms', "Running framaforms cron.");
-    variable_set('framaforms_cron_last', strtotime($now));
+    variable_set('framaforms_cron_last', $now->getTimestamp());
 
     /**
      * Handle expired nodes
