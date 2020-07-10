@@ -14,7 +14,7 @@ function framaforms_menu () {
     'page callback' => 'drupal_get_form',
     'page arguments' => array('framaforms_config_form'),
     'access arguments' => array('access administration pages'),
-    'type' => MENU_NORMAL_ITEM,
+    'type' => MENU_CALLBACK,
     'file' => 'includes/framaforms.admin.inc',
   );
   $items['admin/framaforms/dashboard'] = array(
@@ -40,14 +40,6 @@ function framaforms_menu () {
     'page callback' => 'get_share_content',
     'type' => MENU_NORMAL_ITEM,
     'access arguments' => array('access content'),
-    'file' => 'includes/framaforms.pages.inc',
-  );
-  $items['admin/framaforms/create_default_pages'] = array(
-    'title' => t('Créer les pages par défaut'),
-    'description' => t("Accéder à ce menu déclenche la création des pages par défaut (page d'accueil, de fonctionnalités, etc.)"),
-    'page callback' => 'create_all_pages',
-    'type' => MENU_NORMAL_ITEM,
-    'access arguments' => array('access administration pages'),
     'file' => 'includes/framaforms.pages.inc',
   );
   return $items;

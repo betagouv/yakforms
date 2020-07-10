@@ -159,22 +159,54 @@ function framaforms_config_form ($form, &$form_state) {
       '#description' => t("Vous pouvez ici configurer le contenu de la page d'expiration des formulaires : il s'agit de la page sur laquelle seront redirigé⋅e⋅s les utilisateurices se rendant sur un formulaire dont la date d'expiration est passée. Vous pouvez utiliser les jetons suivants : <strong>[my_forms_url]</strong> (lien vers la page « Mes formulaires »)"),
       '#default_value' => variable_get('framaforms_expiration_page_content'),
       '#required' => TRUE,
-  );
-    return system_settings_form($form);
+    );
+    $form['create-default-pages'] = array(
+      '#type' => 'button',
+      '#value' => t('Générer les pages par défaut'),
+      '#description' => t("En cliquant sur ce bouton, vous créerez des pages par défaut pour votre site : page d'accueil, pages d'erreur 404/403, etc. Vous pourrez les modifier ou les supprimer par la suite."),
+      '#submit' => array('admin_menu_create_pages_callback'),
+      '#executes_submit_callback' => TRUE,
+    );
+    $form['submit'] = array(
+      '#type' => 'submit',
+      '#value' => t('Enregistrer'),
+      '#submit' => array('system_settings_form_submit'),
+    );
+    return $form;
   }
 
-  /**
-   * Inplements hook_form_validate : checks the values for the Framaofrms module configuration form
-   * @return void
-   */
-  function framaforms_config_form_validate ($form, &$form_state) {
-    //assert that time interval values are numeric
-    $expiration_interval = $form_state['values']['framaforms_expiration_default_value'];
-    if(!is_numeric($expiration_interval)){
-      form_set_error(t('Les valeurs de temps doivent être exprimées en chiffres.'));
-    }
-    $deletion_interval = $form_state['values']['framaforms_deletion_period_value'];
-    if(!is_numeric($deletion_interval)){
-      form_set_error(t('Les valeurs de temps doivent être exprimées en chiffres.'));
-    }
+/**
+ * Secondary callback for the "Generate pages" button
+ *
+ * @return void
+ */
+function admin_menu_create_pages_callback () {
+  module_load_include('inc', 'framaforms', 'includes/framaforms.pages');
+  create_all_pages();
+  drupal_set_message('ok ! pages created');
+}
+
+/**
+ * Inplements hook_form_validate : checks the values of expiration and deletion period 
+ *  and checks they are numeric.
+ * @return void
+ */
+function framaforms_config_form_validate ($form, &$form_state) {
+  $values = $form_state['values'];
+  if(!is_numeric($values['framaforms_deletion_period_value'])){
+    drupal_set_message(t("Erreur dans les valeurs administratives de Framaforms."));
+    form_set_error('framaforms_deletion_period_value', t('Deletion period and expiration period should be numeric'));
   }
+  if(!is_numeric($values['framaforms_expiration_period_default_value'])){
+    drupal_set_message(t("Erreur dans les valeurs administratives de Framaforms."));
+    form_set_error('framaforms_expiration_period_default_value', t("Les périodes d'expiration et de suppression doivent être numérique."));
+  }
+}
+
+/**
+ * Implements hook_form_submit
+ * @return void
+ */
+function framaforms_config_form_submit ($form, &$form_state) {
+  drupal_set_message('form submitted !');
+}
