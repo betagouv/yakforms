@@ -23,7 +23,7 @@ function create_custom_page ($page_title, $file_name){
         ->execute()
         ->fetchAssoc();
     if($query){
-        watchdog('framaforms', 'returning from query in create_custom_page()');
+        // early return if a page with the same title is found in the database.
         return -1;
     }
     $custom_node = new stdClass();
