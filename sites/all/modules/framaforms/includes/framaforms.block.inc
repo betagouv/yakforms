@@ -32,7 +32,7 @@ function get_contact_form_content ($nid) {
       }
       }
       catch(Exception $e){
-        watchdog('framaforms', 'Error in contact form block' . $e);
+        watchdog('framaforms', 'Erreur dans le block de formulaire de contact (modules/framaforms/includes/framaforms.block.inc)' . $e);
       }
       return $content;
   }

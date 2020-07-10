@@ -183,7 +183,7 @@ function framaforms_config_form ($form, &$form_state) {
 function admin_menu_create_pages_callback () {
   module_load_include('inc', 'framaforms', 'includes/framaforms.pages');
   create_all_pages();
-  drupal_set_message('ok ! pages created');
+  drupal_set_message("Les pages ont bien été créées.");
 }
 
 /**
@@ -195,11 +195,11 @@ function framaforms_config_form_validate ($form, &$form_state) {
   $values = $form_state['values'];
   if(!is_numeric($values['framaforms_deletion_period_value'])){
     drupal_set_message(t("Erreur dans les valeurs administratives de Framaforms."));
-    form_set_error('framaforms_deletion_period_value', t('Deletion period and expiration period should be numeric'));
+    form_set_error('framaforms_deletion_period_value', t("a période de suppression doit être numérique."));
   }
   if(!is_numeric($values['framaforms_expiration_period_default_value'])){
     drupal_set_message(t("Erreur dans les valeurs administratives de Framaforms."));
-    form_set_error('framaforms_expiration_period_default_value', t("Les périodes d'expiration et de suppression doivent être numérique."));
+    form_set_error('framaforms_expiration_period_default_value', t("La période d'expiration doit être numérique."));
   }
 }
 
