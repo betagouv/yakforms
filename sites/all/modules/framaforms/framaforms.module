@@ -231,6 +231,9 @@ function framaforms_block_view ($delta) {
   if(isset($matches[1])){
     $nid = $matches[1] ? $matches[1] : NULL;
   }
+  else {
+    $nid = NULL;
+  }
   // generate content by block ID
   switch($delta) {
     case 'framaforms_contact_form_block':
