@@ -10,7 +10,7 @@ function framaforms_menu () {
   $items = array();
   $items['admin/config/system/framaforms'] = array(
     'title' => 'Configurer Framaforms',
-    'description' => t('Configuration for Framaforms module'),
+    'description' => t('Configuration du module Framaforms'),
     'page callback' => 'drupal_get_form',
     'page arguments' => array('framaforms_config_form'),
     'access arguments' => array('access administration pages'),
@@ -73,7 +73,7 @@ function framaforms_block_info () {
   );
   // block : General header with Framaforms title
   $blocks['framaforms_header'] = array(
-    'info' => t('Header général'),
+    'info' => t('En-tête général'),
     'cache' => DRUPAL_CACHE_PER_PAGE,
     'status' => TRUE,
     'region' => 'highlighted',
@@ -325,7 +325,7 @@ function framaforms_block_view ($delta) {
       $block['content']['#markup'] .= '</ul>';
     break;
     case 'framaforms_create_form':
-      $block['content']['#markup'] = t("<p>Vous allez créer ou modifier un formulaire framaforms.<br />
+      $block['content']['#markup'] = t("<p>Vous allez créer ou modifier un formulaire.<br />
         Commencez par remplir les champs ci-dessous, puis cliquez sur « Enregistrer ».<br />
         <b>NB : le titre est important, car il sera partiellement repris dans le titre. Le changer changera l'adresse du formulaire !</b></p>");
     break;
@@ -556,7 +556,7 @@ function framaforms_cron(){
       return;
     }
     // else, proceed to cron.
-    watchdog('framaforms', "Running framaforms cron.");
+    watchdog('framaforms', "Tâche cron lancée.");
     variable_set('framaforms_cron_last', $now->getTimestamp());
 
     /**

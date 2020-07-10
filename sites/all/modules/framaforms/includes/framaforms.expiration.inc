@@ -129,7 +129,7 @@ function update_modified_nodes () {
     }
     $expiration_period .= ' weeks';
     $transaction = db_transaction();
-    watchdog('framaforms', "Deleting forms from the framaforms_expired table if users pushed back the expiration date.");
+    watchdog('framaforms', "Suppression des formulaires dans la table framaforms_expired après que leur date d'expiration ait été repoussée.");
     try{
         //Delete nodes from the framaforms_notified table if their expiration date was pushed back by the user
         $modified_nodes = db_query(sprintf("
@@ -175,7 +175,7 @@ function delete_expired_nodes () {
     }
     $deletion_period .= ' weeks';
     $deleted_nodes = array();
-    watchdog('framaforms', "Deleting expired forms {$deletion_period} after notification.");
+    watchdog('framaforms', "Suppression des formulaires après notification.");
     $transaction = db_transaction();
     try{
         $query = db_query("
@@ -196,10 +196,10 @@ function delete_expired_nodes () {
         }
 
         if(!empty($deleted_nodes)){
-            watchdog("framaforms", "Deleted following expired webforms : " . explode($deleted_nodes));
+            watchdog("framaforms", "Les formulaires suivant ont été supprimés : " . explode($deleted_nodes));
             return;
         }
-        watchdog("framaforms", "No expired webform to delete.");
+        watchdog("framaforms", "Aucun formulaire à supprimer.");
     }
     catch(Exception $e){
         $transaction->rollback();
