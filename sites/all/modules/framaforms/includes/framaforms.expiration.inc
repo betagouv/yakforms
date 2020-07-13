@@ -95,8 +95,8 @@ function notify_user_of_expiration ($record) {
     $expiration_date->modify("+".$expiration_period);
     $delete_date = clone $expiration_date;
     $delete_date->modify($deletion_period);
-    $delete_date = $delete_date->getTimestamp();
-    $expiration_date = $expiration_date->getTimestamp();
+    $delete_date = date("d/m/Y", $delete_date->getTimestamp());
+    $expiration_date = date("d/m/Y", $expiration_date->getTimestamp());
 
     $node_url = $base_url . url('node/'.$record->nid);
     $mail_body = variable_get('framaforms_mail_user_notification_body');
