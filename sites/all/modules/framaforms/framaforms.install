@@ -107,12 +107,12 @@ function framaforms_set_variables_mail () {
     // sprintf-ready mail for notifying a user of his⋅her form expiration.
     $framaforms_mail_user_notification_body = t("
     Bonjour,
-    Votre formulaire intitulé « %s » expirera dans deux semaines, soit en date du %s.
+    Votre formulaire intitulé « [form_title] » expirera dans deux semaines, soit en date du [form_expires_on].
 
-    Les utilisateurs ne pourront plus répondre à votre formulaire, mais vous aurez toujours accès aux résultats jusqu'au %s. Ensuite, les données seront définitivement supprimées de notre base de données.
+    Les utilisateurs ne pourront plus répondre à votre formulaire, mais vous aurez toujours accès aux résultats jusqu'au [form_delete_on]. Ensuite, les données seront définitivement supprimées de notre base de données.
 
     Si vous souhaitez repousser l'expiration de votre formulaire, c'est possible.
-    : il suffit de vous identifier sur Framaforms, puis de vous rendre sur la page d'administration de votre formulaire %s et de modifier la date d'expiration comme indiqué ici : https://framaforms.org/limitations.
+    : il suffit de vous identifier sur Framaforms, puis de vous rendre sur la page d'administration de votre formulaire [form_url] et de modifier la date d'expiration comme indiqué ici : https://framaforms.org/limitations.
 
     Ce message est un message automatique, il est inutile d'utiliser la fonctionnalité « Répondre ». Si vous avez des questions concernant l'usage de Framaforms, notre forum d'entraide <Framacolibri> est à votre disposition. Pour toute autre question, vous pouvez aussi nous contacter en passant par notre espace de support : https://contact.framasoft.org.
 
@@ -123,7 +123,7 @@ function framaforms_set_variables_mail () {
 
     « La route est longue, mais la voie est libre. »
     ");
-    $framaforms_mail_user_notification_subject = t("Framaforms : Votre formulaire \"%s\" expirera dans deux semaines.");
+    $framaforms_mail_user_notification_subject = t("Framaforms : Votre formulaire « [form_title] » expirera dans deux semaines.");
     variable_set('framaforms_mail_user_notification_subject', $framaforms_mail_user_notification_subject);
     variable_set('framaforms_mail_user_notification_body', $framaforms_mail_user_notification_body);
 }
