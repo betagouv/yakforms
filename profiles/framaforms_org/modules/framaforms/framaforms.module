@@ -10,11 +10,11 @@ function framaforms_menu () {
   $items = array();
   $items['admin/config/system/framaforms'] = array(
     'title' => 'Configurer Framaforms',
-    'description' => t('Configuration for Framaforms module'),
+    'description' => t('Configuration du module Framaforms'),
     'page callback' => 'drupal_get_form',
     'page arguments' => array('framaforms_config_form'),
     'access arguments' => array('access administration pages'),
-    'type' => MENU_NORMAL_ITEM,
+    'type' => MENU_CALLBACK,
     'file' => 'includes/framaforms.admin.inc',
   );
   $items['admin/framaforms/dashboard'] = array(
@@ -40,14 +40,6 @@ function framaforms_menu () {
     'page callback' => 'get_share_content',
     'type' => MENU_NORMAL_ITEM,
     'access arguments' => array('access content'),
-    'file' => 'includes/framaforms.pages.inc',
-  );
-  $items['admin/framaforms/create_default_pages'] = array(
-    'title' => t('Créer les pages par défaut'),
-    'description' => t("Accéder à ce menu déclenche la création des pages par défaut (page d'accueil, de fonctionnalités, etc.)"),
-    'page callback' => 'create_all_pages',
-    'type' => MENU_NORMAL_ITEM,
-    'access arguments' => array('access administration pages'),
     'file' => 'includes/framaforms.pages.inc',
   );
   return $items;
@@ -81,7 +73,7 @@ function framaforms_block_info () {
   );
   // block : General header with Framaforms title
   $blocks['framaforms_header'] = array(
-    'info' => t('Header général'),
+    'info' => t('En-tête général'),
     'cache' => DRUPAL_CACHE_PER_PAGE,
     'status' => TRUE,
     'region' => 'highlighted',
@@ -239,6 +231,9 @@ function framaforms_block_view ($delta) {
   if(isset($matches[1])){
     $nid = $matches[1] ? $matches[1] : NULL;
   }
+  else {
+    $nid = NULL;
+  }
   // generate content by block ID
   switch($delta) {
     case 'framaforms_contact_form_block':
@@ -330,7 +325,7 @@ function framaforms_block_view ($delta) {
       $block['content']['#markup'] .= '</ul>';
     break;
     case 'framaforms_create_form':
-      $block['content']['#markup'] = t("<p>Vous allez créer ou modifier un formulaire framaforms.<br />
+      $block['content']['#markup'] = t("<p>Vous allez créer ou modifier un formulaire.<br />
         Commencez par remplir les champs ci-dessous, puis cliquez sur « Enregistrer ».<br />
         <b>NB : le titre est important, car il sera partiellement repris dans le titre. Le changer changera l'adresse du formulaire !</b></p>");
     break;
@@ -548,20 +543,21 @@ function framaforms_cron(){
     module_load_include('inc', 'framaforms', 'includes/framaforms.expiration');
     global $user;
     /**
-     * Parameters for adjusting the expiration and deletion period,
-     * as well as the cron frequency.
+     * Parameter for adjusting cron frequency.
      */
-    $cron_last = date('Y/m/d/ h:m:s', variable_get('framaforms_cron_last')); // the last time the cron task was run.
-    $cron_limit = date('Y/m/d/ h:m:s', strtotime('-'. variable_get('framaforms_cron_limit')));
-    $now = date('Y/m/d/ h:m:s', time());
+    $framaforms_cron_last = variable_get('framaforms_cron_last'); // the last time the cron task was run.
+    $cron_limit = new DateTime();
+    $cron_limit->setTimestamp($framaforms_cron_last);
+    $cron_limit->modify('+'.variable_get('framaforms_cron_frequency'));
+    $now = new DateTime();
 
     // if the cron was executed less than 24h ago, do nothing.
-    if(strtotime($cron_last) > strtotime($cron_limit)){
-        return;
+    if($now < $cron_limit){
+      return;
     }
     // else, proceed to cron.
-    watchdog('framaforms', "Running framaforms cron.");
-    variable_set('framaforms_cron_last', strtotime($now));
+    watchdog('framaforms', "Tâche cron lancée.");
+    variable_set('framaforms_cron_last', $now->getTimestamp());
 
     /**
      * Handle expired nodes
