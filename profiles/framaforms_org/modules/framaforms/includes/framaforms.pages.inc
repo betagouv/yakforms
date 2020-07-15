@@ -23,7 +23,7 @@ function create_custom_page ($page_title, $file_name){
         ->execute()
         ->fetchAssoc();
     if($query){
-        watchdog('framaforms', 'returning from query in create_custom_page()');
+        // early return if a page with the same title is found in the database.
         return -1;
     }
     $custom_node = new stdClass();
@@ -58,7 +58,7 @@ function create_custom_page ($page_title, $file_name){
         node_save($custom_node);
     }
     catch(Exception $e){
-        watchdog('framaforms', 'Error creating custom page' .$title . ' : '. $e);
+        watchdog('framaforms', "Erreur lors de la création de la page « {$title} » : {$e}");
         return -1;
     }
 
@@ -94,7 +94,7 @@ function create_all_pages (){
     if($forbidden_nid != -1){
         variable_set('site_403', 'node/'.$forbidden_nid);
     }
-    $notfound_nid = create_custom_page('Page not found / Page introuvable','404.html');
+    $notfound_nid = create_custom_page('Page introuvable / Page not found','404.html');
     if($notfound_nid != -1){
         variable_set('site_404', 'node/'.$notfound_nid);
     }
@@ -112,7 +112,6 @@ function create_all_pages (){
 
     // return to frontpage
     drupal_goto('/');
-    drupal_set_message(t("Les pages par défaut ont bien été crées. Rendez-vous sur <a href='/admin/content'>ce menu</a> pour les visualiser."), 'stat   us');
     return;
 }
 
