@@ -51,7 +51,8 @@ function framaforms_install () {
     framaforms_set_variables_mail();
     framaforms_set_variables_pages();
     $now = date('Y/m/d/ h:m:s', time());
-    variable_set('framaforms_cron_last', strtotime($now)); // the last framforms cron run
+    variable_set('framaforms_cron_last', new DateTime()); // the last framforms cron run
+    variable_set('framaforms_cron_frequency', '1 second');
     variable_set('framaforms_expiration_period_default_value', 26); // default creation-expiration time interval
     variable_set('framaforms_deletion_period_value', 9); // default expiration-deletion time interval
     variable_set('framaforms_notification_period_value', 2); // default notification-expiration time interval
@@ -105,16 +106,24 @@ function framaforms_uninstall () {
 function framaforms_set_variables_mail () {
     // sprintf-ready mail for notifying a user of his⋅her form expiration.
     $framaforms_mail_user_notification_body = t("
-        <p>Bonjour,</p>
-        <p>Votre formulaire intitul&eacute; [form_title] expirera dans deux semaines, soit en date du [form_expires_on] .</p>
-        <p><strong>Les utilisateurs ne pourront plus r&eacute;pondre &agrave; votre formulaire</strong>. Vous aurez toujours acc&egrave;s aux r&eacute;sultats pendant une p&eacute;riode de deux mois, avant qu'il ne soit <strong>d&eacute;finitivement supprim&eacute; de notre base de donn&eacute;es</strong> en date du [form_delete_on] .</p>
-        <p>Si vous souhaitez repousser l'expiration de votre formulaire, c'est possible : il suffit de vous rendre sur la page d'administration de votre formulaire ([form_url]) et de modifier la date d'expiration.</p>
-        <p>&nbsp;</p>
-        <p>Cordialement,</p>
-        <p>Framasoft</p>
-        <p><em>\" La route est longue, mais la voie est libre. \"</em></p>
+    Bonjour,
+    Votre formulaire intitulé « [form_title] » expirera dans deux semaines, soit en date du [form_expires_on].
+
+    Les utilisateurs ne pourront plus répondre à votre formulaire, mais vous aurez toujours accès aux résultats jusqu'au [form_delete_on]. Ensuite, les données seront définitivement supprimées de notre base de données.
+
+    Si vous souhaitez repousser l'expiration de votre formulaire, c'est possible.
+    : il suffit de vous identifier sur Framaforms, puis de vous rendre sur la page d'administration de votre formulaire [form_url] et de modifier la date d'expiration comme indiqué ici : https://framaforms.org/limitations.
+
+    Ce message est un message automatique, il est inutile d'utiliser la fonctionnalité « Répondre ». Si vous avez des questions concernant l'usage de Framaforms, notre forum d'entraide <Framacolibri> est à votre disposition. Pour toute autre question, vous pouvez aussi nous contacter en passant par notre espace de support : https://contact.framasoft.org.
+
+    Nous en profitons pour vous rappeler que Framasoft est une petite association à but non-lucratif, dédiée aux enjeux du numérique, qui ne vit que de vos dons. Si Framaforms vous est utile, merci d'envisager de faire un don (défiscalisable) à l'association : https://soutenir.framasoft.org
+
+    Librement,
+    Framasoft
+
+    « La route est longue, mais la voie est libre. »
     ");
-    $framaforms_mail_user_notification_subject = t("Framaforms : Votre formulaire \"%s\" expirera dans deux semaines.");
+    $framaforms_mail_user_notification_subject = t("Framaforms : Votre formulaire « [form_title] » expirera dans deux semaines.");
     variable_set('framaforms_mail_user_notification_subject', $framaforms_mail_user_notification_subject);
     variable_set('framaforms_mail_user_notification_body', $framaforms_mail_user_notification_body);
 }
