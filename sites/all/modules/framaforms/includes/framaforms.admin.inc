@@ -16,17 +16,17 @@ function get_dashboard_content () {
     // Append otal number of forms
     $query = db_select('node')->condition('type', 'form1');
     $totalNumberOfForms = $query->execute()->rowCount();
-    $content .= sprintf("<h3>Nombre total de formulaires : %s </h3>", $totalNumberOfForms);
+    $content .= "<h3>" . t('Total number of forms') ." : {$totalNumberOfForms} </h3>";
 
     // Append tatistics about the forms created last weeks / months / year
-    $intervals = array("1 week" => t("1 semaine"), "1 month" => t("1 mois"), "6 months" => t("6 mois"), "1 year" => t("1 an"));
-    foreach($intervals as $interval => $translation){
-        $query = sprintf("select *
-        from node where type ='form1'
-        and to_timestamp(created) > date_trunc('day', NOW() - interval'%s')",
-        $interval);
+    $intervals = ["1 week", "1 month", "6 months", "1 year"];
+    foreach($intervals as $interval){
+        $query = "SELECT *
+          FROM node
+          WHERE type ='form1'
+          AND to_timestamp(created) > NOW() - interval'{$interval}'";
         $results = db_query($query, array())->rowCount();
-        $content .= sprintf("<h4>Dont créé depuis %s : %s </h4>", $translation, $results);
+        $content .= "<h4>". t("Last {$interval} : {$results}") ."</h4>";
     }
     $content .="</li>";
 
@@ -35,28 +35,31 @@ function get_dashboard_content () {
     $query = db_select('webform_submissions');
     $results = $query->execute()-> rowCount();
     $averageSubmissions = floor($results / $totalNumberOfForms * 100) / 100;
-    $content .=  sprintf("<h3>Nombre total de réponses : %s </h3>", $results);
-    $content .= sprintf("<h4>(soit en moyenne %s réponses / formulaire) </h4>", $averageSubmissions);
+    $content .=  "<h3>". t("Total number of submissions : "). "{$results} </h3>";
+    $content .= "<h4>" . t("For an average of ") . $averageSubmissions . t(" submissions / form)") ." </h4>";
     $content .="</li>";
 
     $content .="<li>";
     // Total number of users
     $query = db_select('users');
     $results = $query->execute();
-    $content .=  sprintf("<h3>Nombre total d'utilisateurs : %s </h3>", $results->rowCount());
+    $content .=  "<h3>" .t("Total number of users") . ": {$results->rowCount} </h3>";
 
     // Users created since a week / month / year
-    $query="SELECT uid FROM users WHERE to_timestamp(created) >= date_trunc('day', NOW() - interval'%s')";
-    foreach($intervals as $interval => $translation){
+    $query="SELECT uid
+      FROM users
+      WHERE to_timestamp(created) >= NOW() - interval'%s'";
+
+    foreach($intervals as $interval){
         $results = db_query(sprintf($query, $interval), array())
         ->rowCount();
-        $content .=  sprintf("<h4>Dont créé depuis %s : %s </h4>", $translation, $results);
+        $content .=  "<h4>" .t("Registered since {$interval}") . ": {$results} </h4>";
     }
     $content .="</li>";
 
     $content .="<li>";
     // "Critical forms" (with most submissions)
-    $content .= "<h3>Formulaires avec le plus de réponses :  </h3>";
+    $content .= "<h3>". t('Forms with the most submissions') . ": </h3>";
     $content .="<ul>";
     $query = "SELECT count(webform_submissions.nid) as NB, webform_submissions.nid as NID, node.title as TITLE
         from webform_submissions
@@ -66,15 +69,34 @@ function get_dashboard_content () {
         limit 10";
     $results = db_query($query, array());
     foreach($results as $result){
-    $content .= sprintf("<li>%s (#%s)  :  %s réponses </li>", $result->title, $result->nid, $result->nb);
-    $content .= sprintf("<a href='/node/%s'>Visiter</a>", $result->nid);
+      $content .= "<li>" . $result->title . " (#{$result->nid}) :  {$result->nb} ". t("submissions"). "</li>";
+      $content .= "<a href='/node/{$result->nid}'>" . t("Visit") ."</a>";
+    }
+    $content .= "</ul>";
+
+    // "Critical" users (authors of the most forms)
+    // Excluding Anonymous user (uid = 0) as it can be used by moderation for reattributi abusive forms.
+    $content .= "<h3>". t('Users with the most forms') . ": </h3>";
+    $content .="<ul>";
+    $query = "SELECT users.uid as uid, users.name as name, COUNT(node.nid) as c
+      FROM node
+      INNER JOIN users ON users.uid = node.uid
+      WHERE node.type='form1'
+      AND users.uid != 0
+      GROUP BY users.uid
+      ORDER BY c DESC
+      LIMIT 10;";
+    $results = db_query($query, array());
+    foreach($results as $result){
+      $content .= "<li> <a href='/user/{$result->uid}'> {$result->name} </a> (#{$result->uid}) 
+        - <a href='/form-search?status=1&nid=&title=&uid={$result->name}&mail='>{$result->c} forms</a> </li>";
     }
     $content .= "</ul>";
 
     $content .= "<li>";
-    $query = "SELECT pg_size_pretty(pg_database_size(current_database())) as dbsize";
+    $query = "SELECT pg_size_pretty(pg_database_size(current_database())) AS dbsize";
     $sizeOfDatabase = db_query($query, array())->fetchAssoc()['dbsize'];
-    $content .= sprintf("<h3>Taille totale de la base de données :  %s </h3>", $sizeOfDatabase);
+    $content .= sprintf("<h3>Size of database :  %s </h3>", $sizeOfDatabase);
     $content .="</li>";
     $content .="</ul>";
 
@@ -187,7 +209,7 @@ function admin_menu_create_pages_callback () {
 }
 
 /**
- * Inplements hook_form_validate : checks the values of expiration and deletion period 
+ * Inplements hook_form_validate : checks the values of expiration and deletion period
  *  and checks they are numeric.
  * @return void
  */
