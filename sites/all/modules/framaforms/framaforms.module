@@ -565,6 +565,30 @@ function framaforms_cron(){
     make_forms_expire(); // Look in node table for nodes about to expire, and notify the users.
     update_modified_nodes(); // Look in the node table for nodes whose expiration date got changed by the user
     delete_expired_nodes(); // Delete expired nodes after a period of inactivity
+
+    framaforms_delete_possible_spam();
+}
+
+/**
+ * Deletes from database forms that were considered as potential spam (unpublished)
+ * and that were not changed for a period of time
+ *
+ * @return void
+ */
+function framaforms_delete_possible_spam () {
+  $max_possible_spam_lifetime = variable_get('framaforms_suspicious_form_deletion');
+  $query = "SELECT nid
+    FROM node
+    WHERE status = 0
+    AND type = 'form1'
+    AND to_timestamp(changed) < NOW() - interval'{$max_possible_spam_lifetime}'";
+  try{
+    $results = db_query($query)->fetchCol();
+    node_delete_multiple($results);
+  }
+  catch(PDOException $e){
+    watchdog("framaforms", "Error deletion potential spam : ".$e);
+  }
 }
 
 /**
@@ -577,4 +601,63 @@ function framaforms_node_delete ($node) {
           ->condition('source', 'node/'.$node->nid)
           ->execute();
   }
+}
+
+/**
+ * Implements hook_node_insert.
+ *
+ * @param $node : the node that was published
+ * @return void
+ */
+function framaforms_node_presave($node) {
+  // Check newly created form nodes for webform components. If no webfom components were inserted, unpublish the form.
+  // Only checking nodes where nid != NULL because we only want to consider fully created nodes.
+  if($node->type == 'form1' && $node->nid != NULL && $node->webform['components'] == array()) {
+    $node->status = 0; // Unpublish the form node - it won't be accessibly to the public.
+    drupal_set_message(t("Your form was created empty. It is considered as spam, and will soon be deleted automatically. Please insert at least one form field to prove this content is legitimate."), 'warning');
+  }
+
+  // Republish nodes that were previously considered as spam where components were added
+  if($node->status == 0 && $node->webform['components'] != array()){
+    $node->status = 1; // Publish the content
+    drupal_set_message(t("Your form is now considered as legitimate, and is accessible publicly."), 'status');
+  }
+}
+
+/**
+ * Implements hook_node_insert.
+ * Check title for suspicious words in new form titles.
+ * @param [type] $node
+ * @return void
+ */
+function framaforms_node_insert ($node) {
+  // Regex containing suspicious words
+  $suspicious_words = "%(free|watch|online|movie|pelicula|completa|streaming|1080|fortnite|tiktok|mulan|poker)%";
+  if($node->type == 'form1' && $node->nid != NULL && preg_match($suspicious_words, strtolower($node->title)) != 0){
+    $node->status = 0; // Unpublish the form node - it won't be accessibly to the public.
+    drupal_set_message(t("Your form contains suspicious words and is therefore considered as spam. The site's administrators will review it shortly."), 'warning');
+  }
+}
+
+/**
+ * Implements hook_views_api
+ *
+ * @return void
+ */
+function framaforms_views_api () {
+  return array(
+    'api' => 3,
+  );
+}
+
+/**
+ * Implements hook_views_default_views
+ *
+ * @return void
+ */
+function framaforms_views_default_views () {
+  module_load_include('inc', 'framaforms', 'includes/framaforms.views');
+  $views = array();
+  $views['possible-spam'] = return_possible_spam_view_definition();
+  return $views;
 }

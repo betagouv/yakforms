@@ -7,9 +7,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Unreleased
 
-### Added 
+### Added
 * BOTCHA module to fix the possible bypass of CAPTCHA Riddler.
 * IP module to log user IPs.
+* Anti-spam measures that unpublish forms containing suspicious words in title, or don't have any webform component.
+* Automatic deletion of forms after a period of time.
+* Views : /possible-spam, displays unpublished forms from above.
 
 ## [1.0.1] 2020/07/15
 
