@@ -10,9 +10,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Added
 * BOTCHA module to fix the possible bypass of CAPTCHA Riddler.
 * IP module to log user IPs.
-* Anti-spam measures that unpublish forms containing suspicious words in title, or don't have any webform component.
-* Automatic deletion of forms after a period of time.
-* Views : /possible-spam, displays unpublished forms from above.
+* Anti-spam module `framaforms_spam` that put forms in quarantine containing suspicious words in title, or don't have any webform component.
+* VBO (Views Bulk Operations) to put nodes inside quarantine and to take them out.
+* Automatic deletion of forms in quarantine after a period of time.
+* Views : /suspicious, displays unpublished forms from above.
+* Views : /quarantine, displays forms in quarantine.
 
 ## [1.0.1] 2020/07/15
 

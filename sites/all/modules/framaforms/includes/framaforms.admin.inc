@@ -195,7 +195,7 @@ function framaforms_config_form ($form, &$form_state) {
       '#submit' => array('system_settings_form_submit'),
     );
     return $form;
-  }
+}
 
 /**
  * Secondary callback for the "Generate pages" button

@@ -52,12 +52,10 @@ function framaforms_install () {
     framaforms_set_variables_pages();
     $now = date('Y/m/d/ h:m:s', time());
     variable_set('framaforms_cron_last', new DateTime()); // the last framforms cron run
-    variable_set('framaforms_cron_frequency', '1 second');
+    variable_set('framaforms_cron_frequency', '1 hour');
     variable_set('framaforms_expiration_period_default_value', 26); // default creation-expiration time interval
     variable_set('framaforms_deletion_period_value', 9); // default expiration-deletion time interval
     variable_set('framaforms_notification_period_value', 2); // default notification-expiration time interval
-    variable_set('framaforms_suspicious_form_deletion', '1 week'); // default deletion period for possible spam
-
     variable_set('site_contact_url', 'https://contact.framasoft.org/#framaforms');
 
     /* various other custom manipulation */
