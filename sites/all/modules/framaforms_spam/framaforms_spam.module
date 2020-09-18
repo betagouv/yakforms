@@ -1,0 +1,421 @@
+<?php
+
+function framaforms_spam_menu () {
+  $items = array();
+  $items['admin/config/system/framaforms_spam'] = array(
+    'title' => 'Configure Framaforms Spam Protection',
+    'description' => t('Configuration for Framaforms Spam Protection'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('framaforms_spam_config_form'),
+    'access arguments' => array('access administration pages'),
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+function framaforms_spam_config_form ($form, &$form_state) {
+  $form['framaforms_spam_forbidden_words'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Forbidden words'),
+    '#default_value' => variable_get('framaforms_spam_forbidden_words'),
+    '#description' => t('Words that are considered suspicious when found in new form titles. You can separate forms with commas (,).'),
+    '#required' => FALSE,
+  );
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Submit'),
+    '#submit' => array('system_settings_form_submit'),
+  );
+  return $form;
+}
+
+
+function framaforms_spam_cron () {
+    /**
+     * Parameter for adjusting cron frequency.
+     */
+    $framaforms_spam_cron_last = variable_get('framaforms_spam_cron_last'); // the last time the cron task was run.
+    $cron_limit = new DateTime();
+    $cron_limit->setTimestamp($framaforms_spam_cron_last);
+    $cron_limit->modify('+'.variable_get('framaforms_spam_cron_frequency'));
+    $now = new DateTime();
+
+    // if the cron was executed less than 24h ago, do nothing.
+    if($now < $cron_limit){
+      return;
+    }
+    // else, proceed to cron.
+    watchdog('framaforms_spam', t("Launching cron task."));
+    variable_set('framaforms_spam_cron_last', $now->getTimestamp());
+    framaforms_spam_delete_quarantine();
+}
+
+/**
+ * Deletes from database forms that were considered as potential spam (unpublished)
+ * and that were not changed for a period of time
+ *
+ * @return void
+ */
+function framaforms_spam_delete_quarantine () {
+  $max_possible_spam_lifetime = variable_get('framaforms_spam_quarantine_deletion');
+  // get old quarantined forms
+  $query = "SELECT nid
+    FROM framaforms_spam_quarantine
+    WHERE to_timestamp(date_quarantine) < NOW() - interval'{$max_possible_spam_lifetime}'";
+  try{
+    $results = db_query($query)->fetchCol();
+    // delete them along with their references and attached files
+    node_delete_multiple($results);
+    // delete forms from framaforms_spam tables : _allowlist and _quarantine
+    foreach($results as $result){
+      db_delete('framaforms_spam_quarantine')
+      ->condition('nid', $result, '=')
+      ->execute();
+
+      db_delete('framaforms_spam_allowlist')
+        ->condition('nid', $result, '=')
+        ->execute();
+    }
+  }
+  catch(PDOException $e){
+    watchdog("framaforms", "Error deleting potential spam : ".$e);
+  }
+}
+
+/**
+ * Implements hook_node_insert.
+ *
+ * @param $node : the node that was published
+ * @return void
+ */
+function framaforms_spam_node_presave($node) {
+  if(framaforms_spam_node_is_allowlisted($node->nid)){
+    return;
+  }
+  if(framaforms_spam_node_is_in_quarantine($node->nid)){
+    $node->status = 0;
+    return;
+  }
+
+  // Detect words that should be considered as suspicious
+  // TODO : make this configurable through admin interface
+  $suspicious_words = "%(free|watch|online|movie|pelicula|completa|streaming|1080|fortnite|tiktok|mulan|poker)%";
+  if($node->type == 'form1' && $node->nid != NULL && preg_match($suspicious_words, strtolower($node->title)) != 0){
+    framaforms_spam_put_node_into_quarantine($node);
+    drupal_set_message(t("Your form contains suspicious words and is therefore considered as spam. The site's administrators will review it shortly."), 'warning');
+    return;
+  }
+
+  // Check newly created form nodes for webform components. If no webfom components were inserted, put node into quarantine.
+  // Only checking nodes where nid != NULL because we only want to consider fully created nodes.
+  if($node->type == 'form1' && $node->nid != NULL && $node->webform['components'] == array()) {
+    framaforms_spam_put_node_into_quarantine($node);
+    return;
+  }
+  return;
+}
+
+/**
+ * Returns TRUE if the passed string contains one of the forbidden words stored as global variable
+ *
+ * @param  $str
+ * @return void
+ */
+function framaforms_spam_form_contains_forbidden_word ($str) {
+  $forbidden_words = variable_get('framaforms_spam_forbidden_words');
+  watchdog('framaforms_spam', $forbidden_words);
+  $regex = '%('
+    . str_replace(', ', '|', $forbidden_words)
+    . ')%';
+  return preg_match($regex, strtolower($str)) ? TRUE : FALSE;
+}
+
+/**
+ * Returns TRUE if a given node is in quarantine
+ *
+ * @param [type] $nid
+ * @return void
+ */
+function framaforms_spam_node_is_in_quarantine ($nid) {
+  try{
+    $query = db_select('framaforms_spam_quarantine', 'f')
+    ->fields('f', array('nid'))
+    ->condition('nid', $nid, '=')
+    ->execute()
+    ->fetchAssoc();
+    // If no results were returned, then the form is not in quarantine.
+    if($query == NULL){
+      return FALSE;
+    }
+  }
+  catch(PDOException $e){
+    watchdog('Error checking framaforms_spam_quarantine table : ' .$e);
+  }
+  return TRUE;
+}
+
+/**
+ * Returns TRUE if a given node was allowliste from quarantine
+ *
+ * @param [type] $nid
+ * @return void
+ */
+function framaforms_spam_node_is_allowlisted ($nid) {
+  try{
+    $query = db_select('framaforms_spam_allowlist', 'f')
+    ->fields('f', array('nid'))
+    ->condition('nid', $nid, '=')
+    ->execute()
+    ->fetchAssoc();
+    // If no results were returned, then the form is not in the allowlist.
+    if($query == NULL){
+      return FALSE;
+    }
+  }
+  catch(PDOException $e){
+    watchdog('Error checking framaforms_spam_allowlist table : ' .$e);
+  }
+  return TRUE;
+}
+
+/**
+ * Inserts form into framaforms_spam_allowlist
+ * @param [type] $nid
+ * @return void
+ */
+function framaforms_spam_allowlist_node ($nid) {
+  // Check if the form actually exists
+  $node = node_load($nid);
+  if(!node){
+    watchdog('framaforms_spam', t('Trying to put into quarantine unexisting form #'). $nid);
+    return;
+  }
+  try{
+    db_insert('framaforms_spam_allowlist')
+      ->fields(array(
+        'nid' => $nid,
+      ))
+      ->execute();
+  }
+  catch(PDOException $e){
+    watchdog('framaforms_spam', 'Error trying to put insert node into allowlist table : '.$e);
+  }
+}
+
+/**
+ * Inserts form into framaforms_spam_quarantine and unpublishes it.
+ *
+ * @param [type] $nid
+ * @return void
+ */
+function framaforms_spam_put_node_into_quarantine (&$node) {
+  // If the form already is in quarantine or was allowlisted, return
+  if(framaforms_spam_node_is_in_quarantine($node->nid) || framaforms_spam_node_is_allowlisted($node->nid)){
+    return;
+  }
+  try{
+    // Insert the node into the quarantine table
+    db_insert('framaforms_spam_quarantine')
+      ->fields(array(
+        'nid' => $node->nid,
+        'uid' => $node->uid,
+        'date_quarantine' => time(),
+      ))
+      ->execute();
+  }
+  catch(Exception $e){
+    watchdog('framaforms_spam', 'Error trying to put insert node into quarantine table : '.$e);
+    drupal_set_message('Error putting nodes into quarantine. Please refer to the logs for more details', 'warning');
+  }
+
+  $node->uid = 0;     // set author to "anonymous"
+  $node->status = 0;  // unpublish the node
+}
+
+/**
+ * Takes a node out of quarantine.
+ *
+ * @param [type] $nid
+ * @return void
+ */
+function framaforms_spam_take_node_out_of_quarantine (&$node) {
+  // Check if the form actually exists
+  $node_quarantine = framaforms_spam_node_is_in_quarantine($nid);
+  if(!framaforms_spam_node_is_in_quarantine($node->nid)){
+    watchdog('framaforms_spam', t('Trying to take out of quarantine unexisting form #'). $nid);
+    return;
+  }
+  // Automatically add node to allowlist, to avoid it being infinitly readded.
+  framaforms_spam_allowlist_node($node->nid);
+
+  try{
+    // get the original author's uid
+    $original_uid = db_select('framaforms_spam_quarantine', 'f')
+    ->fields('f', array('uid'))
+    ->execute()
+    ->fetchCol();
+
+    $node->uid = $original_uid[0];
+    $node->status = 1; // Set form status to "published"
+  }
+  catch(PDOException $e){
+    watchdog('framaforms_spam', 'Error trying to take form out of quarantine : '.$e);
+    return;
+  }
+  try{
+    // Delete the row from the quarantine.
+    db_delete('framaforms_spam_quarantine')
+    ->condition('nid', $node->nid)
+    ->execute();
+  }
+  catch(PDOException $e){
+    watchdog('framaforms_spam', 'Error trying to delete node from quarantine table : '.$e);
+    return;
+  }
+}
+
+/**
+ * Implements hook_views_api
+ *
+ * @return void
+ */
+function framaforms_spam_views_api () {
+  return array(
+    'api' => 3,
+  );
+}
+
+/**
+ * Implements hook_views_default_views
+ *
+ * @return void
+ */
+function framaforms_spam_views_default_views () {
+  module_load_include('inc', 'framaforms_spam', 'includes/framaforms_spam.views');
+  $views = array();
+  $views['suspicious'] = framaforms_spam_return_suspicious_view_definition();
+  $views['quarantine'] = framaforms_spam_return_quarantine_view_definition();
+  $views['quarantine_from_table'] = framaforms_spam_return_quarantine_from_table_view_definition();
+  return $views;
+}
+
+/**
+ * Implements hook_views_data
+ *
+ * @return void
+ */
+function framaforms_spam_views_data () {
+  $data = array();
+  $data['framaforms_spam_quarantine']['table']['group'] = t('Quarantine');
+  $data['framaforms_spam_quarantine']['table']['base'] = array(
+    'title' => t('Forms in quarantine'),
+    'help' => t('Records exposed to Views.'),
+  );
+  $data['framaforms_spam_quarantine']['table']['join'] = array(
+    'node' => array(
+        'left_field' => 'nid',
+        'field' => 'nid',
+    ),
+  );
+  $data['framaforms_spam_quarantine']['nid'] = array(
+      'title' => t('NID'),
+      'help' => t('Nids of the forms.'),
+      'field' => array(
+        'handler' => 'views_handler_field',
+        'click sortable' => TRUE,
+      ),
+      'relationship' => array(
+        'base' => 'node',
+        'field' => 'nid',
+        'handler' => 'views_handler_relationship',
+        'label' => t('node'),
+    ),
+    'argument' => array(
+        'handler' => 'views_handler_field',
+        'numeric' => TRUE,
+        'validate type' => 'nid',
+    ),
+  );
+  $data['framaforms_spam_quarantine']['uid'] = array(
+    'title' => t("Author's uid"),
+    'help' => t("Uid for the author of this node"),
+    'field' => array(
+      'handler' => 'views_handler_field',
+      'click sortable' => TRUE,
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort_date',
+    ),
+    'filter' => array(
+      'handler' => 'views_handler_filter_date',
+    ),
+  );
+  $data['framaforms_spam_quarantine']['date_quarantine'] = array(
+    'title' => t("Quarantine date"),
+    'help' => t("Date the form was put into quarantine."),
+    'field' => array(
+      'handler' => 'views_handler_field_date',
+      'click sortable' => TRUE,
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort_date',
+    ),
+    'filter' => array(
+      'handler' => 'views_handler_filter_date',
+    ),
+  );
+  return $data;
+}
+
+/**
+ * Implements hook_action_info :
+ * defines custom action for putting forms into quarantine and to take them out of it.
+ *
+ * @return void
+ */
+function framaforms_spam_action_info () {
+  return array(
+    'framaforms_spam_quarantine_action' => array(
+      'type' => 'entity',
+      'label' => t('Put forms into quarantine'),
+      'behavior' => array('changes_property'),
+      'configurable' => FALSE,
+      'vbo_configurable' => FALSE,
+      'triggers' => array('any'),
+      'permissions' => array('access content', 'administer site configuration'),
+    ),
+    'framaforms_spam_quarantine_undo_action' => array(
+      'type' => 'entity',
+      'label' => t('Take forms out of quarantine'),
+      'behavior' => array('changes_property'),
+      'configurable' => FALSE,
+      'vbo_configurable' => FALSE,
+      'triggers' => array('any'),
+      'permissions' => array('access content', 'administer site configuration'),
+    ),
+    );
+}
+
+/**
+ * Defines a VBO to put forms into quarantine
+ *
+ * @param $entity : the given node
+ * @param [type] the operation context (not used)
+ * @return void
+ */
+function framaforms_spam_quarantine_action (&$entity, $context) {
+  framaforms_spam_put_node_into_quarantine($entity);
+  drupal_set_message(t("The form was put into quarantine. You can set it back up using <a href='/quarantine'>this view.</a>"), 'status');
+}
+
+/**
+ * Defines a VBO to take forms out of quarantine
+ *
+ * @param $entity : the given node
+ * @param [type] the operation context (not used)
+ * @return void
+ */
+function framaforms_spam_quarantine_undo_action (&$entity, $context) {
+  framaforms_spam_take_node_out_of_quarantine($entity);
+  drupal_set_message(t("The form was taken out of quarantine and reassigned to user #". $entity->uid), 'status');
+}
