@@ -1,0 +1,78 @@
+<?php
+
+/**
+* @file
+* Framaforms module install.
+*/
+
+/**
+* Implements hook_schema();
+*/
+function framaforms_spam_schema(){
+    $schema['framaforms_spam_quarantine'] = array(
+        'description' => 'Table containing forms that are put into quarantine.',
+        'fields' => array(
+          'nid' => array(
+            'description' => 'NID of the webform (foreign key)',
+            'type' => 'int',
+            'not null' => TRUE,
+          ),
+          'uid' => array(
+            'description' => 'Uid of the original author',
+            'type' => 'int',
+            'not null' => TRUE,
+          ),
+          'date_quarantine' => array(
+            'description' => 'The date the form was put into quarantine', 
+            'type' => 'int', 
+            'not null' => TRUE,
+          )
+        ),
+        'unique keys' => array(
+            'nid' => array(
+                'nid'
+            )
+        ),
+        'foreign key'=>array(
+            'fk_name_node' => array(
+                'table'=>'node',
+                'column'=>array('nid'=>'nid')
+            ),
+        ),
+    );
+    $schema['framaforms_spam_allowlist'] = array(
+      'description' => 'Table containing forms are allowlisted from the quarantine.',
+      'fields' => array(
+        'nid' => array(
+          'description' => 'NID of the webform (foreign key)',
+          'type' => 'int',
+          'not null' => TRUE,
+        ),
+      ),
+      'unique keys' => array(
+          'nid' => array(
+              'nid'
+          )
+      ),
+      'foreign key'=>array(
+          'fk_name_node' => array(
+              'table'=>'node',
+              'column'=>array('nid'=>'nid')
+          ),
+      ),
+  );
+  return $schema;
+}
+
+function framaforms_spam_install () {
+  variable_set('framaforms_spam_quarantine_deletion', '1 week'); // default deletion period for possible spam
+  variable_set('framaforms_spam_cron_last', new DateTime()); // the last framforms cron run
+  variable_set('framaforms_spam_cron_frequency', '1 hour');
+  variable_set('framaforms_spam_forbidden_words', 'free, watch, online, movie, pelicula, completa, streaming, 1080, fortnite, tiktok, mulan, poker');
+
+  return;
+}
+
+function framaforms_spam_uninstall () {
+  return;
+}
