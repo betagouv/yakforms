@@ -15,6 +15,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 * Automatic deletion of forms in quarantine after a period of time.
 * Views : /suspicious, displays unpublished forms from above.
 * Views : /quarantine, displays forms in quarantine.
+* Number of forms / user limit
+
+### Fixed
+* Empty "Share" tab on forms (#106)
 
 ## [1.0.1] 2020/07/15
 
