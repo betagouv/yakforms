@@ -34,13 +34,14 @@ function framaforms_menu () {
     'access arguments' => array('access content'),
     'file' => 'includes/framaforms.pages.inc',
   );
-  $items['content/share'] = array(
+  $items['node/%/share'] = array(
     'title' => t('Partager'),
-    'description' => t('Page de redirection lors de l\'expiration d\'un formulaire.'),
+    'description' => t('Instructions to share the form.'),
     'page callback' => 'get_share_content',
-    'type' => MENU_NORMAL_ITEM,
-    'access arguments' => array('access content'),
+    'type' => MENU_LOCAL_TASK,        // render as tab
+    'access callback' => 'user_is_logged_in',
     'file' => 'includes/framaforms.pages.inc',
+    'weight' => 1000,
   );
   return $items;
 }
@@ -63,11 +64,11 @@ function framaforms_menu_alter (&$items) {
 function framaforms_check_users_forms () {
   global $user;     // the current user
   // if the user is not logged in, deny access
-  if($user->uid === 0){
+  if($user->uid === '0'){
     return FALSE;
   }
   // If the user is admin, grant access (admin is master here)
-  if($user->uid === 1){
+  if($user->uid === '1'){
     return TRUE;
   }
   // Get the user's total number of forms
