@@ -57,7 +57,7 @@ function framaforms_install () {
     variable_set('framaforms_deletion_period_value', 9); // default expiration-deletion time interval
     variable_set('framaforms_notification_period_value', 2); // default notification-expiration time interval
     variable_set('site_contact_url', 'https://contact.framasoft.org/#framaforms');
-
+    variable_set('framaforms_forms_per_user_limit', 200);
     /* various other custom manipulation */
     /* Hide Drupal default banner */
     $theme_settings = variable_get('theme_settings');

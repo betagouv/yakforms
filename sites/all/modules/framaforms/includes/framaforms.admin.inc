@@ -146,6 +146,18 @@ function framaforms_config_form ($form, &$form_state) {
       '#description' => t('Lien vers une éventuelle page de support pour vos utilisateurs. Cette URL sera reprise dans les messages d\'aide à la création des formulaires.'),
       '#required' => TRUE,
     );
+    $form['limitations_intertitle'] = array(
+      '#type' => 'item',
+      '#markup' => t('<h3>Limitations</h3>'),
+    );
+    $form['framaforms_forms_per_user_limit'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Maximum number of form per user'),
+      '#default_value' => variable_get('framaforms_forms_per_user_limit'),
+      '#size' => 11,
+      '#maxlength' => 11,
+      '#required' => TRUE,
+    );
     $form['expiration_intertitle'] = array(
       '#type' => 'item',
       '#markup' => t('<h3>Expiration des formulaires</h3>'),
@@ -191,7 +203,7 @@ function framaforms_config_form ($form, &$form_state) {
     );
     $form['submit'] = array(
       '#type' => 'submit',
-      '#value' => t('Enregistrer'),
+      '#value' => t('Submit'),
       '#submit' => array('system_settings_form_submit'),
     );
     return $form;
@@ -223,6 +235,11 @@ function framaforms_config_form_validate ($form, &$form_state) {
     drupal_set_message(t("Erreur dans les valeurs administratives de Framaforms."));
     form_set_error('framaforms_expiration_period_default_value', t("La période d'expiration doit être numérique."));
   }
+  if(!is_numeric($values['framaforms_forms_per_user_limit'])){
+    drupal_set_message(t("Erreur dans les valeurs administratives de Framaforms."));
+    form_set_error('framaforms_forms_per_user_limit', t("The number of form per user must be numeric."));
+  }
+  
 }
 
 /**
