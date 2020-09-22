@@ -136,8 +136,8 @@ function get_expiration_content () {
 }
 
 /**
- * Content callback for the 'share' page.
- * Originally written by pyg.
+ * Content callback for the 'share' tab.
+ * Originally written by pyg for Framasoft.
  *
  * @return void
  */
