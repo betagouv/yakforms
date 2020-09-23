@@ -371,7 +371,7 @@ function framaforms_spam_return_suspicious_view_definition(){
   $handler->display->display_options['filters']['title']['table'] = 'node';
   $handler->display->display_options['filters']['title']['field'] = 'title';
   $handler->display->display_options['filters']['title']['operator'] = 'word';
-  $handler->display->display_options['filters']['title']['value'] = 'watch, online, free, movie, pelicula, completa, livestream, live, streaming, stream, HD, 1080p, fortnite, tiktok,';
+  $handler->display->display_options['filters']['title']['value'] = variable_get('framaforms_spam_forbidden_words');
   /* Critère de filtrage: Contenu : uid de l'auteur */
   $handler->display->display_options['filters']['uid']['id'] = 'uid';
   $handler->display->display_options['filters']['uid']['table'] = 'node';
