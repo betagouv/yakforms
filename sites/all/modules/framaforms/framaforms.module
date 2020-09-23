@@ -106,7 +106,7 @@ function framaforms_block_info () {
   // block : alert block about passwords.
   $blocks['framaforms_no_password'] = array(
     'info' => t('Alerte mot de passe'),
-    'cache' => DRUPAL_CACHE_PER_PAGE,
+    'cache' => DRUPAL_CACHE_GLOBAL,
     'status' => TRUE,
     'region' => 'content',
     'weight' => 20,
@@ -116,7 +116,7 @@ function framaforms_block_info () {
   // block : General header with Framaforms title
   $blocks['framaforms_header'] = array(
     'info' => t('En-tête général'),
-    'cache' => DRUPAL_CACHE_PER_PAGE,
+    'cache' => DRUPAL_CACHE_GLOBAL,
     'status' => TRUE,
     'region' => 'highlighted',
     'weight' => 10,
@@ -124,7 +124,7 @@ function framaforms_block_info () {
   // block : header with links for a logged-in user.
   $blocks['framaforms_user_header'] = array(
     'info' => t('Liens utilisateurs'),
-    'cache' => DRUPAL_CACHE_PER_PAGE,
+    'cache' => DRUPAL_CACHE_PER_USER,
     'status' => TRUE,
     'region' => 'highlighted',
     'weight' => 20,
@@ -134,7 +134,7 @@ function framaforms_block_info () {
   // block : header with links for an anonymous user.
   $blocks['framaforms_anonymous_header'] = array(
     'info' => t('Liens utilisateur anonyme'),
-    'cache' => DRUPAL_CACHE_PER_PAGE,
+    'cache' => DRUPAL_CACHE_PER_ROLE,
     'status' => TRUE,
     'region' => 'highlighted',
     'weight' => 30,
@@ -145,7 +145,7 @@ function framaforms_block_info () {
   $blocks['framaforms_create_form'] = array(
     'info' => t('Création de formulaire'),
     'title' => 'Création',
-    'cache' => DRUPAL_CACHE_PER_PAGE,
+    'cache' => DRUPAL_CACHE_GLOBAL,
     'status' => TRUE,
     'region' => 'highlighted',
     'weight' => 40,
@@ -166,7 +166,7 @@ function framaforms_block_info () {
   $blocks['help_confirmation_email'] = array(
     'info' => t('Aide : mail de confirmation'),
     'title' => 'Confirmation par email',
-    'cache' => DRUPAL_CACHE_PER_PAGE,
+    'cache' => DRUPAL_CACHE_GLOBAL,
     'status' => TRUE,
     'region' => 'sidebar_first',
     'visibility' => BLOCK_VISIBILITY_LISTED,
@@ -175,7 +175,7 @@ function framaforms_block_info () {
   $blocks['help_emails'] = array(
     'info' => t('Aide : Interactions par email'),
     'title' => 'Interactions par email',
-    'cache' => DRUPAL_CACHE_PER_PAGE,
+    'cache' => DRUPAL_CACHE_GLOBAL,
     'status' => TRUE,
     'region' => 'sidebar_first',
     'visibility' => BLOCK_VISIBILITY_LISTED,
@@ -184,7 +184,7 @@ function framaforms_block_info () {
   $blocks['help_validation'] = array(
     'info' => t('Aide : Conditions de validation'),
     'title' => 'Conditions de validation',
-    'cache' => DRUPAL_CACHE_PER_PAGE,
+    'cache' => DRUPAL_CACHE_GLOBAL,
     'status' => TRUE,
     'region' => 'sidebar_first',
     'visibility' => BLOCK_VISIBILITY_LISTED,
@@ -193,7 +193,7 @@ function framaforms_block_info () {
   $blocks['help_settings'] = array(
     'info' => t('Aide : Paramètres du formulaire'),
     'title' => 'Paramètres du formulaire',
-    'cache' => DRUPAL_CACHE_PER_PAGE,
+    'cache' => DRUPAL_CACHE_GLOBAL,
     'status' => TRUE,
     'region' => 'sidebar_first',
     'visibility' => BLOCK_VISIBILITY_LISTED,
@@ -202,7 +202,7 @@ function framaforms_block_info () {
   $blocks['help_conditionnals'] = array(
     'info' => t('Aide : Champs conditionnels'),
     'title' => 'Champs conditionnels',
-    'cache' => DRUPAL_CACHE_PER_PAGE,
+    'cache' => DRUPAL_CACHE_GLOBAL,
     'status' => TRUE,
     'region' => 'sidebar_first',
     'visibility' => BLOCK_VISIBILITY_LISTED,
@@ -211,7 +211,7 @@ function framaforms_block_info () {
   $blocks['help_form1_creation'] = array(
     'info' => t('Aide : Création'),
     'title' => 'Création d\'un formulaire',
-    'cache' => DRUPAL_CACHE_PER_PAGE,
+    'cache' => DRUPAL_CACHE_GLOBAL,
     'status' => TRUE,
     'region' => 'sidebar_first',
     'visibility' => BLOCK_VISIBILITY_LISTED,
@@ -220,7 +220,7 @@ function framaforms_block_info () {
   $blocks['help_generic'] = array(
     'info' => t('Aide : Générale'),
     'title' => 'Aide',
-    'cache' => DRUPAL_CACHE_PER_PAGE,
+    'cache' => DRUPAL_CACHE_GLOBAL,
     'status' => TRUE,
     'region' => 'sidebar_first',
     'visibility' => BLOCK_VISIBILITY_LISTED,
@@ -229,7 +229,7 @@ function framaforms_block_info () {
   $blocks['help_form1_webform'] = array(
     'info' => t('Aide : Création du formulaire'),
     'title' => 'Création du formulaire',
-    'cache' => DRUPAL_CACHE_PER_PAGE,
+    'cache' => DRUPAL_CACHE_GLOBAL,
     'status' => TRUE,
     'region' => 'sidebar_first',
     'visibility' => BLOCK_VISIBILITY_LISTED,
@@ -238,7 +238,7 @@ function framaforms_block_info () {
   $blocks['help_form1_webform_components'] = array(
     'info' => t('Aide : Ajoutez des composants'),
     'title' => 'Ajoutez des composants',
-    'cache' => DRUPAL_CACHE_PER_PAGE,
+    'cache' => DRUPAL_CACHE_GLOBAL,
     'status' => TRUE,
     'region' => 'sidebar_first',
     'visibility' => BLOCK_VISIBILITY_LISTED,
