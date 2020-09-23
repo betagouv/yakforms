@@ -98,9 +98,7 @@ function framaforms_spam_node_presave($node) {
   }
 
   // Detect words that should be considered as suspicious
-  // TODO : make this configurable through admin interface
-  $suspicious_words = "%(free|watch|online|movie|pelicula|completa|streaming|1080|fortnite|tiktok|mulan|poker)%";
-  if($node->type == 'form1' && $node->nid != NULL && preg_match($suspicious_words, strtolower($node->title)) != 0){
+  if($node->type == 'form1' && $node->nid != NULL && framaforms_spam_form_contains_forbidden_word($node->title)){
     framaforms_spam_put_node_into_quarantine($node);
     drupal_set_message(t("Your form contains suspicious words and is therefore considered as spam. The site's administrators will review it shortly."), 'warning');
     return;
