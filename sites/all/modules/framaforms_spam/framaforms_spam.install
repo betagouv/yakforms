@@ -65,8 +65,9 @@ function framaforms_spam_schema(){
 }
 
 function framaforms_spam_install () {
+  $now = new Datetime();
   variable_set('framaforms_spam_quarantine_deletion', '1 week'); // default deletion period for possible spam
-  variable_set('framaforms_spam_cron_last', new DateTime()); // the last framforms cron run
+  variable_set('framaforms_spam_cron_last', $now->getTimestamp()); // the last framforms cron run
   variable_set('framaforms_spam_cron_frequency', '1 hour');
   variable_set('framaforms_spam_forbidden_words', 'free, watch, online, movie, pelicula, completa, streaming, 1080, fortnite, tiktok, mulan, poker');
 
