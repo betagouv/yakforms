@@ -191,12 +191,8 @@ border-radius: inherit;
 }
 
 /* for responsive inputs */
-input{
+input {
  max-width: 100%;
-}
-img{
- width: 100%;
- max-width:100%;
 }
 
 /* Titres adaptables sur la barre de progression */
