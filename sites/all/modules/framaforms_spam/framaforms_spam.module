@@ -15,7 +15,7 @@ function framaforms_spam_menu () {
 
 function framaforms_spam_config_form ($form, &$form_state) {
   $form['framaforms_spam_forbidden_words'] = array(
-    '#type' => 'textfield',
+    '#type' => 'textarea',
     '#title' => t('Forbidden words'),
     '#default_value' => variable_get('framaforms_spam_forbidden_words'),
     '#description' => t('Words that are considered suspicious when found in new form titles. You can separate forms with commas (,).'),
@@ -121,7 +121,6 @@ function framaforms_spam_node_presave($node) {
  */
 function framaforms_spam_form_contains_forbidden_word ($str) {
   $forbidden_words = variable_get('framaforms_spam_forbidden_words');
-  watchdog('framaforms_spam', $forbidden_words);
   $regex = '%('
     . str_replace(', ', '|', $forbidden_words)
     . ')%';

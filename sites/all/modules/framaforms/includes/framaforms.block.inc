@@ -44,9 +44,12 @@ function get_contact_form_content ($nid) {
  * @return void
  */
 function node_is_form1($nid){
+  if(!isset($nid)){
+    return FALSE;
+  }
     $node = node_load($nid);
     if(isset($node->type) && $node->type == 'form1'){
-      return true;
+      return TRUE;
     }
-    return false;
+    return FALSE;
   }

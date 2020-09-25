@@ -53,7 +53,10 @@ function framaforms_menu () {
  * @return void
  */
 function framaforms_menu_alter (&$items) {
-  $items['node/add/form1']['access callback'] = 'framaforms_check_users_forms';
+  $items['node/add/form1'] = array(
+    'page callback' => 'framaforms_check_users_forms',
+    'type' => MENU_CALLBACK,
+  );
 }
 
 /**
@@ -64,11 +67,11 @@ function framaforms_menu_alter (&$items) {
 function framaforms_check_users_forms () {
   global $user;     // the current user
   // if the user is not logged in, deny access
-  if($user->uid === '0'){
+  if($user->uid === 0){
     return FALSE;
   }
   // If the user is admin, grant access (admin is master here)
-  if($user->uid === '1'){
+  if($user->uid === 1){
     return TRUE;
   }
   // Get the user's total number of forms
@@ -308,10 +311,6 @@ function framaforms_block_view ($delta) {
       );
     break;
     case 'framaforms_header':
-      // if the current page is of node type form1, don't display
-      if(isset($nid) && node_is_form1($nid) && !strpos($current_url, '/edit')){
-        return;
-      }
       $block['content']['#markup'] = '<h1 class="big-title"><a href="/"><b class="frama">Frama</b><b class="vert">forms</b></a></h1>';
       $block['content']['#markup'] .= '<p class="lead">'. variable_get('site_slogan').'</p>';
     break;
@@ -462,6 +461,7 @@ function framaforms_block_view ($delta) {
         Vous pouvez cliquer ou glisser-déplacer les éléments de formulaire situés à droite dans la zone de prévisualisation pour construire votre formulaire.<br/>
         Par ailleurs, vous pouvez sélectionner les options avancées en utilisant les sous-onglets «Champs conditionnels», «Courriels», «Paramètres du formulaire», etc.</p>
         <p>Attention toutefois : il est déconseillé de modifier un formulaire (modifier son titre ou supprimer des champs) une fois que vous aurez obtenu vos premières réponses. Vous risqueriez de perdre des données.</p>
+        <p>Vous devez insérer au minimum <strong>un champ de formulaire</strong> avant de le valider. Si votre formulaire reste vide, il sera considéré comme un spam potentiel, et vous risquez de perdre votre travail.</p>
       ");
     break;
     case 'help_form1_webform_components':
@@ -504,7 +504,7 @@ function framaforms_preprocess_page(&$vars, $hook) {
     '#tag' => 'meta', // The #tag is the html tag -
     '#attributes' => array( // Set up an array of attributes inside the tag
       'name' => 'viewport',
-      'content' => 'width=device-width, initial-scale=1.0"',
+      'content' => 'width=device-width, initial-scale=1.0',
     ),
 );
    drupal_add_html_head($meta_element, 'meta-responsive');
