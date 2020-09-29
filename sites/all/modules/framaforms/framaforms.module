@@ -53,10 +53,8 @@ function framaforms_menu () {
  * @return void
  */
 function framaforms_menu_alter (&$items) {
-  $items['node/add/form1'] = array(
-    'page callback' => 'framaforms_check_users_forms',
-    'type' => MENU_CALLBACK,
-  );
+  $items['node/add/form1']['access arguments'][] = $items['node/add/form1']['access callback'];
+  $items['node/add/form1']['access callback'] = 'framaforms_check_users_forms';
 }
 
 /**
@@ -65,13 +63,13 @@ function framaforms_menu_alter (&$items) {
  * @return void
  */
 function framaforms_check_users_forms () {
-  global $user;     // the current user
+  global $user;
   // if the user is not logged in, deny access
   if($user->uid === 0){
     return FALSE;
   }
   // If the user is admin, grant access (admin is master here)
-  if($user->uid === 1){
+  if($user->uid === "1"){
     return TRUE;
   }
   // Get the user's total number of forms
@@ -83,8 +81,8 @@ function framaforms_check_users_forms () {
     ->execute()
     ->fetchField();
   if($results >= variable_get('framaforms_forms_per_user_limit')){
-    drupal_set_message(t("Your account has reached this site's maximum number of forms. Please delete some of your unused forms in 'My forms' before trying to create a new one."), 'warning');
-    drupal_set_message(t("This site's allows to create the maximum following number of forms : "). variable_get('framaforms_forms_per_user_limit'), 'warning');
+    drupal_set_message(t("Your account has reached this site's maximum number of forms. Please delete some of your unused forms in 'My forms' before trying to create a new one."), 'warning', FALSE);
+    drupal_set_message(t("This site's allows to create the maximum following number of forms : "). variable_get('framaforms_forms_per_user_limit'), 'warning', FALSE);
     return FALSE;
   }
   return TRUE;
