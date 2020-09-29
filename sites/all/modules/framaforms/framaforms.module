@@ -53,8 +53,10 @@ function framaforms_menu () {
  * @return void
  */
 function framaforms_menu_alter (&$items) {
-  $items['node/add/form1']['access arguments'][] = $items['node/add/form1']['access callback'];
-  $items['node/add/form1']['access callback'] = 'framaforms_check_users_forms';
+  $items['node/add/form1'] = array(
+    'page callback' => 'framaforms_check_users_forms',
+    'type' => MENU_CALLBACK,
+  );
 }
 
 /**
