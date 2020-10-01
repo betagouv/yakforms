@@ -43,7 +43,7 @@
     /* Get all the webforms that are about to expire and whose owner wasn't yet notified */
     try{
       $results = db_query("
-        SELECT fex.nid, u.mail, n.title
+        SELECT fex.nid, u.mail, u.uid, n.title
         FROM framaforms_expired fex
         INNER JOIN node n
         ON fex.nid = n.nid
@@ -66,7 +66,9 @@
             ))
             ->condition('nid', $record->nid, '=')
             ->execute();
+            continue;
         }
+        watchdog('framaforms', t("Error while trying to notify the user : the user's email could be badly configured."), array(),  WATCHDOG_WARNING);
       }
       watchdog('framaforms', "Notified all users of their expired forms.");
     }
@@ -88,6 +90,13 @@
   */
 function notify_user_of_expiration ($record) {
     global $base_url;  //use the global variable of Drupal for the site's URL
+
+    // First check if the user has a correct email
+    if(!filter_var($record->mail, FILTER_VALIDATE_EMAIL)) {
+      watchdog('framaforms', t("Invalid email for user ") .$record->uid, array(), WATCHDOG_WARNING);
+      return FALSE;
+    }
+
     $expiration_period = variable_get('framaforms_notification_period_value') .' weeks';
     $deletion_period = variable_get('framaforms_deletion_period_value') .' weeks';
 
@@ -112,9 +121,9 @@ function notify_user_of_expiration ($record) {
         'subject' => $mail_subject,
         'headers' => array(),
     );
-    
+
     $message = drupal_mail('framaforms', 'expired_webform', (string)$record->mail, user_preferred_language($user), $mail_params);
-    return $message['send'];
+    return TRUE;
 }
 
 /**

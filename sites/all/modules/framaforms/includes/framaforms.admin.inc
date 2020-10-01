@@ -88,7 +88,7 @@ function get_dashboard_content () {
       LIMIT 10;";
     $results = db_query($query, array());
     foreach($results as $result){
-      $content .= "<li> <a href='/user/{$result->uid}'> {$result->name} </a> (#{$result->uid}) 
+      $content .= "<li> <a href='/user/{$result->uid}'> {$result->name} </a> (#{$result->uid})
         - <a href='/form-search?status=1&nid=&title=&uid={$result->name}&mail='>{$result->c} forms</a> </li>";
     }
     $content .= "</ul>";
@@ -201,6 +201,13 @@ function framaforms_config_form ($form, &$form_state) {
       '#submit' => array('admin_menu_create_pages_callback'),
       '#executes_submit_callback' => TRUE,
     );
+    $form['reset-variables'] = array(
+      '#type' => 'button',
+      '#value' => t('Reset all'),
+      '#description' => t("Reset all global variables to their initial value."),
+      '#submit' => array('framaforms_admin_menu_reset_variables_callback'),
+      '#executes_submit_callback' => TRUE,
+    );
     $form['submit'] = array(
       '#type' => 'submit',
       '#value' => t('Submit'),
@@ -239,7 +246,7 @@ function framaforms_config_form_validate ($form, &$form_state) {
     drupal_set_message(t("Erreur dans les valeurs administratives de Framaforms."));
     form_set_error('framaforms_forms_per_user_limit', t("The number of form per user must be numeric."));
   }
-  
+
 }
 
 /**
@@ -248,4 +255,15 @@ function framaforms_config_form_validate ($form, &$form_state) {
  */
 function framaforms_config_form_submit ($form, &$form_state) {
   drupal_set_message('form submitted !');
+}
+
+/**
+ * Callback calling
+ *
+ * @return void
+ */
+function framaforms_admin_menu_reset_variables_callback () {
+  module_load_include('install', 'framaforms', 'framaforms');
+  framaforms_set_default_variables();
+  drupal_set_message(t("All global variables for Framaforms were reset."),'status', FALSE);
 }
