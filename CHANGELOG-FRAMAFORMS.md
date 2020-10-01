@@ -16,6 +16,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 * Views : /suspicious, displays unpublished forms from above.
 * Views : /quarantine, displays forms in quarantine.
 * Number of forms / user limit
+* Additional filter/check on user email
+* Variables can now be reset from the adminstration pannel
+
+### Changed
+* the notification email is now loaded from an external template.
 
 ### Fixed
 * Empty "Share" tab on forms (#106)
