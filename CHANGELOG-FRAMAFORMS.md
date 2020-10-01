@@ -20,6 +20,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Fixed
 * Empty "Share" tab on forms (#106)
 * Unconsistent cache strategies for blocks in hook_block_info (`framaforms` module)
+* Automatic deletion of forms to take into account notification period
 
 ## [1.0.1] 2020/07/15
 

@@ -112,6 +112,7 @@ function notify_user_of_expiration ($record) {
         'subject' => $mail_subject,
         'headers' => array(),
     );
+    
     $message = drupal_mail('framaforms', 'expired_webform', (string)$record->mail, user_preferred_language($user), $mail_params);
     return $message['send'];
 }
@@ -168,21 +169,30 @@ function update_modified_nodes () {
  * @return void
  */
 function delete_expired_nodes () {
-    // if the user set the deletion period to 0, don't delete the forms
     $deletion_period = variable_get('framaforms_deletion_period_value');
+    $notification_period = variable_get('framaforms_notification_period_value');
+    $external_log_file = variable_get('framaforms_external_log_file', '/var/log/framaforms_logfile.log');
+
+    // create Datetime object for logging purposes
+    $current_date = new Datetime();
+    $current_date = date("D d/m/Y - H:i:s", $current_date->getTimestamp());
+
+    // if the user set the deletion period to 0, don't delete the forms
     if($deletion_period == 0){
         return;
     }
+
     $deletion_period .= ' weeks';
     $deleted_nodes = array();
     watchdog('framaforms', "Suppression des formulaires après notification.");
+
     $transaction = db_transaction();
     try{
         $query = db_query("
-            SELECT fex.nid
+            SELECT fex.nid, to_timestamp(fex.date_notified) dn
             FROM framaforms_expired fex
             WHERE fex.notified = 1
-            AND to_timestamp(fex.date_notified) < date_trunc('day', NOW() - interval'{$deletion_period}')
+            AND to_timestamp(fex.date_notified) <= NOW() - interval'{$deletion_period}' - interval'{$notification_period}'
             ");
         $expired_nodes= $query->fetchAll();
         foreach($expired_nodes as $record){
@@ -191,7 +201,7 @@ function delete_expired_nodes () {
             db_delete('framaforms_expired')
             ->condition('nid', $record->nid)
             ->execute();
-
+            error_log("{$current_date} : Form #{$record->nid} - user notified on {$record->dn} - was deleted.\n", 3, $external_log_file);
             array_push($deleted_nodes, $record->nid);
         }
 
