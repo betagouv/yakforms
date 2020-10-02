@@ -4,6 +4,11 @@ description = Features for automatically detect and quarantine spam forms in Fra
 core = 7.x
 php = 7.3
 
+dependencies[] = framaforms
+dependencies[] = views
+dependencies[] = views_bulk_operations
+dependencies[] = views_access_callbacks
+
 ; Configuration menu
 configure = admin/config/system/framaforms-spam-protection
 

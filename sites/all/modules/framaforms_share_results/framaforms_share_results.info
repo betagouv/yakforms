@@ -5,6 +5,9 @@ description = "This module allow to share results of a webform with some user-se
 
 core = 7.x
 
+dependencies[] = framaforms
+dependencies[] = webform
+
 ; Information added by drupal.org packaging script on 2016-12-26
 version = "7.x-1.0"
 core = "7.x"
