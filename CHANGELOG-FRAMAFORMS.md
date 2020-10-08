@@ -21,6 +21,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 #### New modules
 * Anti-spam module `framaforms_spam` that put forms in quarantine containing suspicious words in title, or don't have any webform component. (Needs work)
 * Akismet module (optional) to call the Akismet API (Wordpress)
+* Node title validation to strengthen spam control
 
 ### Changed
 * the notification email is now loaded from an external template.
