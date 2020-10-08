@@ -9,12 +9,12 @@ dependencies[] = webform
 dependencies[] = webform_confirm_email
 dependencies[] = webform_validation
 dependencies[] = webform_share
-dependencies[] = webform_chart
+dependencies[] = webform_charts
 dependencies[] = webform_calculator
 dependencies[] = webform_tokens
 dependencies[] = views
 dependencies[] = views_bulk_operations
-dependencies[] = views_access_callbacks
+dependencies[] = views_access_callback
 dependencies[] = form_builder
 dependencies[] = pathauto
 

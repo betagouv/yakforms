@@ -1,130 +1,143 @@
 <?php
 
 /**
-* @file
-* Framaforms module install.
-*/
-
-/**
-* Implements hook_schema();
-*/
-function framaforms_schema(){
-    $schema['framaforms_expired'] = array(
-        'description' => 'Table containing expiration information for Framaforms webforms',
-        'fields' => array(
-                'nid' => array(
-                'description' => 'NID of the webform (foreign key)',
-                'type' => 'int',
-                'not null' => FALSE,
-            ),
-            'date_notified' => array(
-                'description' => 'Date the user was notified (using the associated email).',
-                'type' => 'int',
-            ),
-            'notified' => array(
-                'description' => 'Set to 1 if the user was notified (default 0).',
-                'type' => 'int',
-                'not null' => TRUE,
-                'default' => 0,
-            ),
-        ),
-        'unique keys' => array(
-            'nid' => array(
-                'nid'
-            )
-        ),
-        'foreign key'=>array(
-            'fk_name_node' => array(
-                'table'=>'node',
-                'column'=>array('nid'=>'nid')
-            ),
-        ),
-    );
-    return $schema;
-}
-
-/**
- * Implements hook_install
+ * @file
+ * Framaforms module install.
  */
-function framaforms_install () {
-    framaforms_set_default_variables();
-}
 
 /**
- * Implements hook_uninstall
+ * Implements hook_schema();.
  */
-function framaforms_uninstall () {
-    db_delete('variable')->condition('name', db_like('framaforms_') . '%', 'LIKE')->execute();
-    cache_clear_all('framaforms', 'cache', TRUE);
+function framaforms_schema() {
+  $schema['framaforms_expired'] = array(
+    'description' => 'Table containing expiration information for Framaforms webforms',
+    'fields' => array(
+      'nid' => array(
+        'description' => 'NID of the webform (foreign key)',
+        'type' => 'int',
+        'not null' => FALSE,
+      ),
+      'date_notified' => array(
+        'description' => 'Date the user was notified (using the associated email).',
+        'type' => 'int',
+      ),
+      'notified' => array(
+        'description' => 'Set to 1 if the user was notified (default 0).',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'unique keys' => array(
+      'nid' => array(
+        'nid',
+      ),
+    ),
+    'foreign key' => array(
+      'fk_name_node' => array(
+        'table' => 'node',
+        'column' => array('nid' => 'nid'),
+      ),
+    ),
+  );
+  return $schema;
 }
 
 /**
- *  Set persistent variables regarding mails sent by Framaforms
+ * Implements hook_install.
+ */
+function framaforms_install() {
+  framaforms_set_default_variables();
+}
+
+/**
+ * Implements hook_uninstall.
+ */
+function framaforms_uninstall() {
+  db_delete('variable')->condition('name', db_like('framaforms_') . '%', 'LIKE')->execute();
+  cache_clear_all('framaforms', 'cache', TRUE);
+}
+
+/**
+ * Set persistent variables regarding mails sent by Framaforms.
+ *
  * @return void
  */
-function framaforms_set_variables_mail () {
-    // sprintf-ready mail for notifying a user of his⋅her form expiration.
-    $file_path = drupal_get_path('module', 'framaforms'). '/includes/templates/notification_email_fr.txt';
-    $framaforms_mail_user_notification_body = t("file_get_contents($file_path)");
-    $framaforms_mail_user_notification_subject = t("Framaforms : Votre formulaire « [form_title] » expirera dans deux semaines.");
-    variable_set('framaforms_mail_user_notification_subject', $framaforms_mail_user_notification_subject);
-    variable_set('framaforms_mail_user_notification_body', $framaforms_mail_user_notification_body);
-}
-
-function framaforms_set_variables_pages () {
-    $expiration_page_content = "<p>Le formulaire que vous essayez de voir a expiré.</p><p>Si vous êtes l'auteur de ce formulaire, vous pouvez peut-être le réactiver en vous identifiant, puis <strong>en éditant sa date d'expiration</strong> (en cliquant sur <b>Modifier</b> > <b>Autres options</b>) après avoir cliqué sur le lien <a href='[my_forms_url]'>Mes formulaires.</a></p><p>Si vous n'êtes pas l'auteur, contactez-le, en utilisant le moyen que l'auteur a utilisé pour vous enjoindre à remplir son formulaire (mail, réseau social, autres) et signalez-lui que son formulaire est expiré.</p>";
-    variable_set('framaforms_expiration_page_content', $expiration_page_content);
+function framaforms_set_variables_mail() {
+  // sprintf-ready mail for notifying a user of his⋅her form expiration.
+  $file_path = drupal_get_path('module', 'framaforms') . '/includes/templates/notification_email_fr.txt';
+  $framaforms_mail_user_notification_body = file_get_contents($file_path);
+  $framaforms_mail_user_notification_subject = t("Framaforms : your form « [form_title] » will expire soon.");
+  variable_set('framaforms_mail_user_notification_subject', $framaforms_mail_user_notification_subject);
+  variable_set('framaforms_mail_user_notification_body', $framaforms_mail_user_notification_body);
 }
 
 /**
- * Sets global variables to default value
+ *
+ */
+function framaforms_set_variables_pages() {
+  $language = language_default();       // the site default language
+  $file_path = drupal_get_path('module', 'framaforms') . "/includes/html/expiration_page_{$language}.html";
+  $expiration_page_content = file_get_contents($file_path);
+  variable_set('framaforms_expiration_page_content', $expiration_page_content);
+}
+
+/**
+ * Sets global variables to default value.
  *
  * @return
  */
-function framaforms_set_default_variables () {
-    module_load_include('inc', 'framaforms', 'includes/framaforms.pages');
+function framaforms_set_default_variables() {
+  module_load_include('inc', 'framaforms', 'includes/framaforms.pages');
 
-    framaforms_set_variables_pages();
-    framaforms_set_variables_mail();
+  framaforms_set_variables_pages();
+  framaforms_set_variables_mail();
 
-    $now = date('Y/m/d/ h:m:s', time());
-    variable_set('framaforms_cron_last', new DateTime()); // the last framforms cron run
-    variable_set('framaforms_cron_frequency', '1 hour');
-    variable_set('framaforms_expiration_period_default_value', 26); // default creation-expiration time interval
-    variable_set('framaforms_deletion_period_value', 9); // default expiration-deletion time interval
-    variable_set('framaforms_notification_period_value', 2); // default notification-expiration time interval
-    variable_set('framaforms_site_contact_url', 'https://contact.framasoft.org/#framaforms');
-    variable_set('framaforms_forms_per_user_limit', 200);
-    /* various other custom manipulation */
-    /* Hide Drupal default banner */
-    $theme_settings = variable_get('theme_settings');
-    $theme_settings['toggle_logo'] = 0;
-    $theme_settings['toggle_slogan'] = 0;
-    $theme_settings['toggle_name'] = 0;
-    variable_set('theme_settings', $theme_settings);
+  $now = date('Y/m/d/ h:m:s', time());
+  // The last framforms cron run.
+  variable_set('framaforms_cron_last', new DateTime());
+  variable_set('framaforms_cron_frequency', '1 hour');
+  // Default creation-expiration time interval.
+  variable_set('framaforms_expiration_period_default_value', 26);
+  // Default expiration-deletion time interval.
+  variable_set('framaforms_deletion_period_value', 9);
+  // Default notification-expiration time interval.
+  variable_set('framaforms_notification_period_value', 2);
+  variable_set('framaforms_site_contact_url', 'https://contact.framasoft.org/#framaforms');
+  variable_set('framaforms_forms_per_user_limit', 200);
+  /* various other custom manipulation */
+  /* Hide Drupal default banner */
+  $theme_settings = variable_get('theme_settings');
+  $theme_settings['toggle_logo'] = 0;
+  $theme_settings['toggle_slogan'] = 0;
+  $theme_settings['toggle_name'] = 0;
+  variable_set('theme_settings', $theme_settings);
 
-    /* Set default favicon for Frama theme */
-    $theme_frama_settings = variable_get('theme_frama_settings');
-    $theme_frama_settings['favicon_path'] = drupal_get_path('theme', 'frama'). '/images/Framasoft_Logo.png';
-    variable_set('theme_frama_settings', $theme_frama_settings);
+  /* Set default favicon for Frama theme */
+  $theme_frama_settings = variable_get('theme_frama_settings');
+  $theme_frama_settings['favicon_path'] = drupal_get_path('theme', 'frama') . '/images/Framasoft_Logo.png';
+  variable_set('theme_frama_settings', $theme_frama_settings);
 
-    /* Enable webform option for the form1 type */
-    variable_set('webform_node_form1', 1);
+  /* Enable webform option for the form1 type */
+  variable_set('webform_node_form1', 1);
 
-    /* Pathauto configuration */
-    $form1_settings = variable_get('pathauto_node_form1_pattern');
-    $page_settings = variable_get('pathauto_node_page_pattern');
+  /* Pathauto configuration */
+  $form1_settings = variable_get('pathauto_node_form1_pattern');
+  $page_settings = variable_get('pathauto_node_page_pattern');
 
-    if(!isset($form1_settings)){
-        variable_set('pathauto_node_form1_pattern', '[node:title]-[node:created:raw]');
-    }
-    if(!isset($page_settings)){
-        variable_set('pathauto_node_page_pattern', '[node:title]');
-    }
+  if (!isset($form1_settings)) {
+    variable_set('pathauto_node_form1_pattern', '[node:title]-[node:created:raw]');
+  }
+  if (!isset($page_settings)) {
+    variable_set('pathauto_node_page_pattern', '[node:title]');
+  }
 }
 
-function framaforms_update_7110 (&$sandbox) {
-    $file_path = drupal_get_path('module', 'framaforms'). '/includes/templates/notification_email_fr.txt';
-    $framaforms_mail_user_notification_body = file_get_contents($file_path);
-    variable_set('framaforms_mail_user_notification_body', $framaforms_mail_user_notification_body);
+/**
+ *
+ */
+function framaforms_update_7110(&$sandbox) {
+  $file_path = drupal_get_path('module', 'framaforms') . '/includes/templates/notification_email_fr.txt';
+  $framaforms_mail_user_notification_body = file_get_contents($file_path);
+  variable_set('framaforms_mail_user_notification_body', $framaforms_mail_user_notification_body);
 }

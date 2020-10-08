@@ -1,16 +1,20 @@
 <?php
 
 /**
+ * @file
+ */
+
+/**
  * Implements hook_menu.
  * Declares an administration menu, accessible only to admin.
  *
  * @return void
  */
-function framaforms_menu () {
+function framaforms_menu() {
   $items = array();
   $items['admin/config/system/framaforms'] = array(
-    'title' => 'Configurer Framaforms',
-    'description' => t('Configuration du module Framaforms'),
+    'title' => "Configure Framaforms",
+    'description' => 'Configuration for Framaforms module',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('framaforms_config_form'),
     'access arguments' => array('access administration pages'),
@@ -18,8 +22,8 @@ function framaforms_menu () {
     'file' => 'includes/framaforms.admin.inc',
   );
   $items['admin/framaforms/dashboard'] = array(
-    'title' => t('Vue d\'ensemble'),
-    'description' => t('Dashboard générale contenant différentes statistiques sur Framaforms.'),
+    'title' => "Overview",
+    'description' => "General dashboard containing statistics about your website.",
     'page callback' => 'get_dashboard_content',
     'access arguments' => array('access administration pages'),
     'type' => MENU_NORMAL_ITEM,
@@ -27,18 +31,19 @@ function framaforms_menu () {
     'file' => 'includes/framaforms.admin.inc',
   );
   $items['expiration'] = array(
-    'title' => t('Expiration'),
-    'description' => t("Page d'instructions pour partager un formulaire."),
+    'title' => "Expiration",
+    'description' => "Instructions page for expired forms.",
     'page callback' => 'get_expiration_content',
     'type' => MENU_NORMAL_ITEM,
     'access arguments' => array('access content'),
     'file' => 'includes/framaforms.pages.inc',
   );
   $items['node/%/share'] = array(
-    'title' => t('Partager'),
-    'description' => t('Instructions to share the form.'),
+    'title' => "Share",
+    'description' => "Instructions to share the form.",
     'page callback' => 'get_share_content',
-    'type' => MENU_LOCAL_TASK,        // render as tab
+  // Render as tab.
+    'type' => MENU_LOCAL_TASK,
     'access callback' => 'user_is_logged_in',
     'file' => 'includes/framaforms.pages.inc',
     'weight' => 1000,
@@ -47,12 +52,14 @@ function framaforms_menu () {
 }
 
 /**
- * Implements hook_menu_alter
+ * Implements hook_menu_alter.
  *
- * @param $items : menu items
+ * @param $items
+ *   : menu items
+ *
  * @return void
  */
-function framaforms_menu_alter (&$items) {
+function framaforms_menu_alter(&$items) {
   $items['node/add/form1']['access arguments'][] = $items['node/add/form1']['access callback'];
   $items['node/add/form1']['access callback'] = 'framaforms_check_users_forms';
 }
@@ -62,17 +69,17 @@ function framaforms_menu_alter (&$items) {
  *
  * @return void
  */
-function framaforms_check_users_forms () {
+function framaforms_check_users_forms() {
   global $user;
-  // if the user is not logged in, deny access
-  if($user->uid === 0){
+  // If the user is not logged in, deny access.
+  if ($user->uid === 0) {
     return FALSE;
   }
   // If the user is admin, grant access (admin is master here)
-  if($user->uid === "1"){
+  if ($user->uid === "1") {
     return TRUE;
   }
-  // Get the user's total number of forms
+  // Get the user's total number of forms.
   $results = db_select('node', 'n')
     ->fields('n')
     ->condition('type', 'form1')
@@ -80,9 +87,9 @@ function framaforms_check_users_forms () {
     ->countQuery()
     ->execute()
     ->fetchField();
-  if($results >= variable_get('framaforms_forms_per_user_limit')){
+  if ($results >= variable_get('framaforms_forms_per_user_limit')) {
     drupal_set_message(t("Your account has reached this site's maximum number of forms. Please delete some of your unused forms in 'My forms' before trying to create a new one."), 'warning', FALSE);
-    drupal_set_message(t("This site's allows to create the maximum following number of forms : "). variable_get('framaforms_forms_per_user_limit'), 'warning', FALSE);
+    drupal_set_message(t("This site's allows to create the maximum following number of forms : @number", array('@number' => variable_get('framaforms_forms_per_user_limit'))), 'warning', FALSE);
     return FALSE;
   }
   return TRUE;
@@ -93,38 +100,38 @@ function framaforms_check_users_forms () {
  *
  * @return void
  */
-function framaforms_block_info () {
-  // block : contact form link at the bottom of the form.
+function framaforms_block_info() {
+  // Block : contact form link at the bottom of the form.
   $blocks['framaforms_contact_form_block'] = array(
-    'info' => t('Lien vers le formulaire de contact'),
+    'info' => t("Contact form link"),
     'cache' => DRUPAL_CACHE_PER_PAGE,
     'status' => TRUE,
     'region' => 'content',
     'weight' => 10,
     'visibility' => BLOCK_VISIBILITY_LISTED,
-    'pages' => "node/*"
+    'pages' => "node/*",
   );
-  // block : alert block about passwords.
+  // Block : alert block about passwords.
   $blocks['framaforms_no_password'] = array(
-    'info' => t('Alerte mot de passe'),
+    'info' => t("Password alert"),
     'cache' => DRUPAL_CACHE_GLOBAL,
     'status' => TRUE,
     'region' => 'content',
     'weight' => 20,
     'visibility' => BLOCK_VISIBILITY_LISTED,
-    'pages' => "node/*"
+    'pages' => "node/*",
   );
-  // block : General header with Framaforms title
+  // Block : General header with Framaforms title.
   $blocks['framaforms_header'] = array(
-    'info' => t('En-tête général'),
+    'info' => t("General header"),
     'cache' => DRUPAL_CACHE_GLOBAL,
     'status' => TRUE,
     'region' => 'highlighted',
     'weight' => 10,
   );
-  // block : header with links for a logged-in user.
+  // Block : header with links for a logged-in user.
   $blocks['framaforms_user_header'] = array(
-    'info' => t('Liens utilisateurs'),
+    'info' => t("User links"),
     'cache' => DRUPAL_CACHE_PER_USER,
     'status' => TRUE,
     'region' => 'highlighted',
@@ -132,9 +139,9 @@ function framaforms_block_info () {
     'visibility' => BLOCK_VISIBILITY_NOTLISTED,
     'pages' => "node/add\nnode/add/*",
   );
-  // block : header with links for an anonymous user.
+  // Block : header with links for an anonymous user.
   $blocks['framaforms_anonymous_header'] = array(
-    'info' => t('Liens utilisateur anonyme'),
+    'info' => t("Anonymous user links"),
     'cache' => DRUPAL_CACHE_PER_ROLE,
     'status' => TRUE,
     'region' => 'highlighted',
@@ -142,10 +149,10 @@ function framaforms_block_info () {
     'visibility' => BLOCK_VISIBILITY_LISTED,
     'pages' => "<front>\nfonctionnalites\nuser\nuser/*\ndocs/*",
   );
-  // block : warning for a user when creating a form
+  // Block : warning for a user when creating a form.
   $blocks['framaforms_create_form'] = array(
-    'info' => t('Création de formulaire'),
-    'title' => 'Création',
+    'info' => t("New form warning"),
+    'title' => t("New form"),
     'cache' => DRUPAL_CACHE_GLOBAL,
     'status' => TRUE,
     'region' => 'highlighted',
@@ -153,10 +160,10 @@ function framaforms_block_info () {
     'visibility' => BLOCK_VISIBILITY_LISTED,
     'pages' => "node/add/form1",
   );
-  // block : account information page.
+  // Block : account information page.
   $blocks['framaforms_my_account'] = array(
-    'info' => t('Mon compte Framaforms'),
-    'title' => 'Mon compte Framaforms',
+    'info' => t("My Framaforms account"),
+    'title' => t("My Framaforms account"),
     'cache' => DRUPAL_CACHE_PER_USER,
     'status' => TRUE,
     'region' => 'content',
@@ -165,8 +172,8 @@ function framaforms_block_info () {
     'pages' => "user/\nuser/*",
   );
   $blocks['help_confirmation_email'] = array(
-    'info' => t('Aide : mail de confirmation'),
-    'title' => 'Confirmation par email',
+    'info' => t("Help : confirmation email"),
+    'title' => t("Confirmation email"),
     'cache' => DRUPAL_CACHE_GLOBAL,
     'status' => TRUE,
     'region' => 'sidebar_first',
@@ -174,8 +181,8 @@ function framaforms_block_info () {
     'pages' => "node/*/webform/confirmation-settings",
   );
   $blocks['help_emails'] = array(
-    'info' => t('Aide : Interactions par email'),
-    'title' => 'Interactions par email',
+    'info' => t("Help : email interaction"),
+    'title' => t("Email interaction"),
     'cache' => DRUPAL_CACHE_GLOBAL,
     'status' => TRUE,
     'region' => 'sidebar_first',
@@ -183,8 +190,8 @@ function framaforms_block_info () {
     'pages' => "node/*/webform/emails",
   );
   $blocks['help_validation'] = array(
-    'info' => t('Aide : Conditions de validation'),
-    'title' => 'Conditions de validation',
+    'info' => t("Help : validation conditions"),
+    'title' => t("Validation conditions"),
     'cache' => DRUPAL_CACHE_GLOBAL,
     'status' => TRUE,
     'region' => 'sidebar_first',
@@ -192,8 +199,8 @@ function framaforms_block_info () {
     'pages' => "node/*/webform/validation",
   );
   $blocks['help_settings'] = array(
-    'info' => t('Aide : Paramètres du formulaire'),
-    'title' => 'Paramètres du formulaire',
+    'info' => t("Help : configure form"),
+    'title' => t("Configure form"),
     'cache' => DRUPAL_CACHE_GLOBAL,
     'status' => TRUE,
     'region' => 'sidebar_first',
@@ -201,8 +208,8 @@ function framaforms_block_info () {
     'pages' => "node/*/webform/configure",
   );
   $blocks['help_conditionnals'] = array(
-    'info' => t('Aide : Champs conditionnels'),
-    'title' => 'Champs conditionnels',
+    'info' => t("Help : conditionnal fields"),
+    'title' => t("Conditionnal fields"),
     'cache' => DRUPAL_CACHE_GLOBAL,
     'status' => TRUE,
     'region' => 'sidebar_first',
@@ -210,8 +217,8 @@ function framaforms_block_info () {
     'pages' => "node/*/webform/conditionals",
   );
   $blocks['help_form1_creation'] = array(
-    'info' => t('Aide : Création'),
-    'title' => 'Création d\'un formulaire',
+    'info' => t("Help : new form"),
+    'title' => t("New form"),
     'cache' => DRUPAL_CACHE_GLOBAL,
     'status' => TRUE,
     'region' => 'sidebar_first',
@@ -219,8 +226,8 @@ function framaforms_block_info () {
     'pages' => "node/add/form1\nnode/*/edit",
   );
   $blocks['help_generic'] = array(
-    'info' => t('Aide : Générale'),
-    'title' => 'Aide',
+    'info' => t("Help : global"),
+    'title' => t("Help"),
     'cache' => DRUPAL_CACHE_GLOBAL,
     'status' => TRUE,
     'region' => 'sidebar_first',
@@ -228,8 +235,8 @@ function framaforms_block_info () {
     'pages' => "node/*/view",
   );
   $blocks['help_form1_webform'] = array(
-    'info' => t('Aide : Création du formulaire'),
-    'title' => 'Création du formulaire',
+    'info' => t("Help : new form creation - webform"),
+    'title' => t("New form configuration"),
     'cache' => DRUPAL_CACHE_GLOBAL,
     'status' => TRUE,
     'region' => 'sidebar_first',
@@ -237,8 +244,8 @@ function framaforms_block_info () {
     'pages' => "node/*/webform\nnode/*/webform/form-builder",
   );
   $blocks['help_form1_webform_components'] = array(
-    'info' => t('Aide : Ajoutez des composants'),
-    'title' => 'Ajoutez des composants',
+    'info' => t("Help : add form components"),
+    'title' => t("Add form components"),
     'cache' => DRUPAL_CACHE_GLOBAL,
     'status' => TRUE,
     'region' => 'sidebar_first',
@@ -247,7 +254,7 @@ function framaforms_block_info () {
   );
   $blocks['framaforms_footer'] = array(
     'info' => t('Footer'),
-    'title' => 'Fourni par Framaforms',
+    'title' => t("Powered by Framaforms"),
     'cache' => DRUPAL_CACHE_GLOBAL,
     'status' => TRUE,
     'region' => 'footer',
@@ -256,256 +263,275 @@ function framaforms_block_info () {
 }
 
 /**
-* Implements hook_block_view.
-* Defines content for Framaforms-specific blocks.
-*
-* @param string $delta : the block identifier.
-* @return void
-*/
-function framaforms_block_view ($delta) {
+ * Implements hook_block_view.
+ * Defines content for Framaforms-specific blocks.
+ *
+ * @param string $delta
+ *   : the block identifier.
+ *
+ * @return void
+ */
+function framaforms_block_view($delta) {
   module_load_include('inc', 'framaforms', 'includes/framaforms.block');
   global $user;
   global $base_url;
   $block = array();
-  // get the current nid to generate content from there.
+  // Get the current nid to generate content from there.
   $current_url = $_GET['q'];
   $matches = array();
   preg_match("/node\/([0-9]+)/", $current_url, $matches);
-  if(isset($matches[1])){
+  if (isset($matches[1])) {
     $nid = $matches[1] ? $matches[1] : NULL;
   }
   else {
     $nid = NULL;
   }
-  // generate content by block ID
-  switch($delta) {
+  // Generate content by block ID.
+  switch ($delta) {
     case 'framaforms_contact_form_block':
-      // only display this block on form1-type nodes
-      if(isset($nid) || !node_is_form1($nid)){
+      $block['content'] = array();
+      $block['content']['#markup'] = "hello";
+
+      // Only display this block on form1-type nodes.
+      if (!isset($nid) || !node_is_form1($nid)) {
         return;
       }
-      // don't show this block on edit pages of form1 nodes
-      if(strpos($current_url, 'edit')){
+      // don't show this block on edit pages of form1 nodes.
+      if (strpos($current_url, 'edit')) {
         return;
       }
-      if(user_access('access content')){
-        // get block content
-        $block['content'] = array();
-        $block['content']['#markup'] = "";
-        $block['content']['#markup'] .= get_contact_form_content($nid);
-      }
-    break;
-    case 'framaforms_no_password' :
-      // only display this block on form1-type nodes
-      if(isset($nid) || !node_is_form1($nid)){
+      $block['content'] = array();
+      $block['content']['#markup'] = "";
+      $block['content']['#markup'] .= get_contact_form_content($nid);
+      break;
+
+    case 'framaforms_no_password':
+      // Only display this block on form1-type nodes.
+      if (!isset($nid) || !node_is_form1($nid)) {
         return;
       }
-      // don't show this block on edit pages of form1 nodes
-      if(strpos($current_url, '/edit')){
+      // don't show this block on edit pages of form1 nodes.
+      if (strpos($current_url, '/edit')) {
         return;
       }
       $block['content'] = array(
-        '#markup' => t('<i>Ne transmettez aucun mot de passe via Framaforms</i>'),
+        '#markup' => "<i>" . t("Do not communicate any password through Framaforms.") . "</i>",
       );
-    break;
+      break;
+
     case 'framaforms_header':
       $block['content']['#markup'] = '<h1 class="big-title"><a href="/"><b class="frama">Frama</b><b class="vert">forms</b></a></h1>';
-      $block['content']['#markup'] .= '<p class="lead">'. variable_get('site_slogan').'</p>';
-    break;
+      $block['content']['#markup'] .= '<p class="lead">' . variable_get('site_slogan') . '</p>';
+      break;
+
     case 'framaforms_anonymous_header':
-      // only display to anonymous users
-      if(user_is_logged_in()){
+      // Only display to anonymous users.
+      if (user_is_logged_in()) {
         return;
       }
       $block['content']['#markup'] = '<div class="user-block-connect">';
-      $block['content']['#markup'] .= '<a href="/user/register" class="btn btn-success btn-sm" role="button">Créer un compte</a>';
+      $block['content']['#markup'] .= "<a href='/user/register' class='btn btn-success btn-sm' role='button'>" . t("Register") . "</a>";
       $block['content']['#markup'] .= '&nbsp;&nbsp;&nbsp;&nbsp;';
-      $block['content']['#markup'] .= '<a href="/user" class="btn btn-primary btn-sm" role="button">'. t('M\'identifier') .'</a><br/><br/>';
+      $block['content']['#markup'] .= "<a href='/user' class='btn btn-primary btn-sm' role='button'>" . t("Log in") . "</a><br/><br/>";
       $block['content']['#markup'] .= '<div>';
-      $block['content']['#markup'] .= '<a href="/fonctionnalites" class="btn btn-default btn-sm" role="button">'. t('Fonctionnalités'). '</a>';
+      $block['content']['#markup'] .= "<a href='/fonctionnalites' class='btn btn-default btn-sm' role='button'>" . t("Features") . "</a>";
       $block['content']['#markup'] .= ' </div> </div>';
       $block['content']['#markup'] .= '</div class="user-block-connect">';
-    break;
+      break;
+
     case 'framaforms_user_header':
-      // only display to logged-in users
-      if(!user_is_logged_in()){
+      // Only display to logged-in users.
+      if (!user_is_logged_in()) {
         return;
       }
       $block['content']['#markup'] = '<div class="user-block-connect">';
-      // button for account settings
-      $block['content']['#markup'] .= '<a role="button" class="btn btn-link btn-sm" href="/user/'.$user->uid.'">'.t('Mon compte'). ' ('. $user->name .')</a>';
+      // Button for account settings.
+      $block['content']['#markup'] .= '<a role="button" class="btn btn-link btn-sm" href="/user/' . $user->uid . '">' . t("My account") . ' (' . $user->name . ')</a>';
       $block['content']['#markup'] .= "&nbsp;&nbsp;&nbsp;&nbsp;";
-      // logout button
-      $block['content']['#markup'] .= '<a role="button" class="btn btn-danger btn-sm"href="/user/logout">' .t('Déconnexion') .'</a>';
+      // Logout button.
+      $block['content']['#markup'] .= '<a role="button" class="btn btn-danger btn-sm"href="/user/logout">' . t('Log out') . '</a>';
       $block['content']['#markup'] .= "<br /><br />";
-      $block['content']['#markup'] .= '<a href="/fonctionnalites" class="btn btn-default btn-sm" role="button">'. t('Fonctionnalités') .'</a>';
+      $block['content']['#markup'] .= '<a href="/fonctionnalites" class="btn btn-default btn-sm" role="button">' . t("Features") . '</a>';
       $block['content']['#markup'] .= "&nbsp;&nbsp;&nbsp;&nbsp;";
-      $block['content']['#markup'] .= '<a href="/node/add/form1" class="btn btn-primary btn-sm" role="button">' . t('Créer un formulaire vierge') .'</a>';
+      $block['content']['#markup'] .= '<a href="/node/add/form1" class="btn btn-primary btn-sm" role="button">' . t("Create a new form") . '</a>';
       $block['content']['#markup'] .= "&nbsp;&nbsp;&nbsp;&nbsp;";
-      $block['content']['#markup'] .= '<a href="/templates" class="btn btn-primary btn-sm" role="button">'. t('Créer un formulaire depuis un modèle').'</a>';
+      $block['content']['#markup'] .= '<a href="/templates" class="btn btn-primary btn-sm" role="button">' . t('Create a form from a template') . '</a>';
       $block['content']['#markup'] .= "&nbsp;&nbsp;&nbsp;&nbsp;";
-      $block['content']['#markup'] .= '<a role="button" class="btn btn-primary btn-sm" href="/user/'.$user->uid.'/forms">' . t('Mes formulaires'). '</a>';
+      $block['content']['#markup'] .= '<a role="button" class="btn btn-primary btn-sm" href="/user/' . $user->uid . '/forms">' . t('My forms') . '</a>';
       $block['content']['#markup'] .= "<br/>";
       $block['content']['#markup'] .= "&nbsp;&nbsp;&nbsp;&nbsp;";
       $block['content']['#markup'] .= '</div class="user-block-connect">';
-    break;
+      break;
+
     case 'framaforms_my_account':
-      // don't show this block on the "edit" page
-      if(strpos($current_url, 'edit')){
+      // don't show this block on the "edit" page.
+      if (strpos($current_url, 'edit')) {
         return;
       }
-      $block['content']['#markup'] = '<p>' .t('Bienvenue sur votre compte Framaforms !') .'</p>';
-      $block['content']['#markup'] .= '<p>'. t('Vous pouvez :'). '</p>';
+      $block['content']['#markup'] = '<p>' . t('Welcome to your Framaforms account !') . '</p>';
+      $block['content']['#markup'] .= '<p>' . t('You can :') . '</p>';
       $block['content']['#markup'] .= '<ul>';
-      $block['content']['#markup'] .= '<li>'. t('modifier vos informations personnelles (onglet "Modifier" ci-dessus) ;') .'</li>';
-      $block['content']['#markup'] .= '<li>'. t('lister formulaires que vous avez créés (Bouton "Mes formulaires" ci-dessus) ;') .'</li>';
-      $block['content']['#markup'] .= '<li> <a href="/node/add/form1">'. t('créer un nouveau formulaire') .'</a></li>';
-      $block['content']['#markup'] .= '<li> <a href="'. variable_get('site_contact_url').'">'. t('nous contacter') .'</a></li>';
+      $block['content']['#markup'] .= '<li>' . t('edit your personal information ("Edit" tab above) ;') . '</li>';
+      $block['content']['#markup'] .= '<li>' . t('access your forms ("My forms" button above) ;') . '</li>';
+      $block['content']['#markup'] .= '<li> <a href="/node/add/form1">' . t('create a new form') . '</a></li>';
+      $block['content']['#markup'] .= '<li> <a href="' . variable_get('site_contact_url') . '">' . t('contact us') . '</a></li>';
       $block['content']['#markup'] .= '</ul>';
-    break;
+      break;
+
     case 'framaforms_create_form':
-      $block['content']['#markup'] = t("<p>Vous allez créer ou modifier un formulaire.<br />
-        Commencez par remplir les champs ci-dessous, puis cliquez sur « Enregistrer ».<br />
-        <b>NB : le titre est important, car il sera partiellement repris dans le titre. Le changer changera l'adresse du formulaire !</b></p>");
-    break;
+      $block['content']['#markup'] = "<p>";
+      $block['content']['#markup'] .= t("You are about to create a new form.") . "<br />";
+      $block['content']['#markup'] .= t("Start by filling the fields below, then click « Submit »") . "<br />";
+      $block['content']['#markup'] .= "<b>" . t("NB : the form's title will affect its URL. Choose it wisely and watch out : changing it will change the form's URL !") . "</b>";
+      $block['content']['#markup'] .= "</p>";
+      break;
+
     case 'help_confirmation_email':
-      if(!user_is_logged_in()){
+      if (!user_is_logged_in()) {
         return;
       }
-      $block['content']['#markup'] = t("Ici, vous pouvez indiquer combien de temps l'email de confirmation sera valable (si vous utilisez cette option), et si vous souhaitez qu'à ce terme la soumission soit détruite.");
+      $block['content']['#markup'] = t("Here, you can specify how long you want the confirmation email to be valid (if you are using this option), and if you want the user's submission to be eventually destroyed.");
       $block['content']['#markup'] .= "<br><br>";
-      $block['content']['#markup'] .= t("NB importante : si vous souhaitez utiliser les options de configuration, c'est dans l'onglet « Courriels » que cela ce passe :)");
-    break;
+      $block['content']['#markup'] .= t("(NB : if you are looking for the configuration parameters, you'll find them in the « Emails » tab !)");
+      break;
+
     case 'help_emails':
-      if(!user_is_logged_in()){
+      if (!user_is_logged_in()) {
         return;
       }
-      $block['content']['#markup'] = t("Cette fonctionnalité permet, a minima, d'envoyer un courriel à une adresse donnée.
-      Par exemple pour envoyer, à chaque soumission du formulaire, un courriel au créateur du formulaire, indiquant qu'un formulaire a été soumis.
-      Ce courriel <em>peut</em> contenir les valeurs saisies par le participant.") . "<br>";
-      $block['content']['#markup'] .= t("Mais surtout, ce module permet de mettre en place une procédure de confirmation par courriel.") . "<br>";
-      $block['content']['#markup'] .= t("Ainsi, si l'utilisateur soumet un formulaire, il recevra un courriel avec un lien de validation. Tant qu'il n'aura pas cliqué sur ce lien, son formulaire ne sera pas comptabilisé dans les résultats (il sera enregistré, mais pas validé).
-      Cela peut être très utile dans le cas où vous souhaiteriez vous assurer que tous les participants ont des courriels valides.") . "<br>";
-      $block['content']['#markup'] .= "<strong>" . t("Attention : pour utiliser la confirmation, votre formulaire doit obligatoirement comporter un composant « courriel »") . "</strong>";
-      $block['content']['#markup'] .= t(" (ben oui, sinon, comment voulez vous qu'on envoie le mail au participant ? :P)");
-    break;
+      $block['content']['#markup'] = t("This feature allows you to send an email to a specified address.
+        For example you can send an email to the form's author at each new submission.
+        This email can optionally contain the values submitted by the user.") . "<br>";
+      $block['content']['#markup'] .= t("But the real interest of this module is to set up a confirmation process by email.") . "<br>";
+      $block['content']['#markup'] .= t("If a user submits a form, they will receive an email with a confirmation link. Their submission won't be appear in the results until they have clicked on this link.
+        This can be very useful if you want to make sure all submitted emails are valid.") . "<br>";
+      $block['content']['#markup'] .= "<strong>" . t("Watch out : to use the confirmation process, your form must have an « email » component.") . "</strong>";
+      $block['content']['#markup'] .= t(" (well yeah, how can you possibly send an email if you don't have an address ? :P )");
+      break;
+
     case 'help_validation':
-      if(!user_is_logged_in()){
+      if (!user_is_logged_in()) {
         return;
       }
-      $block['content']['#markup'] = t("(réservé plutôt aux utilisateurs avancés) <br>
-      Ici, vous pouvez définir des conditions de validation du formulaire en fonction des choix de l'utilisateur.
-      Si ces conditions ne sont pas remplies, le formulaire n'est pas validé. Il est resoumis à l'utilisateur jusqu'à correspondre aux conditions.<br>
-      <strong>Cas d'usages : </strong><ul>
-      <li>Vous voulez que le nombre maximum de caractères d'une zone de texte soit inférieur à 200 caractères</li>
-      <li>Vous voulez interdire certains mots dans une zone de texte</li>
-      <li>Vous voulez comparer que « taille (cm) à 5 ans » est plus petit que « taille (cm) à 20 ans »</li>
-      <li>Vous voulez vous assurer « Nom du projet » commence par les lettres « Frama »</li>
-      <li>etc</li>");
-    break;
+      $block['content']['#markup'] = t("(for advanced users)") . "<br>";
+      $block['content']['#markup'] .= t("Here, you can define conditions to validate a user's submission.
+      If these conditions are not fulfilled, the submission won't be saved, and the user will be asked to modify their submission.") . "<br>";
+      $block['content']['#markup'] .= "<strong>" . t("Use cases :") . "</strong>";
+      $block['content']['#markup'] .= "<ul>";
+      $block['content']['#markup'] .= "<li>" . t("You want to set the maximum number of characters in a text area to 200.") . "</li>";
+      $block['content']['#markup'] .= "<li>" . t("You want to forbid the use of some words in a text area") . "</li>";
+      $block['content']['#markup'] .= "<li>" . t("You want to make sure a 'size at age 5' field is inferior to a 'size at age 20' field.") . "</li>";
+      $block['content']['#markup'] .= "<li>" . t("You want to make sure that 'Awesome project name' begins with 'Frama-'") . "</li>";
+      $block['content']['#markup'] .= "<li>" . t("etc") . "</li>";
+      break;
+
     case 'help_settings':
-      if(!user_is_logged_in()){
+      if (!user_is_logged_in()) {
         return;
       }
-      $block['content']['#markup'] = t("
-      On ne rigole plus là, hein ? :)<br>
-      On rentre dans le dur de la configuration avancée du formulaire.<br>
-      Avantage : la configuration par défaut convient dans 90% des cas.<br>
-      Inconvénient : si vous touchez à quelques chose qu'il ne fallait pas, ne venez pas vous plaindre (bon, vous ne prenez que le risque de ne casser *que* ce formulaire, alors au pire il suffira d'en recréer un ! :)<br>
-      ");
-    break;
+      $block['content']['#markup'] = t("Getting real, isn't it ? :)") . "<br>";
+      $block['content']['#markup'] .= t("Here are the advanded parameters for your form.") . "<br>";
+      $block['content']['#markup'] .= t("The good part : The default configuration is enough for 90% of cases.") . "<br>";
+      $block['content']['#markup'] .= t("The less good part : if you mess around and end up breaking your form, don't come whining ! (Don't worry, you'll 'only' have broken your own form, the worst that can happen is having to start over a new one :)") . "<br>";
+      break;
+
     case 'help_conditionnals':
-      if(!user_is_logged_in()){
+      if (!user_is_logged_in()) {
         return;
       }
-      $block['content']['#markup'] = t("
-      Les champs conditionnels vous permettent d'effectuer des actions en fonction de certaines valeurs saisies par l'utilisateur.
-      Exemples :<br>
-      <strong>afficher ou masquer des champs : </strong><br>
-      SI l'utilisateur sélectionne le champs <em>«Autre»</em> dans le menu <em>«Types de structure»</em>
-      ALORS faire apparaître le champ <em>«Autre type de structure»</em><br>
-      SI l'utilisateur coche le bouton <em>«Je n'aime pas la purée»</em>
-      ALORS cacher le menu <em>«Quelle est votre purée préférée ?»</em>.<br>
-      <strong>Forcer une valeur : </strong><br>
-      SI l'utilisateur coche la case <em>«J'ai reçu au moins 3 cadeaux à Noël»</em>
-      ALORS automatiquement cocher la réponse <em>«Oui»</em> pour la case <em>«J'ai de la chance»</em>.<br>
-      <strong>Forcer le remplissage d'un champ</strong>
-      SI l'utilisateur a coché la case <em>«Je suis allé dans l'espace»</em>
-      ALORS rendre le champ <em>«Sur quelle planète»</em> olibgatoire.<br>
-      <a href='docs/champs_conditionnels/'>Plus dinformations</a>
-      ");
-    break;
+      $block['content']['#markup'] = t("Conditonal fields allow you to take actions depending on the user's values. ");
+      $block['content']['#markup'] .= t("Examples :") . "<br>";
+      $block['content']['#markup'] .= "<strong>" . t("Show and hide fields :") . "</strong>" . "<br>";
+      $block['content']['#markup'] .= t("IF the user selected « other » for « Structure type » ");
+      $block['content']['#markup'] .= t("THEN  show the text area « Other structure types » ") . "<br>";
+      $block['content']['#markup'] .= t("IF the user checked the option « I don't like soup » ");
+      $block['content']['#markup'] .= t("THEN hide the question « What's your favorite soup ? ».") . "<br>";
+      $block['content']['#markup'] .= "<strong>" . t("Force a value :") . "</strong>" . "<br>";
+      $block['content']['#markup'] .= t("IF the user checked the option « I got 3 presents or more for Christmas » ");
+      $block['content']['#markup'] .= t("THEN automatically check the option « Yes » for the question « Am I lucky ? » ") . "<br>";
+      $block['content']['#markup'] .= "<strong>" . t("Make a field mandatory : ") . "</strong>" . "<br>";
+      $block['content']['#markup'] .= t("IF the user checked the option « I went to space » ");
+      $block['content']['#markup'] .= t("THEN make the field « Which planet ? » mandatory. ") . "<br>";
+      $block['content']['#markup'] .= "<a href='docs/champs_conditionnels/'>" . t("More information") . "</a>";
+      break;
+
     case 'help_form1_creation':
-      if(!user_is_logged_in()){
+      if (!user_is_logged_in()) {
         return;
       }
-      $block['content']['#markup'] = t("
-      Remplissez les informations de description de votre formulaire, puis cliquez sur «enregistrer» pour passer à l'étape de création des champs de formulaires.<br><br>
-      Une fois validé, cliquez sur l'onglet « Formulaire » <strong>qui n'apparaîtra qu'une fois la description enregistrée !</strong>");
-    break;
+      $block['content']['#markup'] = t("Fill the general information describing your form, then click « Submit » to proceed to add form fields.") . "<br><br>";
+      $block['content']['#markup'] .= t("Once this is done, click on the « Webform » tab <strong>which will only appear once the description is saved !</strong>");
+      break;
+
     case 'help_generic':
-      if(!user_is_logged_in()){
+      if (!user_is_logged_in()) {
         return;
       }
       $block['content']['#markup'] = t("Cliquez sur l'onglet « Formulaire » pour poursuivre la création de formulaire...");
-    break;
+      break;
+
     case 'help_form1_webform':
-      if(!user_is_logged_in()){
+      if (!user_is_logged_in()) {
         return;
       }
-      $block['content']['#markup'] = t("
-        <p>C'est parti !<br/>
-        Choisissez les éléments de votre formulaire.<br/>
-        Vous pouvez cliquer ou glisser-déplacer les éléments de formulaire situés à droite dans la zone de prévisualisation pour construire votre formulaire.<br/>
-        Par ailleurs, vous pouvez sélectionner les options avancées en utilisant les sous-onglets «Champs conditionnels», «Courriels», «Paramètres du formulaire», etc.</p>
-        <p>Attention toutefois : il est déconseillé de modifier un formulaire (modifier son titre ou supprimer des champs) une fois que vous aurez obtenu vos premières réponses. Vous risqueriez de perdre des données.</p>
-        <p>Vous devez insérer au minimum <strong>un champ de formulaire</strong> avant de le valider. Si votre formulaire reste vide, il sera considéré comme un spam potentiel, et vous risquez de perdre votre travail.</p>
-      ");
-    break;
+      $block['content']['#markup'] = t("Here we go !") . "<br/>";
+      $block['content']['#markup'] .= t("Choose your form's components.") . "<br/>";
+      $block['content']['#markup'] .= t("You can drag and drop the components on the right into the preview zone to build the form you want.") . "<br/>";
+      $block['content']['#markup'] .= t("You can also set advanced parameters for your form by clicking on « Emails », « Conditional fields », etc .") . "</p>";
+      $block['content']['#markup'] .= "<p>" . t("Watch out : it is not recommanded to modify your form once you received at least one submission You might loose your data.") . "</p>";
+      $block['content']['#markup'] .= "<p>" . t("You must insert at least ONE form field before clicking « Submit ». If your form remains empty, it will be considered as a potential spam, and you might loose your work.") . "</p>";
+      break;
+
     case 'help_form1_webform_components':
-      if(!user_is_logged_in()){
+      if (!user_is_logged_in()) {
         return;
       }
-      $block['content']['#markup'] = t("
-        Vous pouvez ici définir les mêmes composants que dans le formulaire «graphique», mais de façon plus... «manuelle».
-        L'avantage, c'est que l'édition des champs fonctionne mieux sur mobile.");
-    break;
+      $block['content']['#markup'] = t("Here you can define the same components as with the graphic menu, but in a more... « manual » way. ") . "<br>";
+      $block['content']['#markup'] .= t("This might work better on mobile.");
+      break;
+
     case 'framaforms_footer':
-      $block['content']['#markup'] = t("<u><a href='https://framaforms.org'>Framaforms</a></u> est un service en ligne libre, gratuit, sans publicité et respectueux de vos données permettant de générer des formulaires (sondages, enquêtes, pétitions, etc.).") . "<br>";
-      $block['content']['#markup'] .= t("Ce service (et bien d'autres) vous est proposé par l'association <u><a href='https://framasoft.org/fr/'>Framasoft</a></u>, dans le cadre de sa campagne « <u><a href='https://degooglisons-internet.org/fr/'>Dégooglisons Internet</a></u> ».") . "<br>";
-      $block['content']['#markup'] .= t("Ce contenu n'est ni rédigé, ni cautionné par Framaforms. <u><a href='https://contact.framasoft.org/#framaforms'>Signaler un cas d'utilisation abusive.<a></u><br>");
-      $block['content']['#markup'] .= t("Framaforms est propulsé par <u><a href='https://www.drupal.org/'>Drupal</a></u>.");
-    break;
+      $block['content']['#markup'] = "<u><a href='https://framaforms.org'>Framaforms</a></u>" . t(" is an online, free, add-less and privacy-friendly service to create forms (polls, surveys, quiz, etc.) ") . "<br>";
+      $block['content']['#markup'] .= t("This service (and a whole lot of others) are brought to you by") . " <u><a href='https://framasoft.org/fr/'>Framasoft</a></u> " . t("as part of ") . " « <u><a href='https://degooglisons-internet.org/en/'>" . t("the De-google-ify Internet campaign") . "</a></u> »." . "<br>";
+      $block['content']['#markup'] .= t("This content was not written nor approved by Framasoft.") . " <u><a href='https://contact.framasoft.org/#framaforms'>" . t("Report an abusive content.") . "<a></u><br>";
+      $block['content']['#markup'] .= t("Framaforms is powered by") . " <u><a href='https://www.drupal.org/'>Drupal 7</a></u>.";
+      break;
   }
   return $block;
 }
 
 /**
-* Implements hook_form_alter :
-* Disable wysiwyg on markup widget and add protection before leaving
-*/
+ * Implements hook_form_alter :
+ * Disable wysiwyg on markup widget and add protection before leaving.
+ */
 function framaforms_form_alter(&$form, &$form_state, $context) {
   $form_id['edit-markup-value']['#wysiwyg'] = FALSE;
-  $form_id['edit-markup-value']['und'][0]['#wysiwyg'] = false;
+  $form_id['edit-markup-value']['und'][0]['#wysiwyg'] = FALSE;
   $form_id['markup']['#wysiwyg'] = FALSE;
-  $form_id['markup']['und'][0]['#wysiwyg'] = false;
+  $form_id['markup']['und'][0]['#wysiwyg'] = FALSE;
   $form_id['form-builder-element-markup']['#type'] = 'text_format';
 }
 
+/**
+ *
+ */
 function framaforms_preprocess_page(&$vars, $hook) {
-   $url = url("<front>", array('absolute' => TRUE)); //get base URL of the current website
-   // if the current base url contain  "framaforms.org", add the framanav
-   if( strpos( $url, "framaforms.org" ) !== false) {
-     drupal_add_js('https://framasoft.org/nav/nav.js', 'external');
-   }
-   $meta_element = array(
-    '#tag' => 'meta', // The #tag is the html tag -
-    '#attributes' => array( // Set up an array of attributes inside the tag
+  // Get base URL of the current website.
+  $url = url("<front>", array('absolute' => TRUE));
+  // If the current base url contain  "framaforms.org", add the framanav.
+  if (strpos($url, "framaforms.org") !== FALSE) {
+    drupal_add_js('https://framasoft.org/nav/nav.js', 'external');
+  }
+  $meta_element = array(
+  // The #tag is the html tag -.
+    '#tag' => 'meta',
+  // Set up an array of attributes inside the tag.
+    '#attributes' => array(
       'name' => 'viewport',
       'content' => 'width=device-width, initial-scale=1.0',
     ),
-);
-   drupal_add_html_head($meta_element, 'meta-responsive');
+  );
+  drupal_add_html_head($meta_element, 'meta-responsive');
 }
 
 /**
@@ -517,10 +543,10 @@ function framaforms_webform_submission_load(&$submissions) {
   $submission = current($submissions);
 
   if (in_array('administrator', $user->roles)) {
-    // do we need to anonymze ?
-
-  } else {
-      foreach ($submissions as $sid => $submission) {
+    // Do we need to anonymze ?
+  }
+  else {
+    foreach ($submissions as $sid => $submission) {
       // If called for, anonymize uid and ip of submission before display.
       $submission->uid = 0;
       $submission->name = 'Anonymous';
@@ -530,9 +556,9 @@ function framaforms_webform_submission_load(&$submissions) {
 }
 
 /**
-* Implemements hook_views_access_callbacks :
-* Add specific views access if the visitor is the author of the node
-*/
+ * Implemements hook_views_access_callbacks :
+ * Add specific views access if the visitor is the author of the node.
+ */
 function framaforms_views_access_callbacks() {
   return array(
     'framaforms_user_has_access' => t('Current user is author of the node'),
@@ -542,13 +568,15 @@ function framaforms_views_access_callbacks() {
 /**
  * Callback for framaforms_views_access_callbacks : returns true
  * if the current user is the author of the node.
+ *
  * @param [type] $account
+ *
  * @return void
  */
 function framaforms_user_has_access($account = NULL) {
   global $user;
   $node = node_load(arg(1));
-  if ( (isset($node->uid, $GLOBALS['user']->uid) && $GLOBALS['user']->uid == $node->uid && $GLOBALS['user']->uid > 0) || (user_has_role(3) ) ) {
+  if ((isset($node->uid, $GLOBALS['user']->uid) && $GLOBALS['user']->uid == $node->uid && $GLOBALS['user']->uid > 0) || (user_has_role(3))) {
     return TRUE;
   }
   return FALSE;
@@ -559,7 +587,7 @@ function framaforms_user_has_access($account = NULL) {
  * Sends framaforms-specific mails.
  */
 function framaforms_mail($key, &$message, $params) {
-  switch($key){
+  switch ($key) {
     case 'expired_webform':
       if (isset($params['subject'])) {
         $message['subject'] = $params['subject'];
@@ -570,7 +598,7 @@ function framaforms_mail($key, &$message, $params) {
       if (isset($params['headers']) && is_array($params['headers'])) {
         $message['headers'] += $params['headers'];
       }
-    break;
+      break;
   }
 }
 
@@ -579,42 +607,46 @@ function framaforms_mail($key, &$message, $params) {
  * Checks for webforms about to expire (following intervals defined in variables) and send an email
  * to its owner. Deletes expired forms after a period of inactivity.
  */
-function framaforms_cron(){
-    module_load_include('inc', 'framaforms', 'includes/framaforms.expiration');
-    global $user;
-    /**
-     * Parameter for adjusting cron frequency.
-     */
-    $framaforms_cron_last = variable_get('framaforms_cron_last'); // the last time the cron task was run.
-    $cron_limit = new DateTime();
-    $cron_limit->setTimestamp($framaforms_cron_last);
-    $cron_limit->modify('+'.variable_get('framaforms_cron_frequency'));
-    $now = new DateTime();
+function framaforms_cron() {
+  module_load_include('inc', 'framaforms', 'includes/framaforms.expiration');
+  global $user;
+  /**
+   * Parameter for adjusting cron frequency.
+   */
+  // The last time the cron task was run.
+  $framaforms_cron_last = variable_get('framaforms_cron_last');
+  $cron_limit = new DateTime();
+  $cron_limit->setTimestamp($framaforms_cron_last);
+  $cron_limit->modify('+' . variable_get('framaforms_cron_frequency'));
+  $now = new DateTime();
 
-    // if the cron was executed less than 24h ago, do nothing.
-    if($now < $cron_limit){
-      return;
-    }
-    // else, proceed to cron.
-    watchdog('framaforms', "Tâche cron lancée.");
-    variable_set('framaforms_cron_last', $now->getTimestamp());
+  // If the cron was executed less than 24h ago, do nothing.
+  if ($now < $cron_limit) {
+    // return;.
+  }
+  // else, proceed to cron.
+  watchdog('framaforms', "Cron task launched.");
+  variable_set('framaforms_cron_last', $now->getTimestamp());
 
-    /**
-     * Handle expired nodes
-     */
-    make_forms_expire(); // Look in node table for nodes about to expire, and notify the users.
-    update_modified_nodes(); // Look in the node table for nodes whose expiration date got changed by the user
-    delete_expired_nodes(); // Delete expired nodes after a period of inactivity
+  /**
+   * Handle expired nodes
+   */
+  // Look in node table for nodes about to expire, and notify the users.
+  make_forms_expire();
+  // Look in the node table for nodes whose expiration date got changed by the user.
+  update_modified_nodes();
+  // Delete expired nodes after a period of inactivity.
+  delete_expired_nodes();
 }
 
 /**
- * Implements hook_node_delete
+ * Implements hook_node_delete.
  */
-function framaforms_node_delete ($node) {
-  // If the node being deleted is a page, then delete its aliases too
-  if($node->type == 'page'){
-      db_delete('url_alias')
-          ->condition('source', 'node/'.$node->nid)
-          ->execute();
+function framaforms_node_delete($node) {
+  // If the node being deleted is a page, then delete its aliases too.
+  if ($node->type == 'page') {
+    db_delete('url_alias')
+      ->condition('source', 'node/' . $node->nid)
+      ->execute();
   }
 }

@@ -1,0 +1,156 @@
+# $Id$
+#
+# LANGUAGE translation of Drupal (sites-all-modules-framaforms_spam)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  sites/all/modules/framaforms_spam/framaforms_spam.module: n/a
+#  sites/all/modules/framaforms_spam/framaforms_spam.info: n/a
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2020-10-08 16:35+0200\n"
+"PO-Revision-Date: 2020-10-08 16:37+0200\n"
+"Last-Translator: \n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.3\n"
+
+#: sites/all/modules/framaforms_spam/framaforms_spam.module:19
+msgid "Forbidden words"
+msgstr "Mots interdits"
+
+#: sites/all/modules/framaforms_spam/framaforms_spam.module:21
+msgid ""
+"Words that are considered suspicious when found in new form titles. You can "
+"separate forms with commas (,)."
+msgstr ""
+"Mots qui sont considérés comme suspects quand ils sont présents dans les "
+"titres de nouveaux formulaires. Vous pouvez séparer les mots par des "
+"virgules (,)"
+
+#: sites/all/modules/framaforms_spam/framaforms_spam.module:26
+msgid "Submit"
+msgstr "Enregistrer"
+
+#: sites/all/modules/framaforms_spam/framaforms_spam.module:103
+msgid ""
+"Your form contains suspicious words and is therefore considered as spam. The "
+"site's administrators will review it shortly."
+msgstr ""
+"Votre formulaire contient des mots suspects et est donc considéré comme un "
+"spam. Les administrateur⋅ices de ce site l'inspecteront rapidement."
+
+#: sites/all/modules/framaforms_spam/framaforms_spam.module:307
+msgid "Forms in quarantine"
+msgstr "Formulaires en quarantaine"
+
+#: sites/all/modules/framaforms_spam/framaforms_spam.module:308
+msgid "Records exposed to Views."
+msgstr "Enregistrements exposés aux Vues."
+
+#: sites/all/modules/framaforms_spam/framaforms_spam.module:318
+msgid "Nids of the forms."
+msgstr "Nids des formulaires."
+
+#: sites/all/modules/framaforms_spam/framaforms_spam.module:327
+msgid "node"
+msgstr "nœud"
+
+#: sites/all/modules/framaforms_spam/framaforms_spam.module:337
+msgid "Uid for the author of this node"
+msgstr "Uid de l'auteur du nœud"
+
+#: sites/all/modules/framaforms_spam/framaforms_spam.module:351
+msgid "Date the form was put into quarantine."
+msgstr "Date de mise en quarantaine du formulaire."
+
+#: sites/all/modules/framaforms_spam/framaforms_spam.module:376
+msgid "Put forms into quarantine"
+msgstr "Mettre les formulaires en quarantaine"
+
+#: sites/all/modules/framaforms_spam/framaforms_spam.module:385
+msgid "Take forms out of quarantine"
+msgstr "Sortir les formulaires de quarantaine"
+
+#: sites/all/modules/framaforms_spam/framaforms_spam.module:404
+msgid ""
+"The form was put into quarantine. You can set it back up using <a href='/"
+"quarantine'>this view.</a>"
+msgstr ""
+"Le formulaire a été mis en quarantaine. Vous pouvez l'en sortir en utilisant "
+"<a href='/quarantine'>cette vue.</a>"
+
+#: sites/all/modules/framaforms_spam/framaforms_spam.module:416
+msgid "The form was taken out of quarantine and reassigned to user %id"
+msgstr ""
+"Le formulaire a été sorti de quarantaine et réattribué à l'utilisateur⋅ice "
+"%id"
+
+#: sites/all/modules/framaforms_spam/framaforms_spam.module:48;81;149;173;187;198;224;241;258;268
+msgid "framaforms_spam"
+msgstr "framaforms_spam"
+
+#: sites/all/modules/framaforms_spam/framaforms_spam.module:48
+msgid "Launching cron task."
+msgstr "Lancement de la tâche cron."
+
+#: sites/all/modules/framaforms_spam/framaforms_spam.module:81
+msgid "Error deleting potential spam : %error"
+msgstr "Erreur lors de la suppression d'un potentiel spam : %error"
+
+#: sites/all/modules/framaforms_spam/framaforms_spam.module:149
+msgid "Error checking framaforms_spam_quarantine table : %error"
+msgstr "Erreur de requête dans la table framaforms_spam_quarantine : %error"
+
+#: sites/all/modules/framaforms_spam/framaforms_spam.module:173
+msgid "Error checking framaforms_spam_allowlist table : %error"
+msgstr "Erreur de requête dans la table framaforms_spam_allowlist : %error"
+
+#: sites/all/modules/framaforms_spam/framaforms_spam.module:187
+msgid "Trying to put into quarantine unexisting form %nid"
+msgstr "Tentative de mise en quarantaine du formulaire non existant %nid"
+
+#: sites/all/modules/framaforms_spam/framaforms_spam.module:198
+msgid "Error trying to put insert node into allowlist table :  %error"
+msgstr "Erreur lors de l'insertion d'un nœud dans la table allowlist : %error"
+
+#: sites/all/modules/framaforms_spam/framaforms_spam.module:224
+msgid "Error trying to put insert node into quarantine table : %error"
+msgstr "Tentative de mise en quarantaine du formulaire non existant %id"
+
+#: sites/all/modules/framaforms_spam/framaforms_spam.module:241
+msgid "Trying to take out of quarantine unexisting form %nid"
+msgstr "Tentative de sortie de quarantaine du formulaire non existant %nid"
+
+#: sites/all/modules/framaforms_spam/framaforms_spam.module:258
+msgid "Error trying to take form out of quarantine : %error"
+msgstr "Tentative de sortie de quarantaine du formulaire non existant %error"
+
+#: sites/all/modules/framaforms_spam/framaforms_spam.module:268
+msgid "Error trying to delete node from quarantine table : %e"
+msgstr ""
+"Erreur lors de la suppression d'un nœud de la table de quarantaine : %e"
+
+#: sites/all/modules/framaforms_spam/framaforms_spam.module:6
+msgid "Configure Framaforms Spam Protection"
+msgstr "Configurer Framaforms Spam Protection"
+
+#: sites/all/modules/framaforms_spam/framaforms_spam.module:7
+msgid "Configuration for Framaforms Spam Protection"
+msgstr "Configuration de Framaforms Spam Protection"
+
+#: sites/all/modules/framaforms_spam/framaforms_spam.info:0
+msgid "Framaforms Spam Protection"
+msgstr "Framaforms Spam Protection"
+
+#: sites/all/modules/framaforms_spam/framaforms_spam.info:0
+msgid ""
+"Features for automatically detect and quarantine spam forms in Framaforms."
+msgstr ""
+"Fonctionnalités permettant de détecter et mettre en quarantaine "
+"automatiquement les formulaires de spam Framaforms."
