@@ -17,6 +17,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 * Number of forms / user limit
 * Additional filter/check on user email
 * Variables can now be reset from the adminstration pannel
+* `translations/` subfolder to all custom modules, containing `.pot` and French `.po` file to allow translation.
 
 #### New modules
 * Anti-spam module `framaforms_spam` that put forms in quarantine containing suspicious words in title, or don't have any webform component. (Needs work)
@@ -26,6 +27,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Changed
 * the notification email is now loaded from an external template.
 * removed unused and unsecure `webform_report` module.
+* Usage of `t()` function and other system functions to allow translation.
 
 ### Fixed
 * Empty "Share" tab on forms (#106)

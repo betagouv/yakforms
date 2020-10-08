@@ -1,0 +1,37 @@
+# $Id$
+#
+# LANGUAGE translation of Drupal (sites-all-modules-framaforms_public_results)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  sites/all/modules/framaforms_public_results/framaforms_public_results.module: n/a
+#  framaforms.info,v 1.1 2016/10/08 00:03:04 pyg
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2020-10-07 11:05+0200\n"
+"PO-Revision-Date: 2020-10-07 11:08+0200\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.3\n"
+"Last-Translator: \n"
+"Language: fr\n"
+
+#: sites/all/modules/framaforms_public_results/framaforms_public_results.module:10
+msgid "Form author has checked the \"public results\" option"
+msgstr "L'auteur du formulaire a coché l'option \"résultats publiques\""
+
+#: sites/all/modules/framaforms_public_results/framaforms_public_results.module:33
+msgid "Back to results"
+msgstr "Retour aux résultats"
+
+#: sites/all/modules/framaforms_public_results/framaforms_public_results.info:0
+msgid "Framaforms Public Results"
+msgstr "Framaforms Résultats Publiques"
+
+#: sites/all/modules/framaforms_public_results/framaforms_public_results.info:0
+msgid "Give form author ability to give public access to his results."
+msgstr "Donner l'autorisation à l'auteur du formulaire de rendre ses résultats publiques"

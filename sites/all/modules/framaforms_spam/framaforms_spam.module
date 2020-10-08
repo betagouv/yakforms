@@ -4,7 +4,7 @@ function framaforms_spam_menu () {
   $items = array();
   $items['admin/config/system/framaforms_spam'] = array(
     'title' => 'Configure Framaforms Spam Protection',
-    'description' => t('Configuration for Framaforms Spam Protection'),
+    'description' => 'Configuration for Framaforms Spam Protection',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('framaforms_spam_config_form'),
     'access arguments' => array('access administration pages'),
@@ -45,7 +45,7 @@ function framaforms_spam_cron () {
       return;
     }
     // else, proceed to cron.
-    watchdog('framaforms_spam', t("Launching cron task."));
+    watchdog('framaforms_spam', "Launching cron task.", array(), WATCHDOG_NOTICE);
     variable_set('framaforms_spam_cron_last', $now->getTimestamp());
     framaforms_spam_delete_quarantine();
 }
@@ -78,7 +78,7 @@ function framaforms_spam_delete_quarantine () {
     }
   }
   catch(PDOException $e){
-    watchdog("framaforms", "Error deleting potential spam : ".$e);
+    watchdog('framaforms_spam', "Error deleting potential spam : %error", array('%error' => $e), WATCHDOG_WARNING);
   }
 }
 
@@ -146,7 +146,7 @@ function framaforms_spam_node_is_in_quarantine ($nid) {
     }
   }
   catch(PDOException $e){
-    watchdog('Error checking framaforms_spam_quarantine table : ' .$e);
+    watchdog('framaforms_spam', 'Error checking framaforms_spam_quarantine table : %error', array('%error' => $e), WATCHDOG_WARNING);
   }
   return TRUE;
 }
@@ -170,7 +170,7 @@ function framaforms_spam_node_is_allowlisted ($nid) {
     }
   }
   catch(PDOException $e){
-    watchdog('Error checking framaforms_spam_allowlist table : ' .$e);
+    watchdog('framaforms_spam', 'Error checking framaforms_spam_allowlist table : %error', array('%error' => $e), WATCHDOG_WARNING);
   }
   return TRUE;
 }
@@ -184,7 +184,7 @@ function framaforms_spam_allowlist_node ($nid) {
   // Check if the form actually exists
   $node = node_load($nid);
   if(!node){
-    watchdog('framaforms_spam', t('Trying to put into quarantine unexisting form #'). $nid);
+    watchdog('framaforms_spam', 'Trying to put into quarantine unexisting form %nid', array('%nid' => $nid), WATCHDOG_WARNING);
     return;
   }
   try{
@@ -195,7 +195,7 @@ function framaforms_spam_allowlist_node ($nid) {
       ->execute();
   }
   catch(PDOException $e){
-    watchdog('framaforms_spam', 'Error trying to put insert node into allowlist table : '.$e);
+    watchdog('framaforms_spam', 'Error trying to put insert node into allowlist table :  %error', array('%error' => $e), WATCHDOG_WARNING);
   }
 }
 
@@ -221,7 +221,7 @@ function framaforms_spam_put_node_into_quarantine (&$node) {
       ->execute();
   }
   catch(Exception $e){
-    watchdog('framaforms_spam', 'Error trying to put insert node into quarantine table : '.$e);
+    watchdog('framaforms_spam', 'Error trying to put insert node into quarantine table : %error', array('%error' => $e), WATCHDOG_WARNING);
     drupal_set_message('Error putting nodes into quarantine. Please refer to the logs for more details', 'warning');
   }
 
@@ -236,10 +236,9 @@ function framaforms_spam_put_node_into_quarantine (&$node) {
  * @return void
  */
 function framaforms_spam_take_node_out_of_quarantine (&$node) {
-  // Check if the form actually exists
-  $node_quarantine = framaforms_spam_node_is_in_quarantine($nid);
+  // Check if the form actually is in quarantine
   if(!framaforms_spam_node_is_in_quarantine($node->nid)){
-    watchdog('framaforms_spam', t('Trying to take out of quarantine unexisting form #'). $nid);
+    watchdog('framaforms_spam', 'Trying to take out of quarantine unexisting form %nid', array('%nid' => $nid), WATCHDOG_WARNING);
     return;
   }
   // Automatically add node to allowlist, to avoid it being infinitly readded.
@@ -256,7 +255,7 @@ function framaforms_spam_take_node_out_of_quarantine (&$node) {
     $node->status = 1; // Set form status to "published"
   }
   catch(PDOException $e){
-    watchdog('framaforms_spam', 'Error trying to take form out of quarantine : '.$e);
+    watchdog('framaforms_spam', 'Error trying to take form out of quarantine : %error', array('%error' => $e), WATCHDOG_WARNING);
     return;
   }
   try{
@@ -266,7 +265,7 @@ function framaforms_spam_take_node_out_of_quarantine (&$node) {
     ->execute();
   }
   catch(PDOException $e){
-    watchdog('framaforms_spam', 'Error trying to delete node from quarantine table : '.$e);
+    watchdog('framaforms_spam', 'Error trying to delete node from quarantine table : %e', array('%error' => $e), WATCHDOG_WARNING);
     return;
   }
 }
@@ -414,5 +413,5 @@ function framaforms_spam_quarantine_action (&$entity, $context) {
  */
 function framaforms_spam_quarantine_undo_action (&$entity, $context) {
   framaforms_spam_take_node_out_of_quarantine($entity);
-  drupal_set_message(t("The form was taken out of quarantine and reassigned to user #". $entity->uid), 'status');
+  drupal_set_message(t("The form was taken out of quarantine and reassigned to user %id"), array('%id' => $entity->uid), 'status');
 }
