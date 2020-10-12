@@ -5,6 +5,11 @@ description = "Give form author ability to give public access to his results."
 
 core = 7.x
 
+dependencies[] = framaforms
+dependencies[] = webform
+dependencies[] = views
+dependencies[] = views_access_callbacks
+
 ; Information added by drupal.org packaging script on 2016-10-25
 version = "7.x-1.0"
 core = "7.x"

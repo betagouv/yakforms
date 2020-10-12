@@ -29,8 +29,8 @@ function webform_confirm_email_schema() {
       ),
       'email' => array(
         'description' => 'The confirmation email that will be send once the confirmation URL is used',
-        'type'        => 'blob',
-        'size'        => 'big',
+        'type'        => 'text',
+        'size'        => 'medium',
         'serialize'   => TRUE,
       ),
       'created' => array(
