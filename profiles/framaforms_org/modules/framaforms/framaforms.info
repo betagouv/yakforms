@@ -28,7 +28,7 @@ files[] = includes/framaforms.pages.inc
 configure = admin/config/system/framaforms
 
 ; Information added by drupal.org packaging script on 2016-10-25
-version = "7.x-1.0"
+version = "7.x-1.3"
 core = "7.x"
 project = "framaforms"
 datestamp = "1382691029"
