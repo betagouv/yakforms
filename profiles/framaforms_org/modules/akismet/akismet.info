@@ -1,0 +1,20 @@
+name = Akismet
+description = Protects your site from spam by sending user-submitted content to the Akismet anti-spam service.
+core = 7.x
+configure = admin/config/content/akismet
+
+test_dependencies[] = ctools
+
+stylesheets[all][] = akismet.css
+
+files[] = akismet.class.inc
+files[] = akismet.drupal.inc
+files[] = tests/akismet.test
+files[] = tests/akismet.class.test
+
+
+; Information added by Drupal.org packaging script on 2018-05-11
+version = "7.x-2.x-dev"
+core = "7.x"
+project = "akismet"
+datestamp = "1526049208"

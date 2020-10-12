@@ -1269,7 +1269,10 @@ print "<h3>Nombre total de formulaires : $result</h3>";
   $handler->display->display_options['title'] = 'form_count_total';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'plus';
-  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    3 => '3',
+  );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
@@ -1407,10 +1410,10 @@ print "<h3>Nombre total de formulaires : $result</h3>";
   $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Éléments par page';
   $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- Tout -';
   $handler->display->display_options['pager']['options']['expose']['offset_label'] = 'Décalage';
-  $handler->display->display_options['pager']['options']['tags']['first'] = '« premier';
-  $handler->display->display_options['pager']['options']['tags']['previous'] = '‹ précédent';
-  $handler->display->display_options['pager']['options']['tags']['next'] = 'suivant ›';
-  $handler->display->display_options['pager']['options']['tags']['last'] = 'dernier »';
+  $handler->display->display_options['pager']['options']['tags']['first'] = '« premier';
+  $handler->display->display_options['pager']['options']['tags']['previous'] = '‹ précédent';
+  $handler->display->display_options['pager']['options']['tags']['next'] = 'suivant ›';
+  $handler->display->display_options['pager']['options']['tags']['last'] = 'dernier »';
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
     'nid' => 'nid',
@@ -1490,6 +1493,34 @@ print "<h3>Nombre total de formulaires : $result</h3>";
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
   $handler->display->display_options['relationships']['uid']['table'] = 'node';
   $handler->display->display_options['relationships']['uid']['field'] = 'uid';
+  /* Champ: Opérations en masse : Utilisateur */
+  $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
+  $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'views_entity_user';
+  $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
+  $handler->display->display_options['fields']['views_bulk_operations']['relationship'] = 'uid';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['display_type'] = '0';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['enable_select_all_pages'] = 1;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['row_clickable'] = 1;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['force_single'] = 0;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['entity_load_capacity'] = '10';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_operations'] = array(
+    'action::views_bulk_operations_user_cancel_action' => array(
+      'selected' => 1,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'skip_permission_check' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::user_block_user_action' => array(
+      'selected' => 1,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'skip_permission_check' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+  );
   /* Champ: Contenu : Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
@@ -1664,11 +1695,13 @@ print "<h3>Nombre total de formulaires : $result</h3>";
     t('Éléments par page'),
     t('- Tout -'),
     t('Décalage'),
-    t('« premier'),
-    t('‹ précédent'),
-    t('suivant ›'),
-    t('dernier »'),
+    t('« premier'),
+    t('‹ précédent'),
+    t('suivant ›'),
+    t('dernier »'),
     t('auteur'),
+    t('Utilisateur'),
+    t('- Choisir une opération -'),
     t('Nid'),
     t('[nid]'),
     t('Titre'),
@@ -1955,194 +1988,6 @@ print "<h3>Nombre total de formulaires : $result</h3>";
     t('Fichier attaché'),
   );
   $export['forms_submissions'] = $view;
-
-  $view = new view();
-  $view->name = 'public_submission';
-  $view->description = '';
-  $view->tag = 'webform';
-  $view->base_table = 'webform_submissions';
-  $view->human_name = 'Public submission';
-  $view->core = 7;
-  $view->api_version = '3.0';
-  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
-
-  /* Display: Master */
-  $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['use_more_always'] = FALSE;
-  $handler->display->display_options['use_more_text'] = 'plus';
-  $handler->display->display_options['access']['type'] = 'views_access_callback';
-  $handler->display->display_options['access']['views_access_callback'] = 'framaforms_public_results_user_has_access';
-  $handler->display->display_options['cache']['type'] = 'none';
-  $handler->display->display_options['query']['type'] = 'views_query';
-  $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Appliquer';
-  $handler->display->display_options['exposed_form']['options']['reset_button_label'] = 'Réinitialiser';
-  $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Trier par';
-  $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '50';
-  $handler->display->display_options['pager']['options']['offset'] = '0';
-  $handler->display->display_options['pager']['options']['id'] = '0';
-  $handler->display->display_options['pager']['options']['quantity'] = '9';
-  $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Éléments par page';
-  $handler->display->display_options['pager']['options']['expose']['items_per_page_options'] = '10, 50, 100, 200, 500, 1000';
-  $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all'] = TRUE;
-  $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = 'Tout';
-  $handler->display->display_options['pager']['options']['expose']['offset_label'] = 'Décalage';
-  $handler->display->display_options['pager']['options']['tags']['first'] = '« premier';
-  $handler->display->display_options['pager']['options']['tags']['previous'] = '‹ précédent';
-  $handler->display->display_options['pager']['options']['tags']['next'] = 'suivant ›';
-  $handler->display->display_options['pager']['options']['tags']['last'] = 'dernier »';
-  $handler->display->display_options['style_plugin'] = 'default';
-  $handler->display->display_options['row_plugin'] = 'webform_submission';
-  /* Entête: Global : Zone de texte */
-  $handler->display->display_options['header']['area']['id'] = 'area';
-  $handler->display->display_options['header']['area']['table'] = 'views';
-  $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['label'] = 'date/auteur';
-  $handler->display->display_options['header']['area']['content'] = '<?php
-//print_r(arg());
-$sub_msg = webform_get_submission(arg(1), arg(3));
-echo "Soumis le ". format_date($sub_msg->submitted) ." (".$sub_msg->name .")";
-//print_r($sub_msg);
-?>';
-  $handler->display->display_options['header']['area']['format'] = 'php_code';
-  /* Entête: Global : Zone de texte */
-  $handler->display->display_options['header']['area_1']['id'] = 'area_1';
-  $handler->display->display_options['header']['area_1']['table'] = 'views';
-  $handler->display->display_options['header']['area_1']['field'] = 'area';
-  $handler->display->display_options['header']['area_1']['label'] = 'Titre/retour/separateur';
-  $handler->display->display_options['header']['area_1']['empty'] = TRUE;
-  $handler->display->display_options['header']['area_1']['content'] = '<h1>%1</h1>
-<hr/>';
-  $handler->display->display_options['header']['area_1']['format'] = 'wysiwyg_user';
-  $handler->display->display_options['header']['area_1']['tokenize'] = TRUE;
-  /* Pied de page: Global : Zone de texte */
-  $handler->display->display_options['footer']['area']['id'] = 'area';
-  $handler->display->display_options['footer']['area']['table'] = 'views';
-  $handler->display->display_options['footer']['area']['field'] = 'area';
-  $handler->display->display_options['footer']['area']['content'] = '<hr/>
-<small><a href="/node/!1/public-results">Retour aux résultats</a></small>';
-  $handler->display->display_options['footer']['area']['format'] = 'wysiwyg_user';
-  $handler->display->display_options['footer']['area']['tokenize'] = TRUE;
-  /* Comportement en l'absence de résultats: Global : Texte non filtré */
-  $handler->display->display_options['empty']['area_text_custom']['id'] = 'area_text_custom';
-  $handler->display->display_options['empty']['area_text_custom']['table'] = 'views';
-  $handler->display->display_options['empty']['area_text_custom']['field'] = 'area_text_custom';
-  $handler->display->display_options['empty']['area_text_custom']['empty'] = TRUE;
-  $handler->display->display_options['empty']['area_text_custom']['content'] = 'There are no submissions for this form. <a href="/node/!1">View this form</a>.';
-  $handler->display->display_options['empty']['area_text_custom']['tokenize'] = TRUE;
-  /* Relation: Soumissions de webform : Utilisateur */
-  $handler->display->display_options['relationships']['uid']['id'] = 'uid';
-  $handler->display->display_options['relationships']['uid']['table'] = 'webform_submissions';
-  $handler->display->display_options['relationships']['uid']['field'] = 'uid';
-  /* Champ: Soumissions de webform : Lien d'affichage */
-  $handler->display->display_options['fields']['view_submission']['id'] = 'view_submission';
-  $handler->display->display_options['fields']['view_submission']['table'] = 'webform_submissions';
-  $handler->display->display_options['fields']['view_submission']['field'] = 'view_submission';
-  $handler->display->display_options['fields']['view_submission']['label'] = '#';
-  $handler->display->display_options['fields']['view_submission']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['view_submission']['text'] = '[serial]';
-  $handler->display->display_options['fields']['view_submission']['access_check'] = 0;
-  /* Champ: Soumissions de webform : Soumis */
-  $handler->display->display_options['fields']['submitted']['id'] = 'submitted';
-  $handler->display->display_options['fields']['submitted']['table'] = 'webform_submissions';
-  $handler->display->display_options['fields']['submitted']['field'] = 'submitted';
-  $handler->display->display_options['fields']['submitted']['date_format'] = 'short';
-  $handler->display->display_options['fields']['submitted']['second_date_format'] = 'long';
-  /* Champ: Utilisateur : Nom */
-  $handler->display->display_options['fields']['name']['id'] = 'name';
-  $handler->display->display_options['fields']['name']['table'] = 'users';
-  $handler->display->display_options['fields']['name']['field'] = 'name';
-  $handler->display->display_options['fields']['name']['relationship'] = 'uid';
-  $handler->display->display_options['fields']['name']['label'] = 'Utilisateur';
-  $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
-  /* Champ: Données de la soumission du formulaire Webform : Toutes les valeurs */
-  $handler->display->display_options['fields']['webform_all_fields']['id'] = 'webform_all_fields';
-  $handler->display->display_options['fields']['webform_all_fields']['table'] = 'webform_submissions';
-  $handler->display->display_options['fields']['webform_all_fields']['field'] = 'webform_all_fields';
-  $handler->display->display_options['fields']['webform_all_fields']['label'] = '';
-  $handler->display->display_options['fields']['webform_all_fields']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['webform_all_fields']['alter']['nl2br'] = TRUE;
-  $handler->display->display_options['fields']['webform_all_fields']['alter']['max_length'] = '250';
-  $handler->display->display_options['fields']['webform_all_fields']['alter']['strip_tags'] = TRUE;
-  $handler->display->display_options['fields']['webform_all_fields']['alter']['trim'] = TRUE;
-  $handler->display->display_options['fields']['webform_all_fields']['alter']['html'] = TRUE;
-  /* Filtre contextuel: Soumissions de webform : Nœud */
-  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
-  $handler->display->display_options['arguments']['nid']['table'] = 'webform_submissions';
-  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
-  $handler->display->display_options['arguments']['nid']['default_action'] = 'not found';
-  $handler->display->display_options['arguments']['nid']['exception']['title'] = 'Tout';
-  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'fixed';
-  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
-  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
-  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
-  $handler->display->display_options['arguments']['nid']['specify_validation'] = TRUE;
-  $handler->display->display_options['arguments']['nid']['validate']['type'] = 'node';
-  /* Filtre contextuel: Soumissions de webform : Sid */
-  $handler->display->display_options['arguments']['sid']['id'] = 'sid';
-  $handler->display->display_options['arguments']['sid']['table'] = 'webform_submissions';
-  $handler->display->display_options['arguments']['sid']['field'] = 'sid';
-  $handler->display->display_options['arguments']['sid']['default_action'] = 'not found';
-  $handler->display->display_options['arguments']['sid']['exception']['title'] = 'Tout';
-  $handler->display->display_options['arguments']['sid']['default_argument_type'] = 'fixed';
-  $handler->display->display_options['arguments']['sid']['summary']['number_of_records'] = '0';
-  $handler->display->display_options['arguments']['sid']['summary']['format'] = 'default_summary';
-  $handler->display->display_options['arguments']['sid']['summary_options']['items_per_page'] = '25';
-  /* Critère de filtrage: Contenu : Type */
-  $handler->display->display_options['filters']['type']['id'] = 'type';
-  $handler->display->display_options['filters']['type']['table'] = 'node';
-  $handler->display->display_options['filters']['type']['field'] = 'type';
-  $handler->display->display_options['filters']['type']['value'] = array(
-    'webform' => 'webform',
-    'form1' => 'form1',
-  );
-
-  /* Display: Page */
-  $handler = $view->new_display('page', 'Page', 'page_1');
-  $handler->display->display_options['path'] = 'node/%/public-results/%/view';
-  $handler->display->display_options['menu']['type'] = 'tab';
-  $handler->display->display_options['menu']['title'] = 'Résultats publics';
-  $handler->display->display_options['menu']['weight'] = '5';
-  $handler->display->display_options['menu']['context'] = 0;
-  $handler->display->display_options['menu']['context_only_inline'] = 0;
-  $handler->display->display_options['tab_options']['weight'] = '0';
-  $translatables['public_submission'] = array(
-    t('Master'),
-    t('plus'),
-    t('Appliquer'),
-    t('Réinitialiser'),
-    t('Trier par'),
-    t('Asc'),
-    t('Desc'),
-    t('Éléments par page'),
-    t('Tout'),
-    t('Décalage'),
-    t('« premier'),
-    t('‹ précédent'),
-    t('suivant ›'),
-    t('dernier »'),
-    t('date/auteur'),
-    t('<?php
-//print_r(arg());
-$sub_msg = webform_get_submission(arg(1), arg(3));
-echo "Soumis le ". format_date($sub_msg->submitted) ." (".$sub_msg->name .")";
-//print_r($sub_msg);
-?>'),
-    t('Titre/retour/separateur'),
-    t('<h1>%1</h1>
-<hr/>'),
-    t('<hr/>
-<small><a href="/node/!1/public-results">Retour aux résultats</a></small>'),
-    t('There are no submissions for this form. <a href="/node/!1">View this form</a>.'),
-    t('Webform Submission User'),
-    t('#'),
-    t('[serial]'),
-    t('Soumis'),
-    t('Utilisateur'),
-    t('Page'),
-  );
-  $export['public_submission'] = $view;
 
   $view = new view();
   $view->name = 'templates';
