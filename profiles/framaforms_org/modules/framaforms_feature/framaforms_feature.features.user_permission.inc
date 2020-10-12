@@ -47,15 +47,6 @@ function framaforms_feature_user_default_permissions() {
     'module' => 'webform',
   );
 
-  // Exported permission: 'access comments'.
-  $permissions['access comments'] = array(
-    'name' => 'access comments',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'comment',
-  );
-
   // Exported permission: 'access content'.
   $permissions['access content'] = array(
     'name' => 'access content',
@@ -196,16 +187,6 @@ function framaforms_feature_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'user',
-  );
-
-  // Exported permission: 'access webform reports'.
-  $permissions['access webform reports'] = array(
-    'name' => 'access webform reports',
-    'roles' => array(
-      'administrator' => 'administrator',
-      'authenticated user' => 'authenticated user',
-    ),
-    'module' => 'webform_report',
   );
 
   // Exported permission: 'access webform share functionality'.
@@ -763,23 +744,6 @@ function framaforms_feature_user_default_permissions() {
     'module' => 'path',
   );
 
-  // Exported permission: 'create webform reports'.
-  $permissions['create webform reports'] = array(
-    'name' => 'create webform reports',
-    'roles' => array(
-      'administrator' => 'administrator',
-      'authenticated user' => 'authenticated user',
-    ),
-    'module' => 'webform_report',
-  );
-
-  // Exported permission: 'create webform_report content'.
-  $permissions['create webform_report content'] = array(
-    'name' => 'create webform_report content',
-    'roles' => array(),
-    'module' => 'node',
-  );
-
   // Exported permission: 'customize shortcut links'.
   $permissions['customize shortcut links'] = array(
     'name' => 'customize shortcut links',
@@ -826,13 +790,6 @@ function framaforms_feature_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'delete any webform_report content'.
-  $permissions['delete any webform_report content'] = array(
-    'name' => 'delete any webform_report content',
-    'roles' => array(),
-    'module' => 'node',
-  );
-
   // Exported permission: 'delete own article content'.
   $permissions['delete own article content'] = array(
     'name' => 'delete own article content',
@@ -869,13 +826,6 @@ function framaforms_feature_user_default_permissions() {
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'webform',
-  );
-
-  // Exported permission: 'delete own webform_report content'.
-  $permissions['delete own webform_report content'] = array(
-    'name' => 'delete own webform_report content',
-    'roles' => array(),
-    'module' => 'node',
   );
 
   // Exported permission: 'delete revisions'.
@@ -943,13 +893,6 @@ function framaforms_feature_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'edit any webform_report content'.
-  $permissions['edit any webform_report content'] = array(
-    'name' => 'edit any webform_report content',
-    'roles' => array(),
-    'module' => 'node',
-  );
-
   // Exported permission: 'edit own article content'.
   $permissions['edit own article content'] = array(
     'name' => 'edit own article content',
@@ -957,15 +900,6 @@ function framaforms_feature_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'node',
-  );
-
-  // Exported permission: 'edit own comments'.
-  $permissions['edit own comments'] = array(
-    'name' => 'edit own comments',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'comment',
   );
 
   // Exported permission: 'edit own form1 content'.
@@ -987,16 +921,6 @@ function framaforms_feature_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'edit own webform reports'.
-  $permissions['edit own webform reports'] = array(
-    'name' => 'edit own webform reports',
-    'roles' => array(
-      'administrator' => 'administrator',
-      'authenticated user' => 'authenticated user',
-    ),
-    'module' => 'webform_report',
-  );
-
   // Exported permission: 'edit own webform submissions'.
   $permissions['edit own webform submissions'] = array(
     'name' => 'edit own webform submissions',
@@ -1005,13 +929,6 @@ function framaforms_feature_user_default_permissions() {
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'webform',
-  );
-
-  // Exported permission: 'edit own webform_report content'.
-  $permissions['edit own webform_report content'] = array(
-    'name' => 'edit own webform_report content',
-    'roles' => array(),
-    'module' => 'node',
   );
 
   // Exported permission: 'edit terms in tags'.
@@ -1031,15 +948,6 @@ function framaforms_feature_user_default_permissions() {
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'webform',
-  );
-
-  // Exported permission: 'edit webform reports'.
-  $permissions['edit webform reports'] = array(
-    'name' => 'edit webform reports',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'webform_report',
   );
 
   // Exported permission: 'exclude from message filtering'.
@@ -1103,15 +1011,6 @@ function framaforms_feature_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'pdf_export',
-  );
-
-  // Exported permission: 'post comments'.
-  $permissions['post comments'] = array(
-    'name' => 'post comments',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'comment',
   );
 
   // Exported permission: 'rename features'.
@@ -1218,15 +1117,6 @@ function framaforms_feature_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'captcha',
-  );
-
-  // Exported permission: 'skip comment approval'.
-  $permissions['skip comment approval'] = array(
-    'name' => 'skip comment approval',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'comment',
   );
 
   // Exported permission: 'switch shortcut sets'.
@@ -1347,15 +1237,6 @@ function framaforms_feature_user_default_permissions() {
     'module' => 'panels',
   );
 
-  // Exported permission: 'use php code'.
-  $permissions['use php code'] = array(
-    'name' => 'use php code',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'webform_report',
-  );
-
   // Exported permission: 'use text format ds_code'.
   $permissions['use text format ds_code'] = array(
     'name' => 'use text format ds_code',
@@ -1421,18 +1302,6 @@ function framaforms_feature_user_default_permissions() {
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'filter',
-  );
-
-  // Exported permission: 'view error messages'.
-  $permissions['view error messages'] = array(
-    'name' => 'view error messages',
-    'roles' => array(
-      'administrator' => 'administrator',
-      'anonymous user' => 'anonymous user',
-      'authenticated user' => 'authenticated user',
-      'traducteur' => 'traducteur',
-    ),
-    'module' => 'disable_messages',
   );
 
   // Exported permission: 'view own unpublished content'.
