@@ -93,6 +93,7 @@ function webform_confirm_email_mail_alter(&$message) {
         'created' => $_SERVER['REQUEST_TIME'],
       );
       $message['send'] = FALSE; // prevents drupal_mail from actually sending the message
+      unset($obj["email_message"]["params"]["node"]);
       drupal_write_record('webform_confirm_email_queued_emails', $obj);
     }
   }
