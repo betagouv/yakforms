@@ -8,7 +8,7 @@ core = 7.x
 dependencies[] = framaforms
 dependencies[] = webform
 dependencies[] = views
-dependencies[] = views_access_callbacks
+dependencies[] = views_access_callback
 
 ; Information added by drupal.org packaging script on 2016-10-25
 version = "7.x-1.0"

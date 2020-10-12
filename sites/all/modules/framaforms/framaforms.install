@@ -76,7 +76,7 @@ function framaforms_set_variables_mail() {
  *
  */
 function framaforms_set_variables_pages() {
-  $language = language_default();       // the site default language
+  $language = language_default()->language;       // the site default language
   $file_path = drupal_get_path('module', 'framaforms') . "/includes/html/expiration_page_{$language}.html";
   $expiration_page_content = file_get_contents($file_path);
   variable_set('framaforms_expiration_page_content', $expiration_page_content);
