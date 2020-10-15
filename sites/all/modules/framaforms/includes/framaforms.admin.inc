@@ -184,6 +184,13 @@ function framaforms_config_form($form, &$form_state) {
     '#description' => t("Interval of time between the form expiration and its deletion from the database. Insert '0' if you don't want forms to be deleted."),
     '#required' => true,
   );
+  $form['framaforms_export_form_submissions_before_delete'] = array(
+    '#type' => 'checkbox',
+    '#title' => t("Save form submissions before deleting"),
+    '#default_value' => variable_get('framaforms_export_form_submissions_before_delete', false),
+    '#description' => t("Check this box if you want all form submissions to be saved before deletion. This can be useful for user support."),
+    '#required' => false,
+  );
   $form['framaforms_mail_user_notification_body'] = array(
     '#type' => 'textarea',
     '#title' => t("Notification email"),
@@ -245,6 +252,16 @@ function framaforms_config_form_validate($form, &$form_state) {
     form_set_error('framaforms_forms_per_user_limit', t("The number of form per user must be a number."));
   }
 
+  // Create the backup directory for form submissions if necessary.
+  $backup_dir_path = variable_get('file_private_path') ."/framaforms_submissions_backup/";
+  $backup_dir_writable = file_prepare_directory($backup_dir_path, FILE_CREATE_DIRECTORY);
+  if($values['framaforms_export_form_submissions_before_delete'] && !$backup_dir_writable) {
+    drupal_set_message(
+      t("The following directory doesn't exist or is not writable : !path.", array('!path' => $backup_dir_path)),
+      'error',
+      false
+  );
+  }
 }
 
 /**
@@ -254,6 +271,8 @@ function framaforms_config_form_validate($form, &$form_state) {
  */
 function framaforms_config_form_submit($form, &$form_state) {
   drupal_set_message(t("The form was submitted !"));
+  // Create private backup subfolder if it doesn't yet exist.
+
 }
 
 /**

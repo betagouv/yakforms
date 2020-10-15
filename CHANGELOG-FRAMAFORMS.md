@@ -7,7 +7,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Unreleased
 
-## [1.0.2] 2020/10/08
+### Added
+
+* Option to automatically export form submissions as CSV files before deletion (https://framagit.org/framasoft/framaforms/-/issues/113)
+
+### Changed
+
+### Fixed
+
+
+
+## [1.0.3] 2020/10/12
 
 ### Added
 * BOTCHA module to fix the possible bypass of CAPTCHA Riddler.
