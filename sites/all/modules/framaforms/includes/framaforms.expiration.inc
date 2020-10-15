@@ -252,12 +252,14 @@ function framaforms_export_node_submissions(int $nid) {
   module_load_include('inc', 'webform', 'includes/webform.export');
   module_load_include('inc', 'webform', 'includes/webform.components');
   module_load_include('inc', 'webform', 'includes/webform.report');
+  module_load_include('inc', 'pathauto');
 
   $format = 'delimited';
   $options = webform_results_download_default_options($node, $format);
     // Set the export options.
   $options['range']['batch_size'] = 10000;
-  $options['file_name'] = variable_get('file_private_path') ."/framaforms_submissions_backup/{$node->title}-{$node->uid}-results.csv";
+  $file_title = pathauto_cleanstring($node->title) . "-" . time() . '-' .$node->uid;
+  $options['file_name'] = variable_get('file_private_path') ."/framaforms_submissions_backup/{$file_title}.csv";
 
   // Map form keys to components IDs.
   $form_keys = array();
