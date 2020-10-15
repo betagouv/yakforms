@@ -290,8 +290,6 @@ function framaforms_block_view($delta) {
   switch ($delta) {
     case 'framaforms_contact_form_block':
       $block['content'] = array();
-      $block['content']['#markup'] = "hello";
-
       // Only display this block on form1-type nodes.
       if (!isset($nid) || !node_is_form1($nid)) {
         return;
@@ -643,6 +641,22 @@ function framaforms_cron() {
  * Implements hook_node_delete.
  */
 function framaforms_node_delete($node) {
+  module_load_include('inc', 'framaforms', 'includes/framaforms.expiration');
+  module_load_include('module', 'akismet', 'includes/akismet');
+
+  // Export the results to CSV file for user support purposes.
+  // TODO : only export if the option is selected by the admin
+  if(module_exists('akismet') && variable_get('framaforms_export_form_submissions_before_delete', false)){
+    watchdog('framaforms', 'The variable_get return TRUE');
+    $akismet_data = akismet_data_load('node', $node->nid);
+    // Only export forms that weren't classified by Akismet, or were classfied as legitimate content.
+    if(!is_object($akismet_data)
+      || $akismet_data->classification == 'ham'
+      || $akismet_data->classification == 'unsure'){
+      framaforms_export_node_submissions($node->nid);
+    }
+  }
+
   // If the node being deleted is a page, then delete its aliases too.
   if ($node->type == 'page') {
     db_delete('url_alias')
