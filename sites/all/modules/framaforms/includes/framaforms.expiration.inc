@@ -233,3 +233,51 @@ function delete_expired_nodes() {
     watchdog('framaforms', 'Error deleting expired nodes : %error', array('%error' => $e), WATCHDOG_WARNING);
   }
 }
+
+/**
+ * Exports a webform submission as CSV file.
+ *
+ * Adapted from drush_webform_export() function of Webform module :
+ * https://drushcommands.com/drush-7x/webform/webform-export/
+ *
+  * @param int $nid : the form's identifier.
+  */
+function framaforms_export_node_submissions(int $nid) {
+  $node = node_load($nid);
+  if (!$node) {
+    watchdog('framaforms', t('Node !nid was not found and could not be exported.'), array('!nid' => $nid), WATCHDOG_WARNING);
+    return;
+  }
+  module_load_include('inc', 'webform', 'includes/webform.submissions');
+  module_load_include('inc', 'webform', 'includes/webform.export');
+  module_load_include('inc', 'webform', 'includes/webform.components');
+  module_load_include('inc', 'webform', 'includes/webform.report');
+
+  $format = 'delimited';
+  $options = webform_results_download_default_options($node, $format);
+    // Set the export options.
+  $options['range']['batch_size'] = 10000;
+  $options['file_name'] = variable_get('file_private_path') ."/framaforms_submissions_backup/{$node->title}-{$node->uid}-results.csv";
+
+  // Map form keys to components IDs.
+  $form_keys = array();
+  foreach ($node->webform['components'] as $cid => $component) {
+    $form_keys[$component['form_key']] = $cid;
+  }
+  foreach ($options['components'] as $key => &$component) {
+    if (isset($form_keys[$component])) {
+      $component = $form_keys[$component];
+    }
+  }
+  // Drop PHP reference.
+  unset($component);
+
+  // Calls to webform module to create a clean CSV file.
+  webform_results_batch_bof($node, $format, $options);
+  webform_results_batch_headers($node, $format, $options);
+  webform_results_batch_rows($node, $format, $options);
+  webform_results_batch_eof($node, $format, $options);
+  webform_results_batch_post_process($node, $format, $options);
+
+  watchdog("framaforms", t("Submissions for node !nid exported.", array('!nid' => $nid)), WATCHDOG_INFO);
+}

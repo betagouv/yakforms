@@ -101,6 +101,7 @@ function framaforms_set_default_variables() {
   variable_set('framaforms_expiration_period_default_value', 26);
   // Default expiration-deletion time interval.
   variable_set('framaforms_deletion_period_value', 9);
+  variable_set('framaforms_export_form_submissions_before_delete', false);
   // Default notification-expiration time interval.
   variable_set('framaforms_notification_period_value', 2);
   variable_set('framaforms_site_contact_url', 'https://contact.framasoft.org/#framaforms');
