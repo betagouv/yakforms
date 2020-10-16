@@ -530,6 +530,11 @@ function framaforms_preprocess_page(&$vars, $hook) {
     ),
   );
   drupal_add_html_head($meta_element, 'meta-responsive');
+
+  if(current_path() == "node/add/form1"){
+    drupal_add_js(drupal_get_path('theme', 'frama').'/js/expiration_date.js');
+    watchdog('framaforms', t("Will expire on"));
+  }
 }
 
 /**
