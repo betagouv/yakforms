@@ -669,3 +669,26 @@ function framaforms_node_delete($node) {
       ->execute();
   }
 }
+
+/**
+ * Implements hook_clone_node_alter.
+ *
+ * Modifies the expiration date of cloned nodes in order to push it back later
+ * (as it is previously set to the original node's expiration date).
+ * @param $node
+ *   Reference to the fully loaded node object being saved (the clone) that
+ *   can be altered as needed.
+ * @param array $context
+ *   An array of context describing the clone operation. The keys are:
+ *   - 'method' : Can be either 'prepopulate' or 'save-edit'.
+ *   - 'original_node' : The original fully loaded node object being cloned.
+ *
+ */
+function framaforms_clone_node_alter(&$node, $context) {
+  $date_obj = new DateTime(field_form1_expiration['und'][0]['value']);
+  $default_expiration = variable_get('framaforms_expiration_period_default_value', 26);
+  // Get the DateTime object for x weeks from now.
+  $date_obj->modify("+{$default_expiration} weeks");
+  // Update the node's expiration date value.
+  $node->field_form1_expiration['und'][0]['value'] = $date_obj->date;
+}
