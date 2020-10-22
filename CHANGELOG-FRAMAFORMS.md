@@ -14,8 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Changed
 
 ### Fixed
-
-
+* Expiration date is now modified when a form is cloned (https://framagit.org/framasoft/framaforms/-/issues/61)
 
 ## [1.0.3] 2020/10/12
 
