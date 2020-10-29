@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2020-10-08 16:15+0200\n"
-"PO-Revision-Date: 2020-10-23 14:40+0000\n"
+"PO-Revision-Date: 2020-10-24 19:51+0000\n"
 "Last-Translator: Max Fuxjäger <publicbetamax@gmail.com>\n"
 "Language-Team: German <https://weblate.framasoft.org/projects/framaforms/"
 "framaforms/de/>\n"
@@ -80,11 +80,11 @@ msgstr ""
 
 #: sites/all/modules/framaforms/framaforms.module:193
 msgid "Help : validation conditions"
-msgstr ""
+msgstr "Hilfe : Validierungsregeln"
 
 #: sites/all/modules/framaforms/framaforms.module:194
 msgid "Validation conditions"
-msgstr ""
+msgstr "Validierungsregeln"
 
 #: sites/all/modules/framaforms/framaforms.module:202
 msgid "Help : configure form"
@@ -176,7 +176,7 @@ msgstr ""
 
 #: sites/all/modules/framaforms/framaforms.module:372
 msgid "You can :"
-msgstr ""
+msgstr "Sie können:"
 
 #: sites/all/modules/framaforms/framaforms.module:374
 msgid "edit your personal information (\"Edit\" tab above) ;"
@@ -188,7 +188,7 @@ msgstr ""
 
 #: sites/all/modules/framaforms/framaforms.module:376
 msgid "create a new form"
-msgstr "ein neues Formular erstellen"
+msgstr "Neues Formular erstellen"
 
 #: sites/all/modules/framaforms/framaforms.module:377
 msgid "contact us"
@@ -428,7 +428,7 @@ msgstr ""
 
 #: sites/all/modules/framaforms/framaforms.module:25
 msgid "Overview"
-msgstr ""
+msgstr "Übersicht"
 
 #: sites/all/modules/framaforms/framaforms.module:26
 msgid "General dashboard containing statistics about your website."
@@ -452,7 +452,7 @@ msgstr ""
 
 #: sites/all/modules/framaforms/framaforms.info:0
 msgid "Framaforms"
-msgstr ""
+msgstr "Framaforms"
 
 #: sites/all/modules/framaforms/framaforms.info:0
 msgid "Framaforms functions for creating, managing and sharing webforms."
