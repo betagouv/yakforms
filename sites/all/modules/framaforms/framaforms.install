@@ -54,6 +54,11 @@ function framaforms_install() {
  * Implements hook_uninstall.
  */
 function framaforms_uninstall() {
+  // Delete custom node type
+  node_type_delete('form2');
+  node_type_rebuild();
+  menu_rebuild();
+
   db_delete('variable')->condition('name', db_like('framaforms_') . '%', 'LIKE')->execute();
   cache_clear_all('framaforms', 'cache', TRUE);
 }
@@ -119,16 +124,9 @@ function framaforms_set_default_variables() {
   $theme_frama_settings['favicon_path'] = drupal_get_path('theme', 'frama') . '/images/Framasoft_Logo.png';
   variable_set('theme_frama_settings', $theme_frama_settings);
 
-  /* Enable webform option for the form1 type */
-  variable_set('webform_node_form1', 1);
-
   /* Pathauto configuration */
-  $form1_settings = variable_get('pathauto_node_form1_pattern');
   $page_settings = variable_get('pathauto_node_page_pattern');
 
-  if (!isset($form1_settings)) {
-    variable_set('pathauto_node_form1_pattern', '[node:title]-[node:created:raw]');
-  }
   if (!isset($page_settings)) {
     variable_set('pathauto_node_page_pattern', '[node:title]');
   }

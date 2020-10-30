@@ -23,6 +23,7 @@ files[] = includes/framaforms.expiration.inc
 files[] = includes/framaforms.admin.inc
 files[] = includes/framaforms.block.inc
 files[] = includes/framaforms.pages.inc
+files[] = includes/framaforms.node.inc
 
 ; Configuration menu
 configure = admin/config/system/framaforms
