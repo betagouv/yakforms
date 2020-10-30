@@ -533,7 +533,6 @@ function framaforms_preprocess_page(&$vars, $hook) {
 
   if(current_path() == "node/add/form1"){
     drupal_add_js(drupal_get_path('theme', 'frama').'/js/expiration_date.js');
-    watchdog('framaforms', t("Will expire on"));
   }
 }
 
@@ -652,7 +651,6 @@ function framaforms_node_delete($node) {
   // Export the results to CSV file for user support purposes.
   // TODO : only export if the option is selected by the admin
   if(module_exists('akismet') && variable_get('framaforms_export_form_submissions_before_delete', false)){
-    watchdog('framaforms', 'The variable_get return TRUE');
     $akismet_data = akismet_data_load('node', $node->nid);
     // Only export forms that weren't classified by Akismet, or were classfied as legitimate content.
     if(!is_object($akismet_data)
@@ -691,4 +689,109 @@ function framaforms_clone_node_alter(&$node, $context) {
   $date_obj->modify("+{$default_expiration} weeks");
   // Update the node's expiration date value.
   $node->field_form1_expiration['und'][0]['value'] = $date_obj->date;
+}
+
+/**
+ * Implements hook_node_info.
+ *
+ * Declare custom content types
+ */
+function framaforms_node_info() {
+  return array(
+    'form1' => array(
+      'name' => t('Formulaire'),
+      'base' => 'framaforms', // prefix where Drupal is going to try and find hooks.
+      'description' => t("You are about to create a new form. Start by filling the fields below, then click « Submit ». NB : the form's title will affect its URL. Choose it wisely and watch out : changing it will change the form's URL !"),
+      'title_label' => t('Form title'),
+      'locked' => FALSE,
+    ),
+  );
+}
+
+/**
+ * Implements hook_form
+ *
+ * Return default form for custom content type creation by the user.
+ *
+ * @param $node
+ * @param $form_state
+ * @return array the form object
+ */
+function framaforms_form($node, $form_state) {
+  return node_content_form($node, $form_state);
+}
+
+/**
+ * Implements hook_node_type_insert.
+ *
+ * Defines the fields for the node content type
+ *
+ * @param stdClass $content_type
+ * @return void
+ */
+function framaforms_node_type_insert($content_type) {
+  if($content_type->type == 'form1'){
+    module_load_include('inc', 'framaforms', 'includes/framaforms.node');
+    // Get array of fields to add to our content type ...
+    $fields = framaforms_custom_field_bases();
+    // ... and create them.
+    foreach ($fields as $field) {
+      try {
+        field_create_field($field);
+      }
+      catch(DatabaseSchemaObjectExistsException $e){
+        watchdog('framaforms',
+          "The following error was raised and ignored creating the content type : !e",
+          array('!e' => $e),
+          WATCHDOG_WARNING);
+      }
+    }
+
+    /**
+     * Get all the instances of our fields, that is, which bundle they should be
+     * linked to.
+    **/
+    $instances = framaforms_custom_field_instances();
+
+    foreach($instances as $instance){
+      try{
+        field_create_instance($instance);
+      }
+      catch(FieldException $e){
+        watchdog('framaforms',
+          "The following error was raised and ignollred creating the field instances : !e",
+          array('!e' => $e),
+          WATCHDOG_WARNING);
+      }
+    }
+  }
+  // Attach webform to each node
+  variable_set('webform_node_form1', 1);
+  // Disable comments
+  variable_set('comment_form1', 1);
+  // Disable display of author's information
+  variable_set('node_submitted_form1', 0);
+  // Set Pathauto alias format
+  variable_set('pathauto_node_form1_pattern', '[node:title]-[node:created:raw]');
+
+  // Assign permssions to roles
+  $authenticated_permissions = array(
+    'create form1 content',
+    'edit own form1 content',
+    'delete own form1 content'
+  );
+  $admin_permissions = array(
+    'edit any form1 content',
+    'delete own form1 content',
+    'delete any form1 content',
+  );
+
+  user_role_grant_permissions(
+    user_role_load_by_name('authenticated user')->rid,
+    $authenticated_permissions
+  );
+  user_role_grant_permissions(
+    user_role_load_by_name('administrator')->rid,
+    $admin_permissions
+  );
 }

@@ -182,7 +182,6 @@ function framaforms_feature_menu_default_menu_links() {
     'expanded' => 0,
     'weight' => -50,
     'customized' => 1,
-    'parent_identifier' => 'management_rapports:admin/reports',
   );
   // Exported menu link: management_user-menu:admin/structure/menu/manage/user-menu.
   $menu_links['management_user-menu:admin/structure/menu/manage/user-menu'] = array(
