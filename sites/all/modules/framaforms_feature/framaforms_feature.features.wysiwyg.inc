@@ -94,10 +94,10 @@ function framaforms_feature_wysiwyg_default_profiles() {
       'autoresize_max_height' => '',
     ),
     'preferences' => array(
-      'default' => 1,
-      'user_choose' => 0,
-      'show_toggle' => 1,
       'add_to_summaries' => 1,
+      'default' => 1,
+      'show_toggle' => 1,
+      'user_choose' => 0,
       'version' => '3.5.11',
     ),
     'name' => 'formatwysiwyg_admin',
@@ -154,7 +154,7 @@ function framaforms_feature_wysiwyg_default_profiles() {
       'css_classes' => '',
     ),
     'preferences' => array(
-      'add_to_summaries' => NULL,
+      'add_to_summaries' => FALSE,
       'default' => 1,
       'show_toggle' => 1,
       'user_choose' => 0,

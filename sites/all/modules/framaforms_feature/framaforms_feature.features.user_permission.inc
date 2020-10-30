@@ -716,15 +716,6 @@ function framaforms_feature_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'create form1 content'.
-  $permissions['create form1 content'] = array(
-    'name' => 'create form1 content',
-    'roles' => array(
-      'authenticated user' => 'authenticated user',
-    ),
-    'module' => 'node',
-  );
-
   // Exported permission: 'create page content'.
   $permissions['create page content'] = array(
     'name' => 'create page content',
@@ -772,15 +763,6 @@ function framaforms_feature_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'delete any form1 content'.
-  $permissions['delete any form1 content'] = array(
-    'name' => 'delete any form1 content',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'node',
-  );
-
   // Exported permission: 'delete any page content'.
   $permissions['delete any page content'] = array(
     'name' => 'delete any page content',
@@ -795,15 +777,6 @@ function framaforms_feature_user_default_permissions() {
     'name' => 'delete own article content',
     'roles' => array(
       'administrator' => 'administrator',
-    ),
-    'module' => 'node',
-  );
-
-  // Exported permission: 'delete own form1 content'.
-  $permissions['delete own form1 content'] = array(
-    'name' => 'delete own form1 content',
-    'roles' => array(
-      'authenticated user' => 'authenticated user',
     ),
     'module' => 'node',
   );
@@ -874,15 +847,6 @@ function framaforms_feature_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: 'edit any form1 content'.
-  $permissions['edit any form1 content'] = array(
-    'name' => 'edit any form1 content',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'node',
-  );
-
   // Exported permission: 'edit any page content'.
   $permissions['edit any page content'] = array(
     'name' => 'edit any page content',
@@ -898,15 +862,6 @@ function framaforms_feature_user_default_permissions() {
     'name' => 'edit own article content',
     'roles' => array(
       'administrator' => 'administrator',
-    ),
-    'module' => 'node',
-  );
-
-  // Exported permission: 'edit own form1 content'.
-  $permissions['edit own form1 content'] = array(
-    'name' => 'edit own form1 content',
-    'roles' => array(
-      'authenticated user' => 'authenticated user',
     ),
     'module' => 'node',
   );
