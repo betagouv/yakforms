@@ -1,0 +1,136 @@
+# $Id$
+#
+# LANGUAGE translation of Drupal (sites-all-modules-framaforms_spam-includes)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from file: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc: n/a
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2020-10-08 16:35+0200\n"
+"PO-Revision-Date: 2020-10-28 10:13+0000\n"
+"Last-Translator: Maki <makiniqa@riseup.net>\n"
+"Language-Team: Spanish <https://weblate.framasoft.org/projects/framaforms/"
+"framaforms-spam-include/es/>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.1\n"
+
+#: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:107;216;396
+msgid "Master"
+msgstr ""
+
+#: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:109
+msgid "more"
+msgstr "más"
+
+#: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:110;219;399
+msgid "Apply"
+msgstr "Aplicar"
+
+#: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:111;220;400
+msgid "Reset"
+msgstr "Resetear"
+
+#: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:112;221;401
+msgid "Order by"
+msgstr "Ordenar por"
+
+#: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:113;222;402
+msgid "Asc"
+msgstr "Asc"
+
+#: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:114;223;403
+msgid "Desc"
+msgstr "Desc"
+
+#: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:115;224;404
+msgid "Elements per page"
+msgstr "Elementos por página"
+
+#: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:116;225
+msgid "- All -"
+msgstr "- Todo -"
+
+#: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:117;226;406
+msgid "Offset"
+msgstr ""
+
+#: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:118;227;407
+msgid "« first"
+msgstr "« inicio"
+
+#: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:119;228;408
+msgid "‹ previous"
+msgstr "‹ previa"
+
+#: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:120;229;409
+msgid "next ›"
+msgstr "siguiente ›"
+
+#: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:121;230;410
+msgid "last »"
+msgstr "final »"
+
+#: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:122
+msgid "Content"
+msgstr "Contenido"
+
+#: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:123;412
+msgid "- Choose an operation -"
+msgstr "- Seleccionar una operación -"
+
+#: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:124;415
+msgid "Nid"
+msgstr ""
+
+#: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:125;413
+msgid "Title"
+msgstr "Título"
+
+#: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:126
+msgid "uid"
+msgstr "uid"
+
+#: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:127;236;419
+msgid "Page"
+msgstr "Página"
+
+#: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:218;398
+msgid "plus"
+msgstr "más"
+
+#: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:232
+msgid "[nid]"
+msgstr "[nid]"
+
+#: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:235
+msgid "[uid]"
+msgstr "[uid]"
+
+#: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:397
+msgid "Suspicious forms"
+msgstr "Formularios sospechosos"
+
+#: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:405
+msgid "- Tout -"
+msgstr "- Todo -"
+
+#: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:411
+msgid "Contenu"
+msgstr "Contenido"
+
+#: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:414
+msgid "Publication date"
+msgstr "Fecha de publicación"
+
+#: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:417
+msgid "Published"
+msgstr "Publicado"
+
+#: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:418
+msgid "Author is not"
+msgstr ""
