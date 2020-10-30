@@ -37,27 +37,15 @@ function framaforms_feature_node_info() {
       'base' => 'node_content',
       'description' => t('Utilisez les <em>articles</em> pour des contenus possédant une temporalité tels que des actualités, des communiqués de presse ou des billets de blog.'),
       'has_title' => '1',
-      'title_label' => t('Title'),
+      'title_label' => t('Titre'),
       'help' => '',
-    ),
-    'form1' => array(
-      'name' => t('Formulaire'),
-      'base' => 'node_content',
-      'description' => t('Vous allez créer ou modifier un formulaire framaforms.
-Commencez par remplir les champs ci-dessous, puis cliquez sur "Enregistrer".
-NB : le titre est important, car il sera partiellement repris dans le titre. '),
-      'has_title' => '1',
-      'title_label' => t('Titre du formulaire'),
-      'help' => t('Vous allez créer ou modifier un formulaire framaforms.
-Commencez par remplir les champs ci-dessous, puis cliquez sur "Enregistrer".
-NB : le titre est important, car il sera partiellement repris dans le titre. '),
     ),
     'page' => array(
       'name' => t('Page de base'),
       'base' => 'node_content',
       'description' => t('Utilisez les <em>pages de base</em> pour votre contenu statique, tel que la page \'Qui sommes-nous\'.'),
       'has_title' => '1',
-      'title_label' => t('Title'),
+      'title_label' => t('Titre'),
       'help' => '',
     ),
   );

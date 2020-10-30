@@ -5,5 +5,8 @@ sites/*/settings*.php
 sites/*/files
 sites/*/private
 
+# Ignore examples module if added 
+sites/all/modules/examples
+
 # Ignore editor-specific files
 .vscode
