@@ -114,103 +114,125 @@ function get_dashboard_content() {
  * @return the configuration form.
  */
 function framaforms_config_form($form, &$form_state) {
-  $form['general_intertitle'] = array(
-    '#type' => 'item',
-    '#markup' => "<h3>" . t("General website information"). "<h3>"
+  $form['general-section'] = array(
+    '#type' => 'fieldset',
+    '#title' => "General information",
+    '#collapsible' => TRUE,
   );
-  $form['info_intertitle'] = array(
+  $form['general-section']['info_intertitle'] = array(
     '#type' => 'item',
     '#markup' => "<i>" . t("Note : some of these values can be changed elsewhere on the website, they are simply centralized here.") . "</i>"
   );
-  $form['site_name'] = array(
+  $form['general-section']['site_name'] = array(
     '#type' => 'textfield',
     '#title' => t("Website title"),
     '#default_value' => variable_get('site_name'),
     '#description' => t("The title of this website. It will be displayed in the top header."),
-    '#required' => true,
+    '#required' => TRUE,
   );
-  $form['site_slogan'] = array(
+  $form['general-section']['site_slogan'] = array(
     '#type' => 'textfield',
     '#title' => t("Website slogan"),
     '#default_value' => variable_get('site_slogan'),
     '#description' => t("Small phrase displayed under the title. Ex : 'Create forms easily'"),
-    '#required' => true,
+    '#required' => FALSE,
   );
-  $form['site_mail'] = array(
+  $form['general-section']['site_mail'] = array(
     '#type' => 'textfield',
     '#title' => t("General contact email"),
     '#default_value' => variable_get('site_mail'),
     '#description' => t("It will be used in the general contact form of the website, and used to warn you of pending updates."),
     '#required' => true,
   );
-  $form['site_contact_url'] = array(
+  $form['general-section']['site_contact_url'] = array(
     '#type' => 'textfield',
     '#title' => t("Link to support"),
     '#default_value' => variable_get('site_contact_url'),
     '#description' => t("Link to a support page for your users. This will be displayed when if your users encounter problems creating forms."),
     '#required' => true,
   );
-  $form['limitations_intertitle'] = array(
-    '#type' => 'item',
-    '#markup' => "<h3>" . t("Limitations") . "</h3>",
+  $form['limitation-section'] = array(
+    '#type' => 'fieldset',
+    '#title' => 'Limitations',
+    '#collapsible' => TRUE,
   );
-  $form['framaforms_forms_per_user_limit'] = array(
+    $form['limitation-section']['formsperuser-intertitle'] = array(
+    '#type' => 'item',
+    '#markup' => "<h4>" . t("Number of forms per user") . "<h4>",
+  );
+  $form['limitation-section']['framaforms_forms_per_user_limit'] = array(
     '#type' => 'textfield',
     '#title' => t('Maximum number of form per user'),
     '#default_value' => variable_get('framaforms_forms_per_user_limit'),
-    '#size' => 11,
-    '#maxlength' => 11,
     '#required' => true,
+    '#element_validate' => array('element_validate_number'),
   );
-  $form['expiration_intertitle'] = array(
+  $form['limitation-section']['expiration_intertitle'] = array(
     '#type' => 'item',
-    '#markup' => "<h3>" . t("Forms expiration") . "<h3>",
+    '#markup' => "<h4>" . t("Forms expiration") . "<h4>",
   );
-  $form['framaforms_expiration_period_default_value'] = array(
+  $form['limitation-section']['framaforms_expiration_period_default_value'] = array(
     '#type' => 'textfield',
     '#title' => t("Expiration period (in weeks)"),
     '#default_value' => variable_get('framaforms_expiration_period_default_value'),
-    '#size' => 11,
-    '#maxlength' => 11,
     '#description' => t("When a user creates a form, its expiration date will be set by default at this interval in the futur. Ex : if a user creates a form on 01/01/2020 and the expiration value is set to '5', the form will expire by default on 02/05/2020. Insert '0' if you don't want forms to expire."),
     '#required' => true,
+    '#element_validate' => array('element_validate_number'),
   );
-  $form['framaforms_deletion_period_value'] = array(
+  $form['limitation-section']['framaforms_deletion_period_value'] = array(
     '#type' => 'textfield',
     '#title' => t("Deletion period (in weeks)"),
     '#default_value' => variable_get('framaforms_deletion_period_value'),
-    '#size' => 11,
-    '#maxlength' => 11,
     '#description' => t("Interval of time between the form expiration and its deletion from the database. Insert '0' if you don't want forms to be deleted."),
-    '#required' => true,
+    '#required' => TRUE,
+    '#element_validate' => array('element_validate_number'),
   );
-  $form['framaforms_export_form_submissions_before_delete'] = array(
+  $form['limitation-section']['framaforms_export_form_submissions_before_delete'] = array(
     '#type' => 'checkbox',
     '#title' => t("Save form submissions before deleting"),
     '#default_value' => variable_get('framaforms_export_form_submissions_before_delete', false),
     '#description' => t("Check this box if you want all form submissions to be saved before deletion. This can be useful for user support."),
     '#required' => false,
   );
-  $form['framaforms_mail_user_notification_body'] = array(
+  $form['email-section'] = array(
+    '#type' => 'fieldset',
+    '#title' => 'Emails',
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE
+
+  );
+  $form['email-section']['framaforms_mail_user_notification_body'] = array(
     '#type' => 'textarea',
     '#title' => t("Notification email"),
     '#description' => t("Here you can change the content of the email that will be sent to the user warning them of expired forms. <i>You can use the following tokens that will be replaced : <strong>[form_url]</strong> (the form URL), <strong>[form_expires_on]</strong> (the form's expiration date), <strong>[form_title]</strong> (the form's title).</i>"),
     '#default_value' => variable_get('framaforms_mail_user_notification_body'),
-    '#required' => true,
+    '#required' => TRUE,
   );
-  $form['create-default-pages'] = array(
+  $form['defaults-section'] = array(
+    '#type' => 'fieldset',
+    '#title' => 'Default parameters',
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE
+  );
+  $form['defaults-section']['create-default-pages'] = array(
     '#type' => 'button',
     '#value' => t("Generate default pages"),
-    '#description' => t("By clicking this button, you will create default pages for your website : homepage, 404/403 error pages, etc. You can modify them afterwards."),
     '#submit' => array('admin_menu_create_pages_callback'),
     '#executes_submit_callback' => true,
   );
-  $form['reset-variables'] = array(
+  $form['defaults-section']['create-default-pages-description'] = array(
+    '#type' => 'item',
+    '#markup' => "<i>" . t("By clicking this button, you will create default pages for your website : homepage, 404/403 error pages, etc. You can modify them afterwards.") . "</i>",
+  );
+  $form['defaults-section']['reset-variables'] = array(
     '#type' => 'button',
     '#value' => t("Reset all"),
-    '#description' => t("Reset all global variables to their initial value."),
     '#submit' => array('framaforms_admin_menu_reset_variables_callback'),
     '#executes_submit_callback' => true,
+  );
+  $form['defaults-section']['reset-variables-description'] = array(
+    '#type' => 'item',
+    '#markup' => "<i>" . t("Reset all above variables to their initial value.") . "</i>"
   );
   $form['submit'] = array(
     '#type' => 'submit',
@@ -239,27 +261,14 @@ function admin_menu_create_pages_callback() {
  */
 function framaforms_config_form_validate($form, &$form_state) {
   $values = $form_state['values'];
-  if (!is_numeric($values['framaforms_deletion_period_value'])) {
-    drupal_set_message(t("There was an error in the form values."));
-    form_set_error('framaforms_deletion_period_value', t("The deletion period must be a number."));
-  }
-  if (!is_numeric($values['framaforms_expiration_period_default_value'])) {
-    drupal_set_message(t("There was an error in the form values."));
-    form_set_error('framaforms_expiration_period_default_value', t("The expiration period must be a number."));
-  }
-  if (!is_numeric($values['framaforms_forms_per_user_limit'])) {
-    drupal_set_message(t("There was an error in the form values."));
-    form_set_error('framaforms_forms_per_user_limit', t("The number of form per user must be a number."));
-  }
-
   // Create the backup directory for form submissions if necessary.
   $backup_dir_path = variable_get('file_private_path') ."/framaforms_submissions_backup/";
   $backup_dir_writable = file_prepare_directory($backup_dir_path, FILE_CREATE_DIRECTORY);
-  if($values['framaforms_export_form_submissions_before_delete'] && !$backup_dir_writable) {
+  if($values['limitation-section']['framaforms_export_form_submissions_before_delete'] && !$backup_dir_writable) {
     drupal_set_message(
       t("The following directory doesn't exist or is not writable : !path.", array('!path' => $backup_dir_path)),
       'error',
-      false
+      FALSE
   );
   }
 }
