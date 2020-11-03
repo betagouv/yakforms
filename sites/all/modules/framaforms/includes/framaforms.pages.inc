@@ -182,7 +182,7 @@ function get_share_content() {
 
   $file_path = $base_url . drupal_get_path('module', 'framaforms') . '/includes/html/share_page.html';
   $content = file_get_contents($file_path);
-  $placeholders = ['[thislink]', '[thisurl]', '[thisclonelink]' , '[thisiframe800]'];
+  $placeholders = ['[thishtmlelement]', '[thisurl]', '[thisclonelink]' , '[thisiframe800]'];
   $replacers = [$thisLink, $thisUrl, $thisCloneLink, $thisIframe800];
   $content = str_replace($placeholders, $replacers, $content);
 
