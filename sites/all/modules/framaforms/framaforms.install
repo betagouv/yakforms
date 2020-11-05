@@ -124,7 +124,7 @@ function framaforms_set_default_variables() {
 
   /* Set default favicon for Frama theme */
   $theme_frama_settings = variable_get('theme_frama_settings');
-  $theme_frama_settings['favicon_path'] = drupal_get_path('theme', 'frama') . '/images/Framasoft_Logo.png';
+  $theme_frama_settings['favicon_path'] = drupal_get_path('theme', 'frama') . '/images/default_favicon.png';
   variable_set('theme_frama_settings', $theme_frama_settings);
 
   /* Pathauto configuration */
