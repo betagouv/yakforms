@@ -318,7 +318,7 @@ function framaforms_block_view($delta) {
       break;
 
     case 'framaforms_header':
-      $block['content']['#markup'] = '<h1 class="big-title"><a href="/"><b class="frama">Frama</b><b class="vert">forms</b></a></h1>';
+      $block['content']['#markup'] = "<header ><a href='/'><h1 class='big-title'>" . variable_get('framaforms_general_header_html') . '</h1></a></header>';
       $block['content']['#markup'] .= '<p class="lead">' . variable_get('site_slogan') . '</p>';
       break;
 

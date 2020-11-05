@@ -130,6 +130,13 @@ function framaforms_config_form($form, &$form_state) {
     '#description' => t("The title of this website. It will be displayed in the top header."),
     '#required' => TRUE,
   );
+    $form['general-section']['framaforms_general_header_html'] = array(
+    '#type' => 'textfield',
+    '#title' => t("Website header"),
+    '#default_value' => variable_get('framaforms_general_header_html'),
+    '#description' => t("The title that will be displayed at the top of your site. You might use the following HTML tags :") . htmlspecialchars("<i><strong><b><p><div><del><h1><h2><h3<h4>"),
+    '#required' => TRUE,
+  );
   $form['general-section']['site_slogan'] = array(
     '#type' => 'textfield',
     '#title' => t("Website slogan"),
@@ -271,6 +278,14 @@ function framaforms_config_form_validate($form, &$form_state) {
       FALSE
   );
   }
+  // Strip disallowed HTML tags
+  $stripped_header = strip_tags($values['framaforms_general_header_html'],
+    "<i><strong><b><p><div><del><h1><h2><h3<h4>");
+
+  // Check if disallowed HTML tags were stripped. If so, warn the user.
+  if($stripped_header != $values['framaforms_general_header_html']){
+    form_set_error('general-section][framaforms_general_header_html]', 'Contains disallowed tags.');
+  }
 }
 
 /**
@@ -279,9 +294,9 @@ function framaforms_config_form_validate($form, &$form_state) {
  * @return void
  */
 function framaforms_config_form_submit($form, &$form_state) {
-  drupal_set_message(t("The form was submitted !"));
-  // Create private backup subfolder if it doesn't yet exist.
+  $html_header = $form_state['values']['general-section']['framaforms_general_header_html'];
 
+  drupal_set_message(t("The form was submitted !"));
 }
 
 /**
