@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Changed
 * The `form1` content type is now part of the Framaforms module (declared via `includes/framaforms.node.inc`).
 * Added collapsible `fieldset` elements to admin menu (!93).
+* The general header can now be customized through the administration menu(!96).
 
 ### Fixed
 * Expiration date is now modified when a form is cloned (https://framagit.org/framasoft/framaforms/-/issues/61)

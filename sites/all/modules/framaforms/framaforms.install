@@ -98,6 +98,9 @@ function framaforms_set_default_variables() {
   framaforms_set_variables_pages();
   framaforms_set_variables_mail();
 
+  // Set default header
+  variable_set('framaforms_general_header_html','<b>Your</b>forms');
+
   $now = date('Y/m/d/ h:m:s', time());
   // The last framforms cron run.
   variable_set('framaforms_cron_last', new DateTime());
