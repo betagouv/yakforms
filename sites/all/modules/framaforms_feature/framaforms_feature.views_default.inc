@@ -44,19 +44,19 @@ function framaforms_feature_views_default_views() {
   $handler->display->display_options['pager']['options']['tags']['last'] = 'dernier »';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'node';
-  /* Champ: Content : Title */
+  /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Critère de tri: Content : Post date */
+  /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Critère de filtrage: Content : Published status */
+  /* Filter criterion: Content: Published status */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
@@ -84,6 +84,7 @@ function framaforms_feature_views_default_views() {
     t('suivant ›'),
     t('dernier »'),
     t('Page'),
+    t('more'),
   );
   $export['actualites'] = $view;
 
@@ -174,18 +175,18 @@ function framaforms_feature_views_default_views() {
       'separator' => '',
     ),
   );
-  /* Comportement en l'absence de résultats: Global : Text area */
+  /* No results behavior: Global: Text area */
   $handler->display->display_options['empty']['text']['id'] = 'area';
   $handler->display->display_options['empty']['text']['table'] = 'views';
   $handler->display->display_options['empty']['text']['field'] = 'area';
   $handler->display->display_options['empty']['text']['content'] = 'There is not any content on your site.';
   $handler->display->display_options['empty']['text']['format'] = '1';
-  /* Relation: Content : Content author */
+  /* Relationship: Content: Content author */
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
   $handler->display->display_options['relationships']['uid']['table'] = 'node';
   $handler->display->display_options['relationships']['uid']['field'] = 'uid';
   $handler->display->display_options['relationships']['uid']['label'] = 'auteur';
-  /* Champ: Bulk operations : Content */
+  /* Field: Bulk operations: Content */
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
@@ -233,13 +234,13 @@ function framaforms_feature_views_default_views() {
       'postpone_processing' => 0,
     ),
   );
-  /* Champ: Content : Title */
+  /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = 'Titre';
   $handler->display->display_options['fields']['title']['hide_alter_empty'] = FALSE;
-  /* Champ: User : Name */
+  /* Field: User: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'users';
   $handler->display->display_options['fields']['name']['field'] = 'name';
@@ -247,7 +248,7 @@ function framaforms_feature_views_default_views() {
   $handler->display->display_options['fields']['name']['label'] = 'Auteur';
   $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['name']['hide_alter_empty'] = FALSE;
-  /* Champ: Content : Post date */
+  /* Field: Content: Post date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'node';
   $handler->display->display_options['fields']['created']['field'] = 'created';
@@ -255,7 +256,7 @@ function framaforms_feature_views_default_views() {
   $handler->display->display_options['fields']['created']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['created']['date_format'] = 'custom';
   $handler->display->display_options['fields']['created']['custom_date_format'] = 'm/d g:ia';
-  /* Champ: Content : Updated date */
+  /* Field: Content: Updated date */
   $handler->display->display_options['fields']['changed']['id'] = 'changed';
   $handler->display->display_options['fields']['changed']['table'] = 'node';
   $handler->display->display_options['fields']['changed']['field'] = 'changed';
@@ -264,23 +265,23 @@ function framaforms_feature_views_default_views() {
   $handler->display->display_options['fields']['changed']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
   $handler->display->display_options['fields']['changed']['custom_date_format'] = 'm/d g:ia';
-  /* Champ: Content : Published status */
+  /* Field: Content: Published status */
   $handler->display->display_options['fields']['status']['id'] = 'status';
   $handler->display->display_options['fields']['status']['table'] = 'node';
   $handler->display->display_options['fields']['status']['field'] = 'status';
   $handler->display->display_options['fields']['status']['not'] = 0;
-  /* Champ: Content : Link to edit content */
+  /* Field: Content: Link to edit content */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['label'] = 'Modifier';
   $handler->display->display_options['fields']['edit_node']['text'] = 'modifier';
-  /* Critère de tri: Content : Post date */
+  /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Critère de filtrage: Content : Published status */
+  /* Filter criterion: Content: Published status */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
@@ -288,7 +289,7 @@ function framaforms_feature_views_default_views() {
   $handler->display->display_options['filters']['status']['exposed'] = TRUE;
   $handler->display->display_options['filters']['status']['expose']['label'] = 'Publié';
   $handler->display->display_options['filters']['status']['expose']['identifier'] = 'status';
-  /* Critère de filtrage: User : Name */
+  /* Filter criterion: User: Name */
   $handler->display->display_options['filters']['uid']['id'] = 'uid';
   $handler->display->display_options['filters']['uid']['table'] = 'users';
   $handler->display->display_options['filters']['uid']['field'] = 'uid';
@@ -299,7 +300,7 @@ function framaforms_feature_views_default_views() {
   $handler->display->display_options['filters']['uid']['expose']['label'] = 'Auteur';
   $handler->display->display_options['filters']['uid']['expose']['operator'] = 'uid_op';
   $handler->display->display_options['filters']['uid']['expose']['identifier'] = 'uid';
-  /* Critère de filtrage: Search : Search Terms */
+  /* Filter criterion: Search: Search Terms */
   $handler->display->display_options['filters']['keys']['id'] = 'keys';
   $handler->display->display_options['filters']['keys']['table'] = 'search_index';
   $handler->display->display_options['filters']['keys']['field'] = 'keys';
@@ -308,7 +309,7 @@ function framaforms_feature_views_default_views() {
   $handler->display->display_options['filters']['keys']['expose']['label'] = 'Contient';
   $handler->display->display_options['filters']['keys']['expose']['operator'] = 'keys_op';
   $handler->display->display_options['filters']['keys']['expose']['identifier'] = 'keys';
-  /* Critère de filtrage: Content : Type */
+  /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
@@ -340,7 +341,7 @@ function framaforms_feature_views_default_views() {
   $handler->display->display_options['defaults']['header'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Critère de filtrage: Content : Published status */
+  /* Filter criterion: Content: Published status */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
@@ -348,7 +349,7 @@ function framaforms_feature_views_default_views() {
   $handler->display->display_options['filters']['status']['exposed'] = TRUE;
   $handler->display->display_options['filters']['status']['expose']['label'] = 'Publié';
   $handler->display->display_options['filters']['status']['expose']['identifier'] = 'status';
-  /* Critère de filtrage: User : Name */
+  /* Filter criterion: User: Name */
   $handler->display->display_options['filters']['uid']['id'] = 'uid';
   $handler->display->display_options['filters']['uid']['table'] = 'users';
   $handler->display->display_options['filters']['uid']['field'] = 'uid';
@@ -358,7 +359,7 @@ function framaforms_feature_views_default_views() {
   $handler->display->display_options['filters']['uid']['expose']['label'] = 'Auteur';
   $handler->display->display_options['filters']['uid']['expose']['operator'] = 'uid_op';
   $handler->display->display_options['filters']['uid']['expose']['identifier'] = 'uid';
-  /* Critère de filtrage: Content : Type */
+  /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type_1']['id'] = 'type_1';
   $handler->display->display_options['filters']['type_1']['table'] = 'node';
   $handler->display->display_options['filters']['type_1']['field'] = 'type';
@@ -366,7 +367,7 @@ function framaforms_feature_views_default_views() {
     'form1' => 'form1',
   );
   $handler->display->display_options['filters']['type_1']['expose']['operator'] = FALSE;
-  /* Critère de filtrage: Search : Search Terms */
+  /* Filter criterion: Search: Search Terms */
   $handler->display->display_options['filters']['keys']['id'] = 'keys';
   $handler->display->display_options['filters']['keys']['table'] = 'search_index';
   $handler->display->display_options['filters']['keys']['field'] = 'keys';
@@ -387,7 +388,7 @@ function framaforms_feature_views_default_views() {
   $handler->display->display_options['defaults']['header'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Critère de filtrage: Content : Published status */
+  /* Filter criterion: Content: Published status */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
@@ -395,7 +396,7 @@ function framaforms_feature_views_default_views() {
   $handler->display->display_options['filters']['status']['exposed'] = TRUE;
   $handler->display->display_options['filters']['status']['expose']['label'] = 'Publié';
   $handler->display->display_options['filters']['status']['expose']['identifier'] = 'status';
-  /* Critère de filtrage: User : Name */
+  /* Filter criterion: User: Name */
   $handler->display->display_options['filters']['uid']['id'] = 'uid';
   $handler->display->display_options['filters']['uid']['table'] = 'users';
   $handler->display->display_options['filters']['uid']['field'] = 'uid';
@@ -405,7 +406,7 @@ function framaforms_feature_views_default_views() {
   $handler->display->display_options['filters']['uid']['expose']['label'] = 'Auteur';
   $handler->display->display_options['filters']['uid']['expose']['operator'] = 'uid_op';
   $handler->display->display_options['filters']['uid']['expose']['identifier'] = 'uid';
-  /* Critère de filtrage: Content : Type */
+  /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type_1']['id'] = 'type_1';
   $handler->display->display_options['filters']['type_1']['table'] = 'node';
   $handler->display->display_options['filters']['type_1']['field'] = 'type';
@@ -413,7 +414,7 @@ function framaforms_feature_views_default_views() {
     'page' => 'page',
   );
   $handler->display->display_options['filters']['type_1']['expose']['operator'] = FALSE;
-  /* Critère de filtrage: Search : Search Terms */
+  /* Filter criterion: Search: Search Terms */
   $handler->display->display_options['filters']['keys']['id'] = 'keys';
   $handler->display->display_options['filters']['keys']['table'] = 'search_index';
   $handler->display->display_options['filters']['keys']['field'] = 'keys';
@@ -444,7 +445,7 @@ function framaforms_feature_views_default_views() {
     t('dernier »'),
     t('There is not any content on your site.'),
     t('auteur'),
-    t('- Choisir une opération -'),
+    t('- Choose an operation -'),
     t('Titre'),
     t('Auteur'),
     t('Date de création'),
@@ -457,6 +458,7 @@ function framaforms_feature_views_default_views() {
     t('Type'),
     t('All Content'),
     t('All content'),
+    t('more'),
     t('Formulaire Page'),
     t('Formulaire content'),
     t('Search:'),
@@ -499,30 +501,30 @@ function framaforms_feature_views_default_views() {
     'name' => 'name',
     'created' => 'created',
   );
-  /* Relation: Content : Content author */
+  /* Relationship: Content: Content author */
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
   $handler->display->display_options['relationships']['uid']['table'] = 'node';
   $handler->display->display_options['relationships']['uid']['field'] = 'uid';
   $handler->display->display_options['relationships']['uid']['label'] = 'auteur';
-  /* Champ: Content : Title */
+  /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
-  /* Champ: User : Name */
+  /* Field: User: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'users';
   $handler->display->display_options['fields']['name']['field'] = 'name';
   $handler->display->display_options['fields']['name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['name']['label'] = 'by';
-  /* Champ: Content : Post date */
+  /* Field: Content: Post date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'node';
   $handler->display->display_options['fields']['created']['field'] = 'created';
   $handler->display->display_options['fields']['created']['label'] = 'on';
   $handler->display->display_options['fields']['created']['date_format'] = 'custom';
   $handler->display->display_options['fields']['created']['custom_date_format'] = 'm/d g:ia';
-  /* Critère de tri: Content : Post date */
+  /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
@@ -534,31 +536,31 @@ function framaforms_feature_views_default_views() {
   $handler->display->display_options['title'] = 'New Content';
   $handler->display->display_options['display_description'] = 'Total Control new content summary';
   $handler->display->display_options['defaults']['empty'] = FALSE;
-  /* Comportement en l'absence de résultats: Global : Text area */
+  /* No results behavior: Global: Text area */
   $handler->display->display_options['empty']['area']['id'] = 'area';
   $handler->display->display_options['empty']['area']['table'] = 'views';
   $handler->display->display_options['empty']['area']['field'] = 'area';
   $handler->display->display_options['empty']['area']['content'] = 'No content has been created yet. ';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Champ: Content : Title */
+  /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
-  /* Champ: Content : Type */
+  /* Field: Content: Type */
   $handler->display->display_options['fields']['type']['id'] = 'type';
   $handler->display->display_options['fields']['type']['table'] = 'node';
   $handler->display->display_options['fields']['type']['field'] = 'type';
   $handler->display->display_options['fields']['type']['label'] = '';
   $handler->display->display_options['fields']['type']['element_label_colon'] = FALSE;
-  /* Champ: User : Name */
+  /* Field: User: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'users';
   $handler->display->display_options['fields']['name']['field'] = 'name';
   $handler->display->display_options['fields']['name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['name']['label'] = 'by';
-  /* Champ: Content : Post date */
+  /* Field: Content: Post date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'node';
   $handler->display->display_options['fields']['created']['field'] = 'created';
@@ -585,24 +587,24 @@ function framaforms_feature_views_default_views() {
   $handler->display->display_options['title'] = 'Updated Content';
   $handler->display->display_options['display_description'] = 'Total Control updated content summary';
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Champ: Content : Title */
+  /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
-  /* Champ: Content : Type */
+  /* Field: Content: Type */
   $handler->display->display_options['fields']['type']['id'] = 'type';
   $handler->display->display_options['fields']['type']['table'] = 'node';
   $handler->display->display_options['fields']['type']['field'] = 'type';
   $handler->display->display_options['fields']['type']['label'] = '';
   $handler->display->display_options['fields']['type']['element_label_colon'] = FALSE;
-  /* Champ: User : Name */
+  /* Field: User: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'users';
   $handler->display->display_options['fields']['name']['field'] = 'name';
   $handler->display->display_options['fields']['name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['name']['label'] = 'by';
-  /* Champ: Content : Post date */
+  /* Field: Content: Post date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'node';
   $handler->display->display_options['fields']['created']['field'] = 'created';
@@ -610,7 +612,7 @@ function framaforms_feature_views_default_views() {
   $handler->display->display_options['fields']['created']['date_format'] = 'custom';
   $handler->display->display_options['fields']['created']['custom_date_format'] = 'm/d g:ia';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
-  /* Critère de tri: Content : Updated date */
+  /* Sort criterion: Content: Updated date */
   $handler->display->display_options['sorts']['changed']['id'] = 'changed';
   $handler->display->display_options['sorts']['changed']['table'] = 'node';
   $handler->display->display_options['sorts']['changed']['field'] = 'changed';
@@ -635,7 +637,7 @@ function framaforms_feature_views_default_views() {
   $handler->display->display_options['title'] = 'Unpublished content';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Critère de filtrage: Content : Published status */
+  /* Filter criterion: Content: Published status */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
@@ -660,7 +662,7 @@ function framaforms_feature_views_default_views() {
   $handler->display->display_options['title'] = 'New Formulaire content';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Critère de filtrage: Content : Type */
+  /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
@@ -680,7 +682,7 @@ function framaforms_feature_views_default_views() {
   $handler->display->display_options['title'] = 'New Page de base content';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Critère de filtrage: Content : Type */
+  /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
@@ -707,6 +709,7 @@ function framaforms_feature_views_default_views() {
     t('on'),
     t('New Content'),
     t('Total Control new content summary'),
+    t('more'),
     t('No content has been created yet. '),
     t('Tableau de bord'),
     t('Updated Content'),
@@ -758,41 +761,41 @@ function framaforms_feature_views_default_views() {
   $handler->display->display_options['pager']['options']['tags']['next'] = 'suivant ›';
   $handler->display->display_options['pager']['options']['tags']['last'] = 'dernier »';
   $handler->display->display_options['style_plugin'] = 'table';
-  /* Relation: Webform submissions : Data */
+  /* Relationship: Webform submissions: Data */
   $handler->display->display_options['relationships']['data']['id'] = 'data';
   $handler->display->display_options['relationships']['data']['table'] = 'webform_submissions';
   $handler->display->display_options['relationships']['data']['field'] = 'data';
   $handler->display->display_options['relationships']['data']['label'] = 'Données de la soumission';
   $handler->display->display_options['relationships']['data']['webform_nid'] = '29423';
   $handler->display->display_options['relationships']['data']['webform_cid'] = '6';
-  /* Relation: Webform submissions : Data */
+  /* Relationship: Webform submissions: Data */
   $handler->display->display_options['relationships']['data_1']['id'] = 'data_1';
   $handler->display->display_options['relationships']['data_1']['table'] = 'webform_submissions';
   $handler->display->display_options['relationships']['data_1']['field'] = 'data';
   $handler->display->display_options['relationships']['data_1']['label'] = 'Données de la soumission';
   $handler->display->display_options['relationships']['data_1']['webform_nid'] = '29423';
   $handler->display->display_options['relationships']['data_1']['webform_cid'] = '4';
-  /* Champ: Global : View result counter */
+  /* Field: Global: View result counter */
   $handler->display->display_options['fields']['counter']['id'] = 'counter';
   $handler->display->display_options['fields']['counter']['table'] = 'views';
   $handler->display->display_options['fields']['counter']['field'] = 'counter';
   $handler->display->display_options['fields']['counter']['label'] = '#';
   $handler->display->display_options['fields']['counter']['counter_start'] = '1';
   $handler->display->display_options['fields']['counter']['reverse'] = 0;
-  /* Champ: Webform submission data : Value (raw) */
+  /* Field: Webform submission data: Value (raw) */
   $handler->display->display_options['fields']['data']['id'] = 'data';
   $handler->display->display_options['fields']['data']['table'] = 'webform_submitted_data';
   $handler->display->display_options['fields']['data']['field'] = 'data';
   $handler->display->display_options['fields']['data']['relationship'] = 'data';
   $handler->display->display_options['fields']['data']['label'] = 'Nom/prénom/pseudo';
   $handler->display->display_options['fields']['data']['element_label_colon'] = FALSE;
-  /* Champ: Content : Title */
+  /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = 'Titre';
   $handler->display->display_options['fields']['title']['exclude'] = TRUE;
-  /* Champ: Content : Updated date */
+  /* Field: Content: Updated date */
   $handler->display->display_options['fields']['changed']['id'] = 'changed';
   $handler->display->display_options['fields']['changed']['table'] = 'node';
   $handler->display->display_options['fields']['changed']['field'] = 'changed';
@@ -801,7 +804,7 @@ function framaforms_feature_views_default_views() {
   $handler->display->display_options['fields']['changed']['date_format'] = 'long';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
   $handler->display->display_options['fields']['changed']['format_date_sql'] = 0;
-  /* Champ: Webform submission data : Value */
+  /* Field: Webform submission data: Value */
   $handler->display->display_options['fields']['value']['id'] = 'value';
   $handler->display->display_options['fields']['value']['table'] = 'webform_submissions';
   $handler->display->display_options['fields']['value']['field'] = 'value';
@@ -809,7 +812,7 @@ function framaforms_feature_views_default_views() {
   $handler->display->display_options['fields']['value']['custom_label'] = 'custom';
   $handler->display->display_options['fields']['value']['webform_nid'] = '29423';
   $handler->display->display_options['fields']['value']['webform_cid'] = '4';
-  /* Champ: Webform submission data : Value */
+  /* Field: Webform submission data: Value */
   $handler->display->display_options['fields']['value_1']['id'] = 'value_1';
   $handler->display->display_options['fields']['value_1']['table'] = 'webform_submissions';
   $handler->display->display_options['fields']['value_1']['field'] = 'value';
@@ -817,7 +820,7 @@ function framaforms_feature_views_default_views() {
   $handler->display->display_options['fields']['value_1']['custom_label'] = 'custom';
   $handler->display->display_options['fields']['value_1']['webform_nid'] = '29423';
   $handler->display->display_options['fields']['value_1']['webform_cid'] = '11';
-  /* Critère de filtrage: Content : Nid */
+  /* Filter criterion: Content: Nid */
   $handler->display->display_options['filters']['nid']['id'] = 'nid';
   $handler->display->display_options['filters']['nid']['table'] = 'node';
   $handler->display->display_options['filters']['nid']['field'] = 'nid';
@@ -879,6 +882,7 @@ function framaforms_feature_views_default_views() {
     t('Dodo sur place'),
     t('Nid'),
     t('Page'),
+    t('more'),
     t('Flux'),
   );
   $export['display_results'] = $view;
@@ -959,18 +963,18 @@ function framaforms_feature_views_default_views() {
       'empty_column' => 0,
     ),
   );
-  /* Entête: Global : Result summary with an additional token to change the items/page */
+  /* Header: Global: Result summary with an additional token to change the items/page */
   $handler->display->display_options['header']['webform_result']['id'] = 'webform_result';
   $handler->display->display_options['header']['webform_result']['table'] = 'views';
   $handler->display->display_options['header']['webform_result']['field'] = 'webform_result';
-  /* Pied de page: PDF Export Views : Export as PDF button */
+  /* Footer: PDF Export Views: Export as PDF button */
   $handler->display->display_options['footer']['pdf_export_views']['id'] = 'pdf_export_views';
   $handler->display->display_options['footer']['pdf_export_views']['table'] = 'pdf_export_views_views';
   $handler->display->display_options['footer']['pdf_export_views']['field'] = 'pdf_export_views';
   $handler->display->display_options['footer']['pdf_export_views']['pdf_name'] = '';
   $handler->display->display_options['footer']['pdf_export_views']['css_theme'] = 'bartik';
   $handler->display->display_options['footer']['pdf_export_views']['css_files'] = '';
-  /* Champ: Bulk operations : Content */
+  /* Field: Bulk operations: Content */
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
@@ -989,30 +993,30 @@ function framaforms_feature_views_default_views() {
       'label' => '',
     ),
   );
-  /* Champ: Global : View result counter */
+  /* Field: Global: View result counter */
   $handler->display->display_options['fields']['counter']['id'] = 'counter';
   $handler->display->display_options['fields']['counter']['table'] = 'views';
   $handler->display->display_options['fields']['counter']['field'] = 'counter';
   $handler->display->display_options['fields']['counter']['label'] = '#';
   $handler->display->display_options['fields']['counter']['counter_start'] = '1';
   $handler->display->display_options['fields']['counter']['reverse'] = 0;
-  /* Champ: Content : Title */
+  /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Champ: Content : Author uid */
+  /* Field: Content: Author uid */
   $handler->display->display_options['fields']['uid']['id'] = 'uid';
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['label'] = 'Par:';
-  /* Champ: Webform : Webform submission count */
+  /* Field: Webform: Webform submission count */
   $handler->display->display_options['fields']['webform_submission_count_node']['id'] = 'webform_submission_count_node';
   $handler->display->display_options['fields']['webform_submission_count_node']['table'] = 'node';
   $handler->display->display_options['fields']['webform_submission_count_node']['field'] = 'webform_submission_count_node';
-  /* Champ: Content : Post date */
+  /* Field: Content: Post date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'node';
   $handler->display->display_options['fields']['created']['field'] = 'created';
@@ -1020,7 +1024,7 @@ function framaforms_feature_views_default_views() {
   $handler->display->display_options['fields']['created']['date_format'] = 'custom';
   $handler->display->display_options['fields']['created']['custom_date_format'] = 'Y/m/d';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
-  /* Champ: Nœud : Date d'expiration */
+  /* Field: Content: Expiration date */
   $handler->display->display_options['fields']['field_form1_expiration']['id'] = 'field_form1_expiration';
   $handler->display->display_options['fields']['field_form1_expiration']['table'] = 'field_data_field_form1_expiration';
   $handler->display->display_options['fields']['field_form1_expiration']['field'] = 'field_form1_expiration';
@@ -1032,28 +1036,28 @@ function framaforms_feature_views_default_views() {
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Critère de tri: Content : Post date */
+  /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
   $handler->display->display_options['sorts']['created']['expose']['label'] = 'Date de publication';
   $handler->display->display_options['sorts']['created']['granularity'] = 'day';
-  /* Critère de filtrage: Content : Published status */
+  /* Filter criterion: Content: Published status */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Critère de filtrage: Content : Type */
+  /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
     'form1' => 'form1',
   );
-  /* Critère de filtrage: Content : Title */
+  /* Filter criterion: Content: Title */
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
   $handler->display->display_options['filters']['title']['field'] = 'title';
@@ -1069,7 +1073,7 @@ function framaforms_feature_views_default_views() {
     3 => 0,
     4 => 0,
   );
-  /* Critère de filtrage: Content : Updated date */
+  /* Filter criterion: Content: Updated date */
   $handler->display->display_options['filters']['changed']['id'] = 'changed';
   $handler->display->display_options['filters']['changed']['table'] = 'node';
   $handler->display->display_options['filters']['changed']['field'] = 'changed';
@@ -1105,17 +1109,18 @@ function framaforms_feature_views_default_views() {
     t('‹ précédent'),
     t('suivant ›'),
     t('dernier »'),
-    t('Affichage de @start - @end sur @total. @items_per_page_links'),
+    t('Displaying @start - @end of @total. @items_per_page_links'),
     t('Contenu'),
-    t('- Choisir une opération -'),
+    t('- Choose an operation -'),
     t('#'),
     t('Par:'),
     t('# of Submissions'),
     t('Date de publication'),
-    t('Date d\'expiration'),
+    t('Expiration date'),
     t('Titre'),
     t('MAJ'),
     t('Page'),
+    t('more'),
   );
   $export['form_count2'] = $view;
 
@@ -1175,7 +1180,7 @@ function framaforms_feature_views_default_views() {
       'empty_column' => 0,
     ),
   );
-  /* Entête: Global : Text area */
+  /* Header: Global: Text area */
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
@@ -1192,7 +1197,7 @@ print "<h3>Nombre total de formulaires : $result</h3>";
 ?>
 ';
   $handler->display->display_options['header']['area']['format'] = 'php_code';
-  /* Champ: Content : Post date */
+  /* Field: Content: Post date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'node';
   $handler->display->display_options['fields']['created']['field'] = 'created';
@@ -1201,18 +1206,18 @@ print "<h3>Nombre total de formulaires : $result</h3>";
   $handler->display->display_options['fields']['created']['custom_date_format'] = 'Y/m/d';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
   $handler->display->display_options['fields']['created']['format_date_sql'] = 1;
-  /* Champ: Content : Nid */
+  /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
   $handler->display->display_options['fields']['nid']['group_type'] = 'count';
-  /* Critère de tri: Content : Post date */
+  /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
   $handler->display->display_options['sorts']['created']['granularity'] = 'day';
-  /* Critère de filtrage: Content : Published status */
+  /* Filter criterion: Content: Published status */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
@@ -1220,7 +1225,7 @@ print "<h3>Nombre total de formulaires : $result</h3>";
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Critère de filtrage: Content : Type */
+  /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
@@ -1262,6 +1267,7 @@ print "<h3>Nombre total de formulaires : $result</h3>";
     t('Date de publication'),
     t('Nid'),
     t('Page'),
+    t('more'),
   );
   $export['form_count3'] = $view;
 
@@ -1324,11 +1330,11 @@ print "<h3>Nombre total de formulaires : $result</h3>";
       'empty_column' => 0,
     ),
   );
-  /* Entête: Global : Result summary */
+  /* Header: Global: Result summary */
   $handler->display->display_options['header']['result']['id'] = 'result';
   $handler->display->display_options['header']['result']['table'] = 'views';
   $handler->display->display_options['header']['result']['field'] = 'result';
-  /* Champ: Content : Post date */
+  /* Field: Content: Post date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'node';
   $handler->display->display_options['fields']['created']['field'] = 'created';
@@ -1337,12 +1343,12 @@ print "<h3>Nombre total de formulaires : $result</h3>";
   $handler->display->display_options['fields']['created']['custom_date_format'] = 'Y-m-d';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
   $handler->display->display_options['fields']['created']['format_date_sql'] = 1;
-  /* Champ: Content : Nid */
+  /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
   $handler->display->display_options['fields']['nid']['group_type'] = 'count';
-  /* Critère de tri: Content : Post date */
+  /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
@@ -1350,7 +1356,7 @@ print "<h3>Nombre total de formulaires : $result</h3>";
   $handler->display->display_options['sorts']['created']['exposed'] = TRUE;
   $handler->display->display_options['sorts']['created']['expose']['label'] = 'Date de publication';
   $handler->display->display_options['sorts']['created']['granularity'] = 'day';
-  /* Critère de filtrage: Content : Published status */
+  /* Filter criterion: Content: Published status */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
@@ -1358,7 +1364,7 @@ print "<h3>Nombre total de formulaires : $result</h3>";
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Critère de filtrage: Content : Type */
+  /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
@@ -1389,6 +1395,7 @@ print "<h3>Nombre total de formulaires : $result</h3>";
     t('Date de publication'),
     t('Nid'),
     t('Page'),
+    t('more'),
   );
   $export['form_count_total'] = $view;
 
@@ -1501,12 +1508,12 @@ print "<h3>Nombre total de formulaires : $result</h3>";
     ),
   );
   $handler->display->display_options['style_options']['sticky'] = TRUE;
-  /* Relation: Content : Content author */
+  /* Relationship: Content: Content author */
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
   $handler->display->display_options['relationships']['uid']['table'] = 'node';
   $handler->display->display_options['relationships']['uid']['field'] = 'uid';
   $handler->display->display_options['relationships']['uid']['label'] = 'auteur';
-  /* Champ: Bulk operations : User */
+  /* Field: Bulk operations: User */
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'views_entity_user';
   $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
@@ -1535,24 +1542,24 @@ print "<h3>Nombre total de formulaires : $result</h3>";
       'label' => '',
     ),
   );
-  /* Champ: Content : Nid */
+  /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
   $handler->display->display_options['fields']['nid']['alter']['text'] = '[nid]';
   $handler->display->display_options['fields']['nid']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['nid']['alter']['path'] = 'node/[nid]/edit';
-  /* Champ: Content : Title */
+  /* Field: Content: Title */
   $handler->display->display_options['fields']['title_1']['id'] = 'title_1';
   $handler->display->display_options['fields']['title_1']['table'] = 'node';
   $handler->display->display_options['fields']['title_1']['field'] = 'title';
   $handler->display->display_options['fields']['title_1']['label'] = 'Titre';
-  /* Champ: Content : Path */
+  /* Field: Content: Path */
   $handler->display->display_options['fields']['path']['id'] = 'path';
   $handler->display->display_options['fields']['path']['table'] = 'node';
   $handler->display->display_options['fields']['path']['field'] = 'path';
   $handler->display->display_options['fields']['path']['label'] = 'Chemin';
-  /* Champ: Nœud : Date d'expiration */
+  /* Field: Content: Expiration date */
   $handler->display->display_options['fields']['field_form1_expiration']['id'] = 'field_form1_expiration';
   $handler->display->display_options['fields']['field_form1_expiration']['table'] = 'field_data_field_form1_expiration';
   $handler->display->display_options['fields']['field_form1_expiration']['field'] = 'field_form1_expiration';
@@ -1564,7 +1571,7 @@ print "<h3>Nombre total de formulaires : $result</h3>";
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Champ: Content : Updated date */
+  /* Field: Content: Updated date */
   $handler->display->display_options['fields']['changed']['id'] = 'changed';
   $handler->display->display_options['fields']['changed']['table'] = 'node';
   $handler->display->display_options['fields']['changed']['field'] = 'changed';
@@ -1572,7 +1579,7 @@ print "<h3>Nombre total de formulaires : $result</h3>";
   $handler->display->display_options['fields']['changed']['date_format'] = 'short';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
   $handler->display->display_options['fields']['changed']['format_date_sql'] = 0;
-  /* Champ: Content : Post date */
+  /* Field: Content: Post date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'node';
   $handler->display->display_options['fields']['created']['field'] = 'created';
@@ -1580,36 +1587,36 @@ print "<h3>Nombre total de formulaires : $result</h3>";
   $handler->display->display_options['fields']['created']['date_format'] = 'short';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
   $handler->display->display_options['fields']['created']['format_date_sql'] = 0;
-  /* Champ: Content : Author uid */
+  /* Field: Content: Author uid */
   $handler->display->display_options['fields']['uid']['id'] = 'uid';
   $handler->display->display_options['fields']['uid']['table'] = 'node';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['label'] = 'uid de l\'auteur';
-  /* Champ: User : Name */
+  /* Field: User: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'users';
   $handler->display->display_options['fields']['name']['field'] = 'name';
   $handler->display->display_options['fields']['name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['name']['label'] = 'Nom';
-  /* Champ: User : E-mail */
+  /* Field: User: E-mail */
   $handler->display->display_options['fields']['mail']['id'] = 'mail';
   $handler->display->display_options['fields']['mail']['table'] = 'users';
   $handler->display->display_options['fields']['mail']['field'] = 'mail';
   $handler->display->display_options['fields']['mail']['relationship'] = 'uid';
   $handler->display->display_options['fields']['mail']['label'] = 'Courriel';
   $handler->display->display_options['fields']['mail']['link_to_user'] = 'user';
-  /* Champ: Content : Published status */
+  /* Field: Content: Published status */
   $handler->display->display_options['fields']['status']['id'] = 'status';
   $handler->display->display_options['fields']['status']['table'] = 'node';
   $handler->display->display_options['fields']['status']['field'] = 'status';
   $handler->display->display_options['fields']['status']['label'] = 'Publié';
   $handler->display->display_options['fields']['status']['not'] = 0;
-  /* Critère de tri: Content : Post date */
+  /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Critère de filtrage: Content : Published status */
+  /* Filter criterion: Content: Published status */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
@@ -1627,7 +1634,7 @@ print "<h3>Nombre total de formulaires : $result</h3>";
     3 => 0,
     4 => 0,
   );
-  /* Critère de filtrage: Content : Nid */
+  /* Filter criterion: Content: Nid */
   $handler->display->display_options['filters']['nid']['id'] = 'nid';
   $handler->display->display_options['filters']['nid']['table'] = 'node';
   $handler->display->display_options['filters']['nid']['field'] = 'nid';
@@ -1642,7 +1649,7 @@ print "<h3>Nombre total de formulaires : $result</h3>";
     3 => 0,
     4 => 0,
   );
-  /* Critère de filtrage: Content : Title */
+  /* Filter criterion: Content: Title */
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
   $handler->display->display_options['filters']['title']['field'] = 'title';
@@ -1658,7 +1665,7 @@ print "<h3>Nombre total de formulaires : $result</h3>";
     3 => 0,
     4 => 0,
   );
-  /* Critère de filtrage: User : Name */
+  /* Filter criterion: User: Name */
   $handler->display->display_options['filters']['uid']['id'] = 'uid';
   $handler->display->display_options['filters']['uid']['table'] = 'users';
   $handler->display->display_options['filters']['uid']['field'] = 'uid';
@@ -1683,7 +1690,7 @@ print "<h3>Nombre total de formulaires : $result</h3>";
     2 => array(),
     3 => array(),
   );
-  /* Critère de filtrage: User : E-mail */
+  /* Filter criterion: User: E-mail */
   $handler->display->display_options['filters']['mail']['id'] = 'mail';
   $handler->display->display_options['filters']['mail']['table'] = 'users';
   $handler->display->display_options['filters']['mail']['field'] = 'mail';
@@ -1722,12 +1729,12 @@ print "<h3>Nombre total de formulaires : $result</h3>";
     t('dernier »'),
     t('auteur'),
     t('Utilisateur'),
-    t('- Choisir une opération -'),
+    t('- Choose an operation -'),
     t('Nid'),
     t('[nid]'),
     t('Titre'),
     t('Chemin'),
-    t('Date d\'expiration'),
+    t('Expiration date'),
     t('Date de mise à jour'),
     t('Date de publication'),
     t('uid de l\'auteur'),
@@ -1735,6 +1742,7 @@ print "<h3>Nombre total de formulaires : $result</h3>";
     t('Courriel'),
     t('Publié'),
     t('Page'),
+    t('more'),
   );
   $export['form_search'] = $view;
 
@@ -1797,24 +1805,24 @@ print "<h3>Nombre total de formulaires : $result</h3>";
       'empty_column' => 0,
     ),
   );
-  /* Relation: Webform : Node */
+  /* Relationship: Webform: Node */
   $handler->display->display_options['relationships']['nid']['id'] = 'nid';
   $handler->display->display_options['relationships']['nid']['table'] = 'webform';
   $handler->display->display_options['relationships']['nid']['field'] = 'nid';
   $handler->display->display_options['relationships']['nid']['label'] = 'Nœud pour webform';
-  /* Champ: Content : Title */
+  /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['relationship'] = 'nid';
   $handler->display->display_options['fields']['title']['label'] = 'Titre';
-  /* Champ: Webform : Webform submission count */
+  /* Field: Webform: Webform submission count */
   $handler->display->display_options['fields']['webform_submission_count_node']['id'] = 'webform_submission_count_node';
   $handler->display->display_options['fields']['webform_submission_count_node']['table'] = 'node';
   $handler->display->display_options['fields']['webform_submission_count_node']['field'] = 'webform_submission_count_node';
   $handler->display->display_options['fields']['webform_submission_count_node']['relationship'] = 'nid';
   $handler->display->display_options['fields']['webform_submission_count_node']['hide_empty'] = TRUE;
-  /* Champ: Content : Post date */
+  /* Field: Content: Post date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'node';
   $handler->display->display_options['fields']['created']['field'] = 'created';
@@ -1823,7 +1831,7 @@ print "<h3>Nombre total de formulaires : $result</h3>";
   $handler->display->display_options['fields']['created']['date_format'] = 'date_fr';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
   $handler->display->display_options['fields']['created']['format_date_sql'] = 0;
-  /* Filtre contextuel: Webform : Node */
+  /* Contextual filter: Webform: Node */
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
   $handler->display->display_options['arguments']['nid']['table'] = 'webform';
   $handler->display->display_options['arguments']['nid']['field'] = 'nid';
@@ -1833,7 +1841,7 @@ print "<h3>Nombre total de formulaires : $result</h3>";
   $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
-  /* Critère de filtrage: Webform : Status */
+  /* Filter criterion: Webform: Status */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'webform';
   $handler->display->display_options['filters']['status']['field'] = 'status';
@@ -1843,7 +1851,7 @@ print "<h3>Nombre total de formulaires : $result</h3>";
   $handler->display->display_options['filters']['status']['expose']['operator'] = 'status_op';
   $handler->display->display_options['filters']['status']['expose']['identifier'] = 'status';
   $handler->display->display_options['filters']['status']['expose']['required'] = TRUE;
-  /* Critère de filtrage: Content : Title */
+  /* Filter criterion: Content: Title */
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
   $handler->display->display_options['filters']['title']['field'] = 'title';
@@ -1888,6 +1896,7 @@ print "<h3>Nombre total de formulaires : $result</h3>";
     t('Statut'),
     t('Titre du formulaire'),
     t('Page'),
+    t('more'),
   );
   $export['forms_participations'] = $view;
 
@@ -1949,20 +1958,20 @@ print "<h3>Nombre total de formulaires : $result</h3>";
       'empty_column' => 0,
     ),
   );
-  /* Champ: Webform : Webform submission count */
+  /* Field: Webform: Webform submission count */
   $handler->display->display_options['fields']['webform_submission_count_node']['id'] = 'webform_submission_count_node';
   $handler->display->display_options['fields']['webform_submission_count_node']['table'] = 'node';
   $handler->display->display_options['fields']['webform_submission_count_node']['field'] = 'webform_submission_count_node';
-  /* Champ: Content : Title */
+  /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = 'Titre';
-  /* Critère de tri: Webform submissions : Node */
+  /* Sort criterion: Webform submissions: Node */
   $handler->display->display_options['sorts']['nid']['id'] = 'nid';
   $handler->display->display_options['sorts']['nid']['table'] = 'webform_submissions';
   $handler->display->display_options['sorts']['nid']['field'] = 'nid';
-  /* Critère de tri: Content : Post date */
+  /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
@@ -2009,6 +2018,7 @@ print "<h3>Nombre total de formulaires : $result</h3>";
     t('# of Submissions'),
     t('Titre'),
     t('Page'),
+    t('more'),
     t('Flux'),
     t('Fichier attaché'),
   );
@@ -2063,18 +2073,18 @@ print "<h3>Nombre total de formulaires : $result</h3>";
       'empty_column' => 0,
     ),
   );
-  /* Entête: Global : Text area */
+  /* Header: Global: Text area */
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
   $handler->display->display_options['header']['area']['content'] = 'Vous trouverez ci-dessous la liste des formulaires déclarés volontairement par leur auteur comme "modèle de formulaire". Ces derniers peuvent être dupliqués facilement (lien "cloner") afin de vous faire gagner un temps précieux.';
   $handler->display->display_options['header']['area']['format'] = 'wysiwyg_user';
-  /* Relation: Content : Content author */
+  /* Relationship: Content: Content author */
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
   $handler->display->display_options['relationships']['uid']['table'] = 'node';
   $handler->display->display_options['relationships']['uid']['field'] = 'uid';
   $handler->display->display_options['relationships']['uid']['label'] = 'auteur';
-  /* Champ: Content : Nid */
+  /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid_1']['id'] = 'nid_1';
   $handler->display->display_options['fields']['nid_1']['table'] = 'node';
   $handler->display->display_options['fields']['nid_1']['field'] = 'nid';
@@ -2084,13 +2094,13 @@ print "<h3>Nombre total de formulaires : $result</h3>";
   $handler->display->display_options['fields']['nid_1']['alter']['text'] = '(Voir)';
   $handler->display->display_options['fields']['nid_1']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['nid_1']['link_to_node'] = TRUE;
-  /* Champ: Content : Title */
+  /* Field: Content: Title */
   $handler->display->display_options['fields']['title_1']['id'] = 'title_1';
   $handler->display->display_options['fields']['title_1']['table'] = 'node';
   $handler->display->display_options['fields']['title_1']['field'] = 'title';
   $handler->display->display_options['fields']['title_1']['label'] = 'Nom';
   $handler->display->display_options['fields']['title_1']['link_to_node'] = FALSE;
-  /* Champ: Nœud : Date d'expiration */
+  /* Field: Content: Expiration date */
   $handler->display->display_options['fields']['field_form1_expiration']['id'] = 'field_form1_expiration';
   $handler->display->display_options['fields']['field_form1_expiration']['table'] = 'field_data_field_form1_expiration';
   $handler->display->display_options['fields']['field_form1_expiration']['field'] = 'field_form1_expiration';
@@ -2103,7 +2113,7 @@ print "<h3>Nombre total de formulaires : $result</h3>";
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Champ: Views : Views Conditional */
+  /* Field: Views: Views Conditional */
   $handler->display->display_options['fields']['views_conditional']['id'] = 'views_conditional';
   $handler->display->display_options['fields']['views_conditional']['table'] = 'views_conditional';
   $handler->display->display_options['fields']['views_conditional']['field'] = 'views_conditional';
@@ -2116,7 +2126,7 @@ print "<h3>Nombre total de formulaires : $result</h3>";
   $handler->display->display_options['fields']['views_conditional']['then'] = '[nid_1]';
   $handler->display->display_options['fields']['views_conditional']['or'] = 'Encore actif';
   $handler->display->display_options['fields']['views_conditional']['strip_tags'] = 0;
-  /* Champ: Content : Updated date */
+  /* Field: Content: Updated date */
   $handler->display->display_options['fields']['changed']['id'] = 'changed';
   $handler->display->display_options['fields']['changed']['table'] = 'node';
   $handler->display->display_options['fields']['changed']['field'] = 'changed';
@@ -2124,18 +2134,18 @@ print "<h3>Nombre total de formulaires : $result</h3>";
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
   $handler->display->display_options['fields']['changed']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
-  /* Champ: User : Name */
+  /* Field: User: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'users';
   $handler->display->display_options['fields']['name']['field'] = 'name';
   $handler->display->display_options['fields']['name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['name']['label'] = 'Auteur';
-  /* Champ: Nœud : Description du modèle */
+  /* Field: Content: Template description */
   $handler->display->display_options['fields']['field_form1_template_desc']['id'] = 'field_form1_template_desc';
   $handler->display->display_options['fields']['field_form1_template_desc']['table'] = 'field_data_field_form1_template_desc';
   $handler->display->display_options['fields']['field_form1_template_desc']['field'] = 'field_form1_template_desc';
   $handler->display->display_options['fields']['field_form1_template_desc']['label'] = 'Description';
-  /* Champ: Content : Nid */
+  /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
@@ -2144,19 +2154,19 @@ print "<h3>Nombre total de formulaires : $result</h3>";
   $handler->display->display_options['fields']['nid']['alter']['text'] = 'Cloner';
   $handler->display->display_options['fields']['nid']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['nid']['alter']['path'] = 'node/[nid]/clone/confirm';
-  /* Critère de tri: Content : Post date */
+  /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Critère de filtrage: Content : Published status */
+  /* Filter criterion: Content: Published status */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Critère de filtrage: Content : Type */
+  /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
@@ -2164,7 +2174,7 @@ print "<h3>Nombre total de formulaires : $result</h3>";
     'form1' => 'form1',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
-  /* Critère de filtrage: Nœud : Lister comme modèle (field_form1_template) */
+  /* Filter criterion: Content: List this form as a template (field_form1_template) */
   $handler->display->display_options['filters']['field_form1_template_value']['id'] = 'field_form1_template_value';
   $handler->display->display_options['filters']['field_form1_template_value']['table'] = 'field_data_field_form1_template';
   $handler->display->display_options['filters']['field_form1_template_value']['field'] = 'field_form1_template_value';
@@ -2172,7 +2182,7 @@ print "<h3>Nombre total de formulaires : $result</h3>";
     1 => '1',
   );
   $handler->display->display_options['filters']['field_form1_template_value']['group'] = 1;
-  /* Critère de filtrage: Content : Title */
+  /* Filter criterion: Content: Title */
   $handler->display->display_options['filters']['title_1']['id'] = 'title_1';
   $handler->display->display_options['filters']['title_1']['table'] = 'node';
   $handler->display->display_options['filters']['title_1']['field'] = 'title';
@@ -2189,7 +2199,7 @@ print "<h3>Nombre total de formulaires : $result</h3>";
     3 => 0,
     4 => 0,
   );
-  /* Critère de filtrage: User : Name (raw) */
+  /* Filter criterion: User: Name (raw) */
   $handler->display->display_options['filters']['name']['id'] = 'name';
   $handler->display->display_options['filters']['name']['table'] = 'users';
   $handler->display->display_options['filters']['name']['field'] = 'name';
@@ -2207,7 +2217,7 @@ print "<h3>Nombre total de formulaires : $result</h3>";
     3 => 0,
     4 => 0,
   );
-  /* Critère de filtrage: Nœud : Description du modèle (field_form1_template_desc) */
+  /* Filter criterion: Content: Template description (field_form1_template_desc) */
   $handler->display->display_options['filters']['field_form1_template_desc_value']['id'] = 'field_form1_template_desc_value';
   $handler->display->display_options['filters']['field_form1_template_desc_value']['table'] = 'field_data_field_form1_template_desc';
   $handler->display->display_options['filters']['field_form1_template_desc_value']['field'] = 'field_form1_template_desc_value';
@@ -2249,7 +2259,7 @@ print "<h3>Nombre total de formulaires : $result</h3>";
     t('Visualiser'),
     t('(Voir)'),
     t('Nom'),
-    t('Date d\'expiration'),
+    t('Expiration date'),
     t('Mise à jour'),
     t('Auteur'),
     t('Description'),
@@ -2258,6 +2268,7 @@ print "<h3>Nombre total de formulaires : $result</h3>";
     t('Auteur contient :'),
     t('Description contient :'),
     t('Page'),
+    t('more'),
   );
   $export['templates'] = $view;
 
@@ -2292,7 +2303,7 @@ print "<h3>Nombre total de formulaires : $result</h3>";
   $handler->display->display_options['pager']['options']['tags']['last'] = 'dernier »';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
-  /* Champ: User : Name */
+  /* Field: User: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'users';
   $handler->display->display_options['fields']['name']['field'] = 'name';
@@ -2301,7 +2312,7 @@ print "<h3>Nombre total de formulaires : $result</h3>";
   $handler->display->display_options['fields']['name']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['name']['link_to_user'] = FALSE;
-  /* Critère de filtrage: User : Active status */
+  /* Filter criterion: User: Active status */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'users';
   $handler->display->display_options['filters']['status']['field'] = 'status';
@@ -2338,6 +2349,7 @@ print "<h3>Nombre total de formulaires : $result</h3>";
     t('suivant ›'),
     t('dernier »'),
     t('User Entity Reference Example'),
+    t('more'),
   );
   $export['user_autocomplete'] = $view;
 
@@ -2420,19 +2432,18 @@ print "<h3>Nombre total de formulaires : $result</h3>";
       'empty_column' => 0,
     ),
   );
-  /* Relation: Webform : Node */
+  /* Relationship: Webform: Node */
   $handler->display->display_options['relationships']['nid']['id'] = 'nid';
   $handler->display->display_options['relationships']['nid']['table'] = 'webform';
   $handler->display->display_options['relationships']['nid']['field'] = 'nid';
-  $handler->display->display_options['relationships']['nid']['label'] = 'Nœud pour webform';
-  /* Champ: Content : Title */
+  /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = 'Voir';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Champ: Content : Nid */
+  /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
@@ -2441,14 +2452,13 @@ print "<h3>Nombre total de formulaires : $result</h3>";
   $handler->display->display_options['fields']['nid']['alter']['text'] = 'éditer';
   $handler->display->display_options['fields']['nid']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['nid']['alter']['path'] = 'node/[nid]/edit';
-  /* Champ: Content : Post date */
+  /* Field: Content: Post date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'node';
   $handler->display->display_options['fields']['created']['field'] = 'created';
-  $handler->display->display_options['fields']['created']['label'] = 'Date de publication';
   $handler->display->display_options['fields']['created']['date_format'] = 'short';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
-  /* Champ: Nœud : Date d'expiration */
+  /* Field: Content: Expiration date */
   $handler->display->display_options['fields']['field_form1_expiration']['id'] = 'field_form1_expiration';
   $handler->display->display_options['fields']['field_form1_expiration']['table'] = 'field_data_field_form1_expiration';
   $handler->display->display_options['fields']['field_form1_expiration']['field'] = 'field_form1_expiration';
@@ -2459,17 +2469,17 @@ print "<h3>Nombre total de formulaires : $result</h3>";
     'interval' => '2',
     'interval_display' => 'time span',
   );
-  /* Champ: Content : Link to delete content */
+  /* Field: Content: Link to delete content */
   $handler->display->display_options['fields']['delete_node']['id'] = 'delete_node';
   $handler->display->display_options['fields']['delete_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['delete_node']['field'] = 'delete_node';
   $handler->display->display_options['fields']['delete_node']['label'] = 'Supprimer';
-  /* Critère de tri: Content : Post date */
+  /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Filtre contextuel: Content : Author uid */
+  /* Contextual filter: Content: Author uid */
   $handler->display->display_options['arguments']['uid']['id'] = 'uid';
   $handler->display->display_options['arguments']['uid']['table'] = 'node';
   $handler->display->display_options['arguments']['uid']['field'] = 'uid';
@@ -2479,14 +2489,14 @@ print "<h3>Nombre total de formulaires : $result</h3>";
   $handler->display->display_options['arguments']['uid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['uid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['uid']['summary_options']['items_per_page'] = '25';
-  /* Critère de filtrage: Content : Type */
+  /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
     'form1' => 'form1',
   );
-  /* Critère de filtrage: Content : Title */
+  /* Filter criterion: Content: Title */
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
   $handler->display->display_options['filters']['title']['field'] = 'title';
@@ -2535,11 +2545,11 @@ print "<h3>Nombre total de formulaires : $result</h3>";
     t('‹ précédent'),
     t('suivant ›'),
     t('dernier »'),
-    t('Nœud pour webform'),
+    t('Node for webform'),
     t('Voir'),
     t('Edition'),
     t('éditer'),
-    t('Date de publication'),
+    t('Post date'),
     t('Expiration'),
     t('Supprimer'),
     t('Tout'),
@@ -2547,6 +2557,7 @@ print "<h3>Nombre total de formulaires : $result</h3>";
     t('Cherchez des formulaires dont le titre contient un ou plusieurs des mots suivants.'),
     t('Titre'),
     t('Page'),
+    t('more'),
   );
   $export['user_forms'] = $view;
 
@@ -2605,18 +2616,18 @@ print "<h3>Nombre total de formulaires : $result</h3>";
       'empty_column' => 0,
     ),
   );
-  /* Entête: Global : Result summary */
+  /* Header: Global: Result summary */
   $handler->display->display_options['header']['result']['id'] = 'result';
   $handler->display->display_options['header']['result']['table'] = 'views';
   $handler->display->display_options['header']['result']['field'] = 'result';
-  /* Champ: Global : View result counter */
+  /* Field: Global: View result counter */
   $handler->display->display_options['fields']['counter']['id'] = 'counter';
   $handler->display->display_options['fields']['counter']['table'] = 'views';
   $handler->display->display_options['fields']['counter']['field'] = 'counter';
   $handler->display->display_options['fields']['counter']['label'] = 'Voir le compteur de résultats';
   $handler->display->display_options['fields']['counter']['counter_start'] = '1';
   $handler->display->display_options['fields']['counter']['reverse'] = 1;
-  /* Champ: User : Created date */
+  /* Field: User: Created date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'users';
   $handler->display->display_options['fields']['created']['field'] = 'created';
@@ -2625,18 +2636,18 @@ print "<h3>Nombre total de formulaires : $result</h3>";
   $handler->display->display_options['fields']['created']['custom_date_format'] = 'Y/m/d';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
   $handler->display->display_options['fields']['created']['format_date_sql'] = 0;
-  /* Champ: User : Uid */
+  /* Field: User: Uid */
   $handler->display->display_options['fields']['uid']['id'] = 'uid';
   $handler->display->display_options['fields']['uid']['table'] = 'users';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['link_to_user'] = FALSE;
-  /* Critère de tri: User : Created date */
+  /* Sort criterion: User: Created date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'users';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
   $handler->display->display_options['sorts']['created']['granularity'] = 'day';
-  /* Critère de filtrage: User : Active status */
+  /* Filter criterion: User: Active status */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'users';
   $handler->display->display_options['filters']['status']['field'] = 'status';
@@ -2668,6 +2679,7 @@ print "<h3>Nombre total de formulaires : $result</h3>";
     t('Date de création'),
     t('Uid'),
     t('Page'),
+    t('more'),
   );
   $export['users_count'] = $view;
 
@@ -2776,48 +2788,48 @@ print "<h3>Nombre total de formulaires : $result</h3>";
       'empty_column' => 0,
     ),
   );
-  /* Entête: Global : Result summary */
+  /* Header: Global: Result summary */
   $handler->display->display_options['header']['result']['id'] = 'result';
   $handler->display->display_options['header']['result']['table'] = 'views';
   $handler->display->display_options['header']['result']['field'] = 'result';
-  /* Relation: User : Content authored */
+  /* Relationship: User: Content authored */
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
   $handler->display->display_options['relationships']['uid']['table'] = 'users';
   $handler->display->display_options['relationships']['uid']['field'] = 'uid';
   $handler->display->display_options['relationships']['uid']['label'] = 'nœuds';
-  /* Relation: Content : Content author */
+  /* Relationship: Content: Content author */
   $handler->display->display_options['relationships']['uid_1']['id'] = 'uid_1';
   $handler->display->display_options['relationships']['uid_1']['table'] = 'node';
   $handler->display->display_options['relationships']['uid_1']['field'] = 'uid';
   $handler->display->display_options['relationships']['uid_1']['relationship'] = 'uid';
   $handler->display->display_options['relationships']['uid_1']['label'] = 'auteur';
-  /* Champ: User : Name */
+  /* Field: User: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'users';
   $handler->display->display_options['fields']['name']['field'] = 'name';
   $handler->display->display_options['fields']['name']['label'] = '';
   $handler->display->display_options['fields']['name']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['name']['alter']['ellipsis'] = FALSE;
-  /* Champ: User : E-mail */
+  /* Field: User: E-mail */
   $handler->display->display_options['fields']['mail']['id'] = 'mail';
   $handler->display->display_options['fields']['mail']['table'] = 'users';
   $handler->display->display_options['fields']['mail']['field'] = 'mail';
   $handler->display->display_options['fields']['mail']['label'] = 'Courriel';
-  /* Champ: User : Created date */
+  /* Field: User: Created date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'users';
   $handler->display->display_options['fields']['created']['field'] = 'created';
   $handler->display->display_options['fields']['created']['label'] = 'Date de création';
   $handler->display->display_options['fields']['created']['date_format'] = 'short';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
-  /* Champ: User : Last access */
+  /* Field: User: Last access */
   $handler->display->display_options['fields']['access']['id'] = 'access';
   $handler->display->display_options['fields']['access']['table'] = 'users';
   $handler->display->display_options['fields']['access']['field'] = 'access';
   $handler->display->display_options['fields']['access']['label'] = 'Dernier accès';
   $handler->display->display_options['fields']['access']['date_format'] = 'short';
   $handler->display->display_options['fields']['access']['second_date_format'] = 'long';
-  /* Champ: Bulk operations : User */
+  /* Field: Bulk operations: User */
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'views_entity_user';
   $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
@@ -2850,37 +2862,37 @@ print "<h3>Nombre total de formulaires : $result</h3>";
       'label' => '',
     ),
   );
-  /* Champ: Content : Nid */
+  /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
   $handler->display->display_options['fields']['nid']['relationship'] = 'uid';
   $handler->display->display_options['fields']['nid']['link_to_node'] = TRUE;
-  /* Champ: Webform : Webform submission count */
+  /* Field: Webform: Webform submission count */
   $handler->display->display_options['fields']['webform_submission_count_node']['id'] = 'webform_submission_count_node';
   $handler->display->display_options['fields']['webform_submission_count_node']['table'] = 'node';
   $handler->display->display_options['fields']['webform_submission_count_node']['field'] = 'webform_submission_count_node';
   $handler->display->display_options['fields']['webform_submission_count_node']['relationship'] = 'uid';
-  /* Champ: User : Created date */
+  /* Field: User: Created date */
   $handler->display->display_options['fields']['created_1']['id'] = 'created_1';
   $handler->display->display_options['fields']['created_1']['table'] = 'users';
   $handler->display->display_options['fields']['created_1']['field'] = 'created';
   $handler->display->display_options['fields']['created_1']['label'] = 'Date de création';
   $handler->display->display_options['fields']['created_1']['date_format'] = 'time ago';
   $handler->display->display_options['fields']['created_1']['second_date_format'] = 'long';
-  /* Critère de tri: User : Created date */
+  /* Sort criterion: User: Created date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'users';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Critère de filtrage: User : Active status */
+  /* Filter criterion: User: Active status */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'users';
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Critère de filtrage: User : E-mail */
+  /* Filter criterion: User: E-mail */
   $handler->display->display_options['filters']['mail']['id'] = 'mail';
   $handler->display->display_options['filters']['mail']['table'] = 'users';
   $handler->display->display_options['filters']['mail']['field'] = 'mail';
@@ -2922,10 +2934,11 @@ print "<h3>Nombre total de formulaires : $result</h3>";
     t('Date de création'),
     t('Dernier accès'),
     t('Utilisateur'),
-    t('- Choisir une opération -'),
+    t('- Choose an operation -'),
     t('Nid'),
     t('# of Submissions'),
     t('Page'),
+    t('more'),
   );
   $export['users_list'] = $view;
 
@@ -3012,12 +3025,12 @@ print "<h3>Nombre total de formulaires : $result</h3>";
   );
   $handler->display->display_options['style_options']['sticky'] = TRUE;
   $handler->display->display_options['style_options']['empty_table'] = TRUE;
-  /* Entête: Global : Result summary with an additional token to change the items/page */
+  /* Header: Global: Result summary with an additional token to change the items/page */
   $handler->display->display_options['header']['webform_result']['id'] = 'webform_result';
   $handler->display->display_options['header']['webform_result']['table'] = 'views';
   $handler->display->display_options['header']['webform_result']['field'] = 'webform_result';
   $handler->display->display_options['header']['webform_result']['content'] = '<div class="webform-results-per-page">Showing @start - @end of @total. &nbsp; @items_per_page_links</div>';
-  /* Entête: warning-personnal-data */
+  /* Header: warning-personnal-data */
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
@@ -3028,24 +3041,24 @@ En faisant ce choix, il ou elle s\'est engagé⋅e à respecter la confidentiali
 <p>Si ce formulaire contient des données personnelles que vous jugez sensibles (noms, adresses postales/emails, n° téléphone, etc.), vous pouvez contacter l\'auteur via <a href="/user//contact">son formulaire de contact</a> (NB: pour éviter le spam, il faut être connecté pour lui écrire).</p></div>';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
   $handler->display->display_options['header']['area']['tokenize'] = TRUE;
-  /* Comportement en l'absence de résultats: Global : Unfiltered text */
+  /* No results behavior: Global: Unfiltered text */
   $handler->display->display_options['empty']['area_text_custom']['id'] = 'area_text_custom';
   $handler->display->display_options['empty']['area_text_custom']['table'] = 'views';
   $handler->display->display_options['empty']['area_text_custom']['field'] = 'area_text_custom';
   $handler->display->display_options['empty']['area_text_custom']['empty'] = TRUE;
   $handler->display->display_options['empty']['area_text_custom']['content'] = 'There are no submissions for this form. <a href="/node/!1">View this form</a>.';
   $handler->display->display_options['empty']['area_text_custom']['tokenize'] = TRUE;
-  /* Relation: Webform submissions : User */
+  /* Relationship: Webform submissions: User */
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
   $handler->display->display_options['relationships']['uid']['table'] = 'webform_submissions';
   $handler->display->display_options['relationships']['uid']['field'] = 'uid';
-  /* Champ: Webform submissions : Sid */
+  /* Field: Webform submissions: Sid */
   $handler->display->display_options['fields']['sid']['id'] = 'sid';
   $handler->display->display_options['fields']['sid']['table'] = 'webform_submissions';
   $handler->display->display_options['fields']['sid']['field'] = 'sid';
   $handler->display->display_options['fields']['sid']['exclude'] = TRUE;
   $handler->display->display_options['fields']['sid']['separator'] = '';
-  /* Champ: Webform submissions : Serial number */
+  /* Field: Webform submissions: Serial number */
   $handler->display->display_options['fields']['serial']['id'] = 'serial';
   $handler->display->display_options['fields']['serial']['table'] = 'webform_submissions';
   $handler->display->display_options['fields']['serial']['field'] = 'serial';
@@ -3053,7 +3066,7 @@ En faisant ce choix, il ou elle s\'est engagé⋅e à respecter la confidentiali
   $handler->display->display_options['fields']['serial']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['serial']['alter']['text'] = '<a href="/node/!1/public-results/[sid]/view">#[serial]</a>';
   $handler->display->display_options['fields']['serial']['separator'] = '';
-  /* Champ: Webform submissions : View link */
+  /* Field: Webform submissions: View link */
   $handler->display->display_options['fields']['view_submission']['id'] = 'view_submission';
   $handler->display->display_options['fields']['view_submission']['table'] = 'webform_submissions';
   $handler->display->display_options['fields']['view_submission']['field'] = 'view_submission';
@@ -3062,21 +3075,21 @@ En faisant ce choix, il ou elle s\'est engagé⋅e à respecter la confidentiali
   $handler->display->display_options['fields']['view_submission']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['view_submission']['text'] = '[serial]';
   $handler->display->display_options['fields']['view_submission']['access_check'] = 0;
-  /* Champ: Webform submissions : Submitted */
+  /* Field: Webform submissions: Submitted */
   $handler->display->display_options['fields']['submitted']['id'] = 'submitted';
   $handler->display->display_options['fields']['submitted']['table'] = 'webform_submissions';
   $handler->display->display_options['fields']['submitted']['field'] = 'submitted';
   $handler->display->display_options['fields']['submitted']['label'] = 'Soumis';
   $handler->display->display_options['fields']['submitted']['date_format'] = 'short';
   $handler->display->display_options['fields']['submitted']['second_date_format'] = 'long';
-  /* Champ: User : Name */
+  /* Field: User: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'users';
   $handler->display->display_options['fields']['name']['field'] = 'name';
   $handler->display->display_options['fields']['name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['name']['label'] = 'Utilisateur';
   $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
-  /* Champ: Webform submission data : All values */
+  /* Field: Webform submission data: All values */
   $handler->display->display_options['fields']['webform_all_fields']['id'] = 'webform_all_fields';
   $handler->display->display_options['fields']['webform_all_fields']['table'] = 'webform_submissions';
   $handler->display->display_options['fields']['webform_all_fields']['field'] = 'webform_all_fields';
@@ -3088,7 +3101,7 @@ En faisant ce choix, il ou elle s\'est engagé⋅e à respecter la confidentiali
   $handler->display->display_options['fields']['webform_all_fields']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['webform_all_fields']['alter']['html'] = TRUE;
   $handler->display->display_options['fields']['webform_all_fields']['format'] = 'text';
-  /* Filtre contextuel: Webform submissions : Node */
+  /* Contextual filter: Webform submissions: Node */
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
   $handler->display->display_options['arguments']['nid']['table'] = 'webform_submissions';
   $handler->display->display_options['arguments']['nid']['field'] = 'nid';
@@ -3100,7 +3113,7 @@ En faisant ce choix, il ou elle s\'est engagé⋅e à respecter la confidentiali
   $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['arguments']['nid']['specify_validation'] = TRUE;
   $handler->display->display_options['arguments']['nid']['validate']['type'] = 'node';
-  /* Critère de filtrage: Content : Type */
+  /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
@@ -3149,6 +3162,7 @@ En faisant ce choix, il ou elle s\'est engagé⋅e à respecter la confidentiali
     t('Soumis'),
     t('Utilisateur'),
     t('Page'),
+    t('more'),
   );
   $export['webform_public_results'] = $view;
 
@@ -3235,23 +3249,23 @@ En faisant ce choix, il ou elle s\'est engagé⋅e à respecter la confidentiali
   );
   $handler->display->display_options['style_options']['sticky'] = TRUE;
   $handler->display->display_options['style_options']['empty_table'] = TRUE;
-  /* Entête: Global : Result summary with an additional token to change the items/page */
+  /* Header: Global: Result summary with an additional token to change the items/page */
   $handler->display->display_options['header']['webform_result']['id'] = 'webform_result';
   $handler->display->display_options['header']['webform_result']['table'] = 'views';
   $handler->display->display_options['header']['webform_result']['field'] = 'webform_result';
   $handler->display->display_options['header']['webform_result']['content'] = '<div class="webform-results-per-page">Showing @start - @end of @total. &nbsp; @items_per_page_links</div>';
-  /* Comportement en l'absence de résultats: Global : Unfiltered text */
+  /* No results behavior: Global: Unfiltered text */
   $handler->display->display_options['empty']['area_text_custom']['id'] = 'area_text_custom';
   $handler->display->display_options['empty']['area_text_custom']['table'] = 'views';
   $handler->display->display_options['empty']['area_text_custom']['field'] = 'area_text_custom';
   $handler->display->display_options['empty']['area_text_custom']['empty'] = TRUE;
   $handler->display->display_options['empty']['area_text_custom']['content'] = 'There are no submissions for this form. <a href="/node/!1">View this form</a>.';
   $handler->display->display_options['empty']['area_text_custom']['tokenize'] = TRUE;
-  /* Relation: Webform submissions : User */
+  /* Relationship: Webform submissions: User */
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
   $handler->display->display_options['relationships']['uid']['table'] = 'webform_submissions';
   $handler->display->display_options['relationships']['uid']['field'] = 'uid';
-  /* Champ: Webform submissions : View link */
+  /* Field: Webform submissions: View link */
   $handler->display->display_options['fields']['view_submission']['id'] = 'view_submission';
   $handler->display->display_options['fields']['view_submission']['table'] = 'webform_submissions';
   $handler->display->display_options['fields']['view_submission']['field'] = 'view_submission';
@@ -3259,21 +3273,21 @@ En faisant ce choix, il ou elle s\'est engagé⋅e à respecter la confidentiali
   $handler->display->display_options['fields']['view_submission']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['view_submission']['text'] = '[serial]';
   $handler->display->display_options['fields']['view_submission']['access_check'] = 0;
-  /* Champ: Webform submissions : Submitted */
+  /* Field: Webform submissions: Submitted */
   $handler->display->display_options['fields']['submitted']['id'] = 'submitted';
   $handler->display->display_options['fields']['submitted']['table'] = 'webform_submissions';
   $handler->display->display_options['fields']['submitted']['field'] = 'submitted';
   $handler->display->display_options['fields']['submitted']['label'] = 'Soumis';
   $handler->display->display_options['fields']['submitted']['date_format'] = 'short';
   $handler->display->display_options['fields']['submitted']['second_date_format'] = 'long';
-  /* Champ: User : Name */
+  /* Field: User: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'users';
   $handler->display->display_options['fields']['name']['field'] = 'name';
   $handler->display->display_options['fields']['name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['name']['label'] = 'Utilisateur';
   $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
-  /* Champ: Webform submission data : All values */
+  /* Field: Webform submission data: All values */
   $handler->display->display_options['fields']['webform_all_fields']['id'] = 'webform_all_fields';
   $handler->display->display_options['fields']['webform_all_fields']['table'] = 'webform_submissions';
   $handler->display->display_options['fields']['webform_all_fields']['field'] = 'webform_all_fields';
@@ -3285,7 +3299,7 @@ En faisant ce choix, il ou elle s\'est engagé⋅e à respecter la confidentiali
   $handler->display->display_options['fields']['webform_all_fields']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['webform_all_fields']['alter']['html'] = TRUE;
   $handler->display->display_options['fields']['webform_all_fields']['format'] = 'text';
-  /* Filtre contextuel: Webform submissions : Node */
+  /* Contextual filter: Webform submissions: Node */
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
   $handler->display->display_options['arguments']['nid']['table'] = 'webform_submissions';
   $handler->display->display_options['arguments']['nid']['field'] = 'nid';
@@ -3297,7 +3311,7 @@ En faisant ce choix, il ou elle s\'est engagé⋅e à respecter la confidentiali
   $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['arguments']['nid']['specify_validation'] = TRUE;
   $handler->display->display_options['arguments']['nid']['validate']['type'] = 'node';
-  /* Critère de filtrage: Content : Type */
+  /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
@@ -3337,6 +3351,7 @@ En faisant ce choix, il ou elle s\'est engagé⋅e à respecter la confidentiali
     t('Soumis'),
     t('Utilisateur'),
     t('Page'),
+    t('more'),
   );
   $export['webform_resultss'] = $view;
 
