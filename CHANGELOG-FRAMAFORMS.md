@@ -12,12 +12,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 * Option to automatically export form submissions as CSV files before deletion (https://framagit.org/framasoft/framaforms/-/issues/113)
 
 ### Changed
-* The `form1` content type is now part of the Framaforms module (declared via `includes/framaforms.node.inc`).
+* The `form1` content type is now part of the Framaforms module (declared via `includes/framaforms.node.inc`) (!89).
 * Added collapsible `fieldset` elements to admin menu (!93).
 * The general header can now be customized through the administration menu(!96).
 
 ### Fixed
 * Expiration date is now modified when a form is cloned (https://framagit.org/framasoft/framaforms/-/issues/61)
+* Useless fields were deleted from `framaforms_feature` (!89, fixed with !98).
 
 ## [1.0.3] 2020/10/12
 
