@@ -9,16 +9,18 @@
  * Creates a custom Framaforms page from a HTML template.
  *
  * Create nodes of type "page", based on a title and an HTML template name.
- * The page should be placed under includes/html/ and only contain the necessary HTML
+ * The page should be placed under includes/html/{language_code} and only contain the necessary HTML
  * content (not a complete HTML document).
  *
- * @param string $page_title
+ * @param String $page_title
  *   : name of the page to use.
- * @param string $file_name
+ * @param String $file_name
  *   : name of the HTML template to use for content.
  */
 function create_custom_page($page_title, $file_name){
   global $user;
+  // Get default site language to define which templates to use
+  $language_code = language_default()->language;
   // Check if the node already exists, based on node title.
   $query = db_select('node', 'n')
     ->fields('n', array('nid'))
@@ -34,8 +36,8 @@ function create_custom_page($page_title, $file_name){
   $custom_node->type = 'page';
   $custom_node->title = $page_title;
   node_object_prepare($custom_node);
-  // HTML template to use for the content.
-  $file_path = drupal_get_path('module', 'framaforms') . '/includes/html/' . $file_name;
+  // Define HTML template to use for the content based on the site's default language.
+  $file_path = _get_template_file_path($language_code, $file_name);
 
   $custom_node->uid = $user->uid;
   $custom_node->name = $user->name;
@@ -97,7 +99,7 @@ function create_all_pages() {
   if ($frontpage_nid != -1) {
     variable_set('site_frontpage', 'node/' . $frontpage_nid);
   }
-  $forbidden_nid = create_custom_page('Accès refusé', '403.html');
+  $forbidden_nid = create_custom_page(t('Access denied'), '403.html');
   if ($forbidden_nid != -1) {
     variable_set('site_403', 'node/' . $forbidden_nid);
   }
@@ -150,6 +152,8 @@ function get_expiration_content() {
  * @return void
  */
 function get_share_content() {
+  // Get the site's default language code
+  $language_code = language_default()->language;
   // This is very explicit cause it can vary from configuration
   // determination of http or https protocol.
   if (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1) ||isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') {
@@ -180,11 +184,31 @@ function get_share_content() {
   $thisIframe400 = '&lt;iframe src=&quot;' . $thisUrl . '&quot; width=&quot;100%&quot; height=&quot;400&quot; border=&quot;0&quot; &gt;&lt;/iframe&gt;';
   $thisIframe800 = '&lt;iframe src=&quot;' . $thisUrl . '&quot; width=&quot;100%&quot; height=&quot;800&quot; border=&quot;0&quot; &gt;&lt;/iframe&gt;';
 
-  $file_path = $base_url . drupal_get_path('module', 'framaforms') . '/includes/html/share_page.html';
+  $file_path = $base_url . drupal_get_path('module', 'framaforms') . "/includes/html/{$language_code}/share_page.html";
   $content = file_get_contents($file_path);
   $placeholders = ['[thishtmlelement]', '[thisurl]', '[thisclonelink]' , '[thisiframe800]'];
   $replacers = [$thisLink, $thisUrl, $thisCloneLink, $thisIframe800];
   $content = str_replace($placeholders, $replacers, $content);
 
   return $content;
+}
+
+/**
+ * Returns a template path based on a language code and a filename.
+ *
+ * If the template exists under includes/html in the desired language,
+ * returns this one.
+ * If not, returns the English version by default.
+ *
+ * @param String $language
+ * @param String $filename
+ * @return String the template path
+ */
+function _get_template_file_path($language, $filename){
+  $translated_template_path = drupal_get_path('module', 'framaforms') . "/includes/html/{$language}/{$filename}";
+  if(file_exists($translated_template_path)){
+    return $translated_template_path;
+  }
+  // Fallback to English otherwise
+  return drupal_get_path('module', 'framaforms') . "/includes/html/en/{$filename}";
 }
