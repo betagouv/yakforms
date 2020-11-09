@@ -61,38 +61,7 @@ function framaforms_menu() {
  */
 function framaforms_menu_alter(&$items) {
   $items['node/add/form1']['access arguments'][] = $items['node/add/form1']['access callback'];
-  $items['node/add/form1']['access callback'] = 'framaforms_check_users_forms';
-}
-
-/**
- * Acess callback for /node/add/form1 : forbids a user to create over a given number of forms.
- *
- * @return void
- */
-function framaforms_check_users_forms() {
-  global $user;
-  // If the user is not logged in, deny access.
-  if ($user->uid === 0) {
-    return FALSE;
-  }
-  // If the user is admin, grant access (admin is master here)
-  if ($user->uid === "1") {
-    return TRUE;
-  }
-  // Get the user's total number of forms.
-  $results = db_select('node', 'n')
-    ->fields('n')
-    ->condition('type', 'form1')
-    ->condition('uid', $user->uid)
-    ->countQuery()
-    ->execute()
-    ->fetchField();
-  if ($results >= variable_get('framaforms_forms_per_user_limit')) {
-    drupal_set_message(t("Your account has reached this site's maximum number of forms. Please delete some of your unused forms in 'My forms' before trying to create a new one."), 'warning', FALSE);
-    drupal_set_message(t("This site's allows to create the maximum following number of forms : @number", array('@number' => variable_get('framaforms_forms_per_user_limit'))), 'warning', FALSE);
-    return FALSE;
-  }
-  return TRUE;
+  $items['node/add/form1']['access callback'] = '_framaforms_check_users_forms';
 }
 
 /**
@@ -499,18 +468,6 @@ function framaforms_block_view($delta) {
 }
 
 /**
- * Implements hook_form_alter :
- * Disable wysiwyg on markup widget and add protection before leaving.
- */
-function framaforms_form_alter(&$form, &$form_state, $context) {
-  $form_id['edit-markup-value']['#wysiwyg'] = FALSE;
-  $form_id['edit-markup-value']['und'][0]['#wysiwyg'] = FALSE;
-  $form_id['markup']['#wysiwyg'] = FALSE;
-  $form_id['markup']['und'][0]['#wysiwyg'] = FALSE;
-  $form_id['form-builder-element-markup']['#type'] = 'text_format';
-}
-
-/**
  *
  */
 function framaforms_preprocess_page(&$vars, $hook) {
@@ -563,7 +520,7 @@ function framaforms_webform_submission_load(&$submissions) {
  */
 function framaforms_views_access_callbacks() {
   return array(
-    'framaforms_user_has_access' => t('Current user is author of the node'),
+    '_framaforms_user_has_access' => t('Current user is author of the node'),
   );
 }
 
@@ -575,7 +532,7 @@ function framaforms_views_access_callbacks() {
  *
  * @return void
  */
-function framaforms_user_has_access($account = NULL) {
+function _framaforms_user_has_access($account = NULL) {
   global $user;
   $node = node_load(arg(1));
   if ((isset($node->uid, $GLOBALS['user']->uid) && $GLOBALS['user']->uid == $node->uid && $GLOBALS['user']->uid > 0) || (user_has_role(3))) {
@@ -692,6 +649,31 @@ function framaforms_clone_node_alter(&$node, $context) {
 }
 
 /**
+ * Implements hook_form
+ *
+ * Return default form for custom content type creation by the user.
+ *
+ * @param $node
+ * @param $form_state
+ * @return array the form object
+ */
+function framaforms_form($node, $form_state) {
+  return node_content_form($node, $form_state);
+}
+
+/**
+ * Implements hook_form_alter :
+ * Disable wysiwyg on markup widget and add protection before leaving.
+ */
+function framaforms_form_alter(&$form, &$form_state, $context) {
+  $form_id['edit-markup-value']['#wysiwyg'] = FALSE;
+  $form_id['edit-markup-value']['und'][0]['#wysiwyg'] = FALSE;
+  $form_id['markup']['#wysiwyg'] = FALSE;
+  $form_id['markup']['und'][0]['#wysiwyg'] = FALSE;
+  $form_id['form-builder-element-markup']['#type'] = 'text_format';
+}
+
+/**
  * Implements hook_node_info.
  *
  * Declare custom content types
@@ -706,19 +688,6 @@ function framaforms_node_info() {
       'locked' => FALSE,
     ),
   );
-}
-
-/**
- * Implements hook_form
- *
- * Return default form for custom content type creation by the user.
- *
- * @param $node
- * @param $form_state
- * @return array the form object
- */
-function framaforms_form($node, $form_state) {
-  return node_content_form($node, $form_state);
 }
 
 /**
@@ -794,4 +763,36 @@ function framaforms_node_type_insert($content_type) {
     user_role_load_by_name('administrator')->rid,
     $admin_permissions
   );
+}
+
+
+/**
+ * Acess callback for /node/add/form1 : forbids a user to create over a given number of forms.
+ *
+ * @return void
+ */
+function _framaforms_check_users_forms() {
+  global $user;
+  // If the user is not logged in, deny access.
+  if ($user->uid === 0) {
+    return FALSE;
+  }
+  // If the user is admin, grant access (admin is master here)
+  if ($user->uid === "1") {
+    return TRUE;
+  }
+  // Get the user's total number of forms.
+  $results = db_select('node', 'n')
+    ->fields('n')
+    ->condition('type', 'form1')
+    ->condition('uid', $user->uid)
+    ->countQuery()
+    ->execute()
+    ->fetchField();
+  if ($results >= variable_get('framaforms_forms_per_user_limit')) {
+    drupal_set_message(t("Your account has reached this site's maximum number of forms. Please delete some of your unused forms in 'My forms' before trying to create a new one."), 'warning', FALSE);
+    drupal_set_message(t("This site's allows to create the maximum following number of forms : @number", array('@number' => variable_get('framaforms_forms_per_user_limit'))), 'warning', FALSE);
+    return FALSE;
+  }
+  return TRUE;
 }
