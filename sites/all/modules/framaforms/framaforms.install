@@ -47,7 +47,9 @@ function framaforms_schema() {
  * Implements hook_install.
  */
 function framaforms_install() {
-  framaforms_set_default_variables();
+  _framaforms_set_variables_pages();
+  _framaforms_set_variables_mail();
+  _framaforms_set_default_global_variables();
 }
 
 /**
@@ -64,39 +66,12 @@ function framaforms_uninstall() {
 }
 
 /**
- * Set persistent variables regarding mails sent by Framaforms.
- *
- * @return void
- */
-function framaforms_set_variables_mail() {
-  // sprintf-ready mail for notifying a user of his⋅her form expiration.
-  $file_path = drupal_get_path('module', 'framaforms') . '/includes/templates/notification_email_fr.txt';
-  $framaforms_mail_user_notification_body = file_get_contents($file_path);
-  $framaforms_mail_user_notification_subject = t("Framaforms : your form « [form_title] » will expire soon.");
-  variable_set('framaforms_mail_user_notification_subject', $framaforms_mail_user_notification_subject);
-  variable_set('framaforms_mail_user_notification_body', $framaforms_mail_user_notification_body);
-}
-
-/**
- *
- */
-function framaforms_set_variables_pages() {
-  $language = language_default()->language;       // the site default language
-  $file_path = drupal_get_path('module', 'framaforms') . "/includes/html/expiration_page_{$language}.html";
-  $expiration_page_content = file_get_contents($file_path);
-  variable_set('framaforms_expiration_page_content', $expiration_page_content);
-}
-
-/**
  * Sets global variables to default value.
  *
  * @return
  */
-function framaforms_set_default_variables() {
+function _framaforms_set_default__global_variables() {
   module_load_include('inc', 'framaforms', 'includes/framaforms.pages');
-
-  framaforms_set_variables_pages();
-  framaforms_set_variables_mail();
 
   // Set default header
   variable_set('framaforms_general_header_html','<b>Your</b>forms');
@@ -134,6 +109,31 @@ function framaforms_set_default_variables() {
     variable_set('pathauto_node_page_pattern', '[node:title]');
   }
 }
+
+/**
+ * Set persistent variables regarding mails sent by Framaforms.
+ *
+ * @return void
+ */
+function _framaforms_set_variables_mail() {
+  // sprintf-ready mail for notifying a user of his⋅her form expiration.
+  $file_path = drupal_get_path('module', 'framaforms') . '/includes/templates/notification_email_fr.txt';
+  $framaforms_mail_user_notification_body = file_get_contents($file_path);
+  $framaforms_mail_user_notification_subject = t("Framaforms : your form « [form_title] » will expire soon.");
+  variable_set('framaforms_mail_user_notification_subject', $framaforms_mail_user_notification_subject);
+  variable_set('framaforms_mail_user_notification_body', $framaforms_mail_user_notification_body);
+}
+
+/**
+ * Load expiration page content from HTML template.
+ */
+function _framaforms_set_variables_pages() {
+  $language = language_default()->language;       // the site default language
+  $file_path = drupal_get_path('module', 'framaforms') . "/includes/html/expiration_page_{$language}.html";
+  $expiration_page_content = file_get_contents($file_path);
+  variable_set('framaforms_expiration_page_content', $expiration_page_content);
+}
+
 
 /**
  *
