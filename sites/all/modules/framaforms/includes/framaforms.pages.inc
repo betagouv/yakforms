@@ -126,70 +126,47 @@ function create_all_pages() {
 }
 
 /**
- * Content callback for the expiration page :
- * returns a page indacting the form was expired and giving instruction
- * on how to change its expiration date.
+ * Content callback for the expiration page.
  *
+ *  Returns the content of the HTML template with replaced tokens.
  * @return void
  */
 function get_expiration_content() {
   global $user;
-  $content = variable_get('framaforms_expiration_page_content');
-  if (isset($_GET['from'])) {
-    $content .= "<p>" . t("You can edit this form by going to this link : ");
-    $content .= "<a href='" . $_GET['from'] . "/edit'>" . t("To the form") . "</a> </p>";
-  }
-  $placeholders = ['[my_forms_url]'];
-  $replacers = ['/user/' . $user->uid . '/forms'];
-  $content = str_replace($placeholders, $replacers, $content);
-  return $content;
+  // Get the node which was redirected to the present page
+  $from_url = $_REQUEST['from'];
+  // Trim the base URL
+  $from_url = explode('/', $from_url)[3];
+  // Get the node object from this URL
+  $expired_node = menu_get_object('node', 1, drupal_get_normal_path($from_url));
+
+  // Get base page content from template
+  // Get the site's default language code
+  $language_code = language_default()->language;
+  $file_path = _get_template_file_path($language_code, 'expiration_page.html');
+  $content = file_get_contents($file_path);
+
+  return token_replace($content, array('node' => $expired_node, 'user' => $user));
 }
 
 /**
  * Content callback for the 'share' tab.
- * Originally written by pyg for Framasoft.
  *
+ * Returns the content of the HTML template with replaced tokens.
  * @return void
  */
 function get_share_content() {
   // Get the site's default language code
   $language_code = language_default()->language;
-  // This is very explicit cause it can vary from configuration
-  // determination of http or https protocol.
-  if (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1) ||isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') {
-    $protocol = 'https://';
-  }
-  else {
-    $protocol = 'http://';
-  }
 
-  // Build full URL.
-  $thisUrl = $protocol . $_SERVER['HTTP_HOST'] . dirname($_SERVER['REQUEST_URI']);
-
-  // Get full path.
-  $fullPath = $_SERVER['REQUEST_URI'];
-
-  // Get interesting part of alias.
-  $paths = explode('/', $fullPath);
-  $alias = $paths[1];
-
-  $realpath = drupal_lookup_path("source", $alias);
-
-  $realpaths = explode('/', $realpath);
-  $thisNid = $realpaths[1];
-
-  $thisCloneLink = $protocol . $_SERVER['HTTP_HOST'] . "/node/" . $thisNid . "/clone/confirm";
-
-  $thisLink = '&lt;a href=&quot;' . $thisUrl . '&quot;&gt;Formulaire&lt;/a&gt;';
-  $thisIframe400 = '&lt;iframe src=&quot;' . $thisUrl . '&quot; width=&quot;100%&quot; height=&quot;400&quot; border=&quot;0&quot; &gt;&lt;/iframe&gt;';
-  $thisIframe800 = '&lt;iframe src=&quot;' . $thisUrl . '&quot; width=&quot;100%&quot; height=&quot;800&quot; border=&quot;0&quot; &gt;&lt;/iframe&gt;';
-
-  $file_path = $base_url . drupal_get_path('module', 'framaforms') . "/includes/html/{$language_code}/share_page.html";
+  // Get base page content from template
+  $file_path = _get_template_file_path($language_code, 'share_page.html');
   $content = file_get_contents($file_path);
-  $placeholders = ['[thishtmlelement]', '[thisurl]', '[thisclonelink]' , '[thisiframe800]'];
-  $replacers = [$thisLink, $thisUrl, $thisCloneLink, $thisIframe800];
-  $content = str_replace($placeholders, $replacers, $content);
 
+  // Replace tokens within this content. They need to be passed a node object.
+  $this_nid = explode('/', current_path())[1];
+  $this_node = node_load($this_nid);
+  $content = token_replace($content, array('node' => $this_node));
   return $content;
 }
 

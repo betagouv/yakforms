@@ -132,6 +132,18 @@ function _framaforms_set_variables_pages() {
   $file_path = drupal_get_path('module', 'framaforms') . "/includes/html/{$language}/expiration_page.html";
   $expiration_page_content = file_get_contents($file_path);
   variable_set('framaforms_expiration_page_content', $expiration_page_content);
+
+  // Enable the filter_tokens filter on full HTML pages:
+  $format_id = 'full_html';
+  $filter_id = 'filter_tokens';
+  $format = filter_format_load($format_id);
+  $filters = filter_list_format($format_id);
+  foreach ($filters as $filter_id => $filter_opts) { //Convert to an array, which is expected by the save function.
+    $filters[$filter_id] = (array) $filter_opts;
+  }
+  $filters['filter_tokens']['status'] = 1; // Enable filter
+  $format->filters = $filters;
+  filter_format_save($format);
 }
 
 
@@ -142,4 +154,25 @@ function framaforms_update_7110(&$sandbox) {
   $file_path = drupal_get_path('module', 'framaforms') . '/includes/templates/notification_email_fr.txt';
   $framaforms_mail_user_notification_body = file_get_contents($file_path);
   variable_set('framaforms_mail_user_notification_body', $framaforms_mail_user_notification_body);
+}
+
+/**
+ * Configure the token_replace filter on full HTML pages.
+ * Adapted from https://drupal.stackexchange.com/questions/173309/how-to-programmatically-change-settings-of-input-filters-and-activate-them.
+ */
+function framaforms_update_7111(&$sandbox) {
+    // Enable the filter_tokens filter on full HTML pages:
+  $format_id = 'full_html';
+  $filter_id = 'filter_tokens';
+  $format = filter_format_load($format_id);
+  $filters = filter_list_format($format_id);
+  foreach ($filters as $filter_id => $filter_opts) { //Convert to an array, which is expected by the save function.
+    $filters[$filter_id] = (array) $filter_opts;
+  }
+  $filters['filter_tokens']['status'] = 1; // Enable filter
+  $format->filters = $filters;
+  filter_format_save($format);
+
+  // Introducing new limitation as global variable
+  variable_set('framaforms_submissions_per_form_limit', 1000);
 }
