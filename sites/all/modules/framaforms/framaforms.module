@@ -765,6 +765,127 @@ function framaforms_node_type_insert($content_type) {
   );
 }
 
+/**
+ * Implements hook_token_info.
+ *
+ * @return void
+ */
+function framaforms_token_info (){
+  $info = array();
+  $info['types'] = array(
+    'framaforms-limitations' => array(
+      'name' => t('Limitations'),
+      'description' => t('Limitations for this instance.')
+    ),
+    'framaforms-form' => array(
+      'name' => t('Form'),
+      'description' => t('Tokens regarding the current form'),
+      'needs-data' => array('node')
+    ),
+    'framaforms-user' => array(
+      'name' => t('Framaforms - user'),
+      'description' => t('Tokens regarding the current Framaforms user'),
+      'needs-data' => array('user')
+    )
+  );
+  $info['tokens'] = array(
+    'framaforms-limitations' => array(
+      // [framaforms-limitations:forms-per-user]
+      'forms-per-user' => array(
+        'name' => t('Forms per user'),
+        'description' => t('Maximum number of forms per user allowed on this instance.')
+      ),
+      'submissions-per-form' => array(
+        'name' => t('Submissions per form'),
+        'description' => t('Maximum number of submissions per form allowed on this instance.')
+      ),
+      'form-lifetime' => array(
+        'name' => t('Maximum form lifetime'),
+        'description' => t('Maximum lifetime for a form on this instance.')
+      )
+    ),
+    'framaforms-form' => array(
+      //[framaforms-form:public-url]
+      'public-url' => array(
+        'name' => t("Public URL"),
+        'description' => t("The form's public URL")
+      ),
+      'clone-url' => array(
+        'name' => t('Clone URL'),
+        'description' => t('URL to clone this form')
+      ),
+      'edit-url' => array(
+        'name' => t('Edit URL'),
+        'description' => t('URL to edit this form')
+      )
+      ),
+    'framaforms-user' => array(
+      'my-forms' => array(
+        'name' => t('My forms menu'),
+        'description' => t("Link to the user's forms")
+      )
+    )
+  );
+  return $info;
+}
+
+/**
+ * Implements hook_tokens
+ *
+ * @return void
+ */
+function framaforms_tokens($type, $tokens, array $data = array(), array $options = array()){
+  global $base_url;
+  $replacements = array();
+  if($type == 'framaforms-limitations'){
+    foreach($tokens as $name => $original){
+      switch ($name){
+        case 'forms-per-user':
+          $replacements[$original] = variable_get('framaforms_forms_per_user_limit', 0);
+          break;
+        case 'submissions-per-form':
+          $replacements[$original] = variable_get('framaforms_submissions_per_form_limit', 0);
+          break;
+        case 'form-lifetime':
+          $replacements[$original] = variable_get('framaforms_expiration_period_default_value', 0);
+          break;
+      }
+      if($replacements[$original] == 0){
+        $replacements[$original] = t("No limitation");
+      }
+    }
+  }
+  if($type == 'framaforms-form'){
+    $form_node = $data['node'];
+    foreach($tokens as $name => $original){
+      switch($name){
+        case 'public-url':
+          $form_alias = drupal_get_path_alias('node/' . $form_node->nid);
+          $replacements[$original] = $base_url . '/' .$form_alias;
+          break;
+        case 'clone-url':
+          $replacements[$original] = $base_url . '/node/' . $form_node->nid . '/clone/confirm';
+          break;
+        case 'edit-url':
+          $form_alias = drupal_get_path_alias('node/' . $form_node->nid);
+          $replacements[$original] = $base_url .'/' . $form_alias . '/edit';
+          break;
+      }
+    }
+  }
+  if($type == 'framaforms-user'){
+    $form_user = $data['user'];
+    foreach($tokens as $name => $original){
+      switch($name){
+        case 'my-forms':
+          $replacements[$original] = $base_url .'/user' . $form_user->uid . '/forms';
+          break;
+      }
+    }
+  }
+  return $replacements;
+}
+
 
 /**
  * Acess callback for /node/add/form1 : forbids a user to create over a given number of forms.

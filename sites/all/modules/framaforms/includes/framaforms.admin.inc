@@ -171,6 +171,15 @@ function framaforms_config_form($form, &$form_state) {
     '#type' => 'textfield',
     '#title' => t('Maximum number of form per user'),
     '#default_value' => variable_get('framaforms_forms_per_user_limit'),
+    '#description' => t("0 for no limitation."),
+    '#required' => true,
+    '#element_validate' => array('element_validate_number'),
+  );
+  $form['limitation-section']['framaforms_submissions_per_form_limit'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Maximum number of submissions per form'),
+    '#default_value' => variable_get('framaforms_submissions_per_form_limit', 0),
+    '#description' => t("0 for no limitation."),
     '#required' => true,
     '#element_validate' => array('element_validate_number'),
   );
