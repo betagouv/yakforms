@@ -275,6 +275,9 @@ function framaforms_export_node_submissions(int $nid) {
   // Drop PHP reference.
   unset($component);
 
+  // Clean up IPs in database before export
+  _clean_submissions_ips($node);
+
   // Calls to webform module to create a clean CSV file.
   webform_results_batch_bof($node, $format, $options);
   webform_results_batch_headers($node, $format, $options);
@@ -283,4 +286,23 @@ function framaforms_export_node_submissions(int $nid) {
   webform_results_batch_post_process($node, $format, $options);
 
   // watchdog("framaforms", t("Submissions for node !nid exported.", array('!nid' => $nid)), WATCHDOG_INFO);
+}
+
+function _clean_submissions_ips($node){
+    dpm('here');
+
+  try{
+    db_update('webform_submissions')
+      ->fields(array(
+        'remote_addr' => '0.0.0.0'
+      ))
+      ->condition('nid', $node->nid)
+      ->execute();
+  }
+  catch(PDOException $e){
+    watchdog('framaforms', "Unable to clean IPs for node %id : Error in _clean_submissions_ips. %error",
+        array('%id' => $node->nid, '%error' => $e),
+        WATCHDOG_ERROR
+    );
+  }
 }
