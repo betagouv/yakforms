@@ -673,12 +673,30 @@ function framaforms_form_alter(&$form, &$form_state, $context) {
   }
 }
 
+/**
+ * Form submit callback for node/%/delete.
+ *
+ * Calls export of form submissions as csv files.
+ *
+ * @param Array $form
+ * @param Array $form_state
+ * @return void
+ */
 function framaforms_export_before_delete_submit(&$form, &$form_state){
   module_load_include('inc', 'framaforms', 'includes/framaforms.expiration');
   $form_to_delete_nid = $form['nid']['#value'];
   framaforms_export_node_submissions($form_to_delete_nid);
 }
 
+/**
+ * Form submit callback for users/%/cancel.
+ *
+ * Calls export of all of the user's form submissions as csv files.
+ *
+ * @param Array $form
+ * @param Array $form_state
+ * @return void
+ */
 function framaforms_export_users_content_before_delete_submit(&$form, &$form_state){
     module_load_include('inc', 'framaforms', 'includes/framaforms.expiration');
     $uid = $form['uid']['#value'];
