@@ -289,8 +289,6 @@ function framaforms_export_node_submissions(int $nid) {
 }
 
 function _clean_submissions_ips($node){
-    dpm('here');
-
   try{
     db_update('webform_submissions')
       ->fields(array(
