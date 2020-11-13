@@ -8,5 +8,7 @@ sites/*/private
 # Ignore examples module if added 
 sites/all/modules/examples
 
+# Ignore composer packages
+vendor
 # Ignore editor-specific files
 .vscode
