@@ -213,6 +213,7 @@ function delete_expired_nodes() {
             ");
     $expired_nodes = $query->fetchAll();
     foreach ($expired_nodes as $record) {
+      framaforms_export_node_submissions($record->nid);
       node_delete($record->nid);
       // Also delete it from the framaforms_expired table.
       db_delete('framaforms_expired')
@@ -243,9 +244,13 @@ function delete_expired_nodes() {
   * @param int $nid : the form's identifier.
   */
 function framaforms_export_node_submissions(int $nid) {
+  // Before anything, check if the export option is activated by admin.
+  if(!variable_get('framaforms_export_form_submissions_before_delete', 0)){
+    return;
+  }
   $node = node_load($nid);
-  if (!$node) {
-    watchdog('framaforms', t('Node !nid was not found and could not be exported.'), array('!nid' => $nid), WATCHDOG_WARNING);
+  if (!$node | $node->type!='form1') {
+    watchdog('framaforms', t('Node !nid was not found or could not be exported.'), array('!nid' => $nid), WATCHDOG_WARNING);
     return;
   }
   module_load_include('inc', 'webform', 'includes/webform.submissions');
@@ -285,9 +290,17 @@ function framaforms_export_node_submissions(int $nid) {
   webform_results_batch_eof($node, $format, $options);
   webform_results_batch_post_process($node, $format, $options);
 
-  // watchdog("framaforms", t("Submissions for node !nid exported.", array('!nid' => $nid)), WATCHDOG_INFO);
+  watchdog("framaforms", "Submissions for node !nid exported.",
+    array('!nid' => $nid),
+    WATCHDOG_INFO
+  );
 }
 
+/**
+ * Cleans submission IPs from database before export, as this is private data.
+ *
+ * @param Obj $node
+ */
 function _clean_submissions_ips($node){
   try{
     db_update('webform_submissions')
