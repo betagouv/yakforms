@@ -256,6 +256,7 @@ function framaforms_export_node_submissions(int $nid) {
 
   $format = 'delimited';
   $options = webform_results_download_default_options($node, $format);
+
     // Set the export options.
   $options['range']['batch_size'] = 10000;
   $file_title = pathauto_cleanstring($node->title) . "-" . time() . '-' .$node->uid;
@@ -281,5 +282,5 @@ function framaforms_export_node_submissions(int $nid) {
   webform_results_batch_eof($node, $format, $options);
   webform_results_batch_post_process($node, $format, $options);
 
-  watchdog("framaforms", t("Submissions for node !nid exported.", array('!nid' => $nid)), WATCHDOG_INFO);
+  // watchdog("framaforms", t("Submissions for node !nid exported.", array('!nid' => $nid)), WATCHDOG_INFO);
 }
