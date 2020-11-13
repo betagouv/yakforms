@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## Unreleased
 
 ### Added
-* Option to automatically export form submissions as CSV files before deletion (https://framagit.org/framasoft/framaforms/-/issues/113)
+* Option to automatically export form submissions as CSV files before deletion (#113, introducted by !85, fixed by !104).
 * Introduced Drupal Token mechanism, usable on full-HTML pages (#118, !100).
 
 ### Changed

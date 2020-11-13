@@ -598,25 +598,11 @@ function framaforms_cron() {
   delete_expired_nodes();
 }
 
+
 /**
  * Implements hook_node_delete.
  */
 function framaforms_node_delete($node) {
-  module_load_include('inc', 'framaforms', 'includes/framaforms.expiration');
-  module_load_include('module', 'akismet', 'includes/akismet');
-
-  // Export the results to CSV file for user support purposes.
-  // TODO : only export if the option is selected by the admin
-  if(module_exists('akismet') && variable_get('framaforms_export_form_submissions_before_delete', false)){
-    $akismet_data = akismet_data_load('node', $node->nid);
-    // Only export forms that weren't classified by Akismet, or were classfied as legitimate content.
-    if(!is_object($akismet_data)
-      || $akismet_data->classification == 'ham'
-      || $akismet_data->classification == 'unsure'){
-      framaforms_export_node_submissions($node->nid);
-    }
-  }
-
   // If the node being deleted is a page, then delete its aliases too.
   if ($node->type == 'page') {
     db_delete('url_alias')
@@ -671,8 +657,67 @@ function framaforms_form_alter(&$form, &$form_state, $context) {
   $form_id['markup']['#wysiwyg'] = FALSE;
   $form_id['markup']['und'][0]['#wysiwyg'] = FALSE;
   $form_id['form-builder-element-markup']['#type'] = 'text_format';
+
+  // Add submit callback before a node gets deleted.
+  if($form['#id'] == 'node-delete-confirm'){
+    // Adding export of forms submissions BEFORE the node-deleting callback.
+    $node_delete_submit_index = array_search('node_delete_confirm_submit', $form['#submit']);
+    array_splice($form['#submit'], $node_delete_submit_index, 0, 'framaforms_export_before_delete_submit');
+  }
+
+  // Add submit callback to save all user's form before the user gets deleted.
+  if($form['#id'] == 'user-cancel-confirm-form'){
+    // Adding callback BEFORE the user-deleting callback.
+    $user_delete_submit_index = array_search(' user_cancel_confirm_form_submit', $form['#submit']);
+    array_splice($form['#submit'], $node_delete_submit_index, 0, 'framaforms_export_users_content_before_delete_submit');
+  }
 }
 
+/**
+ * Form submit callback for node/%/delete.
+ *
+ * Calls export of form submissions as csv files.
+ *
+ * @param Array $form
+ * @param Array $form_state
+ * @return void
+ */
+function framaforms_export_before_delete_submit(&$form, &$form_state){
+  module_load_include('inc', 'framaforms', 'includes/framaforms.expiration');
+  $form_to_delete_nid = $form['nid']['#value'];
+  framaforms_export_node_submissions($form_to_delete_nid);
+}
+
+/**
+ * Form submit callback for users/%/cancel.
+ *
+ * Calls export of all of the user's form submissions as csv files.
+ *
+ * @param Array $form
+ * @param Array $form_state
+ * @return void
+ */
+function framaforms_export_users_content_before_delete_submit(&$form, &$form_state){
+    module_load_include('inc', 'framaforms', 'includes/framaforms.expiration');
+    $uid = $form['uid']['#value'];
+    // Get the user's forms
+    try{
+      $user_forms = db_select('node', 'n')
+      ->fields('n', array('nid'))
+      ->condition('uid', $uid)
+      ->execute()
+      ->fetchAll();
+    }
+    catch(Exception $e){
+      watchdog('framaforms', "Unable to export forms for user %id : Error in framaforms_export_users_content_before_delete_submit. %error",
+        array('%id' => $uid, '%error' => $e),
+        WATCHDOG_ERROR
+      );
+    }
+    foreach($user_forms as $form){
+      framaforms_export_node_submissions($form->nid);
+    }
+}
 /**
  * Implements hook_node_info.
  *
