@@ -119,7 +119,7 @@ function _framaforms_set_variables_mail() {
   // sprintf-ready mail for notifying a user of his⋅her form expiration.
   $file_path = drupal_get_path('module', 'framaforms') . '/includes/templates/notification_email_fr.txt';
   $framaforms_mail_user_notification_body = file_get_contents($file_path);
-  $framaforms_mail_user_notification_subject = t("Framaforms : your form « [form_title] » will expire soon.");
+  $framaforms_mail_user_notification_subject = t("Framaforms : your form « [node:title] » will expire soon.");
   variable_set('framaforms_mail_user_notification_subject', $framaforms_mail_user_notification_subject);
   variable_set('framaforms_mail_user_notification_body', $framaforms_mail_user_notification_body);
 }
@@ -157,8 +157,8 @@ function framaforms_update_7110(&$sandbox) {
 }
 
 /**
- * Configure the token_replace filter on full HTML pages.
- * Adapted from https://drupal.stackexchange.com/questions/173309/how-to-programmatically-change-settings-of-input-filters-and-activate-them.
+ * Necessary configuration for tokens.
+ *
  */
 function framaforms_update_7111(&$sandbox) {
     // Enable the filter_tokens filter on full HTML pages:
@@ -175,4 +175,14 @@ function framaforms_update_7111(&$sandbox) {
 
   // Introducing new limitation as global variable
   variable_set('framaforms_submissions_per_form_limit', 1000);
+
+  // Update notification email and subject as they contained old tokens.
+  $old_tokens = array('[form_title]', '[form_expires_on]', '[form_delete_on]', '[form_url]');
+  $new_tokens = array('[node:title]', '[framaforms-form:expiration-date]', '[framaforms-form:deletion-date]', '[node:url]');
+  $mail_body = variable_get('framaforms_mail_user_notification_body', NULL);
+  $mail_subject = variable_get('framaforms_mail_user_notification_subject', NULL);
+  $mail_body = str_replace($old_tokens, $new_tokens, $mail_body);
+  $mail_subject = str_replace($old_tokens, $new_tokens, $mail_subject);
+  variable_set('framaforms_mail_user_notification_subject', $mail_subject);
+  variable_set('framaforms_mail_user_notification_body', $mail_body);
 }

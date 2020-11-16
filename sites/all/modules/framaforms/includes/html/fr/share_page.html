@@ -4,14 +4,14 @@ Vous pouvez partager ce formulaire avec les options suivantes. Vous pouvez aussi
 
 <div><h2>Adresse et lien HTML</h2>
 <p>Copiez cette adresse web et partagez-là avec qui vous voulez !</p>
-<p><input value="[framaforms-form:public-url]" size="60"></input></p>
+<p><input value="[node:url]" size="60"></input></p>
 <p>Ou avec le code HTML</p>
-<p><input value="<a href='[framaforms-form:public-url]'>Form</a>" size="60"></input></p>
+<p><input value="<a href='[node:url]'>Form</a>" size="60"></input></p>
 
 <h2>Embarquer le code</h2>
 <div>
   <textarea cols="60">
-    <iframe src="[framaforms-form:public-url]" width="100%" height="800"border="0">
+    <iframe src="[node:url]" width="100%" height="800"border="0">
     </iframe>
   </textarea>
   <p><small>Veuillez noter que tous les sites ne permettent pas d'inclure des iframes dans leurs contenus. Il vous faudra peut être disposer d'autorisations adéquates, ou de plugins spécifiques (ex pour <a href="https://fr.wordpress.org/plugins/iframe/" target="_blank">Wordpress</a>).</small></p>
@@ -21,17 +21,17 @@ Vous pouvez partager ce formulaire avec les options suivantes. Vous pouvez aussi
 <div class="shareLinks">
 
 <div class="shareLink diaspora">
-  <a href="javascript:(function(){var url = '[framaforms-form:public-url]' ;var title = 'Formulaire';   window.open('https://framablog.org/wp-content/plugins/share-on-diaspora/new_window.php?url='+encodeURIComponent(url)+'&amp;title='+encodeURIComponent(title),'post','location=no,links=no,scrollbars=no,toolbar=no,width=620,height=400')})()">
+  <a href="javascript:(function(){var url = '[node:url]' ;var title = 'Formulaire';   window.open('https://framablog.org/wp-content/plugins/share-on-diaspora/new_window.php?url='+encodeURIComponent(url)+'&amp;title='+encodeURIComponent(title),'post','location=no,links=no,scrollbars=no,toolbar=no,width=620,height=400')})()">
 Diaspora*
   </a>
 </div>
 
 <div class="shareLink facebook">
-  <a target="_blank" href="http://www.facebook.com/sharer/sharer.php?u=[framaforms-form:public-url]; ?>">Facebook</a>
+  <a target="_blank" href="http://www.facebook.com/sharer/sharer.php?u=[node:url]; ?>">Facebook</a>
 </div>
 
 <div class="shareLink twitter">
-  <a target="_blank" href="https://twitter.com/intent/tweet?url=[framaforms-form:public-url]; ?>">Twitter</a>
+  <a target="_blank" href="https://twitter.com/intent/tweet?url=[node:url]; ?>">Twitter</a>
 </div>
 
 <div class="clear:both">&nbsp;<div/>

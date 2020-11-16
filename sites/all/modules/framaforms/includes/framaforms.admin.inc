@@ -220,7 +220,7 @@ function framaforms_config_form($form, &$form_state) {
   $form['email-section']['framaforms_mail_user_notification_body'] = array(
     '#type' => 'textarea',
     '#title' => t("Notification email"),
-    '#description' => t("Here you can change the content of the email that will be sent to the user warning them of expired forms. <i>You can use the following tokens that will be replaced : <strong>[form_url]</strong> (the form URL), <strong>[form_expires_on]</strong> (the form's expiration date), <strong>[form_title]</strong> (the form's title).</i>"),
+    '#description' => t("Here you can change the content of the email that will be sent to the user warning them of expired forms. <i>You can use the following tokens that will be replaced : <strong>[node:url]</strong> (the form URL), <strong>[node:title]</strong> (the form's title), <strong>[framaforms-form:expiration-date]</strong> (the form's expiration date), <strong>[framaforms-form:deletion-date]</strong> (the form's date of deletion).</i>"),
     '#default_value' => variable_get('framaforms_mail_user_notification_body'),
     '#required' => TRUE,
   );

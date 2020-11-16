@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2020-11-16 10:46+0100\n"
+"POT-Creation-Date: 2020-11-16 17:08+0100\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -160,7 +160,7 @@ msgid "Notification email"
 msgstr ""
 
 #: sites/all/modules/framaforms/includes/framaforms.admin.inc:223
-msgid "Here you can change the content of the email that will be sent to the user warning them of expired forms. <i>You can use the following tokens that will be replaced : <strong>[form_url]</strong> (the form URL), <strong>[form_expires_on]</strong> (the form's expiration date), <strong>[form_title]</strong> (the form's title).</i>"
+msgid "Here you can change the content of the email that will be sent to the user warning them of expired forms. <i>You can use the following tokens that will be replaced : <strong>[node:url]</strong> (the form URL), <strong>[node:title]</strong> (the form's title), <strong>[framaforms-form:expiration-date]</strong> (the form's expiration date), <strong>[framaforms-form:deletion-date]</strong> (the form's date of deletion).</i>"
 msgstr ""
 
 #: sites/all/modules/framaforms/includes/framaforms.admin.inc:235
@@ -211,7 +211,7 @@ msgstr ""
 msgid "Error in the contact form block (modules/framaforms/includes/framaforms.block.inc) : %error"
 msgstr ""
 
-#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:253
+#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:236
 msgid "Node !nid was not found or could not be exported."
 msgstr ""
 
@@ -235,39 +235,39 @@ msgstr ""
 msgid "There was an error notifying users : %error"
 msgstr ""
 
-#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:102
+#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:98
 msgid "Invalid email for user %uid"
 msgstr ""
 
-#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:148
+#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:131
 msgid "Removing forms from the framaforms_expired table after their expiration date was pushed back."
 msgstr ""
 
-#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:173
+#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:156
 msgid "Error updating modified nodes : %error"
 msgstr ""
 
-#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:204
+#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:187
 msgid "Deleting forms after notification."
 msgstr ""
 
-#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:227
+#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:210
 msgid "The following forms were deleted : %nodes"
 msgstr ""
 
-#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:230
+#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:213
 msgid "There is no form to delete."
 msgstr ""
 
-#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:234
+#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:217
 msgid "Error deleting expired nodes : %error"
 msgstr ""
 
-#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:293
+#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:276
 msgid "Submissions for node !nid exported."
 msgstr ""
 
-#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:314
+#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:297
 msgid "Unable to clean IPs for node %id : Error in _clean_submissions_ips. %error"
 msgstr ""
 
@@ -285,10 +285,6 @@ msgstr ""
 
 #: sites/all/modules/framaforms/includes/framaforms.node.inc:751
 msgid "Comment"
-msgstr ""
-
-#: sites/all/modules/framaforms/includes/framaforms.node.inc:752
-msgid "Expiration date"
 msgstr ""
 
 #: sites/all/modules/framaforms/includes/framaforms.node.inc:753
@@ -413,5 +409,13 @@ msgstr ""
 
 #: sites/all/modules/framaforms/includes/framaforms.util.inc:29
 msgid "Error getting user's forms : !error"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.util.inc:74
+msgid "Warning : node !nid doesn't seem to have an expiration date, but it was demanded."
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.util.inc:83
+msgid "Error getting form's expiration date : !error"
 msgstr ""
 

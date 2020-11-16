@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2020-11-16 10:46+0100\n"
+"POT-Creation-Date: 2020-11-16 17:08+0100\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -469,27 +469,23 @@ msgid "Maximum lifetime for a form on this instance."
 msgstr ""
 
 #: sites/all/modules/framaforms/framaforms.module:865
-msgid "Public URL"
-msgstr ""
-
-#: sites/all/modules/framaforms/framaforms.module:866
-msgid "The form's public URL"
-msgstr ""
-
-#: sites/all/modules/framaforms/framaforms.module:869
 msgid "Clone URL"
 msgstr ""
 
-#: sites/all/modules/framaforms/framaforms.module:870
+#: sites/all/modules/framaforms/framaforms.module:866
 msgid "URL to clone this form"
 msgstr ""
 
+#: sites/all/modules/framaforms/framaforms.module:870
+msgid "The forms's expiration date"
+msgstr ""
+
 #: sites/all/modules/framaforms/framaforms.module:873
-msgid "Edit URL"
+msgid "Deletion date"
 msgstr ""
 
 #: sites/all/modules/framaforms/framaforms.module:874
-msgid "URL to edit this form"
+msgid "The forms's date of deletion"
 msgstr ""
 
 #: sites/all/modules/framaforms/framaforms.module:879
@@ -504,11 +500,11 @@ msgstr ""
 msgid "No limitation"
 msgstr ""
 
-#: sites/all/modules/framaforms/framaforms.module:969
+#: sites/all/modules/framaforms/framaforms.module:977
 msgid "Your account has reached this site's maximum number of forms. Please delete some of your unused forms in 'My forms' before trying to create a new one."
 msgstr ""
 
-#: sites/all/modules/framaforms/framaforms.module:970
+#: sites/all/modules/framaforms/framaforms.module:978
 msgid "This site's allows to create the maximum following number of forms : @number"
 msgstr ""
 
@@ -557,7 +553,7 @@ msgid "Instructions to share the form."
 msgstr ""
 
 #: sites/all/modules/framaforms/framaforms.install:122
-msgid "Framaforms : your form « [form_title] » will expire soon."
+msgid "Framaforms : your form « [node:title] » will expire soon."
 msgstr ""
 
 #: sites/all/modules/framaforms/framaforms.info:0

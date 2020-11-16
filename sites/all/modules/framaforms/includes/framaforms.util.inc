@@ -20,8 +20,8 @@ function _get_user_forms($uid) {
       ->execute()
       ->fetchAll();
 
-    // Format array from objects
-    foreach ($query as $form){
+    // Format array from objects.
+    foreach ($query as $form) {
       $users_forms[] = $form->title;
     }
   }
@@ -49,4 +49,37 @@ function _get_html_form_list(array $forms = array()) {
   $list .= "<li>...</li>";
   $list .= "</ul></i>";
   return $list;
+}
+
+/**
+ * Returns expiration timestamp for passed node object.
+ *
+ * @param object $node
+ *   The concerned node.
+ *
+ * @return int
+ *   timestamp for the form's expiration date.
+ */
+function _get_form_expiration_date(stdClass $node) {
+  try {
+    $query = db_select('field_data_field_form1_expiration', 'fex')
+      ->fields('fex', array('field_form1_expiration_value'))
+      ->condition('entity_id', $node->nid)
+      ->condition('entity_type', 'node')
+      ->condition('bundle', 'form1')
+      ->execute()
+      ->fetchField();
+    $timestamp = strtotime($query);
+    if ($timestamp == NULL){
+      watchdog('framaforms',
+        "Warning : node !nid doesn't seem to have an expiration date, but it was demanded.",
+        array('!nid' => $node->nid),
+        WATCHDOG_WARNING
+      );
+    }
+    return $timestamp;
+  }
+  catch (PDOException $e) {
+    watchdog('framaforms', "Error getting form's expiration date : !error", array('!error' => $e));
+  }
 }
