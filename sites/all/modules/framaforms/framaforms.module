@@ -667,7 +667,17 @@ function framaforms_form_alter(&$form, &$form_state, $context) {
 
   // Add submit callback to save all user's form before the user gets deleted.
   if($form['#id'] == 'user-cancel-confirm-form'){
-    // Adding callback BEFORE the user-deleting callback.
+    // Append reminder of the user's forms as HTML
+    module_load_include('inc', 'framaforms', 'includes/framaforms.util');
+    $html_form_list = t("<br><p>This user is the author of : </p>");
+    $html_form_list .= _get_html_form_list(_get_user_forms($form['uid']['#value']));
+    $form["user_forms"] = array(
+      '#title' => "User forms",
+      '#type' => 'markup',
+      '#markup' => $html_form_list
+    );
+
+    // Add callback BEFORE the user-deleting callback.
     $user_delete_submit_index = array_search(' user_cancel_confirm_form_submit', $form['#submit']);
     array_splice($form['#submit'], $node_delete_submit_index, 0, 'framaforms_export_users_content_before_delete_submit');
   }
