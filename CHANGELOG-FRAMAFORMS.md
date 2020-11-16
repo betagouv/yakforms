@@ -9,7 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 * Option to automatically export form submissions as CSV files before deletion (#113, introducted by !85, fixed by !104).
-* Introduced Drupal Token mechanism, usable on full-HTML pages (#118, !100).
+* Introduced Drupal Token mechanism, usable on full-HTML pages (#118, !100, !107).
 
 ### Changed
 * The `form1` content type is now part of the Framaforms module (declared via `includes/framaforms.node.inc`) (!89).

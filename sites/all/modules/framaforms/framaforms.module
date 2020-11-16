@@ -860,20 +860,20 @@ function framaforms_token_info (){
       )
     ),
     'framaforms-form' => array(
-      //[framaforms-form:public-url]
-      'public-url' => array(
-        'name' => t("Public URL"),
-        'description' => t("The form's public URL")
-      ),
+      //[framaforms-form:clone-url]
       'clone-url' => array(
         'name' => t('Clone URL'),
         'description' => t('URL to clone this form')
       ),
-      'edit-url' => array(
-        'name' => t('Edit URL'),
-        'description' => t('URL to edit this form')
-      )
+      'expiration-date' => array(
+        'name' => t('Expiration date'),
+        'description' => t("The forms's expiration date")
       ),
+      'deletion-date' => array(
+        'name' => t('Deletion date'),
+        'description' => t("The forms's date of deletion")
+      )
+    ),
     'framaforms-user' => array(
       'my-forms' => array(
         'name' => t('My forms menu'),
@@ -889,7 +889,7 @@ function framaforms_token_info (){
  *
  * @return void
  */
-function framaforms_tokens($type, $tokens, array $data = array(), array $options = array()){
+function framaforms_tokens(String $type, array $tokens, array $data = array(), array $options = array()){
   global $base_url;
   $replacements = array();
   if($type == 'framaforms-limitations'){
@@ -911,19 +911,27 @@ function framaforms_tokens($type, $tokens, array $data = array(), array $options
     }
   }
   if($type == 'framaforms-form'){
+    module_load_include('inc', 'framaforms', 'includes/framaforms.util');
     $form_node = $data['node'];
     foreach($tokens as $name => $original){
       switch($name){
-        case 'public-url':
-          $form_alias = drupal_get_path_alias('node/' . $form_node->nid);
-          $replacements[$original] = $base_url . '/' .$form_alias;
-          break;
         case 'clone-url':
           $replacements[$original] = $base_url . '/node/' . $form_node->nid . '/clone/confirm';
           break;
-        case 'edit-url':
-          $form_alias = drupal_get_path_alias('node/' . $form_node->nid);
-          $replacements[$original] = $base_url .'/' . $form_alias . '/edit';
+        case 'expiration-date':
+          // Return print-ready expiration date
+          $replacements[$original] =
+            format_date(_get_form_expiration_date($form_node), 'long');
+          break;
+        case 'deletion-date':
+          $deletion_date = new DateTime();
+          $deletion_date->setTimestamp(_get_form_expiration_date($form_node));
+          $deletion_date->modify(
+            variable_get('framaforms_deletion_period_value', 9) . " weeks"
+          );
+          // Return print-ready deletion date
+          $replacements[$original] =
+            format_date($deletion_date->getTimestamp(), 'long');
           break;
       }
     }

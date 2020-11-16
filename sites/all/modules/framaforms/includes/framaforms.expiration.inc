@@ -81,19 +81,15 @@ function make_forms_expire() {
 }
 
 /**
+ * Notifies user of their upcoming form expiration.
+ *
  * Sends an email by calling drupal_mail to a user,
  * notifying them of the upcoming webform expiration.
  *
- * @param DatabaseStatementInterface $record
- *   : Single database statement containing node and user information.
- * @param string $expiration_period
- *   : notification-expiration time interval.
- * @param string $deletion_period
- *   : expiration-deletion time interval.
- *
- * @return void
+ * @param object $record
+ *   The expired node.
  */
-function notify_user_of_expiration($record) {
+function notify_user_of_expiration(stdClass $record) {
   // Use the global variable of Drupal for the site's URL.
   global $base_url;
 
@@ -103,24 +99,12 @@ function notify_user_of_expiration($record) {
     return FALSE;
   }
 
-  $expiration_period = variable_get('framaforms_notification_period_value') . ' weeks';
-  $deletion_period = variable_get('framaforms_deletion_period_value') . ' weeks';
-
-  $expiration_date = new DateTime();
-  $expiration_date->modify("+" . $expiration_period);
-  $delete_date = clone $expiration_date;
-  $delete_date->modify($deletion_period);
-  $delete_date = date("d/m/Y", $delete_date->getTimestamp());
-  $expiration_date = date("d/m/Y", $expiration_date->getTimestamp());
-
-  $node_url = $base_url . url('node/' . $record->nid);
   $mail_body = variable_get('framaforms_mail_user_notification_body');
   $mail_subject = variable_get('framaforms_mail_user_notification_subject');
-  // Replace placeholders in the body and subject.
-  $placeholders = ['[form_title]', '[form_expires_on]', '[form_delete_on]', '[form_url]'];
-  $replacers = [$record->title, $expiration_date, $delete_date, $node_url];
-  $mail_subject = str_replace($placeholders, $replacers, $mail_subject);
-  $mail_body = str_replace($placeholders, $replacers, $mail_body);
+  // Replace placeholders from within the mail body and subject.
+  $node = node_load($record->nid);
+  $mail_body = token_replace($mail_body, array('node' => $node));
+  $mail_subject = token_replace($mail_subject, array('node' => $node));
 
   $mail_params = array(
     'body' => $mail_body,
@@ -129,7 +113,6 @@ function notify_user_of_expiration($record) {
   );
 
   $message = drupal_mail('framaforms', 'expired_webform', (string) $record->mail, user_preferred_language($user), $mail_params);
-  return TRUE;
 }
 
 /**
