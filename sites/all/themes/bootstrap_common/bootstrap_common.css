@@ -152,4 +152,13 @@ border-radius: inherit;
   margin: auto;
 }
 
+  #block-framaforms-framaforms-footer {
+    padding-bottom: 2em
+  }
 
+/* Give space to footer for mobile */
+@media only screen and (max-width: 1000px) {
+  #block-framaforms-framaforms-footer {
+    padding: 2em
+  }
+}
