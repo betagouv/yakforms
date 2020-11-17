@@ -150,6 +150,16 @@ input[type="radio"] {
           box-sizing: border-box;
   padding: 0;
 }
+
+.webform-component-checkboxes {
+  max-width: 100%;
+}
+
+.form-item.form-type-checkbox.checkbox{
+  display: block!important;
+  text-align: left;
+}
+
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   height: auto;
