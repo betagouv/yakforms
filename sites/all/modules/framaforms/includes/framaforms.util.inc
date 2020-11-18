@@ -109,3 +109,18 @@ function _form_has_submission ($node) {
   }
   return FALSE;
 }
+
+/**
+ * Returns translatables that aren't automatically extracted via POTX.
+ *
+ * This function is never actually used, it just exposes strings to potx.
+ *
+ * @return array
+ *   Strings that should be translated.
+ */
+function framaforms_translatables () {
+  return array(
+    t("You form already has submissions. You might loose your data by editing or removing form fields."),
+    t("Changing this form's title will also change its URL. If you have already transmitted a link to your users, it will return an error."),
+  );
+}
