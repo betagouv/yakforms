@@ -83,3 +83,29 @@ function _get_form_expiration_date(stdClass $node) {
     watchdog('framaforms', "Error getting form's expiration date : !error", array('!error' => $e));
   }
 }
+
+/**
+ * Returns TRUE if a given form1 node has submissions.
+ *
+ * @param object $node
+ *   An object for the node.
+ *
+ * @return bool
+ *   TRUE if the node has registered submissions.
+ */
+function _form_has_submission ($node) {
+  try {
+    $count = db_select('webform_submissions', 'w')
+      ->fields('w', array('sid'))
+      ->condition('nid', $node->nid)
+      ->execute()
+      ->rowCount();
+    if ($count > 0) {
+      return TRUE;
+    }
+  }
+  catch (PDOException $e) {
+    watchdog('framaforms', "Error getting form's submissions : !error", array('!error' => $e));
+  }
+  return FALSE;
+}
