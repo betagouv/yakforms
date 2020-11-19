@@ -122,6 +122,7 @@ function _framaforms_set_variables_mail() {
   $framaforms_mail_user_notification_subject = t("Framaforms : your form « [node:title] » will expire soon.");
   variable_set('framaforms_mail_user_notification_subject', $framaforms_mail_user_notification_subject);
   variable_set('framaforms_mail_user_notification_body', $framaforms_mail_user_notification_body);
+  variable_set('framaforms_mail_from_address', 'no-reply+example@yoursite.org');
 }
 
 /**

@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 * Option to automatically export form submissions as CSV files before deletion (#113, introducted by !85, fixed by !104).
 * Introduced Drupal Token mechanism, usable on full-HTML pages (#118, !100, !107).
 * jQuery warning on form modification (!109).
+* Option to set custom 'from' mail address and subject for notification emails.
 
 ### Changed
 * The `form1` content type is now part of the Framaforms module (declared via `includes/framaforms.node.inc`) (!89).
@@ -22,6 +23,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Fixed
 * Expiration date is now modified when a form is cloned (https://framagit.org/framasoft/framaforms/-/issues/61)
 * Useless fields were deleted from `framaforms_feature` (!89, fixed with !98).
+* Cron notification of user (!112).
 
 ## [1.0.3] 2020/10/12
 
