@@ -581,7 +581,7 @@ function framaforms_cron() {
 
   // If the cron was executed less than 24h ago, do nothing.
   if ($now < $cron_limit) {
-    // return;.
+    return;
   }
   // else, proceed to cron.
   watchdog('framaforms', "Cron task launched.");

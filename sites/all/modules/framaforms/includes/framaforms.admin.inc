@@ -6,10 +6,12 @@
  */
 
 /**
- * Returns the dashboard page statistics.
- * Accessible at /admin/framaforms/dashboard.
+ * Returns the statistics dashboard page.
  *
- * @return void
+ * Accesibble at /admin/framaforms/dashboard.
+ *
+ * @return string
+ *   The HTML content for the dashboard.
  */
 function get_dashboard_content() {
   $content .= "<ul>";
@@ -27,7 +29,11 @@ function get_dashboard_content() {
           WHERE type ='form1'
           AND to_timestamp(created) > NOW() - interval'{$interval}'";
     $results = db_query($query, array())->rowCount();
-    $content .= "<h4>" . t("Last @interval : @results", array('@interval' => $interval, '@results' => $results)) . "</h4>";
+    $content .= "<h4>" . t("Last @interval : @results",
+      array(
+        '@interval' => $interval,
+        '@results' => $results,
+      )) . "</h4>";
   }
   $content .= "</li>";
 
@@ -54,7 +60,11 @@ function get_dashboard_content() {
   foreach ($intervals as $interval) {
     $results = db_query(sprintf($query, $interval), array())
       ->rowCount();
-    $content .= "<h4>" . t("Registered since @interval : @number", array('@interval' => $interval, '@number' => $results)) . "</h4>";
+    $content .= "<h4>" . t("Registered since @interval : @number",
+      array(
+        '@interval' => $interval,
+        '@number' => $results,
+      )) . "</h4>";
   }
   $content .= "</li>";
 
@@ -77,9 +87,8 @@ function get_dashboard_content() {
   }
   $content .= "</ul>";
 
-  // "Critical" users (authors of the most forms)
-  // Excluding Anonymous user (uid = 0) as it can be used by moderation for reattributi abusive forms.
-  $content .= "<h3>" . t('Users with the most forms') . ": </h3>";
+  // "Critical" users (authors of the most forms)/
+  $content .= t('<h3>Users with the most forms</h3>');
   $content .= "<ul>";
   $query = "SELECT users.uid as uid, users.name as name, COUNT(node.nid) as c
       FROM node
@@ -108,10 +117,7 @@ function get_dashboard_content() {
 }
 
 /**
- * Implements hook_form.
- * Describes the adminstration form, accessible at /admin/config/system/framaforms.
- *
- * @return the configuration form.
+ * Implements hook_form().
  */
 function framaforms_config_form($form, &$form_state) {
   $form['general-section'] = array(
@@ -121,7 +127,7 @@ function framaforms_config_form($form, &$form_state) {
   );
   $form['general-section']['info_intertitle'] = array(
     '#type' => 'item',
-    '#markup' => "<i>" . t("Note : some of these values can be changed elsewhere on the website, they are simply centralized here.") . "</i>"
+    '#markup' => "<i>" . t("Note : some of these values can be changed elsewhere on the website, they are simply centralized here.") . "</i>",
   );
   $form['general-section']['site_name'] = array(
     '#type' => 'textfield',
@@ -130,7 +136,7 @@ function framaforms_config_form($form, &$form_state) {
     '#description' => t("The title of this website. It will be displayed in the top header."),
     '#required' => TRUE,
   );
-    $form['general-section']['framaforms_general_header_html'] = array(
+  $form['general-section']['framaforms_general_header_html'] = array(
     '#type' => 'textfield',
     '#title' => t("Website header"),
     '#default_value' => variable_get('framaforms_general_header_html'),
@@ -149,21 +155,21 @@ function framaforms_config_form($form, &$form_state) {
     '#title' => t("General contact email"),
     '#default_value' => variable_get('site_mail'),
     '#description' => t("It will be used in the general contact form of the website, and used to warn you of pending updates."),
-    '#required' => true,
+    '#required' => TRUE,
   );
   $form['general-section']['site_contact_url'] = array(
     '#type' => 'textfield',
     '#title' => t("Link to support"),
     '#default_value' => variable_get('site_contact_url'),
     '#description' => t("Link to a support page for your users. This will be displayed when if your users encounter problems creating forms."),
-    '#required' => true,
+    '#required' => TRUE,
   );
   $form['limitation-section'] = array(
     '#type' => 'fieldset',
     '#title' => 'Limitations',
     '#collapsible' => TRUE,
   );
-    $form['limitation-section']['formsperuser-intertitle'] = array(
+  $form['limitation-section']['formsperuser-intertitle'] = array(
     '#type' => 'item',
     '#markup' => "<h4>" . t("Number of forms per user") . "<h4>",
   );
@@ -172,7 +178,7 @@ function framaforms_config_form($form, &$form_state) {
     '#title' => t('Maximum number of form per user'),
     '#default_value' => variable_get('framaforms_forms_per_user_limit'),
     '#description' => t("0 for no limitation."),
-    '#required' => true,
+    '#required' => TRUE,
     '#element_validate' => array('element_validate_number'),
   );
   $form['limitation-section']['framaforms_submissions_per_form_limit'] = array(
@@ -180,7 +186,7 @@ function framaforms_config_form($form, &$form_state) {
     '#title' => t('Maximum number of submissions per form'),
     '#default_value' => variable_get('framaforms_submissions_per_form_limit', 0),
     '#description' => t("0 for no limitation."),
-    '#required' => true,
+    '#required' => TRUE,
     '#element_validate' => array('element_validate_number'),
   );
   $form['limitation-section']['expiration_intertitle'] = array(
@@ -192,7 +198,7 @@ function framaforms_config_form($form, &$form_state) {
     '#title' => t("Expiration period (in weeks)"),
     '#default_value' => variable_get('framaforms_expiration_period_default_value'),
     '#description' => t("When a user creates a form, its expiration date will be set by default at this interval in the futur. Ex : if a user creates a form on 01/01/2020 and the expiration value is set to '5', the form will expire by default on 02/05/2020. Insert '0' if you don't want forms to expire."),
-    '#required' => true,
+    '#required' => TRUE,
     '#element_validate' => array('element_validate_number'),
   );
   $form['limitation-section']['framaforms_deletion_period_value'] = array(
@@ -206,16 +212,23 @@ function framaforms_config_form($form, &$form_state) {
   $form['limitation-section']['framaforms_export_form_submissions_before_delete'] = array(
     '#type' => 'checkbox',
     '#title' => t("Save form submissions before deleting"),
-    '#default_value' => variable_get('framaforms_export_form_submissions_before_delete', false),
+    '#default_value' => variable_get('framaforms_export_form_submissions_before_delete', FALSE),
     '#description' => t("Check this box if you want all form submissions to be saved before deletion. This can be useful for user support."),
-    '#required' => false,
+    '#required' => FALSE,
   );
   $form['email-section'] = array(
     '#type' => 'fieldset',
     '#title' => 'Emails',
     '#collapsible' => TRUE,
-    '#collapsed' => TRUE
+    '#collapsed' => TRUE,
 
+  );
+  $form['email-section']['framaforms_mail_user_notification_subject'] = array(
+    '#type' => 'textfield',
+    '#title' => t("Notification email"),
+    '#description' => t("The subject of notification emails. You can use the following tokens : <strong>[node:title]</strong>."),
+    '#default_value' => variable_get('framaforms_mail_user_notification_subject'),
+    '#required' => TRUE,
   );
   $form['email-section']['framaforms_mail_user_notification_body'] = array(
     '#type' => 'textarea',
@@ -224,17 +237,24 @@ function framaforms_config_form($form, &$form_state) {
     '#default_value' => variable_get('framaforms_mail_user_notification_body'),
     '#required' => TRUE,
   );
+  $form['email-section']['framaforms_mail_from_address'] = array(
+    '#type' => 'textfield',
+    '#title' => t("Notification 'from' email address"),
+    '#description' => t("The default 'from' address set in the email header."),
+    '#default_value' => variable_get('framaforms_mail_from_address'),
+    '#required' => TRUE,
+  );
   $form['defaults-section'] = array(
     '#type' => 'fieldset',
     '#title' => 'Default parameters',
     '#collapsible' => TRUE,
-    '#collapsed' => TRUE
+    '#collapsed' => TRUE,
   );
   $form['defaults-section']['create-default-pages'] = array(
     '#type' => 'button',
     '#value' => t("Generate default pages"),
     '#submit' => array('admin_menu_create_pages_callback'),
-    '#executes_submit_callback' => true,
+    '#executes_submit_callback' => TRUE,
   );
   $form['defaults-section']['create-default-pages-description'] = array(
     '#type' => 'item',
@@ -244,11 +264,11 @@ function framaforms_config_form($form, &$form_state) {
     '#type' => 'button',
     '#value' => t("Reset all"),
     '#submit' => array('framaforms_admin_menu_reset_variables_callback'),
-    '#executes_submit_callback' => true,
+    '#executes_submit_callback' => TRUE,
   );
   $form['defaults-section']['reset-variables-description'] = array(
     '#type' => 'item',
-    '#markup' => "<i>" . t("Reset all above variables to their initial value.") . "</i>"
+    '#markup' => "<i>" . t("Reset all above variables to their initial value.") . "</i>",
   );
   $form['submit'] = array(
     '#type' => 'submit',
@@ -259,9 +279,7 @@ function framaforms_config_form($form, &$form_state) {
 }
 
 /**
- * Secondary callback for the "Generate pages" button.
- *
- * @return void
+ * Callback for the "Generate pages" button.
  */
 function admin_menu_create_pages_callback() {
   module_load_include('inc', 'framaforms', 'includes/framaforms.pages');
@@ -270,51 +288,46 @@ function admin_menu_create_pages_callback() {
 }
 
 /**
- * Inplements hook_form_validate : checks the values of expiration and deletion period
- *  and checks they are numeric.
- *
- * @return void
- */
-function framaforms_config_form_validate($form, &$form_state) {
-  $values = $form_state['values'];
-  // Create the backup directory for form submissions if necessary.
-  $backup_dir_path = variable_get('file_private_path') ."/framaforms_submissions_backup/";
-  $backup_dir_writable = file_prepare_directory($backup_dir_path, FILE_CREATE_DIRECTORY);
-  if($values['limitation-section']['framaforms_export_form_submissions_before_delete'] && !$backup_dir_writable) {
-    drupal_set_message(
-      t("The following directory doesn't exist or is not writable : !path.", array('!path' => $backup_dir_path)),
-      'error',
-      FALSE
-  );
-  }
-  // Strip disallowed HTML tags
-  $stripped_header = strip_tags($values['framaforms_general_header_html'],
-    "<i><strong><b><p><div><del><h1><h2><h3<h4>");
-
-  // Check if disallowed HTML tags were stripped. If so, warn the user.
-  if($stripped_header != $values['framaforms_general_header_html']){
-    form_set_error('general-section][framaforms_general_header_html]', 'Contains disallowed tags.');
-  }
-}
-
-/**
- * Implements hook_form_submit.
- *
- * @return void
- */
-function framaforms_config_form_submit($form, &$form_state) {
-  $html_header = $form_state['values']['general-section']['framaforms_general_header_html'];
-
-  drupal_set_message(t("The form was submitted !"));
-}
-
-/**
- * Callback calling.
- *
- * @return void
+ * Callback for the "reset variable" button.
  */
 function framaforms_admin_menu_reset_variables_callback() {
   module_load_include('install', 'framaforms', 'framaforms');
   framaforms_set_default_variables();
   drupal_set_message(t("All global variables for Framaforms were reset."), 'status', FALSE);
+}
+
+/**
+ * Inplements hook_form_validate().
+ *
+ * Check the admin menu's values.
+ */
+function framaforms_config_form_validate($form, &$form_state) {
+  $values = $form_state['values'];
+  // Create the backup directory for form submissions if necessary.
+  $backup_dir_path = variable_get('file_private_path') . "/framaforms_submissions_backup/";
+  $backup_dir_writable = file_prepare_directory($backup_dir_path, FILE_CREATE_DIRECTORY);
+  if ($values['limitation-section']['framaforms_export_form_submissions_before_delete'] && !$backup_dir_writable) {
+    drupal_set_message(
+      t("The following directory doesn't exist or is not writable : !path.", array('!path' => $backup_dir_path)),
+      'error',
+      FALSE
+    );
+  }
+  // Strip disallowed HTML tags.
+  $stripped_header = strip_tags($values['framaforms_general_header_html'],
+    "<i><strong><b><p><div><del><h1><h2><h3<h4>");
+
+  // Check if disallowed HTML tags were stripped. If so, warn the user.
+  if ($stripped_header != $values['framaforms_general_header_html']) {
+    form_set_error('general-section][framaforms_general_header_html]', 'Contains disallowed tags.');
+  }
+}
+
+/**
+ * Implements hook_form_submit().
+ */
+function framaforms_config_form_submit($form, &$form_state) {
+  $html_header = $form_state['values']['general-section']['framaforms_general_header_html'];
+
+  drupal_set_message(t("The form was submitted !"));
 }

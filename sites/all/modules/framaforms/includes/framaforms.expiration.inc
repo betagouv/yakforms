@@ -2,15 +2,14 @@
 
 /**
  * @file
- * Contain Framaforms custom function related to automatic expiration of user
- * webforms.
+ * Contain custom function related to automatic expiration of forms.
  */
 
 /**
- * Get all webforms that will expired between now and 2 weeks in the future,
- * and insert them into framaforms_expired table.
+ * Treat forms a bout to expire.
  *
- * @return void
+ * Get all webforms that will expired between now and a period in the future,
+ * and insert them into framaforms_expired table.
  */
 function make_forms_expire() {
   $expiration_period = variable_get('framaforms_notification_period_value');
@@ -88,6 +87,10 @@ function make_forms_expire() {
  *
  * @param object $record
  *   The expired node.
+ *
+ * @return bool
+ *   TRUE if drupal_mail was called. This doesn't necessarily mean the mail was
+ *   sent : https://api.drupal.org/api/drupal/includes%21mail.inc/function/drupal_mail/7.x
  */
 function notify_user_of_expiration(stdClass $record) {
   // Use the global variable of Drupal for the site's URL.
@@ -112,14 +115,17 @@ function notify_user_of_expiration(stdClass $record) {
     'headers' => array(),
   );
 
-  $message = drupal_mail('framaforms', 'expired_webform', (string) $record->mail, user_preferred_language($user), $mail_params);
+  $from_mail = variable_get('framaforms_mail_from_address');
+
+  $message = drupal_mail('framaforms', 'expired_webform', (string) $record->mail, language_default(), $mail_params, $from_mail, TRUE);
+  return TRUE;
 }
 
 /**
+ * Treat expired nodes that were modified.
+ *
  * Looks up webform nodes in the database that were marked as
  * "expired" but whose expiration date * got changed by the user.
- *
- * @return void
  */
 function update_modified_nodes() {
   $expiration_period = variable_get('framaforms_notification_period_value');
@@ -130,7 +136,7 @@ function update_modified_nodes() {
   $transaction = db_transaction();
   watchdog('framaforms', "Removing forms from the framaforms_expired table after their expiration date was pushed back.", array(), WATCHDOG_NOTICE);
   try {
-    // Delete nodes from the framaforms_notified table if their expiration date was pushed back by the user.
+    // Delete modified from the framaforms_notified table.
     $modified_nodes = db_query(sprintf("
             SELECT n.nid
             FROM node n
@@ -158,15 +164,10 @@ function update_modified_nodes() {
 }
 
 /**
- * Deletes all expired webform nodes after a period of inactivity (defined in $deletion_period).
- * If the webform's expiration date is modified by the user, the update_modified_node()
- * function will delete them from the framaforms_expired table and the rows won't be affected
- * by this function.
+ * Deletes expired webform nodes after a period of inactivity.
  *
- * @param string $deletion_period
- *   : form expiration-deletion time interval.
- *
- * @return void
+ * If an expired node was not treated by the user in the given time,
+ * this function will delete them from the database.
  */
 function delete_expired_nodes() {
   $deletion_period = variable_get('framaforms_deletion_period_value');
@@ -224,16 +225,17 @@ function delete_expired_nodes() {
  * Adapted from drush_webform_export() function of Webform module :
  * https://drushcommands.com/drush-7x/webform/webform-export/
  *
-  * @param int $nid : the form's identifier.
-  */
+ * @param int $nid
+ *   The form's identifier.
+ */
 function framaforms_export_node_submissions(int $nid) {
   // Before anything, check if the export option is activated by admin.
-  if(!variable_get('framaforms_export_form_submissions_before_delete', 0)){
+  if (!variable_get('framaforms_export_form_submissions_before_delete', 0)) {
     return;
   }
   $node = node_load($nid);
-  if (!$node | $node->type!='form1') {
-    watchdog('framaforms', t('Node !nid was not found or could not be exported.'), array('!nid' => $nid), WATCHDOG_WARNING);
+  if (!$node | $node->type != 'form1') {
+    watchdog('framaforms', 'Node !nid was not found or could not be exported.', array('!nid' => $nid), WATCHDOG_WARNING);
     return;
   }
   module_load_include('inc', 'webform', 'includes/webform.submissions');
@@ -245,10 +247,10 @@ function framaforms_export_node_submissions(int $nid) {
   $format = 'delimited';
   $options = webform_results_download_default_options($node, $format);
 
-    // Set the export options.
+  // Set the export options.
   $options['range']['batch_size'] = 10000;
-  $file_title = pathauto_cleanstring($node->title) . "-" . time() . '-' .$node->uid;
-  $options['file_name'] = variable_get('file_private_path') ."/framaforms_submissions_backup/{$file_title}.csv";
+  $file_title = pathauto_cleanstring($node->title) . "-" . time() . '-' . $node->uid;
+  $options['file_name'] = variable_get('file_private_path') . "/framaforms_submissions_backup/{$file_title}.csv";
 
   // Map form keys to components IDs.
   $form_keys = array();
@@ -263,7 +265,7 @@ function framaforms_export_node_submissions(int $nid) {
   // Drop PHP reference.
   unset($component);
 
-  // Clean up IPs in database before export
+  // Clean up IPs in database before export.
   _clean_submissions_ips($node);
 
   // Calls to webform module to create a clean CSV file.
@@ -282,18 +284,19 @@ function framaforms_export_node_submissions(int $nid) {
 /**
  * Cleans submission IPs from database before export, as this is private data.
  *
- * @param Obj $node
+ * @param object $node
+ *   The node whose submissions should be cleaned out.
  */
-function _clean_submissions_ips($node){
-  try{
+function _clean_submissions_ips($node) {
+  try {
     db_update('webform_submissions')
       ->fields(array(
-        'remote_addr' => '0.0.0.0'
+        'remote_addr' => '0.0.0.0',
       ))
       ->condition('nid', $node->nid)
       ->execute();
   }
-  catch(PDOException $e){
+  catch (PDOException $e) {
     watchdog('framaforms', "Unable to clean IPs for node %id : Error in _clean_submissions_ips. %error",
         array('%id' => $node->nid, '%error' => $e),
         WATCHDOG_ERROR
