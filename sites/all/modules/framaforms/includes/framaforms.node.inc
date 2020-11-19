@@ -3,7 +3,6 @@
 /**
  * @file
  * Contains custom content type definition for Framaforms.
- *
  */
 
 /**
@@ -11,7 +10,8 @@
  *
  * Adapted from previous framaforms_feature export.
  *
- * @return array : the field base array to populate the content type with fields.
+ * @return array
+ *   The field base array to populate the content type with fields.
  */
 function framaforms_custom_field_bases() {
   $field_bases = array();
@@ -192,7 +192,6 @@ function framaforms_custom_field_bases() {
   );
   return $field_bases;
 }
-
 
 /**
  * Returns fields instances for custom content type.

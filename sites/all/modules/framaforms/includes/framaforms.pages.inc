@@ -9,17 +9,17 @@
  * Creates a custom Framaforms page from a HTML template.
  *
  * Create nodes of type "page", based on a title and an HTML template name.
- * The page should be placed under includes/html/{language_code} and only contain the necessary HTML
- * content (not a complete HTML document).
+ * The page should be placed under includes/html/{language_code} and only
+ * contain the necessary HTML content (not a complete HTML document).
  *
- * @param String $page_title
- *   : name of the page to use.
- * @param String $file_name
- *   : name of the HTML template to use for content.
+ * @param string $page_title
+ *   Name of the page to use.
+ * @param string $file_name
+ *   Name of the HTML template to use for content.
  */
-function create_custom_page($page_title, $file_name){
+function create_custom_page(string $page_title, string $file_name) {
   global $user;
-  // Get default site language to define which templates to use
+  // Get default site language to define which templates to use.
   $language_code = language_default()->language;
   // Check if the node already exists, based on node title.
   $query = db_select('node', 'n')
@@ -36,7 +36,7 @@ function create_custom_page($page_title, $file_name){
   $custom_node->type = 'page';
   $custom_node->title = $page_title;
   node_object_prepare($custom_node);
-  // Define HTML template to use for the content based on the site's default language.
+  // Get template path for the content based on the site's default language.
   $file_path = _get_template_file_path($language_code, $file_name);
 
   $custom_node->uid = $user->uid;
@@ -66,7 +66,13 @@ function create_custom_page($page_title, $file_name){
     node_save($custom_node);
   }
   catch (Exception $e) {
-    watchdog('framaforms', "There was an error creating the page %title : %error", array('%title' => $title, '%error' => $e), WATCHDOG_WARNING);
+    watchdog('framaforms',
+    "There was an error creating the page %title : %error",
+    array(
+      '%title' => $title,
+      '%error' => $e,
+    ),
+    WATCHDOG_WARNING);
     return -1;
   }
 
@@ -85,17 +91,16 @@ function create_custom_page($page_title, $file_name){
 }
 
 /**
- * Menu callback for admin/framaforms/create_default_pages :
+ * Menu callback for admin/framaforms/create_default_pages.
+ *
  * Creates all default pages, checking each pages doesn't exist prior
  * to creating it in order to avoid overwriting user modifications.
- *
- * @return void
  */
 function create_all_pages() {
   // Create custom Framaforms pages.
   $frontpage_title = t('Welcome to Framaforms');
   $frontpage_nid = create_custom_page($frontpage_title, 'frontpage.html');
-  // If a new frontpage was created from the default Framaforms template, set it as the site frontpage.
+  // If a new frontpage was created, set it as the site frontpage.
   if ($frontpage_nid != -1) {
     variable_set('site_frontpage', 'node/' . $frontpage_nid);
   }
@@ -122,44 +127,48 @@ function create_all_pages() {
 
   // Return to frontpage.
   drupal_goto('/');
-  return;
 }
 
 /**
  * Content callback for the expiration page.
  *
  *  Returns the content of the HTML template with replaced tokens.
- * @return void
  */
 function get_expiration_content() {
   global $user;
-  // Get the node which was redirected to the present page
+  // Get the node which was redirected to the present page.
   $from_url = $_REQUEST['from'];
-  // Trim the base URL
+  // Trim the base URL.
   $from_url = explode('/', $from_url)[3];
-  // Get the node object from this URL
+  // Get the node object from this URL.
   $expired_node = menu_get_object('node', 1, drupal_get_normal_path($from_url));
 
-  // Get base page content from template
-  // Get the site's default language code
+  // Get base page content from template.
+  // Get the site's default language code.
   $language_code = language_default()->language;
   $file_path = _get_template_file_path($language_code, 'expiration_page.html');
   $content = file_get_contents($file_path);
 
-  return token_replace($content, array('node' => $expired_node, 'user' => $user));
+  return token_replace($content,
+    array(
+      'node' => $expired_node,
+      'user' => $user,
+    ));
 }
 
 /**
  * Content callback for the 'share' tab.
  *
  * Returns the content of the HTML template with replaced tokens.
- * @return void
+ *
+ * @return string
+ *   The HTML-formatted content for the share tab.
  */
 function get_share_content() {
-  // Get the site's default language code
+  // Get the site's default language code.
   $language_code = language_default()->language;
 
-  // Get base page content from template
+  // Get base page content from template.
   $file_path = _get_template_file_path($language_code, 'share_page.html');
   $content = file_get_contents($file_path);
 
@@ -177,15 +186,19 @@ function get_share_content() {
  * returns this one.
  * If not, returns the English version by default.
  *
- * @param String $language
- * @param String $filename
- * @return String the template path
+ * @param string $language
+ *   The language code to pick a translation ('en' for English, etc).
+ * @param string $filename
+ *   The template file name.
+ *
+ * @return string
+ *   The template path
  */
-function _get_template_file_path($language, $filename){
+function _get_template_file_path(string $language, string $filename) {
   $translated_template_path = drupal_get_path('module', 'framaforms') . "/includes/html/{$language}/{$filename}";
-  if(file_exists($translated_template_path)){
+  if (file_exists($translated_template_path)) {
     return $translated_template_path;
   }
-  // Fallback to English otherwise
+  // Fallback to English otherwise.
   return drupal_get_path('module', 'framaforms') . "/includes/html/en/{$filename}";
 }

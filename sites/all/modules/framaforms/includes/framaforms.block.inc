@@ -9,9 +9,10 @@
  * Returns the content for the personal contact form block.
  *
  * @param int $nid
- *   : the current page nid.
+ *   The current page nid.
  *
- * @return string : the markup content to be rendered.
+ * @return string
+ *   The markup content to be rendered.
  */
 function get_contact_form_content($nid) {
   $content = "";
@@ -29,7 +30,7 @@ function get_contact_form_content($nid) {
     if ($nid && isset($name) && isset($uid) && $contact == 1) {
       $url_contact = '/' . drupal_get_path_alias('user/' . $uid) . '/contact';
       $content .= "<h3>" . t("Contact the author of this form") . "</h3>";
-      $content .= "<p>" . t("To contact the author of this form, <a href='@link'> click here</a>", array('@link' =>$url_contact)) . "<p>" ;
+      $content .= "<p>" . t("To contact the author of this form, <a href='@link'> click here</a>", array('@link' => $url_contact)) . "<p>";
       $content .= "<br>";
     }
   }
@@ -45,7 +46,8 @@ function get_contact_form_content($nid) {
  * @param int $nid
  *   : the NID of the node.
  *
- * @return boolean : TRUE if the node is a form1 node
+ * @return bool
+ *   TRUE if the node is a form1 node
  */
 function node_is_form1($nid) {
   if (!isset($nid)) {

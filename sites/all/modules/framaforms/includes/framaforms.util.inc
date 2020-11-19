@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @file
+ * Contain general-purpose function related to Framaforms.
+ */
+
+/**
  * Returns an Array of the user's form.
  *
  * @param int $uid
@@ -30,7 +35,6 @@ function _get_user_forms($uid) {
   }
   return $users_forms;
 }
-
 
 /**
  * Returns HTML-formatted list of the user's forms from an array.
@@ -70,7 +74,7 @@ function _get_form_expiration_date(stdClass $node) {
       ->execute()
       ->fetchField();
     $timestamp = strtotime($query);
-    if ($timestamp == NULL){
+    if ($timestamp == NULL) {
       watchdog('framaforms',
         "Warning : node !nid doesn't seem to have an expiration date, but it was demanded.",
         array('!nid' => $node->nid),
@@ -93,7 +97,7 @@ function _get_form_expiration_date(stdClass $node) {
  * @return bool
  *   TRUE if the node has registered submissions.
  */
-function _form_has_submission ($node) {
+function _form_has_submission($node) {
   try {
     $count = db_select('webform_submissions', 'w')
       ->fields('w', array('sid'))
@@ -118,7 +122,7 @@ function _form_has_submission ($node) {
  * @return array
  *   Strings that should be translated.
  */
-function framaforms_translatables () {
+function framaforms_translatables() {
   return array(
     t("You form already has submissions. You might loose your data by editing or removing form fields."),
     t("Changing this form's title will also change its URL. If you have already transmitted a link to your users, it will return an error."),
