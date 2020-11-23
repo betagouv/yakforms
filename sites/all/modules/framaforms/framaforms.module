@@ -652,6 +652,9 @@ function framaforms_form($node, $form_state) {
  * Disable wysiwyg on markup widget and add protection before leaving.
  */
 function framaforms_form_alter(&$form, &$form_state, $context) {
+  if(!isset($form['#id'])){
+    return;
+  }
   module_load_include('inc', 'framaforms', 'includes/framaforms.util');
 
   $form_id['edit-markup-value']['#wysiwyg'] = FALSE;
