@@ -21,9 +21,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 * Updated Drupal to 7.74 (!113)
 
 ### Fixed
-* Expiration date is now modified when a form is cloned (https://framagit.org/framasoft/framaforms/-/issues/61)
+* Expiration date is now modified when a form is cloned (#61)
 * Useless fields were deleted from `framaforms_feature` (!89, fixed with !98).
 * Cron notification of user (!112).
+* Ajax 500 error when sharing results with users (#65).
 
 ## [1.0.3] 2020/10/12
 
