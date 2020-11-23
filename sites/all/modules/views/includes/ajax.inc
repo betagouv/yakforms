@@ -335,6 +335,7 @@ function views_ajax_autocomplete_user($string = '') {
   }
 
   drupal_json_output($matches);
+  drupal_exit();
 }
 
 /**

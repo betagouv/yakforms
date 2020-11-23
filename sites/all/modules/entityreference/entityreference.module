@@ -1129,6 +1129,7 @@ function entityreference_autocomplete_callback_get_matches($type, $field, $insta
   }
 
   drupal_json_output($matches);
+  drupal_exit();
 }
 
  /**
