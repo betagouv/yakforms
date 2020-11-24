@@ -287,7 +287,7 @@ function framaforms_block_view($delta) {
       break;
 
     case 'framaforms_header':
-      $block['content']['#markup'] = "<header ><a href='/'><h1 class='big-title'>" . variable_get('framaforms_general_header_html') . '</h1></a></header>';
+      $block['content']['#markup'] = "<header ><a href='{$base_url}'><h1 class='big-title'>" . variable_get('framaforms_general_header_html') . '</h1></a></header>';
       $block['content']['#markup'] .= '<p class="lead">' . variable_get('site_slogan') . '</p>';
       break;
 
@@ -297,11 +297,11 @@ function framaforms_block_view($delta) {
         return;
       }
       $block['content']['#markup'] = '<div class="user-block-connect">';
-      $block['content']['#markup'] .= "<a href='/user/register' class='btn btn-success btn-sm' role='button'>" . t("Register") . "</a>";
+      $block['content']['#markup'] .= "<a href='{$base_url}/user/register' class='btn btn-success btn-sm' role='button'>" . t("Register") . "</a>";
       $block['content']['#markup'] .= '&nbsp;&nbsp;&nbsp;&nbsp;';
-      $block['content']['#markup'] .= "<a href='/user' class='btn btn-primary btn-sm' role='button'>" . t("Log in") . "</a><br/><br/>";
+      $block['content']['#markup'] .= "<a href='{$base_url}/user' class='btn btn-primary btn-sm' role='button'>" . t("Log in") . "</a><br/><br/>";
       $block['content']['#markup'] .= '<div>';
-      $block['content']['#markup'] .= "<a href='/fonctionnalites' class='btn btn-default btn-sm' role='button'>" . t("Features") . "</a>";
+      $block['content']['#markup'] .= "<a href='{$base_url}/fonctionnalites' class='btn btn-default btn-sm' role='button'>" . t("Features") . "</a>";
       $block['content']['#markup'] .= ' </div> </div>';
       $block['content']['#markup'] .= '</div class="user-block-connect">';
       break;
@@ -313,18 +313,18 @@ function framaforms_block_view($delta) {
       }
       $block['content']['#markup'] = '<div class="user-block-connect">';
       // Button for account settings.
-      $block['content']['#markup'] .= '<a role="button" class="btn btn-link btn-sm" href="/user/' . $user->uid . '">' . t("My account") . ' (' . $user->name . ')</a>';
+      $block['content']['#markup'] .= "<a role='button' class='btn btn-link btn-sm' href='{$base_url}/user/{$user->uid}'>" . t("My account (@account)", array('@account' => $user->name)) . '</a>';
       $block['content']['#markup'] .= "&nbsp;&nbsp;&nbsp;&nbsp;";
       // Logout button.
-      $block['content']['#markup'] .= '<a role="button" class="btn btn-danger btn-sm"href="/user/logout">' . t('Log out') . '</a>';
+      $block['content']['#markup'] .= "<a role='button' class='btn btn-danger btn-sm' href='{$base_url}/user/logout'>" . t('Log out') . '</a>';
       $block['content']['#markup'] .= "<br /><br />";
-      $block['content']['#markup'] .= '<a href="/fonctionnalites" class="btn btn-default btn-sm" role="button">' . t("Features") . '</a>';
+      $block['content']['#markup'] .= "<a href='{$base_url}/fonctionnalites' class='btn btn-default btn-sm' role='button'>" . t("Features") . '</a>';
       $block['content']['#markup'] .= "&nbsp;&nbsp;&nbsp;&nbsp;";
-      $block['content']['#markup'] .= '<a href="/node/add/form1" class="btn btn-primary btn-sm" role="button">' . t("Create a new form") . '</a>';
+      $block['content']['#markup'] .= "<a href='{$base_url}/node/add/form1' class='btn btn-primary btn-sm' role='button'>" . t("Create a new form") . '</a>';
       $block['content']['#markup'] .= "&nbsp;&nbsp;&nbsp;&nbsp;";
-      $block['content']['#markup'] .= '<a href="/templates" class="btn btn-primary btn-sm" role="button">' . t('Create a form from a template') . '</a>';
+      $block['content']['#markup'] .= "<a href='{$base_url}/templates' class='btn btn-primary btn-sm' role='button'>" . t('Create a form from a template') . '</a>';
       $block['content']['#markup'] .= "&nbsp;&nbsp;&nbsp;&nbsp;";
-      $block['content']['#markup'] .= '<a role="button" class="btn btn-primary btn-sm" href="/user/' . $user->uid . '/forms">' . t('My forms') . '</a>';
+      $block['content']['#markup'] .= "<a role='button' class='btn btn-primary btn-sm' href='{$base_url}/user/{$user->uid}/forms'>" . t('My forms') . '</a>';
       $block['content']['#markup'] .= "<br/>";
       $block['content']['#markup'] .= "&nbsp;&nbsp;&nbsp;&nbsp;";
       $block['content']['#markup'] .= '</div class="user-block-connect">';
@@ -340,7 +340,7 @@ function framaforms_block_view($delta) {
       $block['content']['#markup'] .= '<ul>';
       $block['content']['#markup'] .= '<li>' . t('edit your personal information ("Edit" tab above) ;') . '</li>';
       $block['content']['#markup'] .= '<li>' . t('access your forms ("My forms" button above) ;') . '</li>';
-      $block['content']['#markup'] .= '<li> <a href="/node/add/form1">' . t('create a new form') . '</a></li>';
+      $block['content']['#markup'] .= "<li> <a href='{$base_url}/node/add/form1'>" . t('create a new form') . '</a></li>';
       $block['content']['#markup'] .= '<li> <a href="' . variable_get('site_contact_url') . '">' . t('contact us') . '</a></li>';
       $block['content']['#markup'] .= '</ul>';
       break;

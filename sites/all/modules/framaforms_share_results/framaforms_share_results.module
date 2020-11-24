@@ -5,7 +5,7 @@
  * url: http://tylerfrankenstein.com/code/drupal-webform-submission-results-user-access-control
  * It give a simple solution to use a form field (named "field_form1_results_access") with
  * entityreference module to list users that form creator would want to share forms results with.
- * 
+ *
  * modifications by pyg@framasoft.org
 */
 
@@ -60,15 +60,13 @@ function framaforms_share_results_webform_access ($node, $account = NULL) {
 }
 
 
-/** 
-Note that if you have some issues with "Restricted access" shown when you're
-using autocomplete, it's probably because user's don't habe permissions to
-see other users page.
-In this case, you can use multiple solutions:
-https://www.drupal.org/node/2153463#comment-9310517 propose to use to alter
-myentity_alter_info()
-But I prefered to create a new view called user_autocomplete as in 
-https://gist.github.com/acao/7297342 with extended permissions and then
-use entity reference autocomplete field options to link to that view.
 
-*/
+// Note that if you have some issues with "Restricted access" shown when you're
+// using autocomplete, it's probably because user's don't habe permissions to
+// see other users page.
+// In this case, you can use multiple solutions:
+// https://www.drupal.org/node/2153463#comment-9310517 propose to use to alter
+// myentity_alter_info()
+// But I prefered to create a new view called user_autocomplete as in
+// https://gist.github.com/acao/7297342 with extended permissions and then
+// use entity reference autocomplete field options to link to that view.

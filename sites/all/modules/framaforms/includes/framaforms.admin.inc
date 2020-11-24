@@ -14,6 +14,7 @@
  *   The HTML content for the dashboard.
  */
 function get_dashboard_content() {
+  global $base_url;
   $content .= "<ul>";
   $content .= "<li>";
   // Append otal number of forms.
@@ -83,7 +84,7 @@ function get_dashboard_content() {
   $results = db_query($query, array());
   foreach ($results as $result) {
     $content .= "<li>" . $result->title . " (#{$result->nid}) :  {$result->nb} " . t("submissions") . "</li>";
-    $content .= "<a href='/node/{$result->nid}'>" . t("Visit") . "</a>";
+    $content .= "<a href='{$base_url}/node/{$result->nid}'>" . t("Visit") . "</a>";
   }
   $content .= "</ul>";
 
@@ -100,8 +101,8 @@ function get_dashboard_content() {
       LIMIT 10;";
   $results = db_query($query, array());
   foreach ($results as $result) {
-    $content .= "<li> <a href='/user/{$result->uid}'> {$result->name} </a> (#{$result->uid})
-      - <a href='/form-search?status=1&nid=&title=&uid={$result->name}&mail='>{$result->c} forms</a> </li>";
+    $content .= "<li> <a href='{$base_url}/user/{$result->uid}'> {$result->name} </a> (#{$result->uid})
+      - <a href='{$base_url}/form-search?status=1&nid=&title=&uid={$result->name}&mail='>{$result->c} forms</a> </li>";
   }
   $content .= "</ul>";
 

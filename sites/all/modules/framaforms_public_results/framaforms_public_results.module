@@ -18,9 +18,6 @@ function framaforms_public_results_user_has_access($account = NULL) {
 
 if (isset($tmp_node->field_form1_results_public['und'])) { // test if component exists first (it has been added after so it could not exists
    if ($tmp_node->field_form1_results_public['und'][0]['value']==true) {    // Author has checked the option to give public access
-
-    
-
      return TRUE;
    }
    return false;
@@ -28,14 +25,12 @@ if (isset($tmp_node->field_form1_results_public['und'])) { // test if component 
 }
 
 function framaforms_public_results_webform_submission_actions($node, $submission) {
+  global $base_url;
   if (webform_results_access($node)) {
     $actions['myaction'] = array(
-      'title' => t('Back to results'), 
-      'href' => 'node/' . $node->nid . '/webform-results/table', 
+      'title' => t('Back to results'),
+      'href' => "{$base_url}node/{$nid}/webform-results/table",
       'query' => '',
-
-//      'href' => 'node/' . $node->nid . '/submission/' . $submission->sid . '/myaction', 
-//      'query' => drupal_get_destination(),
     );
   }
 
