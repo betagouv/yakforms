@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2020-11-16 17:08+0100\n"
+"POT-Creation-Date: 2020-11-24 16:43+0100\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -141,7 +141,7 @@ msgid "Log in"
 msgstr ""
 
 #: sites/all/modules/framaforms/framaforms.module:316
-msgid "My account"
+msgid "My account (@account)"
 msgstr ""
 
 #: sites/all/modules/framaforms/framaforms.module:319
@@ -404,107 +404,107 @@ msgstr ""
 msgid "Current user is author of the node"
 msgstr ""
 
-#: sites/all/modules/framaforms/framaforms.module:672
+#: sites/all/modules/framaforms/framaforms.module:676
 msgid "<br><p>This user is the author of : </p>"
 msgstr ""
 
-#: sites/all/modules/framaforms/framaforms.module:739
+#: sites/all/modules/framaforms/framaforms.module:749
 msgid "Formulaire"
 msgstr ""
 
-#: sites/all/modules/framaforms/framaforms.module:741
+#: sites/all/modules/framaforms/framaforms.module:751
 msgid "You are about to create a new form. Start by filling the fields below, then click « Submit ». NB : the form's title will affect its URL. Choose it wisely and watch out : changing it will change the form's URL !"
 msgstr ""
 
-#: sites/all/modules/framaforms/framaforms.module:742
+#: sites/all/modules/framaforms/framaforms.module:752
 msgid "Form title"
 msgstr ""
 
-#: sites/all/modules/framaforms/framaforms.module:832
+#: sites/all/modules/framaforms/framaforms.module:842
 msgid "Limitations"
 msgstr ""
 
-#: sites/all/modules/framaforms/framaforms.module:833
+#: sites/all/modules/framaforms/framaforms.module:843
 msgid "Limitations for this instance."
 msgstr ""
 
-#: sites/all/modules/framaforms/framaforms.module:836
+#: sites/all/modules/framaforms/framaforms.module:846
 msgid "Form"
 msgstr ""
 
-#: sites/all/modules/framaforms/framaforms.module:837
+#: sites/all/modules/framaforms/framaforms.module:847
 msgid "Tokens regarding the current form"
 msgstr ""
 
-#: sites/all/modules/framaforms/framaforms.module:841
+#: sites/all/modules/framaforms/framaforms.module:851
 msgid "Framaforms - user"
 msgstr ""
 
-#: sites/all/modules/framaforms/framaforms.module:842
+#: sites/all/modules/framaforms/framaforms.module:852
 msgid "Tokens regarding the current Framaforms user"
 msgstr ""
 
-#: sites/all/modules/framaforms/framaforms.module:850
+#: sites/all/modules/framaforms/framaforms.module:860
 msgid "Forms per user"
 msgstr ""
 
-#: sites/all/modules/framaforms/framaforms.module:851
+#: sites/all/modules/framaforms/framaforms.module:861
 msgid "Maximum number of forms per user allowed on this instance."
 msgstr ""
 
-#: sites/all/modules/framaforms/framaforms.module:854
+#: sites/all/modules/framaforms/framaforms.module:864
 msgid "Submissions per form"
 msgstr ""
 
-#: sites/all/modules/framaforms/framaforms.module:855
+#: sites/all/modules/framaforms/framaforms.module:865
 msgid "Maximum number of submissions per form allowed on this instance."
 msgstr ""
 
-#: sites/all/modules/framaforms/framaforms.module:858
+#: sites/all/modules/framaforms/framaforms.module:868
 msgid "Maximum form lifetime"
 msgstr ""
 
-#: sites/all/modules/framaforms/framaforms.module:859
+#: sites/all/modules/framaforms/framaforms.module:869
 msgid "Maximum lifetime for a form on this instance."
 msgstr ""
 
-#: sites/all/modules/framaforms/framaforms.module:865
+#: sites/all/modules/framaforms/framaforms.module:875
 msgid "Clone URL"
 msgstr ""
 
-#: sites/all/modules/framaforms/framaforms.module:866
+#: sites/all/modules/framaforms/framaforms.module:876
 msgid "URL to clone this form"
 msgstr ""
 
-#: sites/all/modules/framaforms/framaforms.module:870
+#: sites/all/modules/framaforms/framaforms.module:880
 msgid "The forms's expiration date"
 msgstr ""
 
-#: sites/all/modules/framaforms/framaforms.module:873
+#: sites/all/modules/framaforms/framaforms.module:883
 msgid "Deletion date"
 msgstr ""
 
-#: sites/all/modules/framaforms/framaforms.module:874
+#: sites/all/modules/framaforms/framaforms.module:884
 msgid "The forms's date of deletion"
 msgstr ""
 
-#: sites/all/modules/framaforms/framaforms.module:879
+#: sites/all/modules/framaforms/framaforms.module:889
 msgid "My forms menu"
 msgstr ""
 
-#: sites/all/modules/framaforms/framaforms.module:880
+#: sites/all/modules/framaforms/framaforms.module:890
 msgid "Link to the user's forms"
 msgstr ""
 
-#: sites/all/modules/framaforms/framaforms.module:909
+#: sites/all/modules/framaforms/framaforms.module:919
 msgid "No limitation"
 msgstr ""
 
-#: sites/all/modules/framaforms/framaforms.module:977
+#: sites/all/modules/framaforms/framaforms.module:987
 msgid "Your account has reached this site's maximum number of forms. Please delete some of your unused forms in 'My forms' before trying to create a new one."
 msgstr ""
 
-#: sites/all/modules/framaforms/framaforms.module:978
+#: sites/all/modules/framaforms/framaforms.module:988
 msgid "This site's allows to create the maximum following number of forms : @number"
 msgstr ""
 
@@ -512,15 +512,15 @@ msgstr ""
 msgid "Cron task launched."
 msgstr ""
 
-#: sites/all/modules/framaforms/framaforms.module:722
+#: sites/all/modules/framaforms/framaforms.module:732
 msgid "Unable to export forms for user %id : Error in framaforms_export_users_content_before_delete_submit. %error"
 msgstr ""
 
-#: sites/all/modules/framaforms/framaforms.module:767
+#: sites/all/modules/framaforms/framaforms.module:777
 msgid "The following error was raised and ignored creating the content type : !e"
 msgstr ""
 
-#: sites/all/modules/framaforms/framaforms.module:785
+#: sites/all/modules/framaforms/framaforms.module:795
 msgid "The following error was raised and ignollred creating the field instances : !e"
 msgstr ""
 
