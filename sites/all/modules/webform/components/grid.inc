@@ -452,7 +452,7 @@ function theme_webform_display_grid($variables) {
       $row[] = array('data' => webform_filter_xss($questions[0]), 'class' => array('webform-grid-question'));
       if (isset($element['#grid_questions'][$question_key])) {
         foreach ($element['#grid_options'] as $option_value => $option_label) {
-          if (in_array($option_value, $values)) {
+          if (isset($values[0]) && in_array($option_value, $values)) {
             $row[] = array('data' => '<strong>X</strong>', 'class' => array('checkbox', 'webform-grid-option'));
           }
           else {
