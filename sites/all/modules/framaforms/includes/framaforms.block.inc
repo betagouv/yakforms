@@ -15,6 +15,7 @@
  *   The markup content to be rendered.
  */
 function get_contact_form_content($nid) {
+  global $base_url;
   $content = "";
   try {
     if (isset($nid)) {
@@ -28,7 +29,7 @@ function get_contact_form_content($nid) {
       $contact = unserialize($results['data'])['contact'];
     }
     if ($nid && isset($name) && isset($uid) && $contact == 1) {
-      $url_contact = '/' . drupal_get_path_alias('user/' . $uid) . '/contact';
+      $url_contact = $base_url . '/' . drupal_get_path_alias('user/' . $uid) . '/contact';
       $content .= "<h3>" . t("Contact the author of this form") . "</h3>";
       $content .= "<p>" . t("To contact the author of this form, <a href='@link'> click here</a>", array('@link' => $url_contact)) . "<p>";
       $content .= "<br>";
