@@ -25,6 +25,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 * Useless fields were deleted from `framaforms_feature` (!89, fixed with !98).
 * Cron notification of user (!112).
 * Ajax 500 error when sharing results with users (#65).
+* Fixed display of grid component submissions when no answer was provided by the user (#12, !118).
 
 ## [1.0.3] 2020/10/12
 
@@ -54,7 +55,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 * Empty "Share" tab on forms (#106)
 * Unconsistent cache strategies for blocks in hook_block_info (`framaforms` module)
 * Automatic deletion of forms to take into account notification period.
-* Fixed display of grid component submissions when no answer was provided by the user (#12, !118).
 
 ## [1.0.1] 2020/07/15
 
