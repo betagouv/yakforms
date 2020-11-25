@@ -12,16 +12,26 @@ function framaforms_public_results_views_access_callbacks() {
 }
 
 function framaforms_public_results_user_has_access($account = NULL) {
-  // get node id
-  $tmp_nid = arg(1);
-  $tmp_node = node_load($tmp_nid);
+  global $user;
+  $node = node_load($account);
 
-if (isset($tmp_node->field_form1_results_public['und'])) { // test if component exists first (it has been added after so it could not exists
-   if ($tmp_node->field_form1_results_public['und'][0]['value']==true) {    // Author has checked the option to give public access
-     return TRUE;
-   }
-   return false;
+  // This is only for form1 nodes.
+  if($node->type != 'form1'){
+    return FALSE;
   }
+
+  // Else check if the "Public results" option was checked.
+  if (isset($node->field_form1_results_public['und']) && $node->field_form1_results_public['und'][0]['value']) {
+      // If the current user is the author of the node, the tab should not be visible.
+      if ($user->uid == $node->uid) {
+        drupal_set_message(t("The results of this form are public. If you want to change this, go to the « Edit » tab."), 'warning', FALSE);
+        return FALSE;
+      }
+      // For other users, display warnings.
+      drupal_set_message(t("The results of this form are public. Please be aware that if you fill any personal information below it will be visible to anyone."), 'warning', FALSE);
+      return TRUE;
+  }
+  return FALSE;
 }
 
 function framaforms_public_results_webform_submission_actions($node, $submission) {
@@ -36,3 +46,5 @@ function framaforms_public_results_webform_submission_actions($node, $submission
 
   return $actions;
 }
+
+
