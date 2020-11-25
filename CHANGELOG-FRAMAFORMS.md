@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 * Introduced Drupal Token mechanism, usable on full-HTML pages (#118, !100, !107).
 * jQuery warning on form modification (!109).
 * Option to set custom 'from' mail address and subject for notification emails.
+* Warning message on forms where results are public (#67, !120).
 
 ### Changed
 * The `form1` content type is now part of the Framaforms module (declared via `includes/framaforms.node.inc`) (!89).
