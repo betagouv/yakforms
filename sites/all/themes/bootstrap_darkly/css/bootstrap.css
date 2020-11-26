@@ -246,7 +246,7 @@ th {
     page-break-after: avoid;
   }
   .navbar {
-    display: none;
+    display: block;
   }
   .btn > .caret,
   .dropup > .btn > .caret {
@@ -1294,6 +1294,7 @@ p {
   margin: 0 0 10.5px;
 }
 .lead {
+  font-style: italic;
   margin-bottom: 21px;
   font-size: 17px;
   font-weight: 300;
