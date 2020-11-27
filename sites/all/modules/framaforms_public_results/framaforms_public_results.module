@@ -33,18 +33,3 @@ function framaforms_public_results_user_has_access($account = NULL) {
   }
   return FALSE;
 }
-
-function framaforms_public_results_webform_submission_actions($node, $submission) {
-  global $base_url;
-  if (webform_results_access($node)) {
-    $actions['myaction'] = array(
-      'title' => t('Back to results'),
-      'href' => "{$base_url}node/{$nid}/webform-results/table",
-      'query' => '',
-    );
-  }
-
-  return $actions;
-}
-
-
