@@ -542,6 +542,25 @@ function _framaforms_user_has_access($account = NULL) {
 }
 
 /**
+ * Implements hook_webform_submission_action.
+ *
+ * Adds a "Back to results" action at the top of the page when viewing a single
+ * submission.
+ */
+function framaforms_webform_submission_actions($node, $submission) {
+  global $base_url;
+  if (webform_results_access($node)) {
+    $actions['back-to-results-action'] = array(
+      'title' => t('Back to results'),
+      'href' => "{$base_url}/node/{$node->nid}/webform-results/table",
+      'query' => '',
+    );
+  }
+
+  return $actions;
+}
+
+/**
  * Implements of hook_mail() :
  * Sends framaforms-specific mails.
  */
