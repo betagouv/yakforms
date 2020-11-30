@@ -170,22 +170,28 @@ function update_modified_nodes() {
  * this function will delete them from the database.
  */
 function delete_expired_nodes() {
-  $deletion_period = variable_get('framaforms_deletion_period_value');
-  $notification_period = variable_get('framaforms_notification_period_value');
+  $deletion_period = variable_get('framaforms_deletion_period_value', 0);
+  $notification_period = variable_get('framaforms_notification_period_value', 0);
   $external_log_file = variable_get('framaforms_external_log_file', '/var/log/framaforms_logfile.log');
 
   // Create Datetime object for logging purposes.
   $current_date = new Datetime();
-  $current_date = date("D d/m/Y - H:i:s", $current_date->getTimestamp());
+  $current_date = $current_date->format('D d/m/Y - H:i:s');
+
+  $oldest_timestamp = new Datetime();
+  $oldest_timestamp->modify("-{$deletion_period} weeks");
+  $oldest_timestamp->modify("-{$notification_period} weeks");
 
   // If the user set the deletion period to 0, don't delete the forms.
-  if ($deletion_period == 0) {
+  if ($deletion_period == 0 || $notification_period == 0) {
     return;
   }
 
-  $deletion_period .= ' weeks';
   $deleted_nodes = array();
-  watchdog('framaforms', "Deleting forms after notification.", array(), WATCHDOG_NOTICE);
+  watchdog('framaforms', 'Fetching expired forms older than @date for deletion.',
+    array('@date' => $oldest_timestamp->format('Y-m-d')),
+    WATCHDOG_NOTICE
+  );
 
   $transaction = db_transaction();
   try {
@@ -193,8 +199,10 @@ function delete_expired_nodes() {
             SELECT fex.nid, to_timestamp(fex.date_notified) dn
             FROM framaforms_expired fex
             WHERE fex.notified = 1
-            AND to_timestamp(fex.date_notified) <= NOW() - interval'{$deletion_period}' - interval'{$notification_period}'
-            ");
+            AND fex.date_notified <= :timestamp
+            ",
+          array(':timestamp' => $oldest_timestamp->getTimestamp())
+        );
     $expired_nodes = $query->fetchAll();
     foreach ($expired_nodes as $record) {
       framaforms_export_node_submissions($record->nid);
