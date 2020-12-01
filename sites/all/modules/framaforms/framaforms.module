@@ -232,6 +232,41 @@ function framaforms_block_info() {
 }
 
 /**
+ * Implements hook_node_presave.
+ *
+ * On node modification, if the form was about to expire and the date was pushed
+ * back by the user, take the node out of the framaforms_expired table.
+ */
+function framaforms_node_presave($node){
+  if ($node->type != 'form1') {
+    return;
+  }
+  watchdog(
+    'framaforms',
+    'The form !nid was about to expire, but the form was modified. Deleting this form from framaforms_expired.',
+    array(
+      '!nid' => $node->nid,
+    ),
+    WATCHDOG_NOTICE
+  );
+
+  try{
+    db_delete('framaforms_expired')
+    ->condition('nid', $node->nid)
+    ->execute();
+  } catch (PDOException $e) {
+  watchdog(
+    'framaforms',
+    'Error taking the node !nid out of framaforms_expired in framaforms_node_presave : %error',
+    array(
+      '%error' => $e,
+      '!nid' => $node->nid
+    ),
+    WATCHDOG_ERROR);
+  }
+}
+
+/**
  * Implements hook_block_view.
  * Defines content for Framaforms-specific blocks.
  *
@@ -241,6 +276,8 @@ function framaforms_block_info() {
  * @return void
  */
 function framaforms_block_view($delta) {
+  // module_load_include('inc', 'framaforms', 'includes/framaforms.expiration');
+  // make_forms_expire();
   module_load_include('inc', 'framaforms', 'includes/framaforms.block');
   global $user;
   global $base_url;
@@ -611,8 +648,6 @@ function framaforms_cron() {
    */
   // Look in node table for nodes about to expire, and notify the users.
   make_forms_expire();
-  // Look in the node table for nodes whose expiration date got changed by the user.
-  update_modified_nodes();
   // Delete expired nodes after a period of inactivity.
   delete_expired_nodes();
 }

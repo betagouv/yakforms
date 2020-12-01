@@ -12,29 +12,39 @@
  * and insert them into framaforms_expired table.
  */
 function make_forms_expire() {
-  $expiration_period = variable_get('framaforms_notification_period_value');
+  $expiration_period = variable_get('framaforms_notification_period_value', 0);
   // If the user set the expiration period to 0, don't make the nodes expire.
   if ($expiration_period == 0) {
     return;
   }
-  $expiration_period .= ' weeks';
+  $max_expiration_time = new DateTime();
+  $max_expiration_time->modify("+ {$expiration_period} weeks");
+
+  watchdog(
+    'framaforms',
+    'Inserting forms that will expire between now and @time in framaforms_expired',
+    array('@time' => $max_expiration_time->format('Y-m-d')),
+    WATCHDOG_NOTICE
+  );
 
   $transaction = db_transaction();
   try {
     // Select nodes expiring within the two next weeks.
     // Limit query to batch of 1000 rows in order to avoid errors.
-    db_query(sprintf("
+    db_query("
         INSERT INTO framaforms_expired (nid)
         (SELECT n.nid
         FROM node n
         INNER JOIN field_data_field_form1_expiration fex
         ON fex.entity_id = n.nid
-        AND fex.field_form1_expiration_value <= date_trunc('day', NOW() + interval'{$expiration_period}')
+        AND fex.field_form1_expiration_value <= to_timestamp(:max_timestamp)
         AND fex.entity_id NOT IN
           (SELECT nid FROM framaforms_expired)
         LIMIT 1000)
         ON CONFLICT DO NOTHING;
-        ", $expiration_period));
+        ",
+        array(':max_timestamp' => $max_expiration_time->getTimestamp())
+      );
   }
   catch (Exception $e) {
     $transaction->rollback();
@@ -104,6 +114,17 @@ function notify_user_of_expiration(stdClass $record) {
 
   $mail_body = variable_get('framaforms_mail_user_notification_body');
   $mail_subject = variable_get('framaforms_mail_user_notification_subject');
+
+  if (!isset($mail_body) || !isset($mail_subject)) {
+    watchdog(
+      'framaforms',
+      'Error sending notification email : mail body or subject is not set. Go to the Framaforms admin pannel to set them.',
+      array(),
+      WATCHDOG_ERROR
+    );
+    return FALSE;
+  }
+
   // Replace placeholders from within the mail body and subject.
   $node = node_load($record->nid);
   $mail_body = token_replace($mail_body, array('node' => $node));
@@ -115,52 +136,15 @@ function notify_user_of_expiration(stdClass $record) {
     'headers' => array(),
   );
 
+  // Get Framaforms-specific mail address.
   $from_mail = variable_get('framaforms_mail_from_address');
+  if (!isset($from_mail)) {
+    // Fallback to global site mail if not set.
+    $from_mail = variable_get('site_mail');
+  }
 
   $message = drupal_mail('framaforms', 'expired_webform', (string) $record->mail, language_default(), $mail_params, $from_mail, TRUE);
   return TRUE;
-}
-
-/**
- * Treat expired nodes that were modified.
- *
- * Looks up webform nodes in the database that were marked as
- * "expired" but whose expiration date * got changed by the user.
- */
-function update_modified_nodes() {
-  $expiration_period = variable_get('framaforms_notification_period_value');
-  if ($expiration_period == 0) {
-    return;
-  }
-  $expiration_period .= ' weeks';
-  $transaction = db_transaction();
-  watchdog('framaforms', "Removing forms from the framaforms_expired table after their expiration date was pushed back.", array(), WATCHDOG_NOTICE);
-  try {
-    // Delete modified from the framaforms_notified table.
-    $modified_nodes = db_query(sprintf("
-            SELECT n.nid
-            FROM node n
-            INNER JOIN field_data_field_form1_expiration f_exdate
-            ON f_exdate.entity_id = n.nid
-            INNER JOIN framaforms_expired fex
-            ON n.nid = fex.nid
-            WHERE f_exdate.field_form1_expiration_value
-              > to_timestamp(fex.date_notified) + interval'{$expiration_period}'
-            AND n.nid NOT IN (SELECT nid from framaforms_expired)
-        ", $expiration_period));
-    $nid_changed = 0;
-
-    foreach ($modified_nodes as $node) {
-      $nid_changed = $node->nid;
-      db_delete('framaforms_expired')
-        ->condition('nid', (int) $nid_changed)
-        ->execute();
-    }
-  }
-  catch (Exception $e) {
-    $transaction->rollback();
-    watchdog('framaforms', "Error updating modified nodes : %error", array('%error' => $e), WATCHDOG_WARNING);
-  }
 }
 
 /**
