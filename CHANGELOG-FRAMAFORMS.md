@@ -29,6 +29,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 * Fixed display of grid component submissions when no answer was provided by the user (#12, !118).
 * Block links didn't take `$base_url` into account (#120, !110).
 * Fixing handling of the modification of expired forms (!130).
+* `Reply-To`and `From` email addresses on personal contact forms (!129).
 
 ## [1.0.3] 2020/10/12
 
