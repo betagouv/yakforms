@@ -597,6 +597,31 @@ function framaforms_webform_submission_actions($node, $submission) {
 }
 
 /**
+ * Implements hook_mail_alter.
+ *
+ * Alters the headers for direct contact emails.
+ */
+function framaforms_mail_alter(&$message) {
+  global $base_url;
+  $base_domain = trim($base_url, 'https://');
+  $base_email = variable_get('site_mail', "no-reply@{$base_domain}.org");
+  // Forge corrected From email.
+  $substitution_from_email = '"';
+  $substitution_from_email .= t("@from via @base_domain", array(
+      '@from' => $message['from'],
+      '@base_domain' => $base_domain,
+  ));
+  $substitution_from_email .= '" <' . $base_email . '>';
+  switch($message['id']){
+    case 'contact_user_mail':
+      $message['headers']['Reply-To'] = $message['from'];
+      $message['headers']['From'] = $substitution_from_email;
+      $message['from'] = $substitution_from_email;
+      break;
+  }
+}
+
+/**
  * Implements of hook_mail() :
  * Sends framaforms-specific mails.
  */
