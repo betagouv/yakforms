@@ -128,3 +128,37 @@ function framaforms_translatables() {
     t("Changing this form's title will also change its URL. If you have already transmitted a link to your users, it will return an error."),
   );
 }
+
+/**
+ * Returns TRUE if the form is in the framaforms_expired table.
+ *
+ * @param object $node
+ *   The node object.
+ *
+ * @return bool
+ *   TRUE if the form is in framaforms_expired.
+ */
+function _form_is_almost_expired($node) {
+  try {
+    $expired_node = db_select('framaforms_expired', 'fex')
+      ->fields('fex', array('nid'))
+      ->condition('nid', $node->nid)
+      ->execute()
+      ->rowCount();
+  }
+  catch (PDOException $e) {
+    watchdog(
+      'framaforms',
+      'Error updating node !nid : %error',
+      array(
+        '%error' => $e,
+        '!nid' => $node->nid,
+      ),
+      WATCHDOG_WARNING);
+  }
+
+  if ($expired_node > 0) {
+    return TRUE;
+  }
+  return FALSE;
+}

@@ -238,7 +238,8 @@ function framaforms_block_info() {
  * back by the user, take the node out of the framaforms_expired table.
  */
 function framaforms_node_presave($node){
-  if ($node->type != 'form1') {
+  module_load_include('inc', 'framaforms', 'includes/framaforms.util');
+  if ($node->type != 'form1' || !_form_is_almost_expired($node)) {
     return;
   }
   watchdog(
@@ -276,8 +277,6 @@ function framaforms_node_presave($node){
  * @return void
  */
 function framaforms_block_view($delta) {
-  // module_load_include('inc', 'framaforms', 'includes/framaforms.expiration');
-  // make_forms_expire();
   module_load_include('inc', 'framaforms', 'includes/framaforms.block');
   global $user;
   global $base_url;
