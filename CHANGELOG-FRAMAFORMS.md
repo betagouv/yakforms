@@ -20,6 +20,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 * The general header can now be customized through the administration menu(!96).
 * The HTML templates for default pages are now translatable (!99).
 * Updated Drupal to 7.74 (!113)
+* Better stylesheet for printing forms (!124)
 
 ### Fixed
 * Expiration date is now modified when a form is cloned (#61)
