@@ -4,14 +4,7 @@ description = Framaforms functions for creating, managing and sharing webforms.
 core = 7.x
 php = 7.3
 
-dependencies[] = ctools
 dependencies[] = webform
-dependencies[] = webform_confirm_email
-dependencies[] = webform_validation
-dependencies[] = webform_share
-dependencies[] = webform_charts
-dependencies[] = webform_calculator
-; dependencies[] = webform_tokens
 dependencies[] = views
 dependencies[] = views_bulk_operations
 dependencies[] = views_access_callback
