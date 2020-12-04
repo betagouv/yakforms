@@ -50,19 +50,17 @@ function framaforms_install() {
   _framaforms_set_variables_pages();
   _framaforms_set_variables_mail();
   _framaforms_set_default_global_variables();
+  // Triggering menu rebuild as new blocks are defined in the module.
+  menu_rebuild();
 }
 
 /**
  * Implements hook_uninstall.
  */
 function framaforms_uninstall() {
-  // Delete custom node type
-  node_type_delete('form2');
-  node_type_rebuild();
-  menu_rebuild();
-
   db_delete('variable')->condition('name', db_like('framaforms_') . '%', 'LIKE')->execute();
   cache_clear_all('framaforms', 'cache', TRUE);
+  menu_rebuild();
 }
 
 /**
@@ -70,7 +68,7 @@ function framaforms_uninstall() {
  *
  * @return
  */
-function _framaforms_set_default__global_variables() {
+function _framaforms_set_default_global_variables() {
   module_load_include('inc', 'framaforms', 'includes/framaforms.pages');
 
   // Set default header

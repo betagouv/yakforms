@@ -98,6 +98,9 @@ function _get_form_expiration_date(stdClass $node) {
  *   TRUE if the node has registered submissions.
  */
 function _form_has_submission($node) {
+  if (!isset($node->nid)) {
+    return FALSE;
+  }
   try {
     $count = db_select('webform_submissions', 'w')
       ->fields('w', array('sid'))
