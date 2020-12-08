@@ -4,3 +4,11 @@ sites/*/settings*.php
 # Ignore paths that contain user-generated content.
 sites/*/files
 sites/*/private
+
+# Ignore examples module if added
+sites/all/modules/examples
+
+# Ignore composer packages
+/vendor/
+# Ignore editor-specific files
+.vscode
