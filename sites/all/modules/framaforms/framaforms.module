@@ -726,7 +726,8 @@ function framaforms_form($node, $form_state) {
 }
 
 /**
- * Implements hook_form_alter :
+ * Implements hook_form_alter().
+ *
  * Disable wysiwyg on markup widget and add protection before leaving.
  */
 function framaforms_form_alter(&$form, &$form_state, $context) {
@@ -765,9 +766,74 @@ function framaforms_form_alter(&$form, &$form_state, $context) {
   }
 
   if ($form['#id'] == 'form-builder-webform-save-form'|| $form['#id'] == 'form1-node-form') {
-    if(_form_has_submission($form['#node'])){
+    if(_form_has_submissions($form['#node']) > 0){
       drupal_add_js(drupal_get_path('module', 'framaforms').'/includes/js/form_has_submissions.js');
     }
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Adds messages to user forms.
+ */
+function framaforms_form_webform_client_form_alter (&$form, &$form_state, $form_id) {
+  if($form['#node']->type != 'form1') {
+    return;
+  }
+  $node = $form['#node'];
+  $messages = _get_client_messages($node);
+  foreach ($messages as $message) {
+    drupal_set_message(
+      token_replace($message['message'],
+      array('node' => $node)),
+      $message['level'],
+      FALSE
+    );
+  }
+  // Deactivate form submit if the maximum number of submission is reached.
+  $max_submissions = _get_form_submission_limit($node);
+  if (_form_has_submissions($node) >= $max_submissions
+    && $max_submissions > 0) {
+    drupal_set_message(
+      "The maximum number of submissions for this form has been reached.",
+      'warning',
+      FALSE,
+    );
+    $form['actions']['submit']['#attributes']['disabled'] = 'disabled';
+    $form['actions']['next']['#attributes']['disabled'] = 'disabled';
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Adds a custom validation function to the "advanced parameter" menu for a
+ * client form.
+ */
+function framaforms_form_webform_configure_form_alter(&$form, &$form_state, $form_id) {
+  $form['#validate'][] = 'framaforms_form_webform_configure_form_validate';
+}
+
+/**
+ * Implements hook_form_validate().
+ */
+function framaforms_form_webform_configure_form_validate($form, &$form_state) {
+  // No constraint for admin users.
+  if (user_access('administer nodes')) {
+    return;
+  }
+  $form_values = $form_state['values'];
+  $site_limit = variable_get('framaforms_submissions_per_form_limit', 0);
+  // Make sure the submission limit is not higher than than the site-wide limit.
+  if ($site_limit != 0 && $form_values['total_submit_limit'] > $site_limit) {
+    form_set_error(
+      '[submission][total_submit_limit]',
+      t(
+        "The submission limit can't be higher than what the site's maximum (!limit).",
+        ['!limit' => $site_limit]
+      )
+    );
   }
 }
 
@@ -957,9 +1023,17 @@ function framaforms_token_info (){
         'name' => t('Expiration date'),
         'description' => t("The forms's expiration date")
       ),
+      'submissions' => array(
+        'name' => t('Number of submissions'),
+        'description' => t("Number of submissions for this form")
+      ),
       'deletion-date' => array(
         'name' => t('Deletion date'),
         'description' => t("The forms's date of deletion")
+      ),
+      'submission-limit' => array(
+        'name' => t("Submission limit"),
+        'description' => t('Maximum number of submissions for this form')
       )
     ),
     'framaforms-user' => array(
@@ -1021,6 +1095,12 @@ function framaforms_tokens(String $type, array $tokens, array $data = array(), a
           $replacements[$original] =
             format_date($deletion_date->getTimestamp(), 'long');
           break;
+        case 'submission-limit':
+          $replacements[$original] = _get_form_submission_limit($form_node);
+          break;
+        case 'submissions' :
+          $replacements[$original] = _form_has_submissions($form_node);
+          break;
       }
     }
   }
@@ -1036,7 +1116,6 @@ function framaforms_tokens(String $type, array $tokens, array $data = array(), a
   }
   return $replacements;
 }
-
 
 /**
  * Acess callback for /node/add/form1 : forbids a user to create over a given number of forms.

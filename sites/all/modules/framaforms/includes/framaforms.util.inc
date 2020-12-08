@@ -94,10 +94,10 @@ function _get_form_expiration_date(stdClass $node) {
  * @param object $node
  *   An object for the node.
  *
- * @return bool
- *   TRUE if the node has registered submissions.
+ * @return int
+ *   The number of registered submissions.
  */
-function _form_has_submission($node) {
+function _form_has_submissions($node) {
   if (!isset($node->nid)) {
     return FALSE;
   }
@@ -107,14 +107,61 @@ function _form_has_submission($node) {
       ->condition('nid', $node->nid)
       ->execute()
       ->rowCount();
-    if ($count > 0) {
-      return TRUE;
-    }
   }
   catch (PDOException $e) {
     watchdog('framaforms', "Error getting form's submissions : !error", array('!error' => $e));
+    $count = 0;
   }
-  return FALSE;
+  return $count;
+}
+
+/**
+ * Get the maximum number of submission allowed for a given form.
+ *
+ * If the user has set a limit, then this is the one that will be returned. If
+ * not, the site-wide limitation will be returned.
+ *
+ * @return int
+ *   The maximum number of submissions.
+ */
+function _get_form_submission_limit($node) {
+  $user_limit = intval($node->webform['total_submit_limit']);
+  // Limit can be 0 or -1 if it hasn't been set.
+  if ($user_limit < 0) {
+    $user_limit = 0;
+  }
+  $sitewide_limit = variable_get('framaforms_submissions_per_form_limit', 0);
+  // If one of the limits is not set, return the one that is set.
+  if ($sitewide_limit === 0 || $user_limit === 0) {
+    return max($sitewide_limit, $user_limit);
+  }
+  // If both limits are set, return the user-defined limit.
+  return $user_limit;
+}
+
+/**
+ * Get messages to display on form display.
+ *
+ * @param object $node
+ *   The node accessed by the user.
+ *
+ * @return array
+ *   An array of messages to display.
+ */
+function _get_client_messages($node) {
+  $messages = array();
+  $max_submissions = _get_form_submission_limit($node);
+  // If the submission limit is almost reached, warn the current user.
+  $form_submissions = _form_has_submissions($node);
+  if ($form_submissions > $max_submissions - 10
+    && $form_submissions < $max_submissions
+    && $max_submissions > 0) {
+    $messages[] = array(
+      'message' => t("The maximum number of submissions is almost reached for this form (less than 10 submissions left)."),
+      'level' => 'warning',
+    );
+  }
+  return $messages;
 }
 
 /**
