@@ -322,13 +322,10 @@ function framaforms_config_form_validate($form, &$form_state) {
   if ($stripped_header != $values['framaforms_general_header_html']) {
     form_set_error('general-section][framaforms_general_header_html]', 'Contains disallowed tags.');
   }
-}
-
-/**
- * Implements hook_form_submit().
- */
-function framaforms_config_form_submit($form, &$form_state) {
-  $html_header = $form_state['values']['general-section']['framaforms_general_header_html'];
-
-  drupal_set_message(t("The form was submitted !"));
+  // Make sure the user input is healthy.
+  $slogan = $values['site_slogan'];
+  $title = $values['site_name'];
+  if ($slogan != filter_xss($slogan) || $title != filter_xss($title)) {
+    form_set_error('general-section][site_slogan]', 'Some section could be dangerous and is forbidden (contains Javascript code).');
+  }
 }
