@@ -4,6 +4,31 @@
  * @file
  */
 
+ /**
+  * Implements hook_help().
+  */
+function framaforms_help($path, $arg) {
+  global $base_url;
+  if ($path === 'admin/help#framaforms') {
+    $output = "<h2>" . t('About') . "</h2>";
+    $output .= "<p>". t("Framaforms is a module aimed for building form services online.") . "</p>";
+    $output .= "<p>". t("Its usage is very specific to Framaforms websites, and the module is not usable outside of Framaforms environments : specfific modules are needed, and the overall features of the websites are guided for very special purposes.") . "</p>";
+    $output .= "<p>". t("The following are defined inside the Framaforms module :") . "</p>";
+    $output .= "<ul>";
+    $output .= "<li>" . t("A new node type : « form » or <code>form1</code> (machine-name) nodes are publicly-accessible nodes that any authenticated user can create and configure. A webform is attached to each of node. ") . "</li>";
+    $output .= "<li>" . t("Blocks and menu links for user navigation.") . "</li>";
+    $output .= "<li>" . t("Default pages.") . "</li>";
+    $output .= "<li>" . t("Cron tasks for limited-lifetime nodes : to avoid piling up useless data forever, forms expire after a few months by default. (This feature can be deactivated by the admin if necessary)..") . "</li>";
+    $output .= "<li>" . t(
+      "A central administration menu to manage most of the website's parameter : <a href='@link'>Administration page.</a>",
+      ['@link' => $base_url . "/admin/config/system/framaforms"]
+      )
+      . "</li>";
+    $output .= "</ul>";
+    return $output;
+  }
+}
+
 /**
  * Implements hook_menu.
  * Declares an administration menu, accessible only to admin.
