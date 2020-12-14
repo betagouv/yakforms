@@ -11,15 +11,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2020-10-08 16:15+0200\n"
-"PO-Revision-Date: 2020-10-08 16:17+0200\n"
-"Last-Translator: \n"
-"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2020-12-15 23:52+0000\n"
+"Last-Translator: Govi <govi@live.fr>\n"
+"Language-Team: French <https://weblate.framasoft.org/projects/framaforms/"
+"framaforms/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.1\n"
 
 #: sites/all/modules/framaforms/framaforms.module:91
 msgid ""
@@ -101,7 +102,7 @@ msgstr "Configuration du formulaire"
 
 #: sites/all/modules/framaforms/framaforms.module:211
 msgid "Help : conditionnal fields"
-msgstr "Aide :  champs conditionnels"
+msgstr "Aide : champs conditionnels"
 
 #: sites/all/modules/framaforms/framaforms.module:212
 msgid "Conditionnal fields"
@@ -185,11 +186,12 @@ msgstr "Vous pouvez :"
 
 #: sites/all/modules/framaforms/framaforms.module:374
 msgid "edit your personal information (\"Edit\" tab above) ;"
-msgstr "modifier vos informations personnelles (onglet \"Modifier\" ci-dessus)"
+msgstr ""
+"modifier vos informations personnelles (onglet \"Modifier\" ci-dessus) ;"
 
 #: sites/all/modules/framaforms/framaforms.module:375
 msgid "access your forms (\"My forms\" button above) ;"
-msgstr "accéder à vos formulaires (bouton \"Mes formulaires\" ci-dessus)"
+msgstr "accéder à vos formulaires (bouton \"Mes formulaires\" ci-dessus) ;"
 
 #: sites/all/modules/framaforms/framaforms.module:376
 msgid "create a new form"
@@ -372,8 +374,8 @@ msgstr "Afficher ou masquer des champs :"
 #: sites/all/modules/framaforms/framaforms.module:445
 msgid "IF the user selected « other » for « Structure type » "
 msgstr ""
-"SI l'utilisateur⋅ice sélectionne le champs «  Autre » dans le menu « Types "
-"de structure » "
+"SI l'utilisateur⋅ice sélectionne le champs « Autre » dans le menu « Types de "
+"structure » "
 
 #: sites/all/modules/framaforms/framaforms.module:446
 msgid "THEN  show the text area « Other structure types » "
