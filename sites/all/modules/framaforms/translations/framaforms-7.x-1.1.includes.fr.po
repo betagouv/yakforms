@@ -12,15 +12,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2020-10-29 15:28+0100\n"
-"PO-Revision-Date: 2020-10-29 15:29+0100\n"
-"Last-Translator: \n"
-"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2020-12-15 23:52+0000\n"
+"Last-Translator: Govi <govi@live.fr>\n"
+"Language-Team: French <https://weblate.framasoft.org/projects/framaforms/"
+"framaforms-include/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.1\n"
 
 #: sites/all/modules/framaforms/includes/framaforms.admin.inc:20
 msgid "Total number of forms : @number"
@@ -164,13 +165,16 @@ msgstr ""
 
 #: sites/all/modules/framaforms/includes/framaforms.admin.inc:189
 msgid "Save form submissions before deleting"
-msgstr ""
+msgstr "Enregistrer les soumissions du formulaire avant de supprimer"
 
 #: sites/all/modules/framaforms/includes/framaforms.admin.inc:191
 msgid ""
 "Check this box if you want all form submissions to be saved before deletion. "
 "This can be useful for user support."
 msgstr ""
+"Cocher cette case si vous voulez que les soumissions du formulaire soient "
+"sauvegardez avant suppression. Cela peut être utile pour le support "
+"utilisateur."
 
 #: sites/all/modules/framaforms/includes/framaforms.admin.inc:196
 msgid "Notification email"
@@ -239,6 +243,7 @@ msgstr "Le nombre de formulaire par utiliateur⋅ice doit être numérique."
 #: sites/all/modules/framaforms/includes/framaforms.admin.inc:260
 msgid "The following directory doesn't exist or is not writable : !path."
 msgstr ""
+"Le dossier suivant n'existe pas ou n'est pas accessible en écriture : !path."
 
 #: sites/all/modules/framaforms/includes/framaforms.admin.inc:273
 msgid "The form was submitted !"
@@ -269,11 +274,11 @@ msgstr ""
 
 #: sites/all/modules/framaforms/includes/framaforms.expiration.inc:248
 msgid "Node !nid was not found and could not be exported."
-msgstr ""
+msgstr "Le nœud !nid n'a pas été trouvé et ne peut pas être exporté."
 
 #: sites/all/modules/framaforms/includes/framaforms.expiration.inc:284
 msgid "Submissions for node !nid exported."
-msgstr ""
+msgstr "Soumissions pour le nœud !nid exportées."
 
 #: sites/all/modules/framaforms/includes/framaforms.expiration.inc:42
 msgid ""
@@ -338,6 +343,7 @@ msgid "Error deleting expired nodes : %error"
 msgstr "Erreur lors de la suppression des formulaires expirés : %error"
 
 #: sites/all/modules/framaforms/includes/framaforms.node.inc:746
+#, fuzzy
 msgid ""
 "<p>If you select 'yes', all results for this form will be accessible "
 "<strong>by everyone</strong>.</p> Even if no one but you will be able to "
@@ -352,18 +358,32 @@ msgid ""
 "you to give access to the results (read, modify and delete) to selected "
 "authenticated users.</p>"
 msgstr ""
+"<p>Si vous choisissez \"oui\", tous les résultats de ce formulaire seront "
+"accessibles <strong>par tout le monde</strong>.</p> Même si personne d'autre "
+"que vous ne pourra éditer les résultats, cela <strong>N'EST PAS RECOMMANDE</"
+"strong> car vous pourriez rendre publiques des informations personnelles de "
+"personnes qui ne le souhaitent pas (prénom, nom de famille, adresse e-mail "
+"et postale, numéro de téléphone...)</p>\n"
+"<p><strong>En choisissant \"oui\", vous acceptez de protéger l'anonymat des "
+"participant·e·s. Vous serez entièrement responsable des informations que "
+"vous rendez publiques.</strong></p>\n"
+"<p>Merci de noter que l'option \"Utilisateur·trices ayant accès aux "
+"résultats\" ci-dessous vous permet de ne donner accès aux résultats ("
+"lecture, modification et suppression) qu'à certain·es utilisateur·trices "
+"authentifié·es.</p>"
 
 #: sites/all/modules/framaforms/includes/framaforms.node.inc:749
 msgid "Public access to results"
-msgstr ""
+msgstr "Accès public aux résultats"
 
 #: sites/all/modules/framaforms/includes/framaforms.node.inc:750
+#, fuzzy
 msgid "Body"
-msgstr ""
+msgstr "Corps"
 
 #: sites/all/modules/framaforms/includes/framaforms.node.inc:751
 msgid "Comment"
-msgstr ""
+msgstr "Commentaire"
 
 #: sites/all/modules/framaforms/includes/framaforms.node.inc:752
 #, fuzzy
@@ -373,7 +393,7 @@ msgstr "Période d'expiration (en semaines)"
 
 #: sites/all/modules/framaforms/includes/framaforms.node.inc:753
 msgid "Description"
-msgstr ""
+msgstr "Description"
 
 #: sites/all/modules/framaforms/includes/framaforms.node.inc:754
 msgid "Template description"
@@ -386,26 +406,36 @@ msgid ""
 "hosting service, like <a href='https://framapic.org' "
 "target='_blank'>framapic.org</a>."
 msgstr ""
+"Décrivez l'objet de votre formulaire. Cela apparaîtra en haut du formulaire.<"
+"br/>\n"
+"Si vous voulez faire apparaître des images, pensez à utiliser un service "
+"d'hébergement d'images, comme <a href='https://framapic.org' "
+"target='_blank'>framapic.org</a>."
 
 #: sites/all/modules/framaforms/includes/framaforms.node.inc:757
 msgid "Attached files"
-msgstr ""
+msgstr "Fichiers joints"
 
 #: sites/all/modules/framaforms/includes/framaforms.node.inc:758
 msgid "Image"
-msgstr ""
+msgstr "Image"
 
 #: sites/all/modules/framaforms/includes/framaforms.node.inc:759
 msgid "Optional banner"
-msgstr ""
+msgstr "Bannière optionnelle"
 
 #: sites/all/modules/framaforms/includes/framaforms.node.inc:760
+#, fuzzy
 msgid ""
 "Optional image that will be displayed at the top of your form (example : "
 "logo or banner).<br/>\n"
 "After having selected it by clicking 'Browse', don't forget to click "
 "'Upload' to make it available online."
 msgstr ""
+"Image optionnelle qui sera affichée en haut de votre formulaire (par exemple "
+"un logo ou une bannière).<br/>\n"
+"Après avoir choisi \"Parcourir\", n'oubliez pas de cliquer sur \"Téléverser\""
+" pour la rendre disponible en ligne."
 
 #: sites/all/modules/framaforms/includes/framaforms.node.inc:762
 msgid ""
