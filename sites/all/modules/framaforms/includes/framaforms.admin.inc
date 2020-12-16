@@ -307,7 +307,7 @@ function framaforms_config_form_validate($form, &$form_state) {
   // Create the backup directory for form submissions if necessary.
   $backup_dir_path = variable_get('file_private_path') . "/framaforms_submissions_backup/";
   $backup_dir_writable = file_prepare_directory($backup_dir_path, FILE_CREATE_DIRECTORY);
-  if ($values['limitation-section']['framaforms_export_form_submissions_before_delete'] && !$backup_dir_writable) {
+  if ($values['framaforms_export_form_submissions_before_delete'] && !$backup_dir_writable) {
     drupal_set_message(
       t("The following directory doesn't exist or is not writable : !path.", array('!path' => $backup_dir_path)),
       'error',
