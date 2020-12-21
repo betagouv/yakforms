@@ -22,6 +22,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 * The HTML templates for default pages are now translatable (!99).
 * Updated Drupal to 7.74 (!113)
 * Better stylesheet for printing forms (!124)
+* Removed Bootstrap includes from the module, the lib is now in the `framaforms` theme. (!138)
 
 ### Fixed
 * Expiration date is now modified when a form is cloned (#61)

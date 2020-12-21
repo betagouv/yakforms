@@ -1,6 +1,6 @@
 
 name = Frama
-description = A flexible, recolorable theme with many regions.
+description = A flexible, recolorable theme with many regions. Based on Bartik, includes Bootstrap 3.3.7.
 package = Core
 version = VERSION
 core = 7.x
@@ -13,7 +13,6 @@ stylesheets[all][] = css/colors.css
 stylesheets[print][] = css/print.css
 
 scripts[] = js/framaforms.js
-
 regions[header] = Header
 regions[help] = Help
 regions[page_top] = Page top

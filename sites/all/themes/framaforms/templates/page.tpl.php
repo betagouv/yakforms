@@ -87,6 +87,13 @@
 ?>
 
 <div id="page-wrapper"><div id="page">
+  <p>
+    <!-- Add Boostrap stylesheet and JS -->
+    <?php if ($is_front): ?>
+      <link rel="stylesheet" href="<?php print base_path() . path_to_theme(); ?>/includes/bootstrap-3.3.7/dist/css/bootstrap.min.css">
+      <script src="<?php print base_path() . path_to_theme(); ?>/includes/bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
+    <?php endif; ?>
+  </p>
 
   <div id="header" class="<?php print $secondary_menu ? 'with-secondary-menu': 'without-secondary-menu'; ?>"><div class="section clearfix">
 
