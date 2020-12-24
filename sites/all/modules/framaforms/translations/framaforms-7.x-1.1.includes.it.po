@@ -1,0 +1,436 @@
+# $Id$
+#
+# LANGUAGE translation of Drupal (sites-all-modules-framaforms-includes)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  sites/all/modules/framaforms/includes/framaforms.admin.inc: n/a
+#  sites/all/modules/framaforms/includes/framaforms.block.inc: n/a
+#  sites/all/modules/framaforms/includes/framaforms.expiration.inc: n/a
+#  sites/all/modules/framaforms/includes/framaforms.node.inc: n/a
+#  sites/all/modules/framaforms/includes/framaforms.pages.inc: n/a
+#  sites/all/modules/framaforms/includes/framaforms.util.inc: n/a
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2020-11-24 16:43+0100\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:23
+msgid "Total number of forms : @number"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:33
+msgid "Last @interval : @results"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:46
+msgid "Total number of submissions : @number"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:47
+msgid "(For an average of @number submissions / form)"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:54
+msgid "Total number of users : @number"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:64
+msgid "Registered since @interval : @number"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:74
+msgid "Forms with the most submissions :"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:86
+msgid "submissions"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:87
+msgid "Visit"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:92
+msgid "<h3>Users with the most forms</h3>"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:113
+msgid "Size of database :  @size"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:131
+msgid "Note : some of these values can be changed elsewhere on the website, they are simply centralized here."
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:135
+msgid "Website title"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:137
+msgid "The title of this website. It will be displayed in the top header."
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:142
+msgid "Website header"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:144
+msgid "The title that will be displayed at the top of your site. You might use the following HTML tags :"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:149
+msgid "Website slogan"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:151
+msgid "Small phrase displayed under the title. Ex : 'Create forms easily'"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:156
+msgid "General contact email"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:158
+msgid "It will be used in the general contact form of the website, and used to warn you of pending updates."
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:163
+msgid "Link to support"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:165
+msgid "Link to a support page for your users. This will be displayed when if your users encounter problems creating forms."
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:175
+msgid "Number of forms per user"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:179
+msgid "Maximum number of form per user"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:181;189
+msgid "0 for no limitation."
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:187
+msgid "Maximum number of submissions per form"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:195
+msgid "Forms expiration"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:199
+msgid "Expiration period (in weeks)"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:201
+msgid "When a user creates a form, its expiration date will be set by default at this interval in the futur. Ex : if a user creates a form on 01/01/2020 and the expiration value is set to '5', the form will expire by default on 02/05/2020. Insert '0' if you don't want forms to expire."
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:207
+msgid "Deletion period (in weeks)"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:209
+msgid "Interval of time between the form expiration and its deletion from the database. Insert '0' if you don't want forms to be deleted."
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:215
+msgid "Save form submissions before deleting"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:217
+msgid "Check this box if you want all form submissions to be saved before deletion. This can be useful for user support."
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:229;236
+msgid "Notification email"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:230
+msgid "The subject of notification emails. You can use the following tokens : <strong>[node:title]</strong>."
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:237
+msgid "Here you can change the content of the email that will be sent to the user warning them of expired forms. <i>You can use the following tokens that will be replaced : <strong>[node:url]</strong> (the form URL), <strong>[node:title]</strong> (the form's title), <strong>[framaforms-form:expiration-date]</strong> (the form's expiration date), <strong>[framaforms-form:deletion-date]</strong> (the form's date of deletion).</i>"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:243
+msgid "Notification 'from' email address"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:244
+msgid "The default 'from' address set in the email header."
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:256
+msgid "Generate default pages"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:262
+msgid "By clicking this button, you will create default pages for your website : homepage, 404/403 error pages, etc. You can modify them afterwards."
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:266
+msgid "Reset all"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:272
+msgid "Reset all above variables to their initial value."
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:276
+msgid "Submit"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:288
+msgid "The default pages were created."
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:297
+msgid "All global variables for Framaforms were reset."
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:312
+msgid "The following directory doesn't exist or is not writable : !path."
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:333
+msgid "The form was submitted !"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.block.inc:33
+msgid "Contact the author of this form"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.block.inc:34
+msgid "To contact the author of this form, <a href='@link'> click here</a>"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.block.inc:39
+msgid "Error in the contact form block (modules/framaforms/includes/framaforms.block.inc) : %error"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:41
+msgid "There was an error inserting expired forms into framaforms_expired : %error"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:58
+msgid "Notifying users of their expired forms."
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:72
+msgid "Error while trying to notify the user : the user's email could be badly configured."
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:74
+msgid "Notified all users of their expired forms."
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:78
+msgid "There was an error notifying users : %error"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:101
+msgid "Invalid email for user %uid"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:137
+msgid "Removing forms from the framaforms_expired table after their expiration date was pushed back."
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:162
+msgid "Error updating modified nodes : %error"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:188
+msgid "Deleting forms after notification."
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:211
+msgid "The following forms were deleted : %nodes"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:214
+msgid "There is no form to delete."
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:218
+msgid "Error deleting expired nodes : %error"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:238
+msgid "Node !nid was not found or could not be exported."
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:278
+msgid "Submissions for node !nid exported."
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:300
+msgid "Unable to clean IPs for node %id : Error in _clean_submissions_ips. %error"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.node.inc:745
+msgid "<p>If you select 'yes', all results for this form will be accessible <strong>by everyone</strong>.</p> Even if no one but you will be able to edit the results, this is <strong>NOT RECOMMANDED</strong> because you might make public private information of people who would not want it to be public (first and last names, email and postal addresses, telephone numbers...)</p>\n<p><strong>By selecting 'yes', you agree to protect the anonymity of the participants, and will be wholly responsible for information you make public.</strong></p>\n<p>Please note that the 'Users having access to results' option below allows you to give access to the results (read, modify and delete) to selected authenticated users.</p>"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.node.inc:748
+msgid "Public access to results"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.node.inc:749
+msgid "Body"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.node.inc:750
+msgid "Comment"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.node.inc:752
+msgid "Description"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.node.inc:753
+msgid "Template description"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.node.inc:754
+msgid "Describe what your form is about. This will appear above your form.<br/>\nIf you want to display pictures, you should consider using an external image hosting service, like <a href='https://framapic.org' target='_blank'>framapic.org</a>."
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.node.inc:756
+msgid "Attached files"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.node.inc:757
+msgid "Image"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.node.inc:758
+msgid "Optional banner"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.node.inc:759
+msgid "Optional image that will be displayed at the top of your form (example : logo or banner).<br/>\nAfter having selected it by clicking 'Browse', don't forget to click 'Upload' to make it available online."
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.node.inc:761
+msgid "Forms expire after 6 months, and are destroyed after 9 months (this cover 90% of use cases, and avoids database overloads).<br>\n  At the given date, your form won't be accessible publically. You and you only will however be able to access it - and its results - for 60 more days, from your account.\n  If you wish to extend its expiration date, you simply have to edit the field above once your form is live.<br>\n  If this constraint doesn't suit your needs or if you want more information, please refer to <a href='/limitations'>the limitation page</a>.\n  "
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.node.inc:766
+msgid "List this form as a template"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.node.inc:767
+msgid "A short description of your form template (for example : « Subscription form for an concert »)."
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.node.inc:768
+msgid "Words separated by commas."
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.node.inc:769
+msgid "If you check this box, you form will be displayed in the public list of templates, allowing anybody to clone it, use it as a form template and adapt it.<strong>If it is listed as a template, any visitor will be able to fill in your form.</strong>."
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.node.inc:770
+msgid "Tags"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.node.inc:771
+msgid "Upload an image to display with this content."
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.node.inc:772
+msgid "Users having access to the results."
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.node.inc:773
+msgid "<p>You can authorize other authenticated users to access this form's results : this requires them already having created an account. To do that, fill in their usernames in the field above (separated by commas if several).</p>\n  <p>When logged in, these users will have access to the results by browsing to the form's page, and clicking on the 'Results' tab. They will be able to edit and delete results. <strong>They will however NOT be able to edit the form itself</strong> (add or remove fields, change the title, etc).</p>\n  <p>For more information, see <a href='https://docs.framasoft.org/fr/framaforms/fonctionnalites.html#partage-des-r%C3%A9sultats'>our documentation</a>.</p>"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.node.inc:776
+msgid "You can attach up to 5 files to your form."
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.node.inc:777
+msgid "file(s)"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.pages.inc:101
+msgid "Welcome to Framaforms"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.pages.inc:107
+msgid "Access denied"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.pages.inc:111
+msgid "Page not found"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.pages.inc:119
+msgid "Quick form creation"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.pages.inc:120
+msgid "Create a template"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.pages.inc:121
+msgid "Validation rules"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.pages.inc:122
+msgid "Conditional fields"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.pages.inc:123
+msgid "Emails"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.pages.inc:124
+msgid "Confirmation"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.pages.inc:125
+msgid "Downloads"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.pages.inc:126
+msgid "Limits"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.pages.inc:69
+msgid "There was an error creating the page %title : %error"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.util.inc:34
+msgid "Error getting user's forms : !error"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.util.inc:78
+msgid "Warning : node !nid doesn't seem to have an expiration date, but it was demanded."
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.util.inc:87
+msgid "Error getting form's expiration date : !error"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.util.inc:112
+msgid "Error getting form's submissions : !error"
+msgstr ""
