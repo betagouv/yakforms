@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2020-11-24 16:43+0100\n"
 "PO-Revision-Date: 2020-12-25 18:52+0000\n"
-"Last-Translator: qwerty <gabriele.tosato@virgilio.it>\n"
+"Last-Translator: x <hardwired1.0@protonmail.com>\n"
 "Language-Team: Italian <https://weblate.framasoft.org/projects/framaforms/"
 "framaforms/it/>\n"
 "Language: it\n"
@@ -32,7 +32,7 @@ msgstr "Allerta password"
 
 #: sites/all/modules/framaforms/framaforms.module:95
 msgid "General header"
-msgstr ""
+msgstr "Intestazione generale"
 
 #: sites/all/modules/framaforms/framaforms.module:103
 msgid "User links"
@@ -124,11 +124,11 @@ msgstr "Aggiungi componenti di un modulo"
 
 #: sites/all/modules/framaforms/framaforms.module:225
 msgid "Footer"
-msgstr ""
+msgstr "Piè di pagina"
 
 #: sites/all/modules/framaforms/framaforms.module:226
 msgid "Powered by Framaforms"
-msgstr ""
+msgstr "Offerto da Framaforms"
 
 #: sites/all/modules/framaforms/framaforms.module:285
 msgid "Do not communicate any password through Framaforms."
@@ -136,7 +136,7 @@ msgstr "Non diffondete nessuna password tramite Framaforms."
 
 #: sites/all/modules/framaforms/framaforms.module:300
 msgid "Register"
-msgstr ""
+msgstr "Registrati"
 
 #: sites/all/modules/framaforms/framaforms.module:302
 msgid "Log in"
@@ -211,6 +211,8 @@ msgstr ""
 #: sites/all/modules/framaforms/framaforms.module:362
 msgid "(NB : if you are looking for the configuration parameters, you'll find them in the « Emails » tab !)"
 msgstr ""
+"(NB : se stai cercando i parametri di configurazione, li troverai nella "
+"scheda « Email » !)"
 
 #: sites/all/modules/framaforms/framaforms.module:369
 msgid "This feature allows you to send an email to a specified address.\n        For example you can send an email to the form's author at each new submission.\n        This email can optionally contain the values submitted by the user."
@@ -336,7 +338,7 @@ msgstr "QUNDI nascondi la domanda \"qual è la tua zuppa preferita?\"."
 
 #: sites/all/modules/framaforms/framaforms.module:416
 msgid "Force a value :"
-msgstr ""
+msgstr "Forza un valore :"
 
 #: sites/all/modules/framaforms/framaforms.module:417
 msgid "IF the user checked the option « I got 3 presents or more for Christmas » "
@@ -422,7 +424,7 @@ msgstr ""
 
 #: sites/all/modules/framaforms/framaforms.module:457
 msgid "This might work better on mobile."
-msgstr ""
+msgstr "Potrebbe funzionare meglio sui dispositivi mobili."
 
 #: sites/all/modules/framaforms/framaforms.module:461
 msgid " is an online, free, add-less and privacy-friendly service to create forms (polls, surveys, quiz, etc.) "
@@ -455,7 +457,7 @@ msgstr "Segnala un contenuto inappropriato."
 
 #: sites/all/modules/framaforms/framaforms.module:464
 msgid "Framaforms is powered by"
-msgstr ""
+msgstr "Framaforms è offerta da"
 
 #: sites/all/modules/framaforms/framaforms.module:523
 msgid "Current user is author of the node"
@@ -495,7 +497,7 @@ msgstr "Modulo"
 
 #: sites/all/modules/framaforms/framaforms.module:847
 msgid "Tokens regarding the current form"
-msgstr ""
+msgstr "Token relativi alla forma attuale"
 
 #: sites/all/modules/framaforms/framaforms.module:851
 msgid "Framaforms - user"
@@ -503,7 +505,7 @@ msgstr "Framaforms - utente"
 
 #: sites/all/modules/framaforms/framaforms.module:852
 msgid "Tokens regarding the current Framaforms user"
-msgstr ""
+msgstr "Token relativi all'attuale utente di Framaforms"
 
 #: sites/all/modules/framaforms/framaforms.module:860
 msgid "Forms per user"
@@ -603,7 +605,7 @@ msgstr "Configura Framaforms"
 
 #: sites/all/modules/framaforms/framaforms.module:17
 msgid "Configuration for Framaforms module"
-msgstr ""
+msgstr "Configurazione per il modulo Framaforms"
 
 #: sites/all/modules/framaforms/framaforms.module:25
 msgid "Overview"
