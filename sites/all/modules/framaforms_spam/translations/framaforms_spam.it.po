@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2020-10-08 16:35+0200\n"
-"PO-Revision-Date: 2020-12-24 19:16+0000\n"
-"Last-Translator: qwerty <gabriele.tosato@virgilio.it>\n"
+"PO-Revision-Date: 2020-12-25 18:52+0000\n"
+"Last-Translator: x <hardwired1.0@protonmail.com>\n"
 "Language-Team: Italian <https://weblate.framasoft.org/projects/framaforms/"
 "framaforms-spam/it/>\n"
 "Language: it\n"
@@ -154,7 +154,7 @@ msgstr "Configurazione di Framaforms Spam Protection"
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.info:0
 msgid "Framaforms Spam Protection"
-msgstr "Framaforms Spam Protection"
+msgstr "Protezione dallo spam di Framaforms"
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.info:0
 msgid "Features for automatically detect and quarantine spam forms in Framaforms."
