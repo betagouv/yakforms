@@ -10,34 +10,40 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2020-10-08 16:35+0200\n"
-"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2020-12-24 19:16+0000\n"
+"Last-Translator: qwerty <gabriele.tosato@virgilio.it>\n"
+"Language-Team: Italian <https://weblate.framasoft.org/projects/framaforms/"
+"framaforms-spam/it/>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.1\n"
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.module:19
 msgid "Forbidden words"
-msgstr ""
+msgstr "Parole non permesse"
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.module:21
 msgid "Words that are considered suspicious when found in new form titles. You can separate forms with commas (,)."
 msgstr ""
+"Parole che sono considerate sospette allorché reperite nel titolo di un "
+"nuovo modulo. Potete separare i moduli con delle virgole (,)."
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.module:26
 msgid "Submit"
-msgstr ""
+msgstr "Inviare"
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.module:103
 msgid "Your form contains suspicious words and is therefore considered as spam. The site's administrators will review it shortly."
 msgstr ""
+"Il tuo modulo contiene parole dubitevoli ed è pertanto considerato come "
+"spam. L'amministratore del sito lo visionerà a breve."
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.module:307
 msgid "Forms in quarantine"
-msgstr ""
+msgstr "Moduli in quarantena"
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.module:308
 msgid "Records exposed to Views."
@@ -49,88 +55,109 @@ msgstr ""
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.module:327
 msgid "node"
-msgstr ""
+msgstr "nodo"
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.module:337
+#, fuzzy
 msgid "Uid for the author of this node"
-msgstr ""
+msgstr "Uid per l'autore di questo nodo"
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.module:351
 msgid "Date the form was put into quarantine."
-msgstr ""
+msgstr "Data di messa in quarantena del modulo."
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.module:376
 msgid "Put forms into quarantine"
-msgstr ""
+msgstr "Mettere il modulo in quarantena"
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.module:385
 msgid "Take forms out of quarantine"
-msgstr ""
+msgstr "Tirare il modulo fuori dalla quarantena"
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.module:404
+#, fuzzy
 msgid "The form was put into quarantine. You can set it back up using <a href='/quarantine'>this view.</a>"
 msgstr ""
+"IL form è stato messo in quarantena. Potete riportarlo indietro usando <a "
+"href='/quarantine'>questa vista.</a>"
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.module:416
 msgid "The form was taken out of quarantine and reassigned to user %id"
 msgstr ""
+"Il modulo è stato tirato fuori dalla quarantena e riassegnato all'utente %id"
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.module:48;81;149;173;187;198;224;241;258;268
 msgid "framaforms_spam"
-msgstr ""
+msgstr "framaforms_spam"
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.module:48
 msgid "Launching cron task."
 msgstr ""
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.module:81
+#, fuzzy
 msgid "Error deleting potential spam : %error"
-msgstr ""
+msgstr "Errore nella cancellazione di un potenziale spam: %error"
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.module:149
+#, fuzzy
 msgid "Error checking framaforms_spam_quarantine table : %error"
-msgstr ""
+msgstr "Errore nel controllo di framaforms_spam_quarantine table : %error"
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.module:173
+#, fuzzy
 msgid "Error checking framaforms_spam_allowlist table : %error"
-msgstr ""
+msgstr "Errore nel controllo di framaforms_spam_allowlist table : %error"
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.module:187
+#, fuzzy
 msgid "Trying to put into quarantine unexisting form %nid"
-msgstr ""
+msgstr "Si sta provando a mettere in quarantena un modulon inesistente %nid"
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.module:198
+#, fuzzy
 msgid "Error trying to put insert node into allowlist table :  %error"
 msgstr ""
+"Errore nel tentativo di mettere un nodo di inserimento nella \"allowlist "
+"table\" :  %error"
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.module:224
 msgid "Error trying to put insert node into quarantine table : %error"
 msgstr ""
+"Errore nel tentativo di mettere un nodo di inserimento nella \"quarantine "
+"table\": %error"
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.module:241
+#, fuzzy
 msgid "Trying to take out of quarantine unexisting form %nid"
 msgstr ""
+"Si sta tentando di tirar fuori dalla quarantena un modulo inesistente %nid"
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.module:258
+#, fuzzy
 msgid "Error trying to take form out of quarantine : %error"
-msgstr ""
+msgstr "Errore nel tentativo di tirare un modulo fuori dalla quarantena: %error"
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.module:268
+#, fuzzy
 msgid "Error trying to delete node from quarantine table : %e"
 msgstr ""
+"Errore nel tentativo di cancellare un nodo dalla \"quarantine table\": %error"
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.module:6
 msgid "Configure Framaforms Spam Protection"
-msgstr ""
+msgstr "Configurare la Framaforms Spam Protection"
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.module:7
 msgid "Configuration for Framaforms Spam Protection"
-msgstr ""
+msgstr "Configurazione di Framaforms Spam Protection"
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.info:0
 msgid "Framaforms Spam Protection"
-msgstr ""
+msgstr "Framaforms Spam Protection"
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.info:0
 msgid "Features for automatically detect and quarantine spam forms in Framaforms."
 msgstr ""
+"Funzionalità di individuazione e messa in quarantena automatica di moduli "
+"spam in Framaforms."
