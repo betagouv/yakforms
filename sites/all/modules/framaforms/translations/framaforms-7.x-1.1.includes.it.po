@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2020-11-24 16:43+0100\n"
 "PO-Revision-Date: 2020-12-25 18:52+0000\n"
-"Last-Translator: qwerty <gabriele.tosato@virgilio.it>\n"
+"Last-Translator: x <hardwired1.0@protonmail.com>\n"
 "Language-Team: Italian <https://weblate.framasoft.org/projects/framaforms/"
 "framaforms-include/it/>\n"
 "Language: it\n"
@@ -31,7 +31,7 @@ msgstr "Numero totale dei moduli : @number"
 
 #: sites/all/modules/framaforms/includes/framaforms.admin.inc:33
 msgid "Last @interval : @results"
-msgstr ""
+msgstr "Ultimo @interval : @results"
 
 #: sites/all/modules/framaforms/includes/framaforms.admin.inc:46
 msgid "Total number of submissions : @number"
