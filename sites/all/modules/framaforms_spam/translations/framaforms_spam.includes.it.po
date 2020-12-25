@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2020-10-08 16:35+0200\n"
 "PO-Revision-Date: 2020-12-25 18:52+0000\n"
-"Last-Translator: x <hardwired1.0@protonmail.com>\n"
+"Last-Translator: qwerty <gabriele.tosato@virgilio.it>\n"
 "Language-Team: Italian <https://weblate.framasoft.org/projects/framaforms/"
 "framaforms-spam-include/it/>\n"
 "Language: it\n"
@@ -25,7 +25,7 @@ msgstr ""
 
 #: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:109
 msgid "more"
-msgstr ""
+msgstr "più"
 
 #: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:110;219;399
 msgid "Apply"
@@ -41,11 +41,11 @@ msgstr "Ordinato da"
 
 #: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:113;222;402
 msgid "Asc"
-msgstr ""
+msgstr "Asc"
 
 #: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:114;223;403
 msgid "Desc"
-msgstr ""
+msgstr "Desc"
 
 #: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:115;224;404
 msgid "Elements per page"
@@ -85,7 +85,7 @@ msgstr "- Scegli un'operazione -"
 
 #: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:124;415
 msgid "Nid"
-msgstr ""
+msgstr "Nid"
 
 #: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:125;413
 msgid "Title"
@@ -93,7 +93,7 @@ msgstr "Titolo"
 
 #: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:126
 msgid "uid"
-msgstr ""
+msgstr "uid"
 
 #: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:127;236;419
 msgid "Page"
@@ -104,12 +104,13 @@ msgid "plus"
 msgstr "più"
 
 #: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:232
+#, fuzzy
 msgid "[nid]"
-msgstr ""
+msgstr "[nid]"
 
 #: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:235
 msgid "[uid]"
-msgstr ""
+msgstr "[uid]"
 
 #: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:397
 msgid "Suspicious forms"
@@ -117,11 +118,11 @@ msgstr "Forme sospette"
 
 #: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:405
 msgid "- Tout -"
-msgstr ""
+msgstr "- Tutto -"
 
 #: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:411
 msgid "Contenu"
-msgstr ""
+msgstr "Contenuto"
 
 #: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:414
 msgid "Publication date"
