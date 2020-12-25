@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2020-10-08 16:35+0200\n"
 "PO-Revision-Date: 2020-12-25 18:52+0000\n"
-"Last-Translator: x <hardwired1.0@protonmail.com>\n"
+"Last-Translator: qwerty <gabriele.tosato@virgilio.it>\n"
 "Language-Team: Italian <https://weblate.framasoft.org/projects/framaforms/"
 "framaforms-spam/it/>\n"
 "Language: it\n"
@@ -47,18 +47,17 @@ msgstr "Moduli in quarantena"
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.module:308
 msgid "Records exposed to Views."
-msgstr ""
+msgstr "Registrazioni esposte alle Viste."
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.module:318
 msgid "Nids of the forms."
-msgstr ""
+msgstr "Nid del modulo."
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.module:327
 msgid "node"
 msgstr "nodo"
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.module:337
-#, fuzzy
 msgid "Uid for the author of this node"
 msgstr "Uid per l'autore di questo nodo"
 
@@ -75,10 +74,9 @@ msgid "Take forms out of quarantine"
 msgstr "Tirare il modulo fuori dalla quarantena"
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.module:404
-#, fuzzy
 msgid "The form was put into quarantine. You can set it back up using <a href='/quarantine'>this view.</a>"
 msgstr ""
-"IL form è stato messo in quarantena. Potete riportarlo indietro usando <a "
+"Il form è stato messo in quarantena. Potete riportarlo indietro usando <a "
 "href='/quarantine'>questa vista.</a>"
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.module:416
@@ -92,15 +90,13 @@ msgstr "framaforms_spam"
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.module:48
 msgid "Launching cron task."
-msgstr ""
+msgstr "Avvio di un compito cron."
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.module:81
-#, fuzzy
 msgid "Error deleting potential spam : %error"
 msgstr "Errore nella cancellazione di un potenziale spam: %error"
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.module:149
-#, fuzzy
 msgid "Error checking framaforms_spam_quarantine table : %error"
 msgstr "Errore nel controllo di framaforms_spam_quarantine table : %error"
 
@@ -128,13 +124,11 @@ msgstr ""
 "table\": %error"
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.module:241
-#, fuzzy
 msgid "Trying to take out of quarantine unexisting form %nid"
 msgstr ""
 "Si sta tentando di tirar fuori dalla quarantena un modulo inesistente %nid"
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.module:258
-#, fuzzy
 msgid "Error trying to take form out of quarantine : %error"
 msgstr "Errore nel tentativo di tirare un modulo fuori dalla quarantena: %error"
 
