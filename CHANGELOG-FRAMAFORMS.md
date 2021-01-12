@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 * Option to set custom 'from' mail address and subject for notification emails.
 * Warning message on forms where results are public (#67, !120).
 * Possibility to limit the number of forms / user (#116, !126).
+* Script to resend mails : `scripts/resend-mail.php` (!146).
 
 ### Changed
 * The `form1` content type is now part of the Framaforms module (declared via `includes/framaforms.node.inc`) (!89).
