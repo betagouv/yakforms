@@ -1,0 +1,8 @@
+<?php
+
+/**
+ * @file
+ * Code for the yakforms_feature feature.
+ */
+
+include_once 'yakforms_feature.features.inc';
