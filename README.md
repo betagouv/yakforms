@@ -1,4 +1,4 @@
-![logo](yakforms_logo.png)
+![logo](yakforms_logo.svg)
 
 ## Introduction
 
