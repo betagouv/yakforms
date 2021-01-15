@@ -500,7 +500,7 @@ After having selected it by clicking 'Browse', don't forget to click 'Upload' to
     'deleted' => 0,
     'description' => "<p>You can authorize other authenticated users to access this form's results : this requires them already having created an account. To do that, fill in their usernames in the field above (separated by commas if several).</p>
   <p>When logged in, these users will have access to the results by browsing to the form's page, and clicking on the 'Results' tab. They will be able to edit and delete results. <strong>They will however NOT be able to edit the form itself</strong> (add or remove fields, change the title, etc).</p>
-  <p>For more information, see <a href='https://docs.framasoft.org/fr/framaforms/fonctionnalites.html#partage-des-r%C3%A9sultats'>our documentation</a>.</p>",
+  <p>For more information, see <a href='https://docs.yakforms.org/features/partage-resultats/'>our documentation</a>.</p>",
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -772,7 +772,7 @@ After having selected it by clicking 'Browse', don't forget to click 'Upload' to
   t("Users having access to the results.");
   t("<p>You can authorize other authenticated users to access this form's results : this requires them already having created an account. To do that, fill in their usernames in the field above (separated by commas if several).</p>
   <p>When logged in, these users will have access to the results by browsing to the form's page, and clicking on the 'Results' tab. They will be able to edit and delete results. <strong>They will however NOT be able to edit the form itself</strong> (add or remove fields, change the title, etc).</p>
-  <p>For more information, see <a href='https://docs.framasoft.org/fr/framaforms/fonctionnalites.html#partage-des-r%C3%A9sultats'>our documentation</a>.</p>");
+  <p>For more information, see <a href='https://docs.yakforms.org/features/partage-resultats/'>our documentation</a>.</p>");
   t("You can attach up to 5 files to your form.");
   t('file(s)');
 

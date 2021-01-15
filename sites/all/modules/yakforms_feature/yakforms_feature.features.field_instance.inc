@@ -620,9 +620,9 @@ After having selected it by clicking \'Browse\', don\'t forget to click \'Upload
     'bundle' => 'form1',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '<p>You can authorize other authenticated users to access this form\'s results : this requires them already having created an account. To do that, fill in their usernames in the field above (separated by commas if several).</p>
+    'description' => "<p>You can authorize other authenticated users to access this form\'s results : this requires them already having created an account. To do that, fill in their usernames in the field above (separated by commas if several).</p>
   <p>When logged in, these users will have access to the results by browsing to the form\'s page, and clicking on the \'Results\' tab. They will be able to edit and delete results. <strong>They will however NOT be able to edit the form itself</strong> (add or remove fields, change the title, etc).</p>
-  <p>For more information, see <a href=\'https://docs.framasoft.org/fr/machinforms/fonctionnalites.html#partage-des-r%C3%A9sultats\'>our documentation</a>.</p>',
+  <p>For more information, see <a href='https://docs.yakforms.org/features/partage-resultats'>our documentation</a>.</p>",
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -990,7 +990,7 @@ After having selected it by clicking \'Browse\', don\'t forget to click \'Upload
 <p>Please note that the \'Users having access to results\' option below allows you to give access to the results (read, modify and delete) to selected authenticated users.</p>');
   t('<p>You can authorize other authenticated users to access this form\'s results : this requires them already having created an account. To do that, fill in their usernames in the field above (separated by commas if several).</p>
   <p>When logged in, these users will have access to the results by browsing to the form\'s page, and clicking on the \'Results\' tab. They will be able to edit and delete results. <strong>They will however NOT be able to edit the form itself</strong> (add or remove fields, change the title, etc).</p>
-  <p>For more information, see <a href=\'https://docs.framasoft.org/fr/machinforms/fonctionnalites.html#partage-des-r%C3%A9sultats\'>our documentation</a>.</p>');
+  <p>For more information, see <a href=\'https://docs.yakforms.org/features/partage-resultats/\'>our documentation</a>.</p>');
   t('A short description of your form template (for example : « Subscription form for an concert »).');
   t('Attached files');
   t('Body');

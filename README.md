@@ -4,7 +4,7 @@
 
 Yakforms is a free-as-in-free-speech online forms and surveys service. Edit and publish forms easily, collect and analyze submissions online.
 
-[See all features here](https://docs.framasoft.org/fr/framaforms/) (in French).
+[See all features here](https://docs.yakforms.org/) (in French, for now).
 
 ## Installation :fire:
 You don't need superpowers to install Yakforms. If you've already installed Drupal, you'll be on familiar ground. If you haven't, don't you worry, you only need basic knowledge.
