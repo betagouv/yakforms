@@ -5,4 +5,10 @@ sites/*/settings*.php
 sites/*/files
 sites/*/private
 
-vendor/
+# Ignore examples module if added
+sites/all/modules/examples
+
+# Ignore composer packages
+/vendor/
+# Ignore editor-specific files
+.vscode

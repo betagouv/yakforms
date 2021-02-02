@@ -7,19 +7,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Unreleased
 
-IMPORTANT NOTE : Framaforms has become Yakforms. The modules were renamed, and manual action is needed on your instance
-to upgrade to the latest version. Instructions here : https://framagit.org/framasoft/framaforms/-/wikis/From-Framaforms-to-Yakforms.
-
 ### Added
 * Option to automatically export form submissions as CSV files before deletion (#113, introducted by !85, fixed by !104).
 * Introduced Drupal Token mechanism, usable on full-HTML pages (#118, !100, !107).
-* jQuery warning on form modification (!109).e
+* jQuery warning on form modification (!109).
 * Option to set custom 'from' mail address and subject for notification emails.
 * Warning message on forms where results are public (#67, !120).
 * Possibility to limit the number of forms / user (#116, !126).
 * Script to resend mails : `scripts/resend-mail.php` (!146).
-* The custom modules (Yakforms, Yakforms Public Results and Yakforms Share Results) are now distributed on Drupal.org, allowing
-easier individual modules update using Drush or the Drupal admin UI.
 
 ### Changed
 * The `form1` content type is now part of the Framaforms module (declared via `includes/framaforms.node.inc`) (!89).

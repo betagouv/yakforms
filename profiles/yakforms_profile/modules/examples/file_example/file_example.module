@@ -1,9 +1,0 @@
-<?php
-/**
- * @file
- * Examples demonstrating the Drupal File API (and Stream Wrappers).
- */
-
-/**
- * @} End of "defgroup file_example".
- */
