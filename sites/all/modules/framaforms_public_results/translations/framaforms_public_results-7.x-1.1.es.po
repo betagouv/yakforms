@@ -1,0 +1,40 @@
+# $Id$
+#
+# LANGUAGE translation of Drupal (sites-all-modules-framaforms_public_results)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  sites/all/modules/framaforms_public_results/framaforms_public_results.module: n/a
+#  framaforms.info,v 1.1 2016/10/08 00:03:04 pyg
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2020-10-07 11:05+0200\n"
+"PO-Revision-Date: 2020-10-28 10:13+0000\n"
+"Last-Translator: Maki <makiniqa@riseup.net>\n"
+"Language-Team: Spanish <https://weblate.framasoft.org/projects/framaforms/"
+"public-results/es/>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.1\n"
+
+#: sites/all/modules/framaforms_public_results/framaforms_public_results.module:10
+msgid "Form author has checked the \"public results\" option"
+msgstr "Le autore del formulario ha marcado la opción \"resultados públicos\""
+
+#: sites/all/modules/framaforms_public_results/framaforms_public_results.module:33
+msgid "Back to results"
+msgstr "Volver a resultados"
+
+#: sites/all/modules/framaforms_public_results/framaforms_public_results.info:0
+msgid "Framaforms Public Results"
+msgstr "Framaforms Resultados Públicos"
+
+#: sites/all/modules/framaforms_public_results/framaforms_public_results.info:0
+msgid "Give form author ability to give public access to his results."
+msgstr ""
+"Darle a le autore del formulario la posibilidad de hacer de acceso público "
+"los resultados."

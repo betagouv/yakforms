@@ -1,0 +1,35 @@
+<?php
+
+
+
+/**
+* Add specific views access if the visitor is the author of the node
+*/
+function framaforms_public_results_views_access_callbacks() {
+  return array(
+    'framaforms_public_results_user_has_access' => t('Form author has checked the "public results" option'),
+  );
+}
+
+function framaforms_public_results_user_has_access($account = NULL) {
+  global $user;
+  $node = node_load($account);
+
+  // This is only for form1 nodes.
+  if($node->type != 'form1'){
+    return FALSE;
+  }
+
+  // Else check if the "Public results" option was checked.
+  if (isset($node->field_form1_results_public['und']) && $node->field_form1_results_public['und'][0]['value']) {
+      // If the current user is the author of the node, the tab should not be visible.
+      if ($user->uid == $node->uid) {
+        drupal_set_message(t("The results of this form are public. If you want to change this, go to the « Edit » tab."), 'warning', FALSE);
+        return FALSE;
+      }
+      // For other users, display warnings.
+      drupal_set_message(t("The results of this form are public. Please be aware that if you fill any personal information below it will be visible to anyone."), 'warning', FALSE);
+      return TRUE;
+  }
+  return FALSE;
+}
