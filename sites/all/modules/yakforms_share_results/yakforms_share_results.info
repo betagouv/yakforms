@@ -1,0 +1,16 @@
+name = Yakforms Share Results
+description = "This module allow to share results of a webform with some user-selected users"
+package= Yakforms
+
+
+core = 7.x
+
+dependencies[] = yakforms
+dependencies[] = webform
+
+; Information added by drupal.org packaging script on 2016-12-26
+version = "7.x-1.3"
+core = "7.x"
+project = "yakforms_share_results"
+datestamp = "1382691029"
+
