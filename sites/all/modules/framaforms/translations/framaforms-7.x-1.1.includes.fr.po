@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2020-10-29 15:28+0100\n"
-"PO-Revision-Date: 2020-12-15 23:52+0000\n"
-"Last-Translator: Govi <govi@live.fr>\n"
+"PO-Revision-Date: 2021-03-07 17:14+0000\n"
+"Last-Translator: kalou <pascalboussion@protonmail.com>\n"
 "Language-Team: French <https://weblate.framasoft.org/projects/framaforms/"
 "framaforms-include/fr/>\n"
 "Language: fr\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.1\n"
+"X-Generator: Weblate 4.4.2\n"
 
 #: sites/all/modules/framaforms/includes/framaforms.admin.inc:20
 msgid "Total number of forms : @number"
@@ -397,7 +397,7 @@ msgstr "Description"
 
 #: sites/all/modules/framaforms/includes/framaforms.node.inc:754
 msgid "Template description"
-msgstr ""
+msgstr "Description du modèle"
 
 #: sites/all/modules/framaforms/includes/framaforms.node.inc:755
 msgid ""
@@ -438,6 +438,7 @@ msgstr ""
 " pour la rendre disponible en ligne."
 
 #: sites/all/modules/framaforms/includes/framaforms.node.inc:762
+#, fuzzy
 msgid ""
 "Forms expire after 6 months, and are destroyed after 9 months (this cover "
 "90% of use cases, and avoids database overloads).<br>\n"
@@ -451,40 +452,65 @@ msgid ""
 "a>.\n"
 "  "
 msgstr ""
+"Les formulaires expirent après 6 mois, et sont détruits après 9 mois (cela "
+"couvre 90% des cas d'utilisation, et évite les surcharges de la base de "
+"données).<br>\n"
+"    À la date indiquée, votre formulaire ne sera pas accessible au public. "
+"Vous et vous seul pourrez cependant y accéder - ainsi qu'à ses résultats - "
+"pendant 60 jours supplémentaires, à partir de votre compte.\n"
+"    Si vous souhaitez prolonger sa date d'expiration, il vous suffit de "
+"modifier le champ ci-dessus une fois que votre formulaire est en ligne.\n"
+"    Si cette contrainte ne répond pas à vos besoins ou si vous souhaitez "
+"plus d'informations, veuillez vous référer à <a href='/limitations'>la page "
+"des limitations</a>.\n"
+"  "
 
 #: sites/all/modules/framaforms/includes/framaforms.node.inc:767
+#, fuzzy
 msgid "List this form as a template"
-msgstr ""
+msgstr "Inscrivez ce formulaire comme modèle"
 
 #: sites/all/modules/framaforms/includes/framaforms.node.inc:768
+#, fuzzy
 msgid ""
 "A short description of your form template (for example : « Subscription form "
 "for an concert »)."
 msgstr ""
+"Une brève description de votre modèle de formulaire (par exemple : « "
+"Formulaire d'abonnement à un concert »)."
 
 #: sites/all/modules/framaforms/includes/framaforms.node.inc:769
+#, fuzzy
 msgid "Words separated by commas."
-msgstr ""
+msgstr "Mots séparés par des virgules."
 
 #: sites/all/modules/framaforms/includes/framaforms.node.inc:770
+#, fuzzy
 msgid ""
 "If you check this box, you form will be displayed in the public list of "
 "templates, allowing anybody to clone it, use it as a form template and adapt "
 "it.<strong>If it is listed as a template, any visitor will be able to fill "
 "in your form.</strong>."
 msgstr ""
+"Si vous cochez cette case, votre formulaire sera affiché dans la liste "
+"publique des modèles, permettant à n'importe qui de le cloner, de l'utiliser "
+"comme modèle de formulaire et de l'adapter.<strong>Si il est répertorié "
+"comme modèle, tout visiteur pourra remplir votre formulaire.</strong>."
 
 #: sites/all/modules/framaforms/includes/framaforms.node.inc:771
+#, fuzzy
 msgid "Tags"
-msgstr ""
+msgstr "Balises"
 
 #: sites/all/modules/framaforms/includes/framaforms.node.inc:772
+#, fuzzy
 msgid "Upload an image to display with this content."
-msgstr ""
+msgstr "Téléchargez une image à afficher avec ce contenu."
 
 #: sites/all/modules/framaforms/includes/framaforms.node.inc:773
+#, fuzzy
 msgid "Users having access to the results."
-msgstr ""
+msgstr "Les utilisateurs ayant accès aux résultats."
 
 #: sites/all/modules/framaforms/includes/framaforms.node.inc:774
 msgid ""
@@ -501,12 +527,13 @@ msgid ""
 msgstr ""
 
 #: sites/all/modules/framaforms/includes/framaforms.node.inc:777
+#, fuzzy
 msgid "You can attach up to 5 files to your form."
-msgstr ""
+msgstr "Vous pouvez joindre jusqu'à 5 fichiers à votre formulaire."
 
 #: sites/all/modules/framaforms/includes/framaforms.node.inc:778
 msgid "file(s)"
-msgstr ""
+msgstr "dossier(s)"
 
 #: sites/all/modules/framaforms/includes/framaforms.pages.inc:94
 msgid "Welcome to Framaforms"
@@ -537,8 +564,9 @@ msgid "Emails"
 msgstr "Courriels"
 
 #: sites/all/modules/framaforms/includes/framaforms.pages.inc:117
+#, fuzzy
 msgid "Confirmation"
-msgstr "Confirmation"
+msgstr "Validation"
 
 #: sites/all/modules/framaforms/includes/framaforms.pages.inc:118
 msgid "Downloads"
