@@ -444,7 +444,10 @@ class WebformConditionals {
                   webform_component_include($conditional_type);
                   break;
               }
-
+              if($source_values === []) {
+                watchdog('webform', 'NULL passed for $source_value in executeConditionals.', WATCHDOG_WARNING);
+                break;
+              }
               $this->executionStackAccumulate($comparison_callback($source_values, $rule['value'], $source_component));
 
               // Record page number to later determine any intra-page dependency on this source.
