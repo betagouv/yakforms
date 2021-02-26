@@ -1,0 +1,189 @@
+<?php
+
+/**
+ * @file
+ * Yakforms module install.
+ */
+
+/**
+ * Implements hook_schema();.
+ */
+function yakforms_schema() {
+  $schema['yakforms_expired'] = array(
+    'description' => 'Table containing expiration information for Yakforms webforms',
+    'fields' => array(
+      'nid' => array(
+        'description' => 'NID of the webform (foreign key)',
+        'type' => 'int',
+        'not null' => FALSE,
+      ),
+      'date_notified' => array(
+        'description' => 'Date the user was notified (using the associated email).',
+        'type' => 'int',
+      ),
+      'notified' => array(
+        'description' => 'Set to 1 if the user was notified (default 0).',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'unique keys' => array(
+      'nid' => array(
+        'nid',
+      ),
+    ),
+    'foreign key' => array(
+      'fk_name_node' => array(
+        'table' => 'node',
+        'column' => array('nid' => 'nid'),
+      ),
+    ),
+  );
+  return $schema;
+}
+
+/**
+ * Implements hook_install.
+ */
+function yakforms_install() {
+  _yakforms_set_variables_pages();
+  _yakforms_set_variables_mail();
+  _yakforms_set_default_global_variables();
+  // Triggering menu rebuild as new blocks are defined in the module.
+  menu_rebuild();
+}
+
+/**
+ * Implements hook_uninstall.
+ */
+function yakforms_uninstall() {
+  db_delete('variable')->condition('name', db_like('yakforms_') . '%', 'LIKE')->execute();
+  cache_clear_all('yakforms', 'cache', TRUE);
+  menu_rebuild();
+}
+
+/**
+ * Sets global variables to default value.
+ *
+ * @return
+ */
+function _yakforms_set_default_global_variables() {
+  module_load_include('inc', 'yakforms', 'includes/yakforms.pages');
+
+  // Set default header
+  variable_set('yakforms_general_header_html','<b>Your</b>forms');
+
+  $now = date('Y/m/d/ h:m:s', time());
+  // The last framforms cron run.
+  variable_set('yakforms_cron_last', new DateTime());
+  variable_set('yakforms_cron_frequency', '1 hour');
+  // Default creation-expiration time interval.
+  variable_set('yakforms_expiration_period_default_value', 26);
+  // Default expiration-deletion time interval.
+  variable_set('yakforms_deletion_period_value', 9);
+  variable_set('yakforms_export_form_submissions_before_delete', false);
+  // Default notification-expiration time interval.
+  variable_set('yakforms_notification_period_value', 2);
+  variable_set('yakforms_site_contact_url', 'https://contact.framasoft.org/#yakforms');
+  variable_set('yakforms_forms_per_user_limit', 200);
+  variable_set('yakforms_submissions_per_form_limit', 1000);
+
+  /* various other custom manipulation */
+  /* Hide Drupal default banner */
+  $theme_settings = variable_get('theme_settings');
+  $theme_settings['toggle_logo'] = 0;
+  $theme_settings['toggle_slogan'] = 0;
+  $theme_settings['toggle_name'] = 0;
+  variable_set('theme_settings', $theme_settings);
+
+  /* Set default favicon for Frama theme */
+  $theme_frama_settings = variable_get('theme_frama_settings');
+  $theme_frama_settings['favicon_path'] = drupal_get_path('theme', 'frama') . '/images/default_favicon.png';
+  variable_set('theme_frama_settings', $theme_frama_settings);
+
+  /* Pathauto configuration */
+  $page_settings = variable_get('pathauto_node_page_pattern');
+
+  if (!isset($page_settings)) {
+    variable_set('pathauto_node_page_pattern', '[node:title]');
+  }
+}
+
+/**
+ * Set persistent variables regarding mails sent by Yakforms.
+ *
+ * @return void
+ */
+function _yakforms_set_variables_mail() {
+  // sprintf-ready mail for notifying a user of his⋅her form expiration.
+  $file_path = drupal_get_path('module', 'yakforms') . '/includes/templates/notification_email_fr.txt';
+  $yakforms_mail_user_notification_body = file_get_contents($file_path);
+  $yakforms_mail_user_notification_subject = t("Yakforms : your form « [node:title] » will expire soon.");
+  variable_set('yakforms_mail_user_notification_subject', $yakforms_mail_user_notification_subject);
+  variable_set('yakforms_mail_user_notification_body', $yakforms_mail_user_notification_body);
+  variable_set('yakforms_mail_from_address', 'no-reply+example@yoursite.org');
+}
+
+/**
+ * Load expiration page content from HTML template.
+ */
+function _yakforms_set_variables_pages() {
+  $language = language_default()->language;       // the site default language code
+  $file_path = drupal_get_path('module', 'yakforms') . "/includes/html/{$language}/expiration_page.html";
+  $expiration_page_content = file_get_contents($file_path);
+  variable_set('yakforms_expiration_page_content', $expiration_page_content);
+
+  // Enable the filter_tokens filter on full HTML pages:
+  $format_id = 'full_html';
+  $filter_id = 'filter_tokens';
+  $format = filter_format_load($format_id);
+  $filters = filter_list_format($format_id);
+  foreach ($filters as $filter_id => $filter_opts) { //Convert to an array, which is expected by the save function.
+    $filters[$filter_id] = (array) $filter_opts;
+  }
+  $filters['filter_tokens']['status'] = 1; // Enable filter
+  $format->filters = $filters;
+  filter_format_save($format);
+}
+
+
+/**
+ *
+ */
+function yakforms_update_7110(&$sandbox) {
+  $file_path = drupal_get_path('module', 'yakforms') . '/includes/templates/notification_email_fr.txt';
+  $yakforms_mail_user_notification_body = file_get_contents($file_path);
+  variable_set('yakforms_mail_user_notification_body', $yakforms_mail_user_notification_body);
+}
+
+/**
+ * Necessary configuration for tokens.
+ *
+ */
+function yakforms_update_7111(&$sandbox) {
+    // Enable the filter_tokens filter on full HTML pages:
+  $format_id = 'full_html';
+  $filter_id = 'filter_tokens';
+  $format = filter_format_load($format_id);
+  $filters = filter_list_format($format_id);
+  foreach ($filters as $filter_id => $filter_opts) { //Convert to an array, which is expected by the save function.
+    $filters[$filter_id] = (array) $filter_opts;
+  }
+  $filters['filter_tokens']['status'] = 1; // Enable filter
+  $format->filters = $filters;
+  filter_format_save($format);
+
+  // Introducing new limitation as global variable
+  variable_set('yakforms_submissions_per_form_limit', 1000);
+
+  // Update notification email and subject as they contained old tokens.
+  $old_tokens = array('[form_title]', '[form_expires_on]', '[form_delete_on]', '[form_url]');
+  $new_tokens = array('[node:title]', '[yakforms-form:expiration-date]', '[yakforms-form:deletion-date]', '[node:url]');
+  $mail_body = variable_get('yakforms_mail_user_notification_body', NULL);
+  $mail_subject = variable_get('yakforms_mail_user_notification_subject', NULL);
+  $mail_body = str_replace($old_tokens, $new_tokens, $mail_body);
+  $mail_subject = str_replace($old_tokens, $new_tokens, $mail_subject);
+  variable_set('yakforms_mail_user_notification_subject', $mail_subject);
+  variable_set('yakforms_mail_user_notification_body', $mail_body);
+}
