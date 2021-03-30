@@ -164,6 +164,7 @@ msgstr ""
 #: sites/all/modules/framaforms/includes/framaforms.admin.inc:189
 msgid "Notification email"
 msgstr "Email de notificación"
+
 msgid "Save form submissions before deleting"
 msgstr ""
 
@@ -181,8 +182,6 @@ msgstr ""
 #: sites/all/modules/framaforms/includes/framaforms.admin.inc:196
 msgid "Generate default pages"
 msgstr "Generar páginas por defecto"
-msgid "Notification email"
-msgstr ""
 
 #: sites/all/modules/framaforms/includes/framaforms.admin.inc:197
 msgid ""
@@ -202,21 +201,11 @@ msgstr "Resetear todo"
 #: sites/all/modules/framaforms/includes/framaforms.admin.inc:204
 msgid "Reset all global variables to their initial value."
 msgstr "Resetear todas las variables globales a su valor inicial."
-msgid "Generate default pages"
-msgstr ""
 
 #: sites/all/modules/framaforms/includes/framaforms.admin.inc:204
 msgid ""
 "By clicking this button, you will create default pages for your website : "
 "homepage, 404/403 error pages, etc. You can modify them afterwards."
-msgstr ""
-
-#: sites/all/modules/framaforms/includes/framaforms.admin.inc:210
-msgid "Reset all"
-msgstr ""
-
-#: sites/all/modules/framaforms/includes/framaforms.admin.inc:211
-msgid "Reset all global variables to their initial value."
 msgstr ""
 
 #: sites/all/modules/framaforms/includes/framaforms.admin.inc:217
@@ -284,9 +273,6 @@ msgstr ""
 #: sites/all/modules/framaforms/includes/framaforms.expiration.inc:42
 msgid "There was an error inserting expired forms into framaforms_expired : %error"
 msgstr "Error al insertar formularios vencidos a framaforms_expired : %error"
-msgid ""
-"There was an error inserting expired forms into framaforms_expired : %error"
-msgstr ""
 
 #: sites/all/modules/framaforms/includes/framaforms.expiration.inc:59
 msgid "Notifying users of their expired forms."
