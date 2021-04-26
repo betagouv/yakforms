@@ -159,9 +159,11 @@ function notify_user_of_expiration(stdClass $record) {
  * this function will delete them from the database.
  */
 function delete_expired_nodes() {
+  global $conf;
+  module_load_include('inc', 'framaforms', 'includes/framaforms.util');
   $deletion_period = variable_get('framaforms_deletion_period_value', 0);
   $notification_period = variable_get('framaforms_notification_period_value', 0);
-  $external_log_file = variable_get('framaforms_external_log_file', '/var/log/framaforms_logfile.log');
+  $log_file = $conf['framaforms_external_log_file'];
 
   // Create Datetime object for logging purposes.
   $current_date = new Datetime();
@@ -200,7 +202,7 @@ function delete_expired_nodes() {
       db_delete('framaforms_expired')
         ->condition('nid', $record->nid)
         ->execute();
-      error_log("{$current_date} : Form #{$record->nid} - user notified on {$record->dn} - was deleted.\n", 3, $external_log_file);
+      framaforms_custom_log("Deleted expired node", "Form #{$record->nid} - user notified on {$record->dn} - was deleted", $log_file);
       array_push($deleted_nodes, $record->nid);
     }
 
