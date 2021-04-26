@@ -40,12 +40,12 @@ function make_forms_expire() {
         AND fex.field_form1_expiration_value <= to_timestamp(:max_timestamp)
         AND fex.entity_id NOT IN
           (SELECT nid FROM framaforms_expired)
-        LIMIT !limit)
+        LIMIT :limit)
         ON CONFLICT DO NOTHING;
         ",
         array(
           ':max_timestamp' => $max_expiration_time->getTimestamp(),
-          '!limit' => variable_get('framaforms_cron_limit', 1000),
+          ':limit' => variable_get('framaforms_cron_limit', 1000),
         )
       );
   }
@@ -64,9 +64,9 @@ function make_forms_expire() {
         INNER JOIN users u
         ON u.uid = n.uid
         WHERE fex.notified = 0
-        LIMIT !limit;
+        LIMIT :limit;
         ",
-      array('!limit' => variable_get('framaforms_cron_limit', 1000))
+      array(':limit' => variable_get('framaforms_cron_limit', 1000))
     );
 
     // Notify the users of their forms expiration.
