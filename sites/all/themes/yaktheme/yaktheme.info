@@ -1,6 +1,6 @@
 
 name = Yaktheme
-description = A flexible, recolorable theme with many regions. Based on Bartik, includes Bootstrap 3.3.7.
+description = A flexible, recolorable theme with many regions. Based on Bartik.
 package = Core
 version = VERSION
 core = 7.x
@@ -9,7 +9,6 @@ base theme = bartik
 stylesheets[all][] = css/yaktheme.css
 stylesheets[all][] = css/layout.css
 stylesheets[all][] = css/style.css
-stylesheets[all][] = css/colors.css
 stylesheets[print][] = css/print.css
 
 scripts[] = js/yaktheme.js

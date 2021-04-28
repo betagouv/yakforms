@@ -10,12 +10,8 @@ html, body {
 
 #main, #content, section, .section, html, body, #page, #page-wrapper, #main-wrapper, .html, fieldset {
   background:white !important;
-    width:100% !important;
-    max-width:100% !important;
-}
-
-#framanav_container {
-  display:none
+  width:100% !important;
+  max-width:100% !important;
 }
 
 #main {
@@ -27,10 +23,6 @@ html, body {
 
 .grippie {
   display:none !important;
-}
-
-#framafooter {
-  display:none
 }
 
 .grammalecte_menu_main_button {
