@@ -20,6 +20,7 @@ to upgrade to the latest version. Instructions here : https://framagit.org/frama
 * Script to resend mails : `scripts/resend-mail.php` (!146).
 * The custom modules (Yakforms, Yakforms Public Results and Yakforms Share Results) are now distributed on Drupal.org, allowing
 easier individual modules update using Drush or the Drupal admin UI.
+* Subthemes based on TailwindCSS palette, selectable by end user on forms (!163)
 
 ### Changed
 * The `form1` content type is now part of the Framaforms module (declared via `includes/framaforms.node.inc`) (!89).
@@ -29,6 +30,7 @@ easier individual modules update using Drush or the Drupal admin UI.
 * Updated Drupal to 7.74 (!113)
 * Better stylesheet for printing forms (!124)
 * Removed Bootstrap includes from the module, the lib is now in the `framaforms` theme. (!138)
+* Wide theme modifications for new graphical identity (!162)
 
 ### Fixed
 * Expiration date is now modified when a form is cloned (#61)

@@ -1,0 +1,23 @@
+
+body {
+  --c-bg: #E0F2FE; /* p1 */
+}
+
+#main {
+  --c-title: #075985; /* p8 */
+  --c-highlighted: #E0F2FE; /* p1 */
+
+  --c-link: #0369A1; /* p7 */
+  --c-link-hover: #0284C7; /* p6 */
+
+  --c-bd-primary: #0369A1; /* p7 */
+  --c-bd-page: #0284C7; /* p6 */
+
+  --c-primary: #075985; /* p8 */
+  --c-primary-dark: #0C4A6E; /* p9 */
+
+  --c-bd-active: #0284C7; /* p6 */
+  --c-bg-checked: #075985; /* p8 */
+
+  --c-outline-shadow: #BAE6FDdd; /* p2 + alpha */
+}

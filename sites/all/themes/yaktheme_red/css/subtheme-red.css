@@ -1,0 +1,22 @@
+body {
+  --c-bg: #FEE2E2; /* p1 */
+}
+
+body #main {
+  --c-title: #B91C1C; /* p8 */
+  --c-highlighted: #FEE2E2; /* p1 */
+
+  --c-link: #DC2626; /* p7 */
+  --c-link-hover: #EF4444; /* p6 */
+
+  --c-bd-primary: #DC2626; /* p7 */
+  --c-bd-page: #EF4444; /* p6 */
+
+  --c-primary:#B91C1C; /* p8 */
+  --c-primary-dark: #7F1D1D; /* p9 */
+
+  --c-bd-active: #EF4444; /* p6 */
+  --c-bg-checked: #B91C1C; /* p8 */
+
+  --c-outline-shadow: #FECACADD; /* p2 + alpha */
+}
