@@ -8,7 +8,7 @@
 /**
  * Implements hook_taxonomy_default_vocabularies().
  */
-function framaforms_feature_taxonomy_default_vocabularies() {
+function yakforms_feature_taxonomy_default_vocabularies() {
   return array(
     'tags' => array(
       'name' => 'Étiquettes',

@@ -47,13 +47,10 @@
 
 .front #intro::after {
   background-size: cover;
-  background: var(--c-secondary);
   background-image: url(../images/intro.jpg);
   background-repeat: no-repeat;
   background-position: 80%;
   background-size: cover;
-  -webkit-clip-path: polygon(0 0,100% 0,100% 100%,0 88%);
-  clip-path: polygon(0 0,100% 0,100% 100%,0 88%);
 }
 
 @media (max-width: 768px) {
@@ -443,19 +440,6 @@
   .front #what h3 {
     font-size: 1.75rem;
   }
-}
-
-/* Footer */
-.front #page {
-  background: linear-gradient(
-    -8deg,
-    var(--c-primary),
-    var(--c-primary) 4rem,
-    #ccc calc(4rem + 1px),
-    var(--c-bg-lite2) 5rem,
-    var(--c-bg-lite2) calc(5rem + 1px),
-    var(--c-bg-lite2) 100%
-  )
 }
 
 .front #footer {
