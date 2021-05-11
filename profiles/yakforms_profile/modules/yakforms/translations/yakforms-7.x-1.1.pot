@@ -1,17 +1,17 @@
 # $Id$
 #
-# LANGUAGE translation of Drupal (sites-all-modules-yakforms)
+# LANGUAGE translation of Drupal (sites-all-modules-contrib-yakforms)
 # Copyright YEAR NAME <EMAIL@ADDRESS>
 # Generated from files:
-#  sites/all/modules/yakforms/yakforms.module: n/a
-#  sites/all/modules/yakforms/yakforms.install: n/a
-#  sites/all/modules/yakforms/yakforms.info: n/a
+#  sites/all/modules/contrib/yakforms/yakforms.module: n/a
+#  sites/all/modules/contrib/yakforms/yakforms.install: n/a
+#  sites/all/modules/contrib/yakforms/yakforms.info: n/a
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2020-11-24 16:43+0100\n"
+"POT-Creation-Date: 2021-05-10 11:52+0200\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -20,547 +20,599 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: sites/all/modules/yakforms/yakforms.module:75
+#: sites/all/modules/contrib/yakforms/yakforms.module:13
+msgid "About"
+msgstr ""
+
+#: sites/all/modules/contrib/yakforms/yakforms.module:14
+msgid "Yakforms is a module aimed for building form services online."
+msgstr ""
+
+#: sites/all/modules/contrib/yakforms/yakforms.module:15
+msgid "Its usage is very specific to Yakforms websites, and the module is not usable outside of Yakforms environments : specfific modules are needed, and the overall features of the websites are guided for very special purposes."
+msgstr ""
+
+#: sites/all/modules/contrib/yakforms/yakforms.module:16
+msgid "The following are defined inside the Yakforms module :"
+msgstr ""
+
+#: sites/all/modules/contrib/yakforms/yakforms.module:18
+msgid "A new node type : « form » or <code>form1</code> (machine-name) nodes are publicly-accessible nodes that any authenticated user can create and configure. A webform is attached to each of node. "
+msgstr ""
+
+#: sites/all/modules/contrib/yakforms/yakforms.module:19
+msgid "Blocks and menu links for user navigation."
+msgstr ""
+
+#: sites/all/modules/contrib/yakforms/yakforms.module:20
+msgid "Default pages."
+msgstr ""
+
+#: sites/all/modules/contrib/yakforms/yakforms.module:21
+msgid "Cron tasks for limited-lifetime nodes : to avoid piling up useless data forever, forms expire after a few months by default. (This feature can be deactivated by the admin if necessary).."
+msgstr ""
+
+#: sites/all/modules/contrib/yakforms/yakforms.module:22
+msgid "A central administration menu to manage most of the website's parameter : <a href='@link'>Administration page.</a>"
+msgstr ""
+
+#: sites/all/modules/contrib/yakforms/yakforms.module:100
 msgid "Contact form link"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:85
+#: sites/all/modules/contrib/yakforms/yakforms.module:110
 msgid "Password alert"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:95
+#: sites/all/modules/contrib/yakforms/yakforms.module:120
 msgid "General header"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:103
+#: sites/all/modules/contrib/yakforms/yakforms.module:128
 msgid "User links"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:113
+#: sites/all/modules/contrib/yakforms/yakforms.module:138
 msgid "Anonymous user links"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:123
+#: sites/all/modules/contrib/yakforms/yakforms.module:148
 msgid "New form warning"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:124;190
+#: sites/all/modules/contrib/yakforms/yakforms.module:149;215
 msgid "New form"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:134;135
-msgid "My Framaforms account"
+#: sites/all/modules/contrib/yakforms/yakforms.module:159;160
+msgid "My Yakforms account"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:144
+#: sites/all/modules/contrib/yakforms/yakforms.module:169
 msgid "Help : confirmation email"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:145
+#: sites/all/modules/contrib/yakforms/yakforms.module:170
 msgid "Confirmation email"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:153
+#: sites/all/modules/contrib/yakforms/yakforms.module:178
 msgid "Help : email interaction"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:154
+#: sites/all/modules/contrib/yakforms/yakforms.module:179
 msgid "Email interaction"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:162
+#: sites/all/modules/contrib/yakforms/yakforms.module:187
 msgid "Help : validation conditions"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:163
+#: sites/all/modules/contrib/yakforms/yakforms.module:188
 msgid "Validation conditions"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:171
+#: sites/all/modules/contrib/yakforms/yakforms.module:196
 msgid "Help : configure form"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:172
+#: sites/all/modules/contrib/yakforms/yakforms.module:197
 msgid "Configure form"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:180
+#: sites/all/modules/contrib/yakforms/yakforms.module:205
 msgid "Help : conditionnal fields"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:181
+#: sites/all/modules/contrib/yakforms/yakforms.module:206
 msgid "Conditionnal fields"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:189
+#: sites/all/modules/contrib/yakforms/yakforms.module:214
 msgid "Help : new form"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:198
+#: sites/all/modules/contrib/yakforms/yakforms.module:223
 msgid "Help : global"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:199
+#: sites/all/modules/contrib/yakforms/yakforms.module:224
 msgid "Help"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:207
+#: sites/all/modules/contrib/yakforms/yakforms.module:232
 msgid "Help : new form creation - webform"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:208
+#: sites/all/modules/contrib/yakforms/yakforms.module:233
 msgid "New form configuration"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:216
+#: sites/all/modules/contrib/yakforms/yakforms.module:241
 msgid "Help : add form components"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:217
+#: sites/all/modules/contrib/yakforms/yakforms.module:242
 msgid "Add form components"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:225
+#: sites/all/modules/contrib/yakforms/yakforms.module:250
 msgid "Footer"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:226
-msgid "Powered by Framaforms"
+#: sites/all/modules/contrib/yakforms/yakforms.module:251
+msgid "Powered by Yakforms"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:285
-msgid "Do not communicate any password through Framaforms."
+#: sites/all/modules/contrib/yakforms/yakforms.module:346
+msgid "Do not communicate any password through Yakforms."
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:300
+#: sites/all/modules/contrib/yakforms/yakforms.module:361
 msgid "Register"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:302
+#: sites/all/modules/contrib/yakforms/yakforms.module:363
 msgid "Log in"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:316
+#: sites/all/modules/contrib/yakforms/yakforms.module:377
 msgid "My account (@account)"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:319
+#: sites/all/modules/contrib/yakforms/yakforms.module:380
 msgid "Log out"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:323
+#: sites/all/modules/contrib/yakforms/yakforms.module:384
 msgid "Create a new form"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:325
+#: sites/all/modules/contrib/yakforms/yakforms.module:386
 msgid "Create a form from a template"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:327
+#: sites/all/modules/contrib/yakforms/yakforms.module:388
 msgid "My forms"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:338
-msgid "Welcome to your Framaforms account !"
+#: sites/all/modules/contrib/yakforms/yakforms.module:399
+msgid "Welcome to your Yakforms account !"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:339
+#: sites/all/modules/contrib/yakforms/yakforms.module:400
 msgid "You can :"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:341
+#: sites/all/modules/contrib/yakforms/yakforms.module:402
 msgid "edit your personal information (\"Edit\" tab above) ;"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:342
+#: sites/all/modules/contrib/yakforms/yakforms.module:403
 msgid "access your forms (\"My forms\" button above) ;"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:343
+#: sites/all/modules/contrib/yakforms/yakforms.module:404
 msgid "create a new form"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:344
+#: sites/all/modules/contrib/yakforms/yakforms.module:405
 msgid "contact us"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:350
+#: sites/all/modules/contrib/yakforms/yakforms.module:411
 msgid "You are about to create a new form."
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:351
+#: sites/all/modules/contrib/yakforms/yakforms.module:412
 msgid "Start by filling the fields below, then click « Submit »"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:352
+#: sites/all/modules/contrib/yakforms/yakforms.module:413
 msgid "NB : the form's title will affect its URL. Choose it wisely and watch out : changing it will change the form's URL !"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:360
+#: sites/all/modules/contrib/yakforms/yakforms.module:421
 msgid "Here, you can specify how long you want the confirmation email to be valid (if you are using this option), and if you want the user's submission to be eventually destroyed."
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:362
+#: sites/all/modules/contrib/yakforms/yakforms.module:423
 msgid "(NB : if you are looking for the configuration parameters, you'll find them in the « Emails » tab !)"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:369
+#: sites/all/modules/contrib/yakforms/yakforms.module:430
 msgid "This feature allows you to send an email to a specified address.\n        For example you can send an email to the form's author at each new submission.\n        This email can optionally contain the values submitted by the user."
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:372
+#: sites/all/modules/contrib/yakforms/yakforms.module:433
 msgid "But the real interest of this module is to set up a confirmation process by email."
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:373
+#: sites/all/modules/contrib/yakforms/yakforms.module:434
 msgid "If a user submits a form, they will receive an email with a confirmation link. Their submission won't be appear in the results until they have clicked on this link.\n        This can be very useful if you want to make sure all submitted emails are valid."
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:375
+#: sites/all/modules/contrib/yakforms/yakforms.module:436
 msgid "Watch out : to use the confirmation process, your form must have an « email » component."
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:376
+#: sites/all/modules/contrib/yakforms/yakforms.module:437
 msgid " (well yeah, how can you possibly send an email if you don't have an address ? :P )"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:383
+#: sites/all/modules/contrib/yakforms/yakforms.module:444
 msgid "(for advanced users)"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:384
+#: sites/all/modules/contrib/yakforms/yakforms.module:445
 msgid "Here, you can define conditions to validate a user's submission.\n      If these conditions are not fulfilled, the submission won't be saved, and the user will be asked to modify their submission."
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:386
+#: sites/all/modules/contrib/yakforms/yakforms.module:447
 msgid "Use cases :"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:388
+#: sites/all/modules/contrib/yakforms/yakforms.module:449
 msgid "You want to set the maximum number of characters in a text area to 200."
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:389
+#: sites/all/modules/contrib/yakforms/yakforms.module:450
 msgid "You want to forbid the use of some words in a text area"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:390
+#: sites/all/modules/contrib/yakforms/yakforms.module:451
 msgid "You want to make sure a 'size at age 5' field is inferior to a 'size at age 20' field."
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:391
+#: sites/all/modules/contrib/yakforms/yakforms.module:452
 msgid "You want to make sure that 'Awesome project name' begins with 'Frama-'"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:392
+#: sites/all/modules/contrib/yakforms/yakforms.module:453
 msgid "etc"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:399
+#: sites/all/modules/contrib/yakforms/yakforms.module:460
 msgid "Getting real, isn't it ? :)"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:400
+#: sites/all/modules/contrib/yakforms/yakforms.module:461
 msgid "Here are the advanded parameters for your form."
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:401
+#: sites/all/modules/contrib/yakforms/yakforms.module:462
 msgid "The good part : The default configuration is enough for 90% of cases."
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:402
+#: sites/all/modules/contrib/yakforms/yakforms.module:463
 msgid "The less good part : if you mess around and end up breaking your form, don't come whining ! (Don't worry, you'll 'only' have broken your own form, the worst that can happen is having to start over a new one :)"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:409
+#: sites/all/modules/contrib/yakforms/yakforms.module:470
 msgid "Conditonal fields allow you to take actions depending on the user's values. "
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:410
+#: sites/all/modules/contrib/yakforms/yakforms.module:471
 msgid "Examples :"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:411
+#: sites/all/modules/contrib/yakforms/yakforms.module:472
 msgid "Show and hide fields :"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:412
+#: sites/all/modules/contrib/yakforms/yakforms.module:473
 msgid "IF the user selected « other » for « Structure type » "
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:413
+#: sites/all/modules/contrib/yakforms/yakforms.module:474
 msgid "THEN  show the text area « Other structure types » "
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:414
+#: sites/all/modules/contrib/yakforms/yakforms.module:475
 msgid "IF the user checked the option « I don't like soup » "
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:415
+#: sites/all/modules/contrib/yakforms/yakforms.module:476
 msgid "THEN hide the question « What's your favorite soup ? »."
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:416
+#: sites/all/modules/contrib/yakforms/yakforms.module:477
 msgid "Force a value :"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:417
+#: sites/all/modules/contrib/yakforms/yakforms.module:478
 msgid "IF the user checked the option « I got 3 presents or more for Christmas » "
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:418
+#: sites/all/modules/contrib/yakforms/yakforms.module:479
 msgid "THEN automatically check the option « Yes » for the question « Am I lucky ? » "
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:419
+#: sites/all/modules/contrib/yakforms/yakforms.module:480
 msgid "Make a field mandatory : "
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:420
+#: sites/all/modules/contrib/yakforms/yakforms.module:481
 msgid "IF the user checked the option « I went to space » "
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:421
+#: sites/all/modules/contrib/yakforms/yakforms.module:482
 msgid "THEN make the field « Which planet ? » mandatory. "
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:422
+#: sites/all/modules/contrib/yakforms/yakforms.module:483
 msgid "More information"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:429
+#: sites/all/modules/contrib/yakforms/yakforms.module:490
 msgid "Fill the general information describing your form, then click « Submit » to proceed to add form fields."
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:430
+#: sites/all/modules/contrib/yakforms/yakforms.module:491
 msgid "Once this is done, click on the « Webform » tab <strong>which will only appear once the description is saved !</strong>"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:437
+#: sites/all/modules/contrib/yakforms/yakforms.module:498
 msgid "Cliquez sur l'onglet « Formulaire » pour poursuivre la création de formulaire..."
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:444
+#: sites/all/modules/contrib/yakforms/yakforms.module:505
 msgid "Here we go !"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:445
+#: sites/all/modules/contrib/yakforms/yakforms.module:506
 msgid "Choose your form's components."
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:446
+#: sites/all/modules/contrib/yakforms/yakforms.module:507
 msgid "You can drag and drop the components on the right into the preview zone to build the form you want."
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:447
+#: sites/all/modules/contrib/yakforms/yakforms.module:508
 msgid "You can also set advanced parameters for your form by clicking on « Emails », « Conditional fields », etc ."
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:448
+#: sites/all/modules/contrib/yakforms/yakforms.module:509
 msgid "Watch out : it is not recommanded to modify your form once you received at least one submission You might loose your data."
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:449
+#: sites/all/modules/contrib/yakforms/yakforms.module:510
 msgid "You must insert at least ONE form field before clicking « Submit ». If your form remains empty, it will be considered as a potential spam, and you might loose your work."
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:456
+#: sites/all/modules/contrib/yakforms/yakforms.module:517
 msgid "Here you can define the same components as with the graphic menu, but in a more... « manual » way. "
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:457
+#: sites/all/modules/contrib/yakforms/yakforms.module:518
 msgid "This might work better on mobile."
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:461
+#: sites/all/modules/contrib/yakforms/yakforms.module:522
 msgid " is an online, free, add-less and privacy-friendly service to create forms (polls, surveys, quiz, etc.) "
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:462
-msgid "This service (and a whole lot of others) are brought to you by"
+#: sites/all/modules/contrib/yakforms/yakforms.module:523
+msgid "Yakforms is powered by"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:462
-msgid "as part of "
-msgstr ""
-
-#: sites/all/modules/yakforms/yakforms.module:462
-msgid "the De-google-ify Internet campaign"
-msgstr ""
-
-#: sites/all/modules/yakforms/yakforms.module:463
-msgid "This content was not written nor approved by Framasoft."
-msgstr ""
-
-#: sites/all/modules/yakforms/yakforms.module:463
-msgid "Report an abusive content."
-msgstr ""
-
-#: sites/all/modules/yakforms/yakforms.module:464
-msgid "Framaforms is powered by"
-msgstr ""
-
-#: sites/all/modules/yakforms/yakforms.module:523
+#: sites/all/modules/contrib/yakforms/yakforms.module:576
 msgid "Current user is author of the node"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:676
+#: sites/all/modules/contrib/yakforms/yakforms.module:607
+msgid "Back to results"
+msgstr ""
+
+#: sites/all/modules/contrib/yakforms/yakforms.module:627
+msgid "@from via @base_domain"
+msgstr ""
+
+#: sites/all/modules/contrib/yakforms/yakforms.module:773
 msgid "<br><p>This user is the author of : </p>"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:749
+#: sites/all/modules/contrib/yakforms/yakforms.module:850
+msgid "The submission limit can't be higher than what the site's maximum (!limit)."
+msgstr ""
+
+#: sites/all/modules/contrib/yakforms/yakforms.module:911
 msgid "Formulaire"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:751
+#: sites/all/modules/contrib/yakforms/yakforms.module:913
 msgid "You are about to create a new form. Start by filling the fields below, then click « Submit ». NB : the form's title will affect its URL. Choose it wisely and watch out : changing it will change the form's URL !"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:752
+#: sites/all/modules/contrib/yakforms/yakforms.module:914
 msgid "Form title"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:842
+#: sites/all/modules/contrib/yakforms/yakforms.module:1004
 msgid "Limitations"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:843
+#: sites/all/modules/contrib/yakforms/yakforms.module:1005
 msgid "Limitations for this instance."
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:846
+#: sites/all/modules/contrib/yakforms/yakforms.module:1008
 msgid "Form"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:847
+#: sites/all/modules/contrib/yakforms/yakforms.module:1009
 msgid "Tokens regarding the current form"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:851
-msgid "Framaforms - user"
+#: sites/all/modules/contrib/yakforms/yakforms.module:1013
+msgid "Yakforms - user"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:852
-msgid "Tokens regarding the current Framaforms user"
+#: sites/all/modules/contrib/yakforms/yakforms.module:1014
+msgid "Tokens regarding the current Yakforms user"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:860
+#: sites/all/modules/contrib/yakforms/yakforms.module:1022
 msgid "Forms per user"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:861
+#: sites/all/modules/contrib/yakforms/yakforms.module:1023
 msgid "Maximum number of forms per user allowed on this instance."
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:864
+#: sites/all/modules/contrib/yakforms/yakforms.module:1026
 msgid "Submissions per form"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:865
+#: sites/all/modules/contrib/yakforms/yakforms.module:1027
 msgid "Maximum number of submissions per form allowed on this instance."
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:868
+#: sites/all/modules/contrib/yakforms/yakforms.module:1030
 msgid "Maximum form lifetime"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:869
+#: sites/all/modules/contrib/yakforms/yakforms.module:1031
 msgid "Maximum lifetime for a form on this instance."
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:875
+#: sites/all/modules/contrib/yakforms/yakforms.module:1037
 msgid "Clone URL"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:876
+#: sites/all/modules/contrib/yakforms/yakforms.module:1038
 msgid "URL to clone this form"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:880
+#: sites/all/modules/contrib/yakforms/yakforms.module:1042
 msgid "The forms's expiration date"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:883
+#: sites/all/modules/contrib/yakforms/yakforms.module:1045
+msgid "Number of submissions"
+msgstr ""
+
+#: sites/all/modules/contrib/yakforms/yakforms.module:1046
+msgid "Number of submissions for this form"
+msgstr ""
+
+#: sites/all/modules/contrib/yakforms/yakforms.module:1049
 msgid "Deletion date"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:884
+#: sites/all/modules/contrib/yakforms/yakforms.module:1050
 msgid "The forms's date of deletion"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:889
+#: sites/all/modules/contrib/yakforms/yakforms.module:1053
+msgid "Submission limit"
+msgstr ""
+
+#: sites/all/modules/contrib/yakforms/yakforms.module:1054
+msgid "Maximum number of submissions for this form"
+msgstr ""
+
+#: sites/all/modules/contrib/yakforms/yakforms.module:1059
 msgid "My forms menu"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:890
+#: sites/all/modules/contrib/yakforms/yakforms.module:1060
 msgid "Link to the user's forms"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:919
+#: sites/all/modules/contrib/yakforms/yakforms.module:1089
 msgid "No limitation"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:987
+#: sites/all/modules/contrib/yakforms/yakforms.module:1162
 msgid "Your account has reached this site's maximum number of forms. Please delete some of your unused forms in 'My forms' before trying to create a new one."
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:988
+#: sites/all/modules/contrib/yakforms/yakforms.module:1163
 msgid "This site's allows to create the maximum following number of forms : @number"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:587
+#: sites/all/modules/contrib/yakforms/yakforms.module:270
+msgid "The form !nid was about to expire, but the form was modified. Deleting this form from yakforms_expired."
+msgstr ""
+
+#: sites/all/modules/contrib/yakforms/yakforms.module:284
+msgid "Error taking the node !nid out of yakforms_expired in yakforms_node_presave : %error"
+msgstr ""
+
+#: sites/all/modules/contrib/yakforms/yakforms.module:685
 msgid "Cron task launched."
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:732
+#: sites/all/modules/contrib/yakforms/yakforms.module:894
 msgid "Unable to export forms for user %id : Error in yakforms_export_users_content_before_delete_submit. %error"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:777
+#: sites/all/modules/contrib/yakforms/yakforms.module:939
 msgid "The following error was raised and ignored creating the content type : !e"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:795
+#: sites/all/modules/contrib/yakforms/yakforms.module:957
 msgid "The following error was raised and ignollred creating the field instances : !e"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:16
-msgid "Configure Framaforms"
+#: sites/all/modules/contrib/yakforms/yakforms.module:41
+msgid "Configure Yakforms"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:17
-msgid "Configuration for Framaforms module"
+#: sites/all/modules/contrib/yakforms/yakforms.module:42
+msgid "Configuration for Yakforms module"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:25
+#: sites/all/modules/contrib/yakforms/yakforms.module:50
 msgid "Overview"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:26
+#: sites/all/modules/contrib/yakforms/yakforms.module:51
 msgid "General dashboard containing statistics about your website."
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:34
+#: sites/all/modules/contrib/yakforms/yakforms.module:59
 msgid "Expiration"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:35
+#: sites/all/modules/contrib/yakforms/yakforms.module:60
 msgid "Instructions page for expired forms."
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.module:43
+#: sites/all/modules/contrib/yakforms/yakforms.module:68
 msgid "Instructions to share the form."
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.install:122
-msgid "Framaforms : your form « [node:title] » will expire soon."
+#: sites/all/modules/contrib/yakforms/yakforms.install:122
+msgid "Yakforms : your form « [node:title] » will expire soon."
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.info:0
-msgid "Framaforms"
+#: sites/all/modules/contrib/yakforms/yakforms.info:0
+msgid "Yakforms"
 msgstr ""
 
-#: sites/all/modules/yakforms/yakforms.info:0
-msgid "Framaforms functions for creating, managing and sharing webforms."
+#: sites/all/modules/contrib/yakforms/yakforms.info:0
+msgid "Yakforms functions for creating, managing and sharing webforms."
 msgstr ""
 

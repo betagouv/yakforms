@@ -48,6 +48,7 @@ dependencies[] = l10n_update
 dependencies[] = libraries
 dependencies[] = list
 dependencies[] = locale
+dependencies[] = localize_fields
 dependencies[] = logintoboggan
 dependencies[] = menu
 dependencies[] = node

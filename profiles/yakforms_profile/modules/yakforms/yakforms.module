@@ -520,8 +520,6 @@ function yakforms_block_view($delta) {
 
     case 'yakforms_footer':
       $block['content']['#markup'] = "<u><a href='https://yakforms.org'>Yakforms</a></u>" . t(" is an online, free, add-less and privacy-friendly service to create forms (polls, surveys, quiz, etc.) ") . "<br>";
-      $block['content']['#markup'] .= t("This software was originally developped by ") . " <u><a href='https://framasoft.org/fr/'>Framasoft</a></u> " . t("as part of ") . " « <u><a href='https://degooglisons-internet.org/en/'>" . t("the De-google-ify Internet campaign") . "</a></u> »." . "<br>";
-      $block['content']['#markup'] .= t("The content on this website was not written nor approved by Framasoft.") . " <u><a href='https://contact.framasoft.org/#framaforms'>" . t("Report an abusive content.") . "<a></u><br>";
       $block['content']['#markup'] .= t("Yakforms is powered by") . " <u><a href='https://www.drupal.org/'>Drupal 7</a></u>.";
       break;
   }
@@ -532,12 +530,6 @@ function yakforms_block_view($delta) {
  *
  */
 function yakforms_preprocess_page(&$vars, $hook) {
-  // Get base URL of the current website.
-  $url = url("<front>", array('absolute' => TRUE));
-  // If the current base url contain  "yakforms.org", add the framanav.
-  if (strpos($url, "yakforms.org") !== FALSE) {
-    drupal_add_js('https://framasoft.org/nav/nav.js', 'external');
-  }
   $meta_element = array(
   // The #tag is the html tag -.
     '#tag' => 'meta',

@@ -59,8 +59,8 @@ msgid "New form"
 msgstr "Neues Formular"
 
 #: sites/all/modules/yakforms/yakforms.module:165;166
-msgid "My Framaforms account"
-msgstr "Mein Framaforms Konto"
+msgid "My Yakforms account"
+msgstr "Mein Yakforms Konto"
 
 #: sites/all/modules/yakforms/yakforms.module:175
 msgid "Help : confirmation email"
@@ -135,12 +135,12 @@ msgid "Footer"
 msgstr "Fußzeile"
 
 #: sites/all/modules/yakforms/yakforms.module:257
-msgid "Powered by Framaforms"
+msgid "Powered by Yakforms"
 msgstr ""
 
 #: sites/all/modules/yakforms/yakforms.module:318
-msgid "Do not communicate any password through Framaforms."
-msgstr "Geben Sie niemals Passwörter über Framaforms weiter."
+msgid "Do not communicate any password through Yakforms."
+msgstr "Geben Sie niemals Passwörter über Yakforms weiter."
 
 #: sites/all/modules/yakforms/yakforms.module:333
 msgid "Register"
@@ -171,7 +171,7 @@ msgid "My forms"
 msgstr "Meine Formulare"
 
 #: sites/all/modules/yakforms/yakforms.module:371
-msgid "Welcome to your Framaforms account !"
+msgid "Welcome to your Yakforms account !"
 msgstr ""
 
 #: sites/all/modules/yakforms/yakforms.module:372
@@ -407,7 +407,7 @@ msgid "Report an abusive content."
 msgstr ""
 
 #: sites/all/modules/yakforms/yakforms.module:497
-msgid "Framaforms is powered by"
+msgid "Yakforms is powered by"
 msgstr ""
 
 #: sites/all/modules/yakforms/yakforms.module:564
@@ -419,11 +419,11 @@ msgid "Cron task launched."
 msgstr ""
 
 #: sites/all/modules/yakforms/yakforms.module:16
-msgid "Configure Framaforms"
+msgid "Configure Yakforms"
 msgstr ""
 
 #: sites/all/modules/yakforms/yakforms.module:17
-msgid "Configuration for Framaforms module"
+msgid "Configuration for Yakforms module"
 msgstr ""
 
 #: sites/all/modules/yakforms/yakforms.module:25
@@ -447,13 +447,13 @@ msgid "Instructions to share the form."
 msgstr ""
 
 #: sites/all/modules/yakforms/yakforms.install:70
-msgid "Framaforms : your form « [form_title] » will expire soon."
+msgid "Yakforms : your form « [form_title] » will expire soon."
 msgstr ""
 
 #: sites/all/modules/yakforms/yakforms.info:0
-msgid "Framaforms"
-msgstr "Framaforms"
+msgid "Yakforms"
+msgstr "Yakforms"
 
 #: sites/all/modules/yakforms/yakforms.info:0
-msgid "Framaforms functions for creating, managing and sharing webforms."
+msgid "Yakforms functions for creating, managing and sharing webforms."
 msgstr ""

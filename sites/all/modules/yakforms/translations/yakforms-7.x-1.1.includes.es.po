@@ -12,15 +12,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2020-10-08 16:15+0200\n"
-"Last-Translator: Maki <makiniqa@riseup.net>\n"
+"PO-Revision-Date: 2021-04-24 07:15+0000\n"
+"Last-Translator: Berto Te <ateira@3fpj.com>\n"
 "Language-Team: Spanish <https://weblate.framasoft.org/projects/yakforms/"
-"PO-Revision-Date: 2020-10-29 15:30+0100\n"
+"yakforms-include/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.1\n"
+"X-Generator: Weblate 4.5.1\n"
 
 #: sites/all/modules/yakforms/includes/yakforms.admin.inc:20
 msgid "Total number of forms : @number"
@@ -165,18 +166,15 @@ msgstr ""
 msgid "Notification email"
 msgstr "Email de notificación"
 msgid "Save form submissions before deleting"
-msgstr ""
+msgstr "Guarde los envíos de formularios antes de eliminarlos"
 
 #: sites/all/modules/yakforms/includes/yakforms.admin.inc:191
 msgid ""
 "Check this box if you want all form submissions to be saved before deletion. "
 "This can be useful for user support."
 msgstr ""
-"Aquí puedes cambiar el contenido del email que será enviado a le usuarie "
-"para advertirle acerca de vencimientos. <i>Puedes utilizar los siguientes "
-"tokens que serán reemplazados: <strong>[form_url]</strong> (el URL del "
-"formulario), <strong>[form_expires_on]</strong> (la fecha de vencimiento del "
-"formulario), <strong>[form_title]</strong> (el título del formulario).</i>"
+"Marque esta casilla si desea que todos los envíos de formularios se guarden "
+"antes de eliminarlos. Esto puede resultar útil para la asistencia al usuario."
 
 #: sites/all/modules/yakforms/includes/yakforms.admin.inc:196
 msgid "Generate default pages"
@@ -192,8 +190,12 @@ msgid ""
 "<strong>[form_expires_on]</strong> (the form's expiration date), "
 "<strong>[form_title]</strong> (the form's title).</i>"
 msgstr ""
-"Al cliquear este botón, crearás páginas por defecto para tu sitio: páginas "
-"de error 404/403, etc. Puedes modificarlas después."
+"Aquí puede cambiar el contenido del correo electrónico que se enviará al "
+"usuario advirtiéndole de los formularios caducados.<i>Puede usar los "
+"siguientes tokens que serán reemplazados:<strong>[form_url]</strong> (la URL "
+"del formulario), <strong>[form_expires_on</strong> (la fecha de vencimiento "
+"del formulario), <strong>[form_title]</strong> (el título del "
+"formulario).</i>"
 
 #: sites/all/modules/yakforms/includes/yakforms.admin.inc:203
 msgid "Reset all"
@@ -210,6 +212,9 @@ msgid ""
 "By clicking this button, you will create default pages for your website : "
 "homepage, 404/403 error pages, etc. You can modify them afterwards."
 msgstr ""
+"Al hacer clic en este botón, creará páginas predeterminadas para su sitio "
+"web: página de inicio, páginas de error 404/403, etc. Puede modificarlas "
+"posteriormente."
 
 #: sites/all/modules/yakforms/includes/yakforms.admin.inc:210
 msgid "Reset all"
@@ -245,7 +250,7 @@ msgstr "El número de formularios por usuarie debe ser un número."
 
 #: sites/all/modules/yakforms/includes/yakforms.admin.inc:260
 msgid "The following directory doesn't exist or is not writable : !path."
-msgstr ""
+msgstr "El siguiente directorio no existe o no se puede escribir: !path."
 
 #: sites/all/modules/yakforms/includes/yakforms.admin.inc:273
 msgid "The form was submitted !"
@@ -270,16 +275,16 @@ msgid ""
 "Error in the contact form block (modules/yakforms/includes/yakforms."
 "block.inc) : %error"
 msgstr ""
+"Error en el bloque del formulario de contactot (modules/yakforms/includes/"
+"yakforms.block.inc) : %error"
 
 #: sites/all/modules/yakforms/includes/yakforms.expiration.inc:248
 msgid "Node !nid was not found and could not be exported."
-msgstr ""
+msgstr "Nodo !nid no se encontró y no se pudo exportar."
 
 #: sites/all/modules/yakforms/includes/yakforms.expiration.inc:284
 msgid "Submissions for node !nid exported."
-msgstr ""
-"Error en el bloque de formulario de contacto (modules/yakforms/includes/"
-"yakforms.block.inc) : %error"
+msgstr "Opciones para el nodo !nid exportadas."
 
 #: sites/all/modules/yakforms/includes/yakforms.expiration.inc:42
 msgid "There was an error inserting expired forms into yakforms_expired : %error"
@@ -307,17 +312,19 @@ msgstr ""
 
 #: sites/all/modules/yakforms/includes/yakforms.expiration.inc:79
 msgid "There was an error notifying users : %error"
-msgstr "Error al notificar usuaries: %error"
+msgstr "Error al notificar a los usuarios: %error"
 
 #: sites/all/modules/yakforms/includes/yakforms.expiration.inc:102
 msgid "Invalid email for user %uid"
-msgstr "Email inválido para le usuarie %uid"
+msgstr "Email inválido para el usuario %uid"
 
 #: sites/all/modules/yakforms/includes/yakforms.expiration.inc:148
 msgid ""
 "Removing forms from the yakforms_expired table after their expiration date "
 "was pushed back."
 msgstr ""
+"La eliminación de formularios de la tabla yakforms_expired después de su "
+"fecha de vencimiento se retrasó."
 
 #: sites/all/modules/yakforms/includes/yakforms.expiration.inc:173
 msgid "Error updating modified nodes : %error"
@@ -325,7 +332,7 @@ msgstr "Error al modificar formularios: %error"
 
 #: sites/all/modules/yakforms/includes/yakforms.expiration.inc:204
 msgid "Deleting forms after notification."
-msgstr "Eliminación de formularios luego de notificación."
+msgstr "Eliminación de formularios después de la notificación."
 
 #: sites/all/modules/yakforms/includes/yakforms.expiration.inc:226
 msgid "The following forms were deleted : %nodes"
@@ -337,7 +344,7 @@ msgstr "No hay formularios para borrar."
 
 #: sites/all/modules/yakforms/includes/yakforms.expiration.inc:233
 msgid "Error deleting expired nodes : %error"
-msgstr "Error eliminando formularios vencidos: %error"
+msgstr "Error eliminando los formularios caducados: %error"
 
 #: sites/all/modules/yakforms/includes/yakforms.node.inc:746
 msgid ""
@@ -354,30 +361,42 @@ msgid ""
 "you to give access to the results (read, modify and delete) to selected "
 "authenticated users.</p>"
 msgstr ""
+"<p>Si selecciona \"sí\", todos los resultados de este formulario "
+"serán<strong accesibles para todos</strong>.</p> Incluso si nadie más que "
+"usted podrá editar los resultados, esto es <strong> NO RECOMENDADO </"
+"strong>porque puede hacer pública la información privada de personas que no "
+"quieren que sea pública (nombres y apellidos, direcciones de correo "
+"electrónico y postales, números de teléfono ...) </p> \n"
+"<p> <strong> Al seleccionar \"sí\", acepta proteger el anonimato de los "
+"participantes y será totalmente responsable de la información que haga "
+"pública. </strong> </p>\n"
+"<p> Tenga en cuenta que la opción \"Usuarios con acceso a los resultados\" a "
+"continuación le permite dar acceso a los resultados (leer, modificar y "
+"eliminar) a los usuarios autenticados seleccionados. </p>"
 
 #: sites/all/modules/yakforms/includes/yakforms.node.inc:749
 msgid "Public access to results"
-msgstr ""
+msgstr "Acceso público a los resultados"
 
 #: sites/all/modules/yakforms/includes/yakforms.node.inc:750
 msgid "Body"
-msgstr ""
+msgstr "Cuerpo"
 
 #: sites/all/modules/yakforms/includes/yakforms.node.inc:751
 msgid "Comment"
-msgstr ""
+msgstr "Comentario"
 
 #: sites/all/modules/yakforms/includes/yakforms.node.inc:752
 msgid "Expiration date"
-msgstr ""
+msgstr "Fecha de caducidad"
 
 #: sites/all/modules/yakforms/includes/yakforms.node.inc:753
 msgid "Description"
-msgstr ""
+msgstr "Descripción"
 
 #: sites/all/modules/yakforms/includes/yakforms.node.inc:754
 msgid "Template description"
-msgstr ""
+msgstr "Descripción de la plantilla"
 
 #: sites/all/modules/yakforms/includes/yakforms.node.inc:755
 msgid ""
@@ -386,18 +405,23 @@ msgid ""
 "hosting service, like <a href='https://framapic.org' "
 "target='_blank'>framapic.org</a>."
 msgstr ""
+"Describe de qué se trata tu formulario. Esto aparecerá encima de su "
+"formulario.<br/>\n"
+"Si desea mostrar imágenes, debe considerar el uso de un servicio de "
+"alojamiento de imágenes externo, como<a href='https://framapic.org' "
+"target='_blank'>framapic.org</a>."
 
 #: sites/all/modules/yakforms/includes/yakforms.node.inc:757
 msgid "Attached files"
-msgstr ""
+msgstr "Archivos adjuntos"
 
 #: sites/all/modules/yakforms/includes/yakforms.node.inc:758
 msgid "Image"
-msgstr ""
+msgstr "Imagen"
 
 #: sites/all/modules/yakforms/includes/yakforms.node.inc:759
 msgid "Optional banner"
-msgstr ""
+msgstr "Banner opcional"
 
 #: sites/all/modules/yakforms/includes/yakforms.node.inc:760
 msgid ""
@@ -406,6 +430,10 @@ msgid ""
 "After having selected it by clicking 'Browse', don't forget to click "
 "'Upload' to make it available online."
 msgstr ""
+"Imagen opcional que se mostrará en la parte superior de su formulario "
+"(ejemplo: logotipo o banner).<br/>\n"
+"Después de haberlo seleccionado haciendo clic en 'Examinar', no olvide hacer "
+"clic en 'Cargar' para que esté disponible en línea."
 
 #: sites/all/modules/yakforms/includes/yakforms.node.inc:762
 msgid ""
@@ -421,20 +449,34 @@ msgid ""
 "a>.\n"
 "  "
 msgstr ""
+"Los formularios caducan después de 6 meses y se destruyen después de 9 meses "
+"(esto cubre el 90% de los casos de uso y evita las sobrecargas de la base de "
+"datos). <br>\n"
+"En la fecha indicada, su formulario no será accesible públicamente. Sin "
+"embargo, usted y solo podrán acceder a él, y a sus resultados, durante 60 "
+"días más, desde su cuenta.\n"
+"Si desea extender su fecha de vencimiento, simplemente tiene que editar el "
+"campo de arriba una vez que su formulario esté activo. <br>\n"
+"Si esta restricción no se adapta a sus necesidades o si desea obtener más "
+"información, consulte <a href='/limitations'> la página de limitaciones </a>."
+"\n"
+"  "
 
 #: sites/all/modules/yakforms/includes/yakforms.node.inc:767
 msgid "List this form as a template"
-msgstr ""
+msgstr "Incluya este formulario como plantilla"
 
 #: sites/all/modules/yakforms/includes/yakforms.node.inc:768
 msgid ""
 "A short description of your form template (for example : « Subscription form "
 "for an concert »)."
 msgstr ""
+"Una breve descripción de su plantilla de formulario (por ejemplo: «"
+"Formulario de suscripción para un concierto»)."
 
 #: sites/all/modules/yakforms/includes/yakforms.node.inc:769
 msgid "Words separated by commas."
-msgstr ""
+msgstr "Palabras separadas por comas."
 
 #: sites/all/modules/yakforms/includes/yakforms.node.inc:770
 msgid ""
@@ -443,18 +485,22 @@ msgid ""
 "it.<strong>If it is listed as a template, any visitor will be able to fill "
 "in your form.</strong>."
 msgstr ""
+"Si marca esta casilla, su formulario se mostrará en la lista pública de "
+"plantillas, lo que permitirá que cualquiera pueda clonarlo, utilizarlo como "
+"plantilla de formulario y adaptarlo.<strong>Si aparece como una plantilla, "
+"cualquier visitante podrá completar su formulario</strong>."
 
 #: sites/all/modules/yakforms/includes/yakforms.node.inc:771
 msgid "Tags"
-msgstr ""
+msgstr "Etiquetas"
 
 #: sites/all/modules/yakforms/includes/yakforms.node.inc:772
 msgid "Upload an image to display with this content."
-msgstr ""
+msgstr "Sube una imagen para mostrar con este contenido."
 
 #: sites/all/modules/yakforms/includes/yakforms.node.inc:773
 msgid "Users having access to the results."
-msgstr ""
+msgstr "Usuarios que tienen acceso a los resultados."
 
 #: sites/all/modules/yakforms/includes/yakforms.node.inc:774
 msgid ""
@@ -469,18 +515,30 @@ msgid ""
 "  <p>For more information, see <a href='https://docs.yakforms.org/features/partage-resultats/'>our "
 "documentation</a>.</p>"
 msgstr ""
+"<p>Puede autorizar a otros usuarios autenticados a acceder a los resultados "
+"de este formulario: esto requiere que ya hayan creado una cuenta. Para hacer "
+"eso, complete sus nombres de usuario en el campo de arriba (separados por "
+"comas si son varios).</p>\n"
+"<p>Cuando inicien sesión, estos usuarios tendrán acceso a los resultados "
+"navegando a la página del formulario y haciendo clic en la pestaña "
+"'Resultados'. Podrán editar y eliminar resultados. <strong>Sin embargo, NO "
+"podrán editar el formulario en sí </strong> (agregar o eliminar campos, "
+"cambiar el título, etc.).</p>\n"
+"<p>Para más información, ver <a href='https://docs.framasoft.org/fr/"
+"yakforms/fonctionnalites.html#partage-des-r%C3%A9sultats'>nuestra "
+"documentación</a>.</p>"
 
 #: sites/all/modules/yakforms/includes/yakforms.node.inc:777
 msgid "You can attach up to 5 files to your form."
-msgstr ""
+msgstr "Puede adjuntar hasta 5 archivos a su formulario."
 
 #: sites/all/modules/yakforms/includes/yakforms.node.inc:778
 msgid "file(s)"
-msgstr ""
+msgstr "archivo(s)"
 
 #: sites/all/modules/yakforms/includes/yakforms.pages.inc:94
 msgid "Welcome to Yakforms"
-msgstr "Bienvenide a Yakforms"
+msgstr "Bienvenido a Yakforms"
 
 #: sites/all/modules/yakforms/includes/yakforms.pages.inc:104
 msgid "Page not found"

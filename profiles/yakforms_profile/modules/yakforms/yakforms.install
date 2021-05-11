@@ -85,7 +85,7 @@ function _yakforms_set_default_global_variables() {
   variable_set('yakforms_export_form_submissions_before_delete', false);
   // Default notification-expiration time interval.
   variable_set('yakforms_notification_period_value', 2);
-  variable_set('yakforms_site_contact_url', 'https://changeme.yourcontacturl.org');
+  variable_set('yakforms_site_contact_url', 'https://changme.yourcontacturl.org');
   variable_set('yakforms_forms_per_user_limit', 200);
   variable_set('yakforms_submissions_per_form_limit', 1000);
 

@@ -1,0 +1,575 @@
+# $Id$
+#
+# LANGUAGE translation of Drupal (sites-all-modules-yakforms)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  sites/all/modules/yakforms/yakforms.module: n/a
+#  sites/all/modules/yakforms/yakforms.install: n/a
+#  sites/all/modules/yakforms/yakforms.info: n/a
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2020-11-24 16:43+0100\n"
+"PO-Revision-Date: 2021-04-26 09:33+0000\n"
+"Last-Translator: Racida S. <rgebbid@gmail.com>\n"
+"Language-Team: Kabyle <https://weblate.framasoft.org/projects/yakforms/"
+"yakforms/kab/>\n"
+"Language: kab\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.5.1\n"
+
+#: sites/all/modules/yakforms/yakforms.module:75
+msgid "Contact form link"
+msgstr "Aseɣen n tferkit n unermis"
+
+#: sites/all/modules/yakforms/yakforms.module:85
+msgid "Password alert"
+msgstr "Alɣu n wawal uffir"
+
+#: sites/all/modules/yakforms/yakforms.module:95
+msgid "General header"
+msgstr "Aqerru amatu"
+
+#: sites/all/modules/yakforms/yakforms.module:103
+msgid "User links"
+msgstr "Iseɣwan n useqdac"
+
+#: sites/all/modules/yakforms/yakforms.module:113
+msgid "Anonymous user links"
+msgstr "Iseɣwan n useqdac udrig"
+
+#: sites/all/modules/yakforms/yakforms.module:123
+msgid "New form warning"
+msgstr "Alɣu n umasal amaynut"
+
+#: sites/all/modules/yakforms/yakforms.module:124;190
+msgid "New form"
+msgstr "Tiferkit tamaynut"
+
+#: sites/all/modules/yakforms/yakforms.module:134;135
+msgid "My Yakforms account"
+msgstr "Amiḍan-iw Yakforms"
+
+#: sites/all/modules/yakforms/yakforms.module:144
+msgid "Help : confirmation email"
+msgstr "Tallalt: imayl n usentem"
+
+#: sites/all/modules/yakforms/yakforms.module:145
+msgid "Confirmation email"
+msgstr "Imayl n usentem"
+
+#: sites/all/modules/yakforms/yakforms.module:153
+msgid "Help : email interaction"
+msgstr "Tallalt: amyigew n yimayl"
+
+#: sites/all/modules/yakforms/yakforms.module:154
+msgid "Email interaction"
+msgstr "Amyigew n yimayl"
+
+#: sites/all/modules/yakforms/yakforms.module:162
+msgid "Help : validation conditions"
+msgstr "Tallalt: tiwtilin n useɣbel"
+
+#: sites/all/modules/yakforms/yakforms.module:163
+msgid "Validation conditions"
+msgstr "Tiwtilin n useɣbel"
+
+#: sites/all/modules/yakforms/yakforms.module:171
+msgid "Help : configure form"
+msgstr "Tallalt: tiferkit n twila"
+
+#: sites/all/modules/yakforms/yakforms.module:172
+msgid "Configure form"
+msgstr "Tiferkit n twila"
+
+#: sites/all/modules/yakforms/yakforms.module:180
+msgid "Help : conditionnal fields"
+msgstr "Tallalt: urtiyen iwtilanen"
+
+#: sites/all/modules/yakforms/yakforms.module:181
+msgid "Conditionnal fields"
+msgstr "Urtiyen iwtilanen"
+
+#: sites/all/modules/yakforms/yakforms.module:189
+msgid "Help : new form"
+msgstr "Tallalt: tiferkit tamaynut"
+
+#: sites/all/modules/yakforms/yakforms.module:198
+msgid "Help : global"
+msgstr "Tallalt: amatu"
+
+#: sites/all/modules/yakforms/yakforms.module:199
+msgid "Help"
+msgstr "Tallalt"
+
+#: sites/all/modules/yakforms/yakforms.module:207
+msgid "Help : new form creation - webform"
+msgstr "Tallalt: timerna n tferkit tamaynut - webform"
+
+#: sites/all/modules/yakforms/yakforms.module:208
+msgid "New form configuration"
+msgstr "Tawila n tferkit tamaynut"
+
+#: sites/all/modules/yakforms/yakforms.module:216
+msgid "Help : add form components"
+msgstr "Tallalt: rnu isuddam n tferkit"
+
+#: sites/all/modules/yakforms/yakforms.module:217
+msgid "Add form components"
+msgstr "Rnu isuddam n tferkit"
+
+#: sites/all/modules/yakforms/yakforms.module:225
+msgid "Footer"
+msgstr "Aḍar n usebtar"
+
+#: sites/all/modules/yakforms/yakforms.module:226
+msgid "Powered by Yakforms"
+msgstr "S lmendan n Yakforms"
+
+#: sites/all/modules/yakforms/yakforms.module:285
+msgid "Do not communicate any password through Yakforms."
+msgstr "Ur ttmuddu ara akk awalen uffiren s Yakforms."
+
+#: sites/all/modules/yakforms/yakforms.module:300
+msgid "Register"
+msgstr "Jerred"
+
+#: sites/all/modules/yakforms/yakforms.module:302
+msgid "Log in"
+msgstr "Qqen"
+
+#: sites/all/modules/yakforms/yakforms.module:316
+msgid "My account (@account)"
+msgstr "Amiḍan-iw (@account)"
+
+#: sites/all/modules/yakforms/yakforms.module:319
+msgid "Log out"
+msgstr "Tuffɣa"
+
+#: sites/all/modules/yakforms/yakforms.module:323
+msgid "Create a new form"
+msgstr "Rnu tiferkit tamaynut"
+
+#: sites/all/modules/yakforms/yakforms.module:325
+msgid "Create a form from a template"
+msgstr "Rnu tiferkit seg tneɣruft"
+
+#: sites/all/modules/yakforms/yakforms.module:327
+msgid "My forms"
+msgstr "Tiferkiyin-iw"
+
+#: sites/all/modules/yakforms/yakforms.module:338
+msgid "Welcome to your Yakforms account !"
+msgstr "Ansuf ɣer umiḍan-ik·im Yakforms!"
+
+#: sites/all/modules/yakforms/yakforms.module:339
+msgid "You can :"
+msgstr "Tzemreḍ:"
+
+#: sites/all/modules/yakforms/yakforms.module:341
+msgid "edit your personal information (\"Edit\" tab above) ;"
+msgstr "ẓreg talɣut-ik·im tudmawant (iccer \"Ẓreg\" ddaw);"
+
+#: sites/all/modules/yakforms/yakforms.module:342
+msgid "access your forms (\"My forms\" button above) ;"
+msgstr "kcem ɣer tferkiyin-ik·im (taqeffalt \"Tiferkiyin-inu\" ddaw);"
+
+#: sites/all/modules/yakforms/yakforms.module:343
+msgid "create a new form"
+msgstr "rnu tiferkit tamaynut"
+
+#: sites/all/modules/yakforms/yakforms.module:344
+msgid "contact us"
+msgstr "nermes-aɣ-d"
+
+#: sites/all/modules/yakforms/yakforms.module:350
+msgid "You are about to create a new form."
+msgstr "La tettedduḍ ad ternuḍ tiferkit tamaynut."
+
+#: sites/all/modules/yakforms/yakforms.module:351
+msgid "Start by filling the fields below, then click « Submit »"
+msgstr "Bdu s tacaṛt n wurtiyen-a ddaw, syen sit ɣef \"Azen\""
+
+#: sites/all/modules/yakforms/yakforms.module:352
+msgid "NB : the form's title will affect its URL. Choose it wisely and watch out : changing it will change the form's URL !"
+msgstr ""
+
+#: sites/all/modules/yakforms/yakforms.module:360
+msgid "Here, you can specify how long you want the confirmation email to be valid (if you are using this option), and if you want the user's submission to be eventually destroyed."
+msgstr ""
+
+#: sites/all/modules/yakforms/yakforms.module:362
+msgid "(NB : if you are looking for the configuration parameters, you'll find them in the « Emails » tab !)"
+msgstr ""
+
+#: sites/all/modules/yakforms/yakforms.module:369
+msgid "This feature allows you to send an email to a specified address.\n        For example you can send an email to the form's author at each new submission.\n        This email can optionally contain the values submitted by the user."
+msgstr ""
+
+#: sites/all/modules/yakforms/yakforms.module:372
+msgid "But the real interest of this module is to set up a confirmation process by email."
+msgstr ""
+
+#: sites/all/modules/yakforms/yakforms.module:373
+msgid "If a user submits a form, they will receive an email with a confirmation link. Their submission won't be appear in the results until they have clicked on this link.\n        This can be very useful if you want to make sure all submitted emails are valid."
+msgstr ""
+
+#: sites/all/modules/yakforms/yakforms.module:375
+msgid "Watch out : to use the confirmation process, your form must have an « email » component."
+msgstr ""
+
+#: sites/all/modules/yakforms/yakforms.module:376
+msgid " (well yeah, how can you possibly send an email if you don't have an address ? :P )"
+msgstr ""
+
+#: sites/all/modules/yakforms/yakforms.module:383
+msgid "(for advanced users)"
+msgstr ""
+
+#: sites/all/modules/yakforms/yakforms.module:384
+msgid "Here, you can define conditions to validate a user's submission.\n      If these conditions are not fulfilled, the submission won't be saved, and the user will be asked to modify their submission."
+msgstr ""
+
+#: sites/all/modules/yakforms/yakforms.module:386
+msgid "Use cases :"
+msgstr "Tignatin n useqdec:"
+
+#: sites/all/modules/yakforms/yakforms.module:388
+msgid "You want to set the maximum number of characters in a text area to 200."
+msgstr ""
+"Tebɣiḍ ad tesbaduḍ amḍan afellay n yisekkilen n temnaḍt n uḍris ɣer 200 "
+"yisekkilen."
+
+#: sites/all/modules/yakforms/yakforms.module:389
+msgid "You want to forbid the use of some words in a text area"
+msgstr "Tebɣiḍ ad tagiḍ kra n wawalen deg temnaḍt n uḍris"
+
+#: sites/all/modules/yakforms/yakforms.module:390
+msgid "You want to make sure a 'size at age 5' field is inferior to a 'size at age 20' field."
+msgstr ""
+
+#: sites/all/modules/yakforms/yakforms.module:391
+msgid "You want to make sure that 'Awesome project name' begins with 'Frama-'"
+msgstr ""
+
+#: sites/all/modules/yakforms/yakforms.module:392
+msgid "etc"
+msgstr "atg"
+
+#: sites/all/modules/yakforms/yakforms.module:399
+msgid "Getting real, isn't it ? :)"
+msgstr "Ulac tteqsiṛ da, neɣ?:)"
+
+#: sites/all/modules/yakforms/yakforms.module:400
+msgid "Here are the advanded parameters for your form."
+msgstr "Dagi iɣewwaren leqqayen i tferkit-ik·im."
+
+#: sites/all/modules/yakforms/yakforms.module:401
+msgid "The good part : The default configuration is enough for 90% of cases."
+msgstr ""
+
+#: sites/all/modules/yakforms/yakforms.module:402
+msgid "The less good part : if you mess around and end up breaking your form, don't come whining ! (Don't worry, you'll 'only' have broken your own form, the worst that can happen is having to start over a new one :)"
+msgstr ""
+
+#: sites/all/modules/yakforms/yakforms.module:409
+msgid "Conditonal fields allow you to take actions depending on the user's values. "
+msgstr ""
+
+#: sites/all/modules/yakforms/yakforms.module:410
+msgid "Examples :"
+msgstr "Imedyaten:"
+
+#: sites/all/modules/yakforms/yakforms.module:411
+msgid "Show and hide fields :"
+msgstr "Sken neɣ ffer urtiyen:"
+
+#: sites/all/modules/yakforms/yakforms.module:412
+msgid "IF the user selected « other » for « Structure type » "
+msgstr "MA YELLA aseqdac yefren \"wayeḍ\" i \"Wanaw n tɣessa\" "
+
+#: sites/all/modules/yakforms/yakforms.module:413
+msgid "THEN  show the text area « Other structure types » "
+msgstr "SYEN sken tamnaḍt n uḍris \"Anawen-nniḍen n tɣessa\" "
+
+#: sites/all/modules/yakforms/yakforms.module:414
+msgid "IF the user checked the option « I don't like soup » "
+msgstr "MA YELLA aseqdac issenqed taxtiṛt \"Ur ḥemmleɣ ara taḥrirt\" "
+
+#: sites/all/modules/yakforms/yakforms.module:415
+msgid "THEN hide the question « What's your favorite soup ? »."
+msgstr "SYEN ffer asteqsi \"Anta taḥrirt i tḥemmleḍ?\"."
+
+#: sites/all/modules/yakforms/yakforms.module:416
+msgid "Force a value :"
+msgstr "Ḥettem azal:"
+
+#: sites/all/modules/yakforms/yakforms.module:417
+msgid "IF the user checked the option « I got 3 presents or more for Christmas » "
+msgstr ""
+"MA YELLA aseqdac issenqed taxtiṛt \"Ṭṭfeɣ-d ma drus 3 yisefka i Nuwel\" "
+
+#: sites/all/modules/yakforms/yakforms.module:418
+msgid "THEN automatically check the option « Yes » for the question « Am I lucky ? » "
+msgstr "SYEN senqed taxtiṛt s wudem awurman \"Ih\" i usteqsi \"Sεiɣ zzheṛ?\" "
+
+#: sites/all/modules/yakforms/yakforms.module:419
+msgid "Make a field mandatory : "
+msgstr "Ḥettem tacaṛt n wurti: "
+
+#: sites/all/modules/yakforms/yakforms.module:420
+msgid "IF the user checked the option « I went to space » "
+msgstr ""
+
+#: sites/all/modules/yakforms/yakforms.module:421
+msgid "THEN make the field « Which planet ? » mandatory. "
+msgstr ""
+
+#: sites/all/modules/yakforms/yakforms.module:422
+msgid "More information"
+msgstr "Ugar n telɣut"
+
+#: sites/all/modules/yakforms/yakforms.module:429
+msgid "Fill the general information describing your form, then click « Submit » to proceed to add form fields."
+msgstr ""
+
+#: sites/all/modules/yakforms/yakforms.module:430
+msgid "Once this is done, click on the « Webform » tab <strong>which will only appear once the description is saved !</strong>"
+msgstr ""
+
+#: sites/all/modules/yakforms/yakforms.module:437
+msgid "Cliquez sur l'onglet « Formulaire » pour poursuivre la création de formulaire..."
+msgstr ""
+
+#: sites/all/modules/yakforms/yakforms.module:444
+msgid "Here we go !"
+msgstr "Yebda!"
+
+#: sites/all/modules/yakforms/yakforms.module:445
+msgid "Choose your form's components."
+msgstr "Fren iferdisen n tferkit-ik·im."
+
+#: sites/all/modules/yakforms/yakforms.module:446
+msgid "You can drag and drop the components on the right into the preview zone to build the form you want."
+msgstr ""
+
+#: sites/all/modules/yakforms/yakforms.module:447
+msgid "You can also set advanced parameters for your form by clicking on « Emails », « Conditional fields », etc ."
+msgstr ""
+
+#: sites/all/modules/yakforms/yakforms.module:448
+msgid "Watch out : it is not recommanded to modify your form once you received at least one submission You might loose your data."
+msgstr ""
+
+#: sites/all/modules/yakforms/yakforms.module:449
+msgid "You must insert at least ONE form field before clicking « Submit ». If your form remains empty, it will be considered as a potential spam, and you might loose your work."
+msgstr ""
+
+#: sites/all/modules/yakforms/yakforms.module:456
+msgid "Here you can define the same components as with the graphic menu, but in a more... « manual » way. "
+msgstr ""
+
+#: sites/all/modules/yakforms/yakforms.module:457
+msgid "This might work better on mobile."
+msgstr "Ayagi yezmer ad yeddu xiṛ ɣef uziraz."
+
+#: sites/all/modules/yakforms/yakforms.module:461
+msgid " is an online, free, add-less and privacy-friendly service to create forms (polls, surveys, quiz, etc.) "
+msgstr ""
+
+#: sites/all/modules/yakforms/yakforms.module:462
+msgid "This service (and a whole lot of others) are brought to you by"
+msgstr ""
+
+#: sites/all/modules/yakforms/yakforms.module:462
+msgid "as part of "
+msgstr ""
+
+#: sites/all/modules/yakforms/yakforms.module:462
+msgid "the De-google-ify Internet campaign"
+msgstr ""
+
+#: sites/all/modules/yakforms/yakforms.module:463
+msgid "This content was not written nor approved by Framasoft."
+msgstr ""
+
+#: sites/all/modules/yakforms/yakforms.module:463
+msgid "Report an abusive content."
+msgstr ""
+
+#: sites/all/modules/yakforms/yakforms.module:464
+msgid "Yakforms is powered by"
+msgstr "Yakforms yella-d s lmendad n"
+
+#: sites/all/modules/yakforms/yakforms.module:523
+msgid "Current user is author of the node"
+msgstr "D aseqdac amiran i d ameskar n tkerrist"
+
+#: sites/all/modules/yakforms/yakforms.module:676
+msgid "<br><p>This user is the author of : </p>"
+msgstr "<br><p>D aseqdac-a i d ameskar n : </p>"
+
+#: sites/all/modules/yakforms/yakforms.module:749
+msgid "Formulaire"
+msgstr "Tiferkit"
+
+#: sites/all/modules/yakforms/yakforms.module:751
+msgid "You are about to create a new form. Start by filling the fields below, then click « Submit ». NB : the form's title will affect its URL. Choose it wisely and watch out : changing it will change the form's URL !"
+msgstr ""
+
+#: sites/all/modules/yakforms/yakforms.module:752
+msgid "Form title"
+msgstr "Azwel n tferkit"
+
+#: sites/all/modules/yakforms/yakforms.module:842
+msgid "Limitations"
+msgstr "Tilisa"
+
+#: sites/all/modules/yakforms/yakforms.module:843
+msgid "Limitations for this instance."
+msgstr "Tilisa n tummant-a."
+
+#: sites/all/modules/yakforms/yakforms.module:846
+msgid "Form"
+msgstr "Tiferkit"
+
+#: sites/all/modules/yakforms/yakforms.module:847
+msgid "Tokens regarding the current form"
+msgstr "Ijuṭuten yeεnan tiferkit tamirant"
+
+#: sites/all/modules/yakforms/yakforms.module:851
+msgid "Yakforms - user"
+msgstr "Yakforms - aseqdac"
+
+#: sites/all/modules/yakforms/yakforms.module:852
+msgid "Tokens regarding the current Yakforms user"
+msgstr "Ijuṭuten yeεnan aseqdac amiran n Yakforms"
+
+#: sites/all/modules/yakforms/yakforms.module:860
+msgid "Forms per user"
+msgstr "Tiferkiyen i yal aseqdac"
+
+#: sites/all/modules/yakforms/yakforms.module:861
+msgid "Maximum number of forms per user allowed on this instance."
+msgstr "Amḍan afellay n tferkiyin i useqdac yettusirgen ɣef tummant-a."
+
+#: sites/all/modules/yakforms/yakforms.module:864
+msgid "Submissions per form"
+msgstr "Tuzniwin n yal tferkit"
+
+#: sites/all/modules/yakforms/yakforms.module:865
+msgid "Maximum number of submissions per form allowed on this instance."
+msgstr "Amḍan afellay n tuzniwin n yal tiferkit yettusirgen ɣef tummant-a."
+
+#: sites/all/modules/yakforms/yakforms.module:868
+msgid "Maximum form lifetime"
+msgstr "Tanzagt n tudert tafellayt n tferkit"
+
+#: sites/all/modules/yakforms/yakforms.module:869
+msgid "Maximum lifetime for a form on this instance."
+msgstr "Tanzagt tafellayt n tferkit ɣef tummant-a."
+
+#: sites/all/modules/yakforms/yakforms.module:875
+msgid "Clone URL"
+msgstr ""
+
+#: sites/all/modules/yakforms/yakforms.module:876
+msgid "URL to clone this form"
+msgstr ""
+
+#: sites/all/modules/yakforms/yakforms.module:880
+msgid "The forms's expiration date"
+msgstr "Azemz n keffu n tferkit"
+
+#: sites/all/modules/yakforms/yakforms.module:883
+msgid "Deletion date"
+msgstr "Azemz n tukksa"
+
+#: sites/all/modules/yakforms/yakforms.module:884
+msgid "The forms's date of deletion"
+msgstr "Azemz n tukksa n tferkiyin"
+
+#: sites/all/modules/yakforms/yakforms.module:889
+msgid "My forms menu"
+msgstr "Umuɣ-inu n tferkiyin"
+
+#: sites/all/modules/yakforms/yakforms.module:890
+msgid "Link to the user's forms"
+msgstr "Aseɣwen ɣer tferkiyin n useqdac"
+
+#: sites/all/modules/yakforms/yakforms.module:919
+msgid "No limitation"
+msgstr "Ulac talast"
+
+#: sites/all/modules/yakforms/yakforms.module:987
+msgid "Your account has reached this site's maximum number of forms. Please delete some of your unused forms in 'My forms' before trying to create a new one."
+msgstr ""
+"Amiḍan-ik·im yessaweḍ ɣer umḍan afellay yettusirgen seg usmel-a. Ttxil-k·m "
+"kkes kra n tferkiyin ur tseqdaceḍ ara seg \"Tiferkiyin-inu\" send ad tεerḍeḍ "
+"ad ternuḍ tamaynut-nniḍen."
+
+#: sites/all/modules/yakforms/yakforms.module:988
+msgid "This site's allows to create the maximum following number of forms : @number"
+msgstr "Asmel-a yessirig timerna n umḍan afellay n tferkiyin: @aseqdac"
+
+#: sites/all/modules/yakforms/yakforms.module:587
+msgid "Cron task launched."
+msgstr "Tawuri Cron tebda."
+
+#: sites/all/modules/yakforms/yakforms.module:732
+msgid "Unable to export forms for user %id : Error in yakforms_export_users_content_before_delete_submit. %error"
+msgstr ""
+"Awway n tferkiyin i useqdac %d d awezɣi: Tuccḍa deg "
+"yakforms_export_users_content_before_delete_submit. %tuccḍa"
+
+#: sites/all/modules/yakforms/yakforms.module:777
+msgid "The following error was raised and ignored creating the content type : !e"
+msgstr "Tteḍra-d tuccḍa-a yerna tettwazgal lawan n tmerna n wanaw n ugbur: !e"
+
+#: sites/all/modules/yakforms/yakforms.module:795
+msgid "The following error was raised and ignollred creating the field instances : !e"
+msgstr ""
+
+#: sites/all/modules/yakforms/yakforms.module:16
+msgid "Configure Yakforms"
+msgstr "Swel Yakforms"
+
+#: sites/all/modules/yakforms/yakforms.module:17
+msgid "Configuration for Yakforms module"
+msgstr "Tawila i uzegrir n Yakforms"
+
+#: sites/all/modules/yakforms/yakforms.module:25
+msgid "Overview"
+msgstr "Agzul"
+
+#: sites/all/modules/yakforms/yakforms.module:26
+msgid "General dashboard containing statistics about your website."
+msgstr ""
+
+#: sites/all/modules/yakforms/yakforms.module:34
+msgid "Expiration"
+msgstr "Tanzagt n tagara"
+
+#: sites/all/modules/yakforms/yakforms.module:35
+msgid "Instructions page for expired forms."
+msgstr "Asebter n yiwellihen n tferkiyin yemmuten."
+
+#: sites/all/modules/yakforms/yakforms.module:43
+msgid "Instructions to share the form."
+msgstr "Iwellihen i beṭṭu n tferkit."
+
+#: sites/all/modules/yakforms/yakforms.install:122
+msgid "Yakforms : your form « [node:title] » will expire soon."
+msgstr "Yakforms: tiferkit-ik·im « [tikerrist:azwel] » ad temmet daɣen."
+
+#: sites/all/modules/yakforms/yakforms.info:0
+msgid "Yakforms"
+msgstr "Yakforms"
+
+#: sites/all/modules/yakforms/yakforms.info:0
+msgid "Yakforms functions for creating, managing and sharing webforms."
+msgstr "Tiwuriwin n Yakforms i tmerna, i usefrek d beṭṭu n tferkiyin web."

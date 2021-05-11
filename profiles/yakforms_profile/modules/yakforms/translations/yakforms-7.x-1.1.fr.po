@@ -64,8 +64,8 @@ msgid "New form"
 msgstr "Nouveau formulaire"
 
 #: sites/all/modules/yakforms/yakforms.module:165;166
-msgid "My Framaforms account"
-msgstr "Mon compte Framaforms"
+msgid "My Yakforms account"
+msgstr "Mon compte Yakforms"
 
 #: sites/all/modules/yakforms/yakforms.module:175
 msgid "Help : confirmation email"
@@ -140,12 +140,12 @@ msgid "Footer"
 msgstr "Pied de page"
 
 #: sites/all/modules/yakforms/yakforms.module:257
-msgid "Powered by Framaforms"
-msgstr "Propulsé par Framaforms"
+msgid "Powered by Yakforms"
+msgstr "Propulsé par Yakforms"
 
 #: sites/all/modules/yakforms/yakforms.module:318
-msgid "Do not communicate any password through Framaforms."
-msgstr "Ne communiquez aucun mot de passe via Framaforms."
+msgid "Do not communicate any password through Yakforms."
+msgstr "Ne communiquez aucun mot de passe via Yakforms."
 
 #: sites/all/modules/yakforms/yakforms.module:333
 msgid "Register"
@@ -176,8 +176,8 @@ msgid "My forms"
 msgstr "Mes formulaires"
 
 #: sites/all/modules/yakforms/yakforms.module:371
-msgid "Welcome to your Framaforms account !"
-msgstr "Bienvenue sur votre compte Framaforms !"
+msgid "Welcome to your Yakforms account !"
+msgstr "Bienvenue sur votre compte Yakforms !"
 
 #: sites/all/modules/yakforms/yakforms.module:372
 msgid "You can :"
@@ -533,8 +533,8 @@ msgid "Report an abusive content."
 msgstr "Signaler un cas d'utilisation abusive."
 
 #: sites/all/modules/yakforms/yakforms.module:497
-msgid "Framaforms is powered by"
-msgstr "Framaforms est propulsé par"
+msgid "Yakforms is powered by"
+msgstr "Yakforms est propulsé par"
 
 #: sites/all/modules/yakforms/yakforms.module:564
 msgid "Current user is author of the node"
@@ -545,12 +545,12 @@ msgid "Cron task launched."
 msgstr "Tâche cron lancée."
 
 #: sites/all/modules/yakforms/yakforms.module:16
-msgid "Configure Framaforms"
-msgstr "Configurer Framaforms"
+msgid "Configure Yakforms"
+msgstr "Configurer Yakforms"
 
 #: sites/all/modules/yakforms/yakforms.module:17
-msgid "Configuration for Framaforms module"
-msgstr "Configuration pour le module Framaforms"
+msgid "Configuration for Yakforms module"
+msgstr "Configuration pour le module Yakforms"
 
 #: sites/all/modules/yakforms/yakforms.module:25
 msgid "Overview"
@@ -575,16 +575,16 @@ msgid "Instructions to share the form."
 msgstr "Instructions pour partager le formulaire."
 
 #: sites/all/modules/yakforms/yakforms.install:70
-msgid "Framaforms : your form « [form_title] » will expire soon."
-msgstr "Framaforms : Votre formulaire « [form_title] » expirera bientôt."
+msgid "Yakforms : your form « [form_title] » will expire soon."
+msgstr "Yakforms : Votre formulaire « [form_title] » expirera bientôt."
 
 #: sites/all/modules/yakforms/yakforms.info:0
-msgid "Framaforms"
-msgstr "Framaforms"
+msgid "Yakforms"
+msgstr "Yakforms"
 
 #: sites/all/modules/yakforms/yakforms.info:0
-msgid "Framaforms functions for creating, managing and sharing webforms."
-msgstr "Fonction Framaforms pour créer, gérer et partager des formulaires."
+msgid "Yakforms functions for creating, managing and sharing webforms."
+msgstr "Fonction Yakforms pour créer, gérer et partager des formulaires."
 
 #~ msgid "Features"
 #~ msgstr "Fonctionnalités"

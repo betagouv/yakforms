@@ -8,20 +8,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2020-10-08 16:35+0200\n"
-"PO-Revision-Date: 2020-10-28 10:13+0000\n"
-"Last-Translator: Maki <makiniqa@riseup.net>\n"
+"PO-Revision-Date: 2021-04-24 07:15+0000\n"
+"Last-Translator: Berto Te <ateira@3fpj.com>\n"
 "Language-Team: Spanish <https://weblate.framasoft.org/projects/framaforms/"
-"framaforms-spam-include/es/>\n"
+"spam-includes/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.1\n"
+"X-Generator: Weblate 4.5.1\n"
 
 #: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:107;216;396
 msgid "Master"
-msgstr ""
+msgstr "Maestro"
 
 #: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:109
 msgid "more"
@@ -57,7 +57,7 @@ msgstr "- Todo -"
 
 #: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:117;226;406
 msgid "Offset"
-msgstr ""
+msgstr "Desplazamiento"
 
 #: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:118;227;407
 msgid "« first"
@@ -85,7 +85,7 @@ msgstr "- Seleccionar una operación -"
 
 #: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:124;415
 msgid "Nid"
-msgstr ""
+msgstr "Nodo id"
 
 #: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:125;413
 msgid "Title"
@@ -93,7 +93,7 @@ msgstr "Título"
 
 #: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:126
 msgid "uid"
-msgstr "uid"
+msgstr "usuario id"
 
 #: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:127;236;419
 msgid "Page"
@@ -133,4 +133,4 @@ msgstr "Publicado"
 
 #: sites/all/modules/framaforms_spam/includes/framaforms_spam.views.inc:418
 msgid "Author is not"
-msgstr ""
+msgstr "El autor no es"

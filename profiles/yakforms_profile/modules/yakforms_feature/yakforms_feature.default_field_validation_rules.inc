@@ -22,22 +22,22 @@ function yakforms_feature_default_field_validation_rule() {
   $rule->bundle = 'webform';
   $rule->validator = 'field_validation_date_range2_validator';
   $rule->settings = array(
-    'cycle' => 'global',
-    'min' => 'now',
-    'max' => '+12 month',
-    'reverse' => 0,
     'bypass' => 0,
-    'roles' => array(
-      1 => 0,
-      2 => 0,
-      3 => 0,
-    ),
-    'errors' => 0,
     'condition' => 0,
     'condition_wrapper' => array(
       'condition_field' => '',
       'condition_operator' => 'equals',
       'condition_value' => '',
+    ),
+    'cycle' => 'global',
+    'errors' => 0,
+    'max' => '+12 month',
+    'min' => 'now',
+    'reverse' => 0,
+    'roles' => array(
+      1 => 0,
+      2 => 0,
+      3 => 0,
     ),
   );
   $rule->error_message = 'La date d\'expiration ne peut pas excéder 12 mois';
@@ -54,22 +54,22 @@ function yakforms_feature_default_field_validation_rule() {
   $rule->bundle = 'webform';
   $rule->validator = 'field_validation_date_range2_validator';
   $rule->settings = array(
-    'cycle' => 'global',
-    'min' => 'now',
-    'max' => '+12 month',
-    'reverse' => 0,
     'bypass' => 0,
-    'roles' => array(
-      1 => 0,
-      2 => 0,
-      3 => 0,
-    ),
-    'errors' => 0,
     'condition' => 0,
     'condition_wrapper' => array(
       'condition_field' => '',
       'condition_operator' => 'equals',
       'condition_value' => '',
+    ),
+    'cycle' => 'global',
+    'errors' => 0,
+    'max' => '+12 month',
+    'min' => 'now',
+    'reverse' => 0,
+    'roles' => array(
+      1 => 0,
+      2 => 0,
+      3 => 0,
     ),
   );
   $rule->error_message = 'La date d\'expiration ne peut pas excéder 12 mois';
@@ -86,23 +86,23 @@ function yakforms_feature_default_field_validation_rule() {
   $rule->bundle = 'form1';
   $rule->validator = 'field_validation_date_range2_validator';
   $rule->settings = array(
-    'cycle' => 'global',
-    'min' => '',
-    'max' => '+6 month',
-    'reverse' => 0,
     'bypass' => 0,
-    'roles' => array(
-      1 => 0,
-      2 => 0,
-      3 => 0,
-      4 => 0,
-    ),
-    'errors' => 0,
     'condition' => 0,
     'condition_wrapper' => array(
       'condition_field' => '',
       'condition_operator' => 'equals',
       'condition_value' => '',
+    ),
+    'cycle' => 'global',
+    'errors' => 0,
+    'max' => '+6 month',
+    'min' => '',
+    'reverse' => 0,
+    'roles' => array(
+      1 => 0,
+      2 => 0,
+      3 => 0,
+      4 => 0,
     ),
   );
   $rule->error_message = 'La date d\'expiration ne peut pas excéder 6 mois suivant votre dernière mise à jour du formulaire.';

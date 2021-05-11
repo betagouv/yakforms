@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2020-10-08 16:35+0200\n"
-"PO-Revision-Date: 2020-12-25 18:52+0000\n"
-"Last-Translator: qwerty <gabriele.tosato@virgilio.it>\n"
+"PO-Revision-Date: 2021-02-27 00:14+0000\n"
+"Last-Translator: x <hardwired1.0@protonmail.com>\n"
 "Language-Team: Italian <https://weblate.framasoft.org/projects/yakforms/"
 "yakforms-spam/it/>\n"
 "Language: it\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.1\n"
+"X-Generator: Weblate 4.4.2\n"
 
 #: sites/all/modules/yakforms_spam/yakforms_spam.module:19
 msgid "Forbidden words"
@@ -101,12 +101,10 @@ msgid "Error checking yakforms_spam_quarantine table : %error"
 msgstr "Errore nel controllo di yakforms_spam_quarantine table : %error"
 
 #: sites/all/modules/yakforms_spam/yakforms_spam.module:173
-#, fuzzy
 msgid "Error checking yakforms_spam_allowlist table : %error"
 msgstr "Errore nel controllo di yakforms_spam_allowlist table : %error"
 
 #: sites/all/modules/yakforms_spam/yakforms_spam.module:187
-#, fuzzy
 msgid "Trying to put into quarantine unexisting form %nid"
 msgstr "Si sta provando a mettere in quarantena un modulon inesistente %nid"
 

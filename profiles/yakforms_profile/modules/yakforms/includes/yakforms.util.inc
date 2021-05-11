@@ -212,3 +212,14 @@ function _form_is_almost_expired($node) {
   }
   return FALSE;
 }
+
+/**
+ * Function for custom logging.
+ *
+ * @return void
+ */
+function yakforms_custom_log($prefix, $message, $log_file) {
+  // Build log message
+  $message = date('d/m/Y h:i:s') . " - {$prefix} : {$message} \n";
+  file_put_contents($log_file, $message, FILE_APPEND);
+}

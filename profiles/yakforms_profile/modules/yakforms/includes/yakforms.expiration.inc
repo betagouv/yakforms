@@ -40,12 +40,12 @@ function make_forms_expire() {
         AND fex.field_form1_expiration_value <= to_timestamp(:max_timestamp)
         AND fex.entity_id NOT IN
           (SELECT nid FROM yakforms_expired)
-        LIMIT !limit)
+        LIMIT :limit)
         ON CONFLICT DO NOTHING;
         ",
         array(
           ':max_timestamp' => $max_expiration_time->getTimestamp(),
-          '!limit' => variable_get('yakforms_cron_limit', 1000),
+          ':limit' => variable_get('yakforms_cron_limit', 1000),
         )
       );
   }
@@ -64,9 +64,9 @@ function make_forms_expire() {
         INNER JOIN users u
         ON u.uid = n.uid
         WHERE fex.notified = 0
-        LIMIT !limit;
+        LIMIT :limit;
         ",
-      array('!limit' => variable_get('yakforms_cron_limit', 1000))
+      array(':limit' => variable_get('yakforms_cron_limit', 1000))
     );
 
     // Notify the users of their forms expiration.
@@ -159,9 +159,11 @@ function notify_user_of_expiration(stdClass $record) {
  * this function will delete them from the database.
  */
 function delete_expired_nodes() {
+  global $conf;
+  module_load_include('inc', 'yakforms', 'includes/yakforms.util');
   $deletion_period = variable_get('yakforms_deletion_period_value', 0);
   $notification_period = variable_get('yakforms_notification_period_value', 0);
-  $external_log_file = variable_get('yakforms_external_log_file', '/var/log/yakforms_logfile.log');
+  $log_file = $conf['yakforms_external_log_file'];
 
   // Create Datetime object for logging purposes.
   $current_date = new Datetime();
@@ -175,6 +177,7 @@ function delete_expired_nodes() {
   if ($deletion_period == 0 || $notification_period == 0) {
     return;
   }
+
 
   $deleted_nodes = array();
   watchdog('yakforms', 'Fetching expired forms older than @date for deletion.',
@@ -200,7 +203,7 @@ function delete_expired_nodes() {
       db_delete('yakforms_expired')
         ->condition('nid', $record->nid)
         ->execute();
-      error_log("{$current_date} : Form #{$record->nid} - user notified on {$record->dn} - was deleted.\n", 3, $external_log_file);
+      yakforms_custom_log("Deleted expired node", "Form #{$record->nid} - user notified on {$record->dn} - was deleted.", $log_file);
       array_push($deleted_nodes, $record->nid);
     }
 

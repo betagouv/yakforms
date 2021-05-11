@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2020-10-08 16:15+0200\n"
-"PO-Revision-Date: 2020-10-28 10:13+0000\n"
-"Last-Translator: Maki <makiniqa@riseup.net>\n"
+"PO-Revision-Date: 2021-04-24 07:15+0000\n"
+"Last-Translator: Berto Te <ateira@3fpj.com>\n"
 "Language-Team: Spanish <https://weblate.framasoft.org/projects/framaforms/"
 "framaforms/es/>\n"
 "Language: es\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.1\n"
+"X-Generator: Weblate 4.5.1\n"
 
 #: sites/all/modules/framaforms/framaforms.module:91
 msgid "Your account has reached this site's maximum number of forms. Please delete some of your unused forms in 'My forms' before trying to create a new one."
@@ -53,7 +53,7 @@ msgstr "Vínculos de usuarie"
 
 #: sites/all/modules/framaforms/framaforms.module:144
 msgid "Anonymous user links"
-msgstr ""
+msgstr "Vínculos de usuario anónimo"
 
 #: sites/all/modules/framaforms/framaforms.module:154
 msgid "New form warning"
@@ -141,7 +141,7 @@ msgstr "Pie de página"
 
 #: sites/all/modules/framaforms/framaforms.module:257
 msgid "Powered by Framaforms"
-msgstr ""
+msgstr "Desarrollado por Framaforms"
 
 #: sites/all/modules/framaforms/framaforms.module:318
 msgid "Do not communicate any password through Framaforms."
@@ -210,6 +210,8 @@ msgstr "Empieza completando los campos de abajo, luego presiona \"Enviar\""
 #: sites/all/modules/framaforms/framaforms.module:385
 msgid "NB : the form's title will affect its URL. Choose it wisely and watch out : changing it will change the form's URL !"
 msgstr ""
+"NB: el título del formulario afectará a su URL. Elígelo sabiamente y ten "
+"cuidado: ¡cambiarlo cambiará la URL del formulario!"
 
 #: sites/all/modules/framaforms/framaforms.module:393
 msgid "Here, you can specify how long you want the confirmation email to be valid (if you are using this option), and if you want the user's submission to be eventually destroyed."
@@ -221,6 +223,8 @@ msgstr ""
 #: sites/all/modules/framaforms/framaforms.module:395
 msgid "(NB : if you are looking for the configuration parameters, you'll find them in the « Emails » tab !)"
 msgstr ""
+"NB: si estás buscando los parámetros de configuración, los encontrará en la "
+"pestaña «Emails» :)"
 
 #: sites/all/modules/framaforms/framaforms.module:402
 msgid "This feature allows you to send an email to a specified address.\n        For example you can send an email to the form's author at each new submission.\n        This email can optionally contain the values submitted by the user."
@@ -265,6 +269,9 @@ msgstr "(para usuaries avanzades)"
 #: sites/all/modules/framaforms/framaforms.module:417
 msgid "Here, you can define conditions to validate a user's submission.\n      If these conditions are not fulfilled, the submission won't be saved, and the user will be asked to modify their submission."
 msgstr ""
+"Aquí, puedes definir condiciones para validar las opciones de un usuario.\n"
+"Si no se cumplen estas condiciones, el formulario no se guardará y se le "
+"pedirá al usuario que modifique sus opciones."
 
 #: sites/all/modules/framaforms/framaforms.module:419
 msgid "Use cases :"
@@ -273,18 +280,23 @@ msgstr "Casos de uso:"
 #: sites/all/modules/framaforms/framaforms.module:421
 msgid "You want to set the maximum number of characters in a text area to 200."
 msgstr ""
+"Quieres establecer el número máximo de caracteres en un área de texto en 200."
 
 #: sites/all/modules/framaforms/framaforms.module:422
 msgid "You want to forbid the use of some words in a text area"
-msgstr ""
+msgstr "Quieres prohibir el uso de algunas palabras en un área de texto"
 
 #: sites/all/modules/framaforms/framaforms.module:423
 msgid "You want to make sure a 'size at age 5' field is inferior to a 'size at age 20' field."
 msgstr ""
+"Quieres asegurarse de que un campo \"tamaño a los 5 años\" sea inferior a un "
+"campo \"tamaño a los 20 años\"."
 
 #: sites/all/modules/framaforms/framaforms.module:424
 msgid "You want to make sure that 'Awesome project name' begins with 'Frama-'"
 msgstr ""
+"Quieres asegurarse de que el \"Nombre del proyecto\" comience con las letras "
+"\"Frama\""
 
 #: sites/all/modules/framaforms/framaforms.module:425
 msgid "etc"
@@ -292,7 +304,7 @@ msgstr "etc."
 
 #: sites/all/modules/framaforms/framaforms.module:432
 msgid "Getting real, isn't it ? :)"
-msgstr ""
+msgstr "Ya no nos reímos, ¿verdad? :)"
 
 #: sites/all/modules/framaforms/framaforms.module:433
 msgid "Here are the advanded parameters for your form."
@@ -312,6 +324,8 @@ msgstr ""
 #: sites/all/modules/framaforms/framaforms.module:442
 msgid "Conditonal fields allow you to take actions depending on the user's values. "
 msgstr ""
+"Los campos condicionales le permiten realizar acciones basadas en ciertos "
+"valores elegidos por el usuario. "
 
 #: sites/all/modules/framaforms/framaforms.module:443
 msgid "Examples :"
@@ -377,6 +391,8 @@ msgstr ""
 #: sites/all/modules/framaforms/framaforms.module:463
 msgid "Once this is done, click on the « Webform » tab <strong>which will only appear once the description is saved !</strong>"
 msgstr ""
+"Una vez hecho esto, haga clic en la pestaña «Formulario»<strong>¡que solo "
+"aparecerá una vez que se guarde la descripción!</strong>"
 
 #: sites/all/modules/framaforms/framaforms.module:470
 msgid "Cliquez sur l'onglet « Formulaire » pour poursuivre la création de formulaire..."
@@ -435,7 +451,7 @@ msgstr ""
 
 #: sites/all/modules/framaforms/framaforms.module:495
 msgid "This service (and a whole lot of others) are brought to you by"
-msgstr ""
+msgstr "Este servicio (y muchos otros) te lo ofrece"
 
 #: sites/all/modules/framaforms/framaforms.module:495
 msgid "as part of "
@@ -455,15 +471,15 @@ msgstr "Reportar contenido abusivo."
 
 #: sites/all/modules/framaforms/framaforms.module:497
 msgid "Framaforms is powered by"
-msgstr ""
+msgstr "Framaforms funciona con"
 
 #: sites/all/modules/framaforms/framaforms.module:564
 msgid "Current user is author of the node"
-msgstr ""
+msgstr "El usuario actual es el autor del nodo"
 
 #: sites/all/modules/framaforms/framaforms.module:628
 msgid "Cron task launched."
-msgstr ""
+msgstr "Se inició la tarea cron."
 
 #: sites/all/modules/framaforms/framaforms.module:16
 msgid "Configure Framaforms"
@@ -474,13 +490,12 @@ msgid "Configuration for Framaforms module"
 msgstr "Configuración para el módulo de Framaforms"
 
 #: sites/all/modules/framaforms/framaforms.module:25
-#, fuzzy
 msgid "Overview"
-msgstr "Pantallazo"
+msgstr "Descripción general"
 
 #: sites/all/modules/framaforms/framaforms.module:26
 msgid "General dashboard containing statistics about your website."
-msgstr ""
+msgstr "Panel de control general que contiene estadísticas sobre su sitio web."
 
 #: sites/all/modules/framaforms/framaforms.module:34
 msgid "Expiration"
@@ -505,3 +520,4 @@ msgstr "Framaforms"
 #: sites/all/modules/framaforms/framaforms.info:0
 msgid "Framaforms functions for creating, managing and sharing webforms."
 msgstr ""
+"Funciones de Framaforms para crear, administrar y compartir formularios web."

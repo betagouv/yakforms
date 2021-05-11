@@ -189,7 +189,7 @@ msgid "The form was submitted !"
 msgstr ""
 
 #: sites/all/modules/yakforms/includes/yakforms.admin.inc:310
-msgid "All global variables for Framaforms were reset."
+msgid "All global variables for Yakforms were reset."
 msgstr ""
 
 #: sites/all/modules/yakforms/includes/yakforms.block.inc:31
@@ -353,7 +353,7 @@ msgid "file(s)"
 msgstr ""
 
 #: sites/all/modules/yakforms/includes/yakforms.pages.inc:94
-msgid "Welcome to Framaforms"
+msgid "Welcome to Yakforms"
 msgstr ""
 
 #: sites/all/modules/yakforms/includes/yakforms.pages.inc:104

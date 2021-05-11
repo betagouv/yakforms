@@ -86,15 +86,9 @@
  */
 ?>
 
-<div id="page-wrapper"><div id="page">
-  <p>
-    <!-- Add Boostrap stylesheet and JS -->
-    <?php if ($is_front): ?>
-      <link rel="stylesheet" href="<?php print base_path() . path_to_theme(); ?>/includes/bootstrap-3.3.7/dist/css/bootstrap.min.css">
-      <script src="<?php print base_path() . path_to_theme(); ?>/includes/bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
-    <?php endif; ?>
-  </p>
+<?php if ($page['highlighted']): ?><div id="highlighted"><?php print render($page['highlighted']); ?></div><?php endif; ?>
 
+<div id="page-wrapper"><div id="page">
   <div id="header" class="<?php print $secondary_menu ? 'with-secondary-menu': 'without-secondary-menu'; ?>"><div class="section clearfix">
 
     <?php if ($logo): ?>
@@ -181,7 +175,7 @@
 
   <div id="main-wrapper" class="clearfix"><div id="main" class="clearfix">
 
-    <?php if ($breadcrumb==2): ?>
+    <?php if ($breadcrumb == 2): ?>
       <div id="breadcrumb"><?php print $breadcrumb; ?></div>
     <?php endif; ?>
 
@@ -192,7 +186,6 @@
     <?php endif; ?>
 
     <div id="content" class="column"><div class="section">
-      <?php if ($page['highlighted']): ?><div id="highlighted"><?php print render($page['highlighted']); ?></div><?php endif; ?>
       <a id="main-content"></a>
       <?php print render($title_prefix); ?>
       <?php if ($title): ?>

@@ -1,5 +1,6 @@
 name = Yakforms Spam Protection
 description = Features for automatically detect and quarantine spam forms in Yakforms.
+package= Yakforms
 
 core = 7.x
 php = 7.3

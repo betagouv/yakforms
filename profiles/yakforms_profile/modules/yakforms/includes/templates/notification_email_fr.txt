@@ -4,6 +4,6 @@ Votre formulaire intitulé « [node:title] » expirera dans deux semaines, soit 
 
 Si vous souhaitez repousser l'expiration de votre formulaire, c'est possible : il suffit de vous identifier sur Yakforms, puis de vous rendre sur la page d'administration de votre formulaire ([node:edit-url]) et de modifier la date d'expiration comme indiqué ici : https://yakforms.org/limitations.
 
-Ce message est un message automatique, il est inutile d'y répondre. Si vous avez des questions concernant l'usage de Yakforms, notre forum d'entraide Framacolibri est à votre disposition (https://framacolibri.org/). Pour toute autre question, vous pouvez aussi nous contacter en passant par notre espace de support : https://contact.framasoft.org.
+Ce message est un message automatique, il est inutile d'y répondre. Si vous avez des questions concernant l'usage de Yakforms, notre forum d'entraide Framacolibri est à votre disposition (https://framacolibri.org/c/yakforms/54). Pour toute autre question, vous pouvez aussi nous contacter en passant par notre espace de support : https://contact.framasoft.org.
 
 Librement,

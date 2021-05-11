@@ -57,7 +57,7 @@ msgid "New form"
 msgstr ""
 
 #: sites/all/modules/yakforms/yakforms.module:165;166
-msgid "My Framaforms account"
+msgid "My Yakforms account"
 msgstr ""
 
 #: sites/all/modules/yakforms/yakforms.module:175
@@ -133,11 +133,11 @@ msgid "Footer"
 msgstr ""
 
 #: sites/all/modules/yakforms/yakforms.module:257
-msgid "Powered by Framaforms"
+msgid "Powered by Yakforms"
 msgstr ""
 
 #: sites/all/modules/yakforms/yakforms.module:316
-msgid "Do not communicate any password through Framaforms."
+msgid "Do not communicate any password through Yakforms."
 msgstr ""
 
 #: sites/all/modules/yakforms/yakforms.module:331
@@ -169,7 +169,7 @@ msgid "My forms"
 msgstr ""
 
 #: sites/all/modules/yakforms/yakforms.module:369
-msgid "Welcome to your Framaforms account !"
+msgid "Welcome to your Yakforms account !"
 msgstr ""
 
 #: sites/all/modules/yakforms/yakforms.module:370
@@ -405,7 +405,7 @@ msgid "Report an abusive content."
 msgstr ""
 
 #: sites/all/modules/yakforms/yakforms.module:495
-msgid "Framaforms is powered by"
+msgid "Yakforms is powered by"
 msgstr ""
 
 #: sites/all/modules/yakforms/yakforms.module:566
@@ -437,11 +437,11 @@ msgid "The following error was raised and ignollred creating the field instances
 msgstr ""
 
 #: sites/all/modules/yakforms/yakforms.module:16
-msgid "Configure Framaforms"
+msgid "Configure Yakforms"
 msgstr ""
 
 #: sites/all/modules/yakforms/yakforms.module:17
-msgid "Configuration for Framaforms module"
+msgid "Configuration for Yakforms module"
 msgstr ""
 
 #: sites/all/modules/yakforms/yakforms.module:25
@@ -465,13 +465,13 @@ msgid "Instructions to share the form."
 msgstr ""
 
 #: sites/all/modules/yakforms/yakforms.install:75
-msgid "Framaforms : your form « [form_title] » will expire soon."
+msgid "Yakforms : your form « [form_title] » will expire soon."
 msgstr ""
 
 #: sites/all/modules/yakforms/yakforms.info:0
-msgid "Framaforms"
+msgid "Yakforms"
 msgstr ""
 
 #: sites/all/modules/yakforms/yakforms.info:0
-msgid "Framaforms functions for creating, managing and sharing webforms."
+msgid "Yakforms functions for creating, managing and sharing webforms."
 msgstr ""
