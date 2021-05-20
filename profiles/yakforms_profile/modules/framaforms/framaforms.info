@@ -1,0 +1,28 @@
+name = Framaforms
+description = Framaforms functions for creating, managing and sharing webforms.
+
+core = 7.x
+php = 7.3
+
+dependencies[] = webform
+dependencies[] = views
+dependencies[] = views_bulk_operations
+dependencies[] = views_access_callback
+dependencies[] = form_builder
+dependencies[] = pathauto
+
+; Files that contain classes:
+files[] = includes/framaforms.expiration.inc
+files[] = includes/framaforms.admin.inc
+files[] = includes/framaforms.block.inc
+files[] = includes/framaforms.pages.inc
+files[] = includes/framaforms.node.inc
+
+; Configuration menu
+configure = admin/config/system/framaforms
+
+; Information added by drupal.org packaging script on 2016-10-25
+version = "7.x-1.3"
+core = "7.x"
+project = "framaforms"
+datestamp = "1382691029"

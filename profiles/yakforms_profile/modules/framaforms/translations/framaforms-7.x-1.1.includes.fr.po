@@ -1,0 +1,613 @@
+# $Id$
+#
+# LANGUAGE translation of Drupal (sites-all-modules-framaforms-includes)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  sites/all/modules/framaforms/includes/framaforms.admin.inc: n/a
+#  sites/all/modules/framaforms/includes/framaforms.block.inc: n/a
+#  sites/all/modules/framaforms/includes/framaforms.expiration.inc: n/a
+#  sites/all/modules/framaforms/includes/framaforms.pages.inc: n/a
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2020-10-29 15:28+0100\n"
+"PO-Revision-Date: 2021-03-07 17:14+0000\n"
+"Last-Translator: kalou <pascalboussion@protonmail.com>\n"
+"Language-Team: French <https://weblate.framasoft.org/projects/framaforms/"
+"framaforms-include/fr/>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.4.2\n"
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:20
+msgid "Total number of forms : @number"
+msgstr "Nombre total de formulaires : @number"
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:30
+msgid "Last @interval : @results"
+msgstr "Dernier @interval : @results"
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:39
+msgid "Total number of submissions : @number"
+msgstr "Nombre total de réponses : @number"
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:40
+msgid "(For an average of @number submissions / form)"
+msgstr "(Pour un total de @number réponses /formulaires)"
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:47
+msgid "Total number of users : @number"
+msgstr "Nombre total d'utilisateur⋅ices : @number"
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:57
+msgid "Registered since @interval : @number"
+msgstr "Enregistré depuis @interval : @number"
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:63
+msgid "Forms with the most submissions :"
+msgstr "Formulaires ayant le plus de réponses :"
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:75
+msgid "submissions"
+msgstr "réponses"
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:76
+msgid "Visit"
+msgstr "Visiter"
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:82
+msgid "Users with the most forms"
+msgstr "Utilisateur⋅ices avec le plus de formulaires"
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:103
+msgid "Size of database :  @size"
+msgstr "Taille de la base de données : @size"
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:119
+msgid "General website information"
+msgstr "Informations générales du site"
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:123
+msgid ""
+"Note : some of these values can be changed elsewhere on the website, they "
+"are simply centralized here."
+msgstr ""
+"Note : certaines de ces valeurs peuvent être modifiées autre part sur ce "
+"site, elles sont simplement centralisées ici."
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:127
+msgid "Website title"
+msgstr "Titre sur site"
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:129
+msgid "The title of this website. It will be displayed in the top header."
+msgstr "Le titre de ce site. Il sera affiché dans l'en-tête."
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:134
+msgid "Website slogan"
+msgstr "Slogan du site"
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:136
+msgid "Small phrase displayed under the title. Ex : 'Create forms easily'"
+msgstr ""
+"Petite phrase affichée en-dessous du site. Ex : \"Créer des formulaires "
+"facilement\""
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:141
+msgid "General contact email"
+msgstr "Mail de contact général"
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:143
+msgid ""
+"It will be used in the general contact form of the website, and used to warn "
+"you of pending updates."
+msgstr ""
+"Il sera utilisé dans le formulaire de contact général du site, et pour vous "
+"prévenir d'éventuelles mises à jour en attente."
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:148
+msgid "Link to support"
+msgstr "Lien vers le support"
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:150
+msgid ""
+"Link to a support page for your users. This will be displayed when if your "
+"users encounter problems creating forms."
+msgstr ""
+"Lien vers une page de support pour vos utilisateur⋅ices. Il sera affiché "
+"afin d'aider vos utilisateur⋅ices à créer un formulaire."
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:155
+msgid "Limitations"
+msgstr "Limites"
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:159
+msgid "Maximum number of form per user"
+msgstr "Nombre maximum de formulaires par utilisateur⋅ice"
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:167
+msgid "Forms expiration"
+msgstr "Expiration des formulaires"
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:171
+msgid "Expiration period (in weeks)"
+msgstr "Période d'expiration (en semaines)"
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:175
+msgid ""
+"When a user creates a form, its expiration date will be set by default at "
+"this interval in the futur. Ex : if a user creates a form on 01/01/2020 and "
+"the expiration value is set to '5', the form will expire by default on "
+"02/05/2020. Insert '0' if you don't want forms to expire."
+msgstr ""
+"Quand un⋅e utilisateur⋅ice crée un formulaire, sa date d'expiration sera "
+"définie par défaut à cet interval de temps dans le futur. Ex : si un⋅e "
+"utilisateur⋅ice crée un formulaire le 01/01/2020 et que cette valeur est à "
+"'5', le formulaire expirera le 01/05/2020. Insérer '0' si vous ne voulez pas "
+"que les formulaires expirent."
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:180
+msgid "Deletion period (in weeks)"
+msgstr "Période de suppression (en semaines)"
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:184
+msgid ""
+"Interval of time between the form expiration and its deletion from the "
+"database. Insert '0' if you don't want forms to be deleted."
+msgstr ""
+"Interval de temps entre l'expiration des formulaires et leur suppression de "
+"la base de données. Insérer '0' si vous ne voulez pas que les formulaires "
+"soient supprimés."
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:189
+msgid "Save form submissions before deleting"
+msgstr "Enregistrer les soumissions du formulaire avant de supprimer"
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:191
+msgid ""
+"Check this box if you want all form submissions to be saved before deletion. "
+"This can be useful for user support."
+msgstr ""
+"Cocher cette case si vous voulez que les soumissions du formulaire soient "
+"sauvegardez avant suppression. Cela peut être utile pour le support "
+"utilisateur."
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:196
+msgid "Notification email"
+msgstr "Mail d'avertissement"
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:197
+msgid ""
+"Here you can change the content of the email that will be sent to the user "
+"warning them of expired forms. <i>You can use the following tokens that will "
+"be replaced : <strong>[form_url]</strong> (the form URL), "
+"<strong>[form_expires_on]</strong> (the form's expiration date), "
+"<strong>[form_title]</strong> (the form's title).</i>"
+msgstr ""
+"Ici, vous pouvez changer le contenu du mail qui sera envoyé aux "
+"utilisateur⋅ices pour les prévenir de l'expiration de leurs formulaires. "
+"<i>Vous pouvez utiliser les jetons suivants, qui seront remplacés : "
+"<strong>[form_url]</strong> (l'URL du formulaire), "
+"<strong>[form_expires_on]</strong> (la date d'expiration du formulaire), "
+"<strong>[form_title]</strong> (le titre du formulaire).</i>"
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:203
+msgid "Generate default pages"
+msgstr "Générer les pages par défaut"
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:204
+msgid ""
+"By clicking this button, you will create default pages for your website : "
+"homepage, 404/403 error pages, etc. You can modify them afterwards."
+msgstr ""
+"En cliquant sur ce bouton, vous créerez les pages par défaut pour ce site : "
+"page d'accueil, d'erreur 404/403, etc. Vous pourrez les modifier par la "
+"suite."
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:210
+msgid "Reset all"
+msgstr "Réinitialiser tout"
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:211
+msgid "Reset all global variables to their initial value."
+msgstr "Réinitialiser toutes les variables globales."
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:217
+msgid "Submit"
+msgstr "Enregistrer"
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:231
+msgid "The default pages were created."
+msgstr "Les pages par défaut ont été créées."
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:243;247;251
+msgid "There was an error in the form values."
+msgstr "Il y a une erreur dans les valeur du formulaires."
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:244
+msgid "The deletion period must be a number."
+msgstr "La période de suppression doit être numérique."
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:248
+msgid "The expiration period must be a number."
+msgstr "La période d'expiration doit être numérique."
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:252
+msgid "The number of form per user must be a number."
+msgstr "Le nombre de formulaire par utiliateur⋅ice doit être numérique."
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:260
+msgid "The following directory doesn't exist or is not writable : !path."
+msgstr ""
+"Le dossier suivant n'existe pas ou n'est pas accessible en écriture : !path."
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:273
+msgid "The form was submitted !"
+msgstr "Le formulaire a été enregistré !"
+
+#: sites/all/modules/framaforms/includes/framaforms.admin.inc:286
+msgid "All global variables for Framaforms were reset."
+msgstr ""
+"Toutes les variables globales du module Framaforms ont été réinitialisées."
+
+#: sites/all/modules/framaforms/includes/framaforms.block.inc:31
+msgid "Contact the author of this form"
+msgstr "Contacter l'auteur⋅rice de ce formulaire"
+
+#: sites/all/modules/framaforms/includes/framaforms.block.inc:32
+msgid "To contact the author of this form, <a href='@link'> click here</a>"
+msgstr ""
+"Pour contacter l'auteur⋅rice de ce formulaire,  <a href='@link'> cliquez "
+"ici</a>"
+
+#: sites/all/modules/framaforms/includes/framaforms.block.inc:37
+msgid ""
+"Error in the contact form block (modules/framaforms/includes/framaforms."
+"block.inc) : %error"
+msgstr ""
+"Erreur dans le bloc de formulaire de contact (modules/framaforms/includes/"
+"framaforms.block.inc) : %error"
+
+#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:248
+msgid "Node !nid was not found and could not be exported."
+msgstr "Le nœud !nid n'a pas été trouvé et ne peut pas être exporté."
+
+#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:284
+msgid "Submissions for node !nid exported."
+msgstr "Soumissions pour le nœud !nid exportées."
+
+#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:42
+msgid ""
+"There was an error inserting expired forms into framaforms_expired : %error"
+msgstr ""
+"Erreur lors de l'insertion des formulaires expirés dans framaforms_expired : "
+"%error"
+
+#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:59
+msgid "Notifying users of their expired forms."
+msgstr "Notification aux utilisateur⋅ices pour leur formulaires expirés."
+
+#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:73
+msgid ""
+"Error while trying to notify the user : the user's email could be badly "
+"configured."
+msgstr ""
+"Erreur lors de la notification de l'utilisateur⋅ice : il est possible que "
+"son mail soit mal configuré."
+
+#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:75
+msgid "Notified all users of their expired forms."
+msgstr ""
+"Tous les utilisateur⋅ices ont été notifié de l'expiration de leurs "
+"formulaires."
+
+#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:79
+msgid "There was an error notifying users : %error"
+msgstr ""
+"Il y a eu une erreur lors de la notification des utilisateur⋅ices : %error"
+
+#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:102
+msgid "Invalid email for user %uid"
+msgstr "Mail invalide pour l'utilisateur⋅ice %uid"
+
+#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:148
+msgid ""
+"Removing forms from the framaforms_expired table after their expiration date "
+"was pushed back."
+msgstr ""
+"Retrait des formulaires de la table framaforms_expired après que leur date "
+"d'expiration ait été modifiée."
+
+#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:173
+msgid "Error updating modified nodes : %error"
+msgstr "Erreur lors de la modification des formulaires : %error"
+
+#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:204
+msgid "Deleting forms after notification."
+msgstr "Suppession des formulaires après notification."
+
+#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:226
+msgid "The following forms were deleted : %nodes"
+msgstr "Les formulaires suivants ont été supprimés : %nodes"
+
+#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:229
+msgid "There is no form to delete."
+msgstr "Il n'y a aucun formulaire à supprimer."
+
+#: sites/all/modules/framaforms/includes/framaforms.expiration.inc:233
+msgid "Error deleting expired nodes : %error"
+msgstr "Erreur lors de la suppression des formulaires expirés : %error"
+
+#: sites/all/modules/framaforms/includes/framaforms.node.inc:746
+#, fuzzy
+msgid ""
+"<p>If you select 'yes', all results for this form will be accessible "
+"<strong>by everyone</strong>.</p> Even if no one but you will be able to "
+"edit the results, this is <strong>NOT RECOMMANDED</strong> because you might "
+"make public private information of people who would not want it to be public "
+"(first and last names, email and postal addresses, telephone numbers...)</"
+"p>\n"
+"<p><strong>By selecting 'yes', you agree to protect the anonymity of the "
+"participants, and will be wholly responsible for information you make public."
+"</strong></p>\n"
+"<p>Please note that the 'Users having access to results' option below allows "
+"you to give access to the results (read, modify and delete) to selected "
+"authenticated users.</p>"
+msgstr ""
+"<p>Si vous choisissez \"oui\", tous les résultats de ce formulaire seront "
+"accessibles <strong>par tout le monde</strong>.</p> Même si personne d'autre "
+"que vous ne pourra éditer les résultats, cela <strong>N'EST PAS RECOMMANDE</"
+"strong> car vous pourriez rendre publiques des informations personnelles de "
+"personnes qui ne le souhaitent pas (prénom, nom de famille, adresse e-mail "
+"et postale, numéro de téléphone...)</p>\n"
+"<p><strong>En choisissant \"oui\", vous acceptez de protéger l'anonymat des "
+"participant·e·s. Vous serez entièrement responsable des informations que "
+"vous rendez publiques.</strong></p>\n"
+"<p>Merci de noter que l'option \"Utilisateur·trices ayant accès aux "
+"résultats\" ci-dessous vous permet de ne donner accès aux résultats ("
+"lecture, modification et suppression) qu'à certain·es utilisateur·trices "
+"authentifié·es.</p>"
+
+#: sites/all/modules/framaforms/includes/framaforms.node.inc:749
+msgid "Public access to results"
+msgstr "Accès public aux résultats"
+
+#: sites/all/modules/framaforms/includes/framaforms.node.inc:750
+#, fuzzy
+msgid "Body"
+msgstr "Corps"
+
+#: sites/all/modules/framaforms/includes/framaforms.node.inc:751
+msgid "Comment"
+msgstr "Commentaire"
+
+#: sites/all/modules/framaforms/includes/framaforms.node.inc:752
+#, fuzzy
+#| msgid "Expiration period (in weeks)"
+msgid "Expiration date"
+msgstr "Période d'expiration (en semaines)"
+
+#: sites/all/modules/framaforms/includes/framaforms.node.inc:753
+msgid "Description"
+msgstr "Description"
+
+#: sites/all/modules/framaforms/includes/framaforms.node.inc:754
+msgid "Template description"
+msgstr "Description du modèle"
+
+#: sites/all/modules/framaforms/includes/framaforms.node.inc:755
+msgid ""
+"Describe what your form is about. This will appear above your form.<br/>\n"
+"If you want to display pictures, you should consider using an external image "
+"hosting service, like <a href='https://framapic.org' "
+"target='_blank'>framapic.org</a>."
+msgstr ""
+"Décrivez l'objet de votre formulaire. Cela apparaîtra en haut du formulaire.<"
+"br/>\n"
+"Si vous voulez faire apparaître des images, pensez à utiliser un service "
+"d'hébergement d'images, comme <a href='https://framapic.org' "
+"target='_blank'>framapic.org</a>."
+
+#: sites/all/modules/framaforms/includes/framaforms.node.inc:757
+msgid "Attached files"
+msgstr "Fichiers joints"
+
+#: sites/all/modules/framaforms/includes/framaforms.node.inc:758
+msgid "Image"
+msgstr "Image"
+
+#: sites/all/modules/framaforms/includes/framaforms.node.inc:759
+msgid "Optional banner"
+msgstr "Bannière optionnelle"
+
+#: sites/all/modules/framaforms/includes/framaforms.node.inc:760
+#, fuzzy
+msgid ""
+"Optional image that will be displayed at the top of your form (example : "
+"logo or banner).<br/>\n"
+"After having selected it by clicking 'Browse', don't forget to click "
+"'Upload' to make it available online."
+msgstr ""
+"Image optionnelle qui sera affichée en haut de votre formulaire (par exemple "
+"un logo ou une bannière).<br/>\n"
+"Après avoir choisi \"Parcourir\", n'oubliez pas de cliquer sur \"Téléverser\""
+" pour la rendre disponible en ligne."
+
+#: sites/all/modules/framaforms/includes/framaforms.node.inc:762
+#, fuzzy
+msgid ""
+"Forms expire after 6 months, and are destroyed after 9 months (this cover "
+"90% of use cases, and avoids database overloads).<br>\n"
+"  At the given date, your form won't be accessible publically. You and you "
+"only will however be able to access it - and its results - for 60 more days, "
+"from your account.\n"
+"  If you wish to extend its expiration date, you simply have to edit the "
+"field above once your form is live.<br>\n"
+"  If this constraint doesn't suit your needs or if you want more "
+"information, please refer to <a href='/limitations'>the limitation page</"
+"a>.\n"
+"  "
+msgstr ""
+"Les formulaires expirent après 6 mois, et sont détruits après 9 mois (cela "
+"couvre 90% des cas d'utilisation, et évite les surcharges de la base de "
+"données).<br>\n"
+"    À la date indiquée, votre formulaire ne sera pas accessible au public. "
+"Vous et vous seul pourrez cependant y accéder - ainsi qu'à ses résultats - "
+"pendant 60 jours supplémentaires, à partir de votre compte.\n"
+"    Si vous souhaitez prolonger sa date d'expiration, il vous suffit de "
+"modifier le champ ci-dessus une fois que votre formulaire est en ligne.\n"
+"    Si cette contrainte ne répond pas à vos besoins ou si vous souhaitez "
+"plus d'informations, veuillez vous référer à <a href='/limitations'>la page "
+"des limitations</a>.\n"
+"  "
+
+#: sites/all/modules/framaforms/includes/framaforms.node.inc:767
+#, fuzzy
+msgid "List this form as a template"
+msgstr "Inscrivez ce formulaire comme modèle"
+
+#: sites/all/modules/framaforms/includes/framaforms.node.inc:768
+#, fuzzy
+msgid ""
+"A short description of your form template (for example : « Subscription form "
+"for an concert »)."
+msgstr ""
+"Une brève description de votre modèle de formulaire (par exemple : « "
+"Formulaire d'abonnement à un concert »)."
+
+#: sites/all/modules/framaforms/includes/framaforms.node.inc:769
+#, fuzzy
+msgid "Words separated by commas."
+msgstr "Mots séparés par des virgules."
+
+#: sites/all/modules/framaforms/includes/framaforms.node.inc:770
+#, fuzzy
+msgid ""
+"If you check this box, you form will be displayed in the public list of "
+"templates, allowing anybody to clone it, use it as a form template and adapt "
+"it.<strong>If it is listed as a template, any visitor will be able to fill "
+"in your form.</strong>."
+msgstr ""
+"Si vous cochez cette case, votre formulaire sera affiché dans la liste "
+"publique des modèles, permettant à n'importe qui de le cloner, de l'utiliser "
+"comme modèle de formulaire et de l'adapter.<strong>Si il est répertorié "
+"comme modèle, tout visiteur pourra remplir votre formulaire.</strong>."
+
+#: sites/all/modules/framaforms/includes/framaforms.node.inc:771
+#, fuzzy
+msgid "Tags"
+msgstr "Balises"
+
+#: sites/all/modules/framaforms/includes/framaforms.node.inc:772
+#, fuzzy
+msgid "Upload an image to display with this content."
+msgstr "Téléchargez une image à afficher avec ce contenu."
+
+#: sites/all/modules/framaforms/includes/framaforms.node.inc:773
+#, fuzzy
+msgid "Users having access to the results."
+msgstr "Les utilisateurs ayant accès aux résultats."
+
+#: sites/all/modules/framaforms/includes/framaforms.node.inc:774
+msgid ""
+"<p>You can authorize other authenticated users to access this form's "
+"results : this requires them already having created an account. To do that, "
+"fill in their usernames in the field above (separated by commas if several)."
+"</p>\n"
+"  <p>When logged in, these users will have access to the results by browsing "
+"to the form's page, and clicking on the 'Results' tab. They will be able to "
+"edit and delete results. <strong>They will however NOT be able to edit the "
+"form itself</strong> (add or remove fields, change the title, etc).</p>\n"
+"  <p>For more information, see <a href='https://docs.yakforms.org/features/partage-resultats/'>our "
+"documentation</a>.</p>"
+msgstr ""
+
+#: sites/all/modules/framaforms/includes/framaforms.node.inc:777
+#, fuzzy
+msgid "You can attach up to 5 files to your form."
+msgstr "Vous pouvez joindre jusqu'à 5 fichiers à votre formulaire."
+
+#: sites/all/modules/framaforms/includes/framaforms.node.inc:778
+msgid "file(s)"
+msgstr "dossier(s)"
+
+#: sites/all/modules/framaforms/includes/framaforms.pages.inc:94
+msgid "Welcome to Framaforms"
+msgstr "Bienvenue sur Framaforms"
+
+#: sites/all/modules/framaforms/includes/framaforms.pages.inc:104
+msgid "Page not found"
+msgstr "Page introuvable"
+
+#: sites/all/modules/framaforms/includes/framaforms.pages.inc:112
+msgid "Quick form creation"
+msgstr "Création rapide de formulaires"
+
+#: sites/all/modules/framaforms/includes/framaforms.pages.inc:113
+msgid "Create a template"
+msgstr "Créer un modèle"
+
+#: sites/all/modules/framaforms/includes/framaforms.pages.inc:114
+msgid "Validation rules"
+msgstr "Règles de validation"
+
+#: sites/all/modules/framaforms/includes/framaforms.pages.inc:115
+msgid "Conditional fields"
+msgstr "Champs conditionnels"
+
+#: sites/all/modules/framaforms/includes/framaforms.pages.inc:116
+msgid "Emails"
+msgstr "Courriels"
+
+#: sites/all/modules/framaforms/includes/framaforms.pages.inc:117
+#, fuzzy
+msgid "Confirmation"
+msgstr "Validation"
+
+#: sites/all/modules/framaforms/includes/framaforms.pages.inc:118
+msgid "Downloads"
+msgstr "Téléchargements"
+
+#: sites/all/modules/framaforms/includes/framaforms.pages.inc:119
+msgid "Limits"
+msgstr "Limites"
+
+#: sites/all/modules/framaforms/includes/framaforms.pages.inc:137
+msgid "You can edit this form by going to this link : "
+msgstr ""
+"Vous pouvez modifier le formulaire en vous rendant directement sur ce lien : "
+
+#: sites/all/modules/framaforms/includes/framaforms.pages.inc:138
+msgid "To the form"
+msgstr "Vers le formulaire"
+
+#: sites/all/modules/framaforms/includes/framaforms.pages.inc:67
+msgid "There was an error creating the page %title : %error"
+msgstr "Erreur lors de la création de la page %title : %error"
+
+#~ msgid ""
+#~ "Vous pouvez éditer le formulaire en vous rendant directement sur ce "
+#~ "lien : "
+#~ msgstr ""
+#~ "Vous pouvez éditer le formulaire en vous rendant directement sur ce "
+#~ "lien : "
+
+#~ msgid "Vers le formulaire"
+#~ msgstr "Vers le formulaire"
+
+#~ msgid "For an average of "
+#~ msgstr "Pour une moyenne de "
+
+#~ msgid "<h3>Informations générales du site</h3>"
+#~ msgstr "<h3>Informations générales du site</h3>"
+
+#~ msgid ""
+#~ "<i>Note : ces valeurs peuvent être changées dans d'autres modules de "
+#~ "Drupal, et sont simplement rassemblées ici, par simplicité.</i>"
+#~ msgstr ""
+#~ "<i>Note : ces valeurs peuvent être changées dans d'autres modules de "
+#~ "Drupal, et sont simplement rassemblées ici, par simplicité.</i>"

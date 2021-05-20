@@ -72,7 +72,7 @@ function _yakforms_set_default_global_variables() {
   module_load_include('inc', 'yakforms', 'includes/yakforms.pages');
 
   // Set default header
-  variable_set('yakforms_general_header_html','<b>Your</b>forms');
+  variable_set('yakforms_general_header_html','YourForms');
 
   $now = date('Y/m/d/ h:m:s', time());
   // The last framforms cron run.

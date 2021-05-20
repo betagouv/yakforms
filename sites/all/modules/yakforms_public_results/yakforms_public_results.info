@@ -11,7 +11,4 @@ dependencies[] = views
 dependencies[] = views_access_callback
 
 ; Information added by drupal.org packaging script on 2016-10-25
-version = "7.x-1.3"
-core = "7.x"
-project = "yakforms_public_results"
-datestamp = "1382691029"
+version = "7.x-1.1"

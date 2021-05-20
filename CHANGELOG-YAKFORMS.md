@@ -1,37 +1,34 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-_Note : the file `CHANGELOG.txt` is the Drupal 7 changelog. The present file lists changes made to Framaforms._
+_Note : the file `CHANGELOG.txt` is the Drupal 7 changelog. The present file lists changes made to Yakforms._
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-## Unreleased
+## [1.1] 2021/05/20
 
 IMPORTANT NOTE : Framaforms has become Yakforms. The modules were renamed, and manual action is needed on your instance
-to upgrade to the latest version. Instructions here : https://framagit.org/framasoft/framaforms/-/wikis/From-Framaforms-to-Yakforms.
+to upgrade to the latest version. Instructions here : https://framagit.org/yakforms/yakforms/-/wikis/From-Framaforms-to-Yakforms.
 
 ### Added
 * Option to automatically export form submissions as CSV files before deletion (#113, introducted by !85, fixed by !104).
 * Introduced Drupal Token mechanism, usable on full-HTML pages (#118, !100, !107).
-* jQuery warning on form modification (!109).e
+* jQuery warning on form modification (!109).
 * Option to set custom 'from' mail address and subject for notification emails.
 * Warning message on forms where results are public (#67, !120).
 * Possibility to limit the number of forms / user (#116, !126).
 * Script to resend mails : `scripts/resend-mail.php` (!146).
-* The custom modules (Yakforms, Yakforms Public Results and Yakforms Share Results) are now distributed on Drupal.org, allowing
-easier individual modules update using Drush or the Drupal admin UI.
+* The custom modules ([Yakforms](drupal.org/project/yakforms), [Yakforms Public Results](https://www.drupal.org/project/yakforms_public_results) and [Yakforms Share Results](https://www.drupal.org/project/yakforms_share_results)) are now distributed on Drupal.org, allowing easier individual modules update using Drush or the Drupal admin UI.
 * Subthemes based on TailwindCSS palette, selectable by end user on forms (!163)
 * Possibility to translate the node creation form.
 
 ### Changed
 * The `form1` content type is now part of the Framaforms module (declared via `includes/framaforms.node.inc`) (!89).
-* Added collapsible `fieldset` elements to admin menu (!93).
-* The general header can now be customized through the administration menu(!96).
+* Better admin menu (!93, !96).
 * The HTML templates for default pages are now translatable (!99).
-* Updated Drupal to 7.74 (!113)
 * Better stylesheet for printing forms (!124)
-* Removed Bootstrap includes from the module, the lib is now in the `framaforms` theme. (!138)
 * Wide theme modifications for new graphical identity (!162)
+* Drupal core and contrib module updates (!113, !150, !152).
 
 ### Fixed
 * Expiration date is now modified when a form is cloned (#61)
