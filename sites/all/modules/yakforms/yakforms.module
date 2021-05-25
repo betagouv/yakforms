@@ -396,11 +396,12 @@ function yakforms_block_view($delta) {
       if (strpos($current_url, 'edit')) {
         return;
       }
+      $forms_url = $base_url . '/' . $current_url . '/forms';
       $block['content']['#markup'] = '<p>' . t('Welcome to your Yakforms account !') . '</p>';
       $block['content']['#markup'] .= '<p>' . t('You can :') . '</p>';
       $block['content']['#markup'] .= '<ul>';
+      $block['content']['#markup'] .= "<li> <a href='$forms_url'>" . t('access your forms') . '</a></li>';
       $block['content']['#markup'] .= '<li>' . t('edit your personal information ("Edit" tab above) ;') . '</li>';
-      $block['content']['#markup'] .= '<li>' . t('access your forms ("My forms" button above) ;') . '</li>';
       $block['content']['#markup'] .= "<li> <a href='{$base_url}/node/add/form1'>" . t('create a new form') . '</a></li>';
       $block['content']['#markup'] .= '<li> <a href="' . variable_get('site_contact_url') . '">' . t('contact us') . '</a></li>';
       $block['content']['#markup'] .= '</ul>';
