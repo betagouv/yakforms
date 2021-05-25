@@ -49,7 +49,7 @@ jQuery(function($){
         }
       }
     }
-  };
+  }
 
   if(window.screen.width < 768 || window.screen.height < 1024){
     // get current and last page numbers
@@ -59,13 +59,11 @@ jQuery(function($){
 
     // Don't replace the progress bar if the current title is set to null
     // (avoiding leftover characters)
-    if(currentTitle===""){
-      return;
-    }
-
-    // Replace progress bar with textual element
-    $(".webform-progressbar")
-      .replaceWith("<h4>"+ currentTitle + ": " + currentPage + " / " + lastPage + "</h5>");
+    if(currentTitle!==""){
+      // Replace progress bar with textual element
+        $(".webform-progressbar")
+        .replaceWith("<h4>"+ currentTitle + ": " + currentPage + " / " + lastPage + "</h5>");
+      }
   }
 
   if ($('body').hasClass('logged-in')) {

@@ -299,10 +299,9 @@
   margin: .25rem auto;
 }
 
-.front.not-logged-in #intro .buttons [href*="add/form1"],
+/* .front.not-logged-in #intro .buttons [href*="add/form1"],
 .front.logged-in #intro .buttons [href*="register"] {
-  display: none;
-}
+} */
 
 .front #content #what .tabs {
   display: flex;

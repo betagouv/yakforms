@@ -299,8 +299,11 @@
   margin: .25rem auto;
 }
 
-.front.not-logged-in #intro .buttons [href*="add/form1"],
-.front.logged-in #intro .buttons [href*="register"] {
+.front.not-logged-in #intro .buttons [href*="add/form1"] {
+  display: none;
+}
+
+.front.logged-in #intro .buttons [href*="login"] {
   display: none;
 }
 
