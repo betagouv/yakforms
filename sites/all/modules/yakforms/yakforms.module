@@ -722,7 +722,7 @@ function yakforms_node_delete($node) {
  *
  */
 function yakforms_clone_node_alter(&$node, $context) {
-  $date_obj = new DateTime($node->field_form1_expiration['und'][0]['value']);
+  $date_obj = new DateTime("now");
   $default_expiration = variable_get('yakforms_expiration_period_default_value', 26);
   // Get the DateTime object for x weeks from now.
   $date_obj->modify("+{$default_expiration} weeks");
