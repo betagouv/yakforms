@@ -33,8 +33,6 @@
 #main .tabledrag-toggle-weight-wrapper,
 /* - attached file don't need a visibility status */
 #edit-field-form1-file table .checkbox,
-/* - form component key (only drupal admin need that) */
-#form-builder .machine-name-source + .field-suffix,
 /* - size setting disabled on input */
 #form-builder .form-item-size,
 /* - size setting disabled on textarea */
