@@ -29,8 +29,6 @@
 #edit-field-form1-image .image-widget-data .form-item,
 /* - template description visibility is toggled via yaktheme.js */
 #edit-field-form1-template-desc,
-/* - toggle weight on draggable table is not a userfriendly feature */
-#main .tabledrag-toggle-weight-wrapper,
 /* - attached file don't need a visibility status */
 #edit-field-form1-file table .checkbox,
 /* - size setting disabled on input */
