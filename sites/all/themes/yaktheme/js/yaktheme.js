@@ -62,7 +62,7 @@ jQuery(function($){
     if(currentTitle!==""){
       // Replace progress bar with textual element
         $(".webform-progressbar")
-        .replaceWith("<h4>"+ currentTitle + ": " + currentPage + " / " + lastPage + "</h5>");
+        .replaceWith("<h4>"+ currentTitle + ": " + currentPage + " / " + lastPage + "</h4>");
       }
   }
 
