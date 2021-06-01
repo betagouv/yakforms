@@ -157,11 +157,6 @@ jQuery(function($){
       </div>`);
   }
 
-  if ($('.page-node-share')) {
-    $('#block-system-main input, #block-system-main textarea')
-      .attr('onclick', 'this.select()');
-  }
-
   if (window.top.location !== window.self.document.location) {
     $('body').addClass('inframe');
   }
