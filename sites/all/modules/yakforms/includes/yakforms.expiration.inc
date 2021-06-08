@@ -160,6 +160,7 @@ function notify_user_of_expiration(stdClass $record) {
  */
 function delete_expired_nodes() {
   global $conf;
+  global $base_url;
   module_load_include('inc', 'yakforms', 'includes/yakforms.util');
   $deletion_period = variable_get('yakforms_deletion_period_value', 0);
   $notification_period = variable_get('yakforms_notification_period_value', 0);
@@ -203,7 +204,10 @@ function delete_expired_nodes() {
       db_delete('yakforms_expired')
         ->condition('nid', $record->nid)
         ->execute();
-      yakforms_custom_log("Deleted expired node", "Form #{$record->nid} - user notified on {$record->dn} - was deleted.", $log_file);
+
+      // Build node's alias to log URL.
+      $alias = "$base_url/" . drupal_get_path_alias("node/$record->nid");
+      yakforms_custom_log("Deleted expired node", "Form #{$record->nid} ($alias) was deleted. User notified on {$record->dn}.", $log_file);
       array_push($deleted_nodes, $record->nid);
     }
 
