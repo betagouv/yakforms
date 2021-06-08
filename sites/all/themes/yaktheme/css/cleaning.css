@@ -48,8 +48,8 @@
 #page-wrapper ~ #page-wrapper,
 .main-container ~ .main-container,
 /* - ip address (anonymous) on results */
-.page-node-webform-results:not(.admin-menu) #block-system-main table th:nth-of-type(4),
-.page-node-webform-results:not(.admin-menu) #block-system-main table td:nth-of-type(4),
+.page-node-webform-results:not(.admin-menu):not(.page-node-webform-results-analysis) #block-system-main table th:nth-of-type(4),
+.page-node-webform-results:not(.admin-menu):not(.page-node-webform-results-analysis) #block-system-main table td:nth-of-type(4),
 /* - html guidelines */
 .page-node-webform-configure .filter-guidelines,
 /* - text format + help */
