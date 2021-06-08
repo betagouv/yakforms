@@ -167,7 +167,7 @@
     </div></div> <!-- /.section, /#messages -->
   <?php endif; ?>
 
-  <?php if ($page['featured']): ?>
+  <?php if (isset($page['featured']) && $pages['featured']): ?>
     <div id="featured"><div class="section clearfix">
       <?php print render($page['featured']); ?>
     </div></div> <!-- /.section, /#featured -->
