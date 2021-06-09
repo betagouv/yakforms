@@ -1,0 +1,31 @@
+image: framasoft/yakforms-assets-deploy:latest
+variables:
+  DRUPAL_VERSION: "7.80"
+production:
+  stage: deploy
+  script:
+    - mkdir public
+    - cd public
+    - mkdir yakforms_distribution
+    - wget https://ftp.drupal.org/files/projects/drupal-${DRUPAL_VERSION}.zip
+    - unzip ./drupal-${DRUPAL_VERSION}.zip
+    - mv ./drupal-${DRUPAL_VERSION}/* ./yakforms_distribution
+    - cp -r ../profiles/yakforms_profile ./yakforms_distribution/profiles
+    - cp -r ../profiles/yakforms_profile ./
+    - zip -r yakforms_distribution_${CI_COMMIT_TAG}.zip ./yakforms_distribution
+    - rm -rf yakforms_distribution drupal-${DRUPAL_VERSION} drupal-${DRUPAL_VERSION}.zip
+    - zip -r ./yakforms_profile_${CI_COMMIT_TAG}.zip ./yakforms_profile
+    - rm -rf ./yakforms_profile
+    - cd ..
+    - eval `ssh-agent -s`
+    - ssh-add <(echo "${DEPLOYEMENT_KEY}" | base64 --decode -i);
+    - cd public && echo "put -r ." | sftp -o "VerifyHostKeyDNS yes" ${DEPLOYEMENT_USER}@${DEPLOYEMENT_HOST}:public/;
+  only:
+    refs:
+      - tags
+    variables:
+      - $DEPLOYEMENT_KEY
+      - $DEPLOYEMENT_USER
+      - $DEPLOYEMENT_HOST
+      - $CI_COMMIT_TAG
+      - $DRUPAL_VERSION
