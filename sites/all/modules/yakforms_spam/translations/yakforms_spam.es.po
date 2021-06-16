@@ -10,16 +10,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2020-10-08 16:35+0200\n"
-"PO-Revision-Date: 2020-10-28 10:13+0000\n"
-"Last-Translator: Maki <makiniqa@riseup.net>\n"
+"PO-Revision-Date: 2021-06-17 09:15+0000\n"
+"Last-Translator: Berto Te <ateira@3fpj.com>\n"
 "Language-Team: Spanish <https://weblate.framasoft.org/projects/framaforms/"
-"framaforms-spam/es/>\n"
+"spam/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.1\n"
+"X-Generator: Weblate 4.6.2\n"
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.module:19
 msgid "Forbidden words"
@@ -47,11 +47,11 @@ msgstr "Formularios en cuarentena"
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.module:308
 msgid "Records exposed to Views."
-msgstr ""
+msgstr "Registros expuestos a Vistas."
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.module:318
 msgid "Nids of the forms."
-msgstr ""
+msgstr "Nids de las formas."
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.module:327
 msgid "node"
@@ -76,6 +76,8 @@ msgstr "Sacar formularios de cuarentena"
 #: sites/all/modules/framaforms_spam/framaforms_spam.module:404
 msgid "The form was put into quarantine. You can set it back up using <a href='/quarantine'>this view.</a>"
 msgstr ""
+"El formulario se puso en cuarentena. Puede configurarlo de nuevo usando <a "
+"href='/quarantine'>esta vista.</a>"
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.module:416
 msgid "The form was taken out of quarantine and reassigned to user %id"
@@ -87,7 +89,7 @@ msgstr "framaforms_spam"
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.module:48
 msgid "Launching cron task."
-msgstr ""
+msgstr "Lanzamiento de la tarea cron."
 
 #: sites/all/modules/framaforms_spam/framaforms_spam.module:81
 msgid "Error deleting potential spam : %error"
